@@ -1,3 +1,5 @@
+//UpgradeIntro.tsx
+
 import React, {useState} from 'react';
 import {
   View,
@@ -6,128 +8,119 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
 import PinkButton from '../components/PinkButton';
 import InfoModal from '../components/InfoModal';
 import Text from '../components/Text';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {NavigationProps} from '../navigationTypes';
 
-type RootStackParamList = {
-  UpgradeChangesHow: undefined;
-};
+type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
-type UpgradeIntroScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'UpgradeChangesHow'>;
-};
-
-const UpgradeIntroScreen: React.FC<UpgradeIntroScreenProps> = ({
-  navigation,
-}) => {
+const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   const [showPaymentInfoModal, setShowPaymentInfoModal] = useState(false);
   const [showChapsInfoModal, setShowChapsInfoModal] = useState(false);
 
+  const handleSwitchButtonPress = () => {
+    navigation.navigate('UpgradeChangesHow'); // Navigate to the desired screen
+  };
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <StatusBar backgroundColor="black" />
-      <View>
-        <Image
-          source={require('../assets/rocket.png')}
-          style={styles.rocketImage}
-          accessibilityLabel="Mettle Bank Account Logo"
-        />
-        <Text variant="headerMedium">Welcome to the Mettle bank account</Text>
-        <Text variant="bodyText">
-          We’ve built a new bank account, which will replace the e-money account
-          you currently use.
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text variant="headerSmall">What’s new</Text>
-      </View>
-      <View style={styles.box}>
-        <Image
-          source={require('../assets/FSCSLogo.png')}
-          style={styles.fscsLogo}
-          accessibilityLabel="FSCS Logo"
-        />
-        <Text variant="headerSmall">Funds protected up to £85,000</Text>
-        <Text variant="bodyText" style={styles.centeredText}>
-          With the new Mettle bank account, your funds are protected by the
-          Financial Services Compensation Scheme (FSCS) up to £85k.
-        </Text>
-      </View>
-      <View style={styles.box}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.bodyTextWithImage}>
-            Your annual cash deposit limit will be £23,000
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <StatusBar backgroundColor="#171B1B" translucent={false} />
+        <View>
+          <Image
+            source={require('../assets/rocket.png')}
+            style={styles.largeImage}
+            accessibilityLabel="Mettle Bank Account Logo"
+          />
+          <Text variant="headerMedium">Welcome to the Mettle bank account</Text>
+          <Text variant="bodyText">
+            We’ve built a new bank account, which will replace the e-money
+            account you currently use.
           </Text>
-          <TouchableOpacity
-            onPress={() => setShowPaymentInfoModal(true)}
-            accessibilityLabel="More info on cash deposit limit">
-            <Image
-              source={require('../assets/Info.png')}
-              style={styles.infoIcon}
-              accessibilityLabel="Cash Deposit Limit Info"
-            />
-          </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.box}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.bodyTextWithImage}>
-            Your account won’t accept CHAPS payments
+        <View style={styles.section}>
+          <Text variant="headerSmall">What’s new</Text>
+        </View>
+        <View style={styles.box}>
+          <Image
+            source={require('../assets/FSCSLogo.png')}
+            style={styles.fscsLogo}
+            accessibilityLabel="FSCS Logo"
+          />
+          <Text variant="headerSmall">Funds protected up to £85,000</Text>
+          <Text variant="bodyText" style={styles.centeredText}>
+            With the new Mettle bank account, your funds are protected by the
+            Financial Services Compensation Scheme (FSCS) up to £85k.
           </Text>
-          <TouchableOpacity
-            onPress={() => setShowChapsInfoModal(true)}
-            accessibilityLabel="More info on CHAPS payments">
-            <Image
-              source={require('../assets/Info.png')}
-              style={styles.infoIcon}
-              accessibilityLabel="CHAPS Payments Info"
-            />
-          </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.box}>
-        <Text variant="bodyText">
-          Scheduled payments will be processed on business days only.
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text variant="headerSmall">What this means for you</Text>
-      </View>
-      <View style={styles.box}>
-        <Text variant="bodyText">
-          We’ll close your e-money account. This means you’ll no longer have
-          access to your transaction history and existing invoices.
-        </Text>
-      </View>
-      <PinkButton
-        buttonText="Switch now"
-        onPress={() => console.log('Switch button pressed')}
-        navigateToScreen="UpgradeChangesHow"
-        navigation={navigation}
-      />
-      <TouchableOpacity onPress={() => console.log('Switch button pressed')}>
-        {/* <Text style={styles.buttonText}>Switch now</Text> */}
-      </TouchableOpacity>
-      {/* Payment Info Modal */}
-      <InfoModal
-        visible={showPaymentInfoModal}
-        onPressClose={() => setShowPaymentInfoModal(false)}
-        title="Your cash deposit limit"
-        content="This is the amount of cash you can deposit into your Mettle account annually. It’s different from your account limit."
-        accessibilityLabel="Close Payment Info Modal"
-      />
-      {/* Chaps Info Modal */}
-      <InfoModal
-        visible={showChapsInfoModal}
-        onPressClose={() => setShowChapsInfoModal(false)}
-        title="What is a CHAPS payment?"
-        content="This is a type of payment, usually used to send high-value payments to other accounts."
-        accessibilityLabel="Close CHAPS Info Modal"
-      />
-    </ScrollView>
+        <View style={styles.box}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.bodyTextWithImage}>
+              Your annual cash deposit limit will be £23,000
+            </Text>
+            <TouchableOpacity
+              onPress={() => setShowPaymentInfoModal(true)}
+              accessibilityLabel="More info on cash deposit limit">
+              <Image
+                source={require('../assets/Info.png')}
+                style={styles.infoIcon}
+                accessibilityLabel="Cash Deposit Limit Info"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.box}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.bodyTextWithImage}>
+              Your account won’t accept CHAPS payments
+            </Text>
+            <TouchableOpacity
+              onPress={() => setShowChapsInfoModal(true)}
+              accessibilityLabel="More info on CHAPS payments">
+              <Image
+                source={require('../assets/Info.png')}
+                style={styles.infoIcon}
+                accessibilityLabel="CHAPS Payments Info"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.box}>
+          <Text variant="bodyText">
+            Scheduled payments will be processed on business days only.
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <Text variant="headerSmall">What this means for you</Text>
+        </View>
+        <View style={styles.box}>
+          <Text variant="bodyText">
+            We’ll close your e-money account. This means you’ll no longer have
+            access to your transaction history and existing invoices.
+          </Text>
+        </View>
+        <PinkButton buttonText="Switch now" onPress={handleSwitchButtonPress} />
+        {/* Payment Info Modal */}
+        <InfoModal
+          visible={showPaymentInfoModal}
+          onPressClose={() => setShowPaymentInfoModal(false)}
+          title="Your cash deposit limit"
+          content="This is the amount of cash you can deposit into your Mettle account annually. It’s different from your account limit."
+          accessibilityLabel="Close Payment Info Modal"
+        />
+        {/* Chaps Info Modal */}
+        <InfoModal
+          visible={showChapsInfoModal}
+          onPressClose={() => setShowChapsInfoModal(false)}
+          title="What is a CHAPS payment?"
+          content="This is a type of payment, usually used to send high-value payments to other accounts."
+          accessibilityLabel="Close CHAPS Info Modal"
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -136,11 +129,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#171B1B',
     padding: 25,
   },
+  safeAreaContainer: {
+    backgroundColor: '#171B1B',
+  },
 
-  rocketImage: {
+  largeImage: {
     width: 210,
     height: 210,
-    marginTop: 20,
     alignSelf: 'center',
   },
   //   headerMedium: {
@@ -183,17 +178,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingRight: 10, // Space for the info icon
   },
   bodyTextWithImage: {
-    flex: 1,
+    width: '90%',
+    textAlign: 'left',
     fontSize: 16,
     lineHeight: 21,
-    marginRight: 10, // Adjusted for better spacing
     color: 'white',
   },
   infoIcon: {
     width: 32,
     height: 32,
+    alignSelf: 'flex-end',
   },
   //   button: {
   //     backgroundColor: '#f45f78', // Keep button color

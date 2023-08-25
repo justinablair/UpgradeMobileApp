@@ -1,26 +1,34 @@
+//UpgradeChangesHow.tsx
+
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
+import PinkButton from '../components/PinkButton';
 
-// import PinkButton from '../components/PinkButton';
+import {NavigationProps} from '../navigationTypes';
 
-const UpgradeIntroScreen: React.FC = ({}) => {
+// type UpgradeChangesHowProps = NavigationProps<'UpgradeIntro'>;
+
+const UpgradeChangesHowScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image
         source={require('../assets/folderRefresh.png')}
-        style={styles.image}
+        style={styles.largeImage}
         accessibilityLabel="Folder Refresh Image"
       />
-      <Text variant="screenTitle">We’ll open your new bank account</Text>
-      <Text variant="bodyText">
-        We’ll show you what we’ll do, what you need to do, and what will happen
-        during your switch.
-      </Text>
-      <Text variant="bodyText">
-        And don’t worry, we’ll also send you an email with all of this
-        information once we’ve opened your new account.
-      </Text>
+      <View style={styles.contentContainer}>
+        <Text variant="screenTitle">We’ll open your new bank account</Text>
+        <Text variant="bodyText" style={styles.leftAlignText}>
+          We’ll show you what we’ll do, what you need to do, and what will
+          happen during your switch.{'\n\n'}And don’t worry, we’ll also send you
+          an email with all of this information once we’ve opened your new
+          account.
+        </Text>
+
+        <PinkButton buttonText="How it will work" />
+      </View>
+
       {/* <PinkButton
         buttonText="Switch now"
         onPress={() => console.log('Switch button pressed')}
@@ -39,10 +47,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 25,
   },
-  image: {
-    width: 152.07,
-    height: 117.38,
-    marginBottom: 20,
+
+  largeImage: {
+    width: 210,
+    height: 210,
+    alignSelf: 'center',
   },
 
   bodyText: {
@@ -52,19 +61,27 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  button: {
-    backgroundColor: '#f45f78',
-    borderRadius: 8,
-    width: 327,
-    padding: 15,
-    alignItems: 'center',
+  // button: {
+  //   backgroundColor: '#f45f78',
+  //   borderRadius: 8,
+  //   width: 327,
+  //   padding: 15,
+  //   alignItems: 'center',
+  // },
+  // buttonText: {
+  //   fontSize: 16,
+  //   lineHeight: 21,
+  //   fontWeight: 'bold',
+  //   color: 'white',
+  // },
+  leftAlignText: {
+    textAlign: 'center',
   },
-  buttonText: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    color: 'white',
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'space-between', // Aligns content to the top and bottom
+    paddingBottom: 10, // Optional padding to add space between content and button
   },
 });
 
-export default UpgradeIntroScreen;
+export default UpgradeChangesHowScreen;
