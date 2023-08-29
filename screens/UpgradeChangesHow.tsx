@@ -4,12 +4,17 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
-
 import {NavigationProps} from '../navigationTypes';
 
-// type UpgradeChangesHowProps = NavigationProps<'UpgradeIntro'>;
+type UpgradeChangesHowProps = NavigationProps<'UpgradeChangesHow'>;
 
-const UpgradeChangesHowScreen: React.FC = () => {
+const UpgradeChangesHowScreen: React.FC<UpgradeChangesHowProps> = ({
+  navigation,
+}) => {
+  const handleSwitchButtonPress = () => {
+    navigation.navigate('UpgradeChangesWeDo'); // Navigate to the desired screen
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -19,22 +24,18 @@ const UpgradeChangesHowScreen: React.FC = () => {
       />
       <View style={styles.contentContainer}>
         <Text variant="screenTitle">We’ll open your new bank account</Text>
-        <Text variant="bodyText" style={styles.leftAlignText}>
+        <Text variant="bodyText centerAlign">
           We’ll show you what we’ll do, what you need to do, and what will
           happen during your switch.{'\n\n'}And don’t worry, we’ll also send you
           an email with all of this information once we’ve opened your new
           account.
         </Text>
 
-        <PinkButton buttonText="How it will work" />
+        <PinkButton
+          buttonText="How it will work"
+          onPress={handleSwitchButtonPress}
+        />
       </View>
-
-      {/* <PinkButton
-        buttonText="Switch now"
-        onPress={() => console.log('Switch button pressed')}
-        navigateToScreen="UpgradeChangesHow"
-        navigation={navigation} // Pass the navigation prop
-      /> */}
     </View>
   );
 };
@@ -74,9 +75,7 @@ const styles = StyleSheet.create({
   //   fontWeight: 'bold',
   //   color: 'white',
   // },
-  leftAlignText: {
-    textAlign: 'center',
-  },
+
   contentContainer: {
     flex: 1,
     justifyContent: 'space-between', // Aligns content to the top and bottom

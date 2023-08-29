@@ -4,8 +4,13 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 // Define your stack navigation parameter list
 export type RootStackParamList = {
+  UserSelectionScreen: undefined;
   UpgradeIntro: undefined;
   UpgradeChangesHow: undefined;
+  UpgradeChangesWeDo: undefined;
+  UpgradeChangesYouDo: undefined;
+  UpgradeChangesNewAccount: undefined;
+  UpgradeTerms: undefined;
 };
 
 // // Define navigation props for UpgradeIntroScreen

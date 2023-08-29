@@ -1,3 +1,4 @@
+//Text.tsx
 import React from 'react';
 import {
   Text as RNText,
@@ -7,22 +8,30 @@ import {
 } from 'react-native';
 
 // Define the possible variants for the Text component
-type TextVariant = 'screenTitle' | 'headerMedium' | 'headerSmall' | 'bodyText'; // Use | to indicate multiple variants
+type TextVariant =
+  | 'screenTitle'
+  | 'headerMedium'
+  | 'headerSmall'
+  | 'bodyText'
+  | 'bodyTextBold'
+  | 'leftAlign';
 
 // Define the props for the Text component, extending RNTextProps
 interface TextProps extends RNTextProps {
-  variant?: TextVariant; // Allow specifying the variant
+  variant?: TextVariant | string; // Allow specifying the variant as a string
   style?: TextStyle | TextStyle[]; // Allow specifying styles
 }
 
-// Create the Text component
+// Define the Text component
 const Text: React.FC<TextProps> = ({
   variant = 'screenTitle',
   style,
   ...props
 }) => {
-  // Use RNText with the specified styles based on the variant
-  return <RNText style={[styles[variant], style]} {...props} />;
+  const variantNames = variant.split(' ');
+  const combinedStyles = variantNames.map(variantName => styles[variantName]);
+
+  return <RNText style={[...combinedStyles, style]} {...props} />;
 };
 
 // Define styles for different variants
@@ -34,7 +43,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  // Define more variants as needed
   headerMedium: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -50,9 +58,15 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 16,
     lineHeight: 21,
-    textAlign: 'left', // Updated to 'left'
+    textAlign: 'left',
     marginTop: 10,
     color: 'white',
+  },
+  bodyTextBold: {
+    fontWeight: '600',
+  },
+  leftAlign: {
+    textAlign: 'left',
   },
 });
 
