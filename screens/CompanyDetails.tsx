@@ -6,7 +6,8 @@ import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
 import PinkButton from '../components/PinkButton';
 import {UncheckedIcon} from '../components/theme/UncheckedIcon';
-import {CheckmarkIcon} from '../components/theme/checkbox';
+import {CheckmarkIcon} from '../components/theme/CheckboxIcon';
+import CheckboxToggle from '../components/CheckboxToggle';
 
 type CompanyDetailsScreenProps = NavigationProps<'CompanyDetails'>;
 
@@ -46,25 +47,17 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
       </View>
 
       {/* Consent section */}
-
       <View style={styles.checkboxContainer}>
-        <Text variant="bodyText" style={styles.checkboxText}>
+        <Text variant="bodyText" style={[styles.checkboxText]}>
           I confirm{' '}
           {companyName !== '' ? companyName : 'the company name I entered'} is
           correct
         </Text>
-        <TouchableOpacity
-          onPress={() => setIsChecked(!isChecked)}
-          disabled={!isCompanyNameEntered} // Disable if company name is not entered
-        >
-          {isChecked ? (
-            <CheckmarkIcon />
-          ) : (
-            <UncheckedIcon
-              stroke={isCompanyNameEntered ? Colours.black : Colours.black30}
-            />
-          )}
-        </TouchableOpacity>
+        <CheckboxToggle
+          checked={isChecked}
+          onToggle={() => setIsChecked(!isChecked)}
+          disabled={!isCompanyNameEntered}
+        />
       </View>
       <View>
         <PinkButton
@@ -103,15 +96,15 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end', // Aligns content to the right
-    width: '95%',
-
     marginBottom: 16,
+    paddingRight: 8, // Add padding to the right side
   },
+
   checkboxText: {
-    marginRight: 8,
+    marginLeft: 8,
     color: Colours.black,
     flex: 1,
+    width: '80%',
   },
 });
 

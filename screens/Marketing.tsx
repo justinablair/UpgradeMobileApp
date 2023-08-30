@@ -33,7 +33,7 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
   };
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeChangesNewAccount'); // Navigate to the desired screen
+    navigation.navigate('UpgradeTaxCompliant'); // Navigate to the desired screen
   };
   return (
     <ScrollView>

@@ -12,7 +12,7 @@ import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import PinkButton from '../components/PinkButton'; // Update the path to your PinkButton component
 import {NavigationProps} from '../navigationTypes';
-import {CheckmarkIcon} from '../components/theme/checkbox'; // Update the path to your CheckmarkIcon component
+import {CheckmarkIcon} from '../components/theme/CheckboxIcon'; // Update the path to your CheckmarkIcon component
 import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Update the path to your ChevronRightIcon component
 
 type UpgradeConsentsProps = NavigationProps<'UpgradeConsents'>;

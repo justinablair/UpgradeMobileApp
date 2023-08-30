@@ -17,6 +17,8 @@ import UserSelectionScreen from './screens/UserSelection';
 import {UserContextProvider} from './components/UserContext';
 import CompanyDetailsScreen from './screens/CompanyDetails';
 import MarketingScreen from './screens/Marketing';
+import UpgradeTaxCompliantScreen from './screens/UpgradeTaxCompliant';
+import UpgradeTaxReportingScreen from './screens/UpgradeTaxReporting';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -58,6 +60,14 @@ function App(): JSX.Element {
               component={UpgradeConsentsScreen}
             />
             <Stack.Screen name="Marketing" component={MarketingScreen} />
+            <Stack.Screen
+              name="UpgradeTaxCompliant"
+              component={UpgradeTaxCompliantScreen}
+            />
+            <Stack.Screen
+              name="UpgradeTaxReporting"
+              component={UpgradeTaxReportingScreen}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </UserContextProvider>

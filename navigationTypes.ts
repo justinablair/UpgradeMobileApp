@@ -13,6 +13,8 @@ export type RootStackParamList = {
   UpgradeTerms: undefined;
   UpgradeConsents: undefined;
   Marketing: undefined;
+  UpgradeTaxCompliant: undefined;
+  UpgradeTaxReporting: undefined;
 };
 
 export type NavigationProps<T extends keyof RootStackParamList> = {
