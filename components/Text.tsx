@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
   bodyTextBold: {
     fontWeight: '600',
   },
+  bodyTextDescription: {
+    fontSize: 13,
+  },
   leftAlign: {
     textAlign: 'left',
   },

@@ -1,15 +1,22 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, ViewStyle} from 'react-native';
 import Colours from '../components/theme/Colour';
 
 interface WhiteButtonProps {
   buttonText: string;
   onPress: () => void;
+  customWidth?: number; // New prop for custom width
 }
 
-const WhiteButton: React.FC<WhiteButtonProps> = ({buttonText, onPress}) => {
+const WhiteButton: React.FC<WhiteButtonProps> = ({
+  buttonText,
+  onPress,
+  customWidth,
+}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.button, {width: customWidth || 327}]}
+      onPress={onPress}>
       <Text style={styles.buttonText}>{buttonText}</Text>
     </TouchableOpacity>
   );
@@ -19,10 +26,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'white',
     borderColor: Colours.pink, // Pink outline
-    borderWidth: 2, // Pink outline width
+    borderWidth: 1, // Pink outline width
     borderRadius: 8,
-    width: 327,
-    padding: 15,
+    padding: 14,
     alignItems: 'center',
     alignSelf: 'center',
     marginTop: 20,

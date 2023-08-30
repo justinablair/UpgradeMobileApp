@@ -7,25 +7,41 @@ import Colours from '../components/theme/Colour'; // Update the path to Colour.j
 interface PinkButtonProps {
   buttonText: string;
   onPress: () => void;
+  disabled?: boolean; // Make the disabled prop optional
+  customWidth?: number; // New prop for custom width
 }
 
-const PinkButton: React.FC<PinkButtonProps> = ({buttonText, onPress}) => {
+const PinkButton: React.FC<PinkButtonProps> = ({
+  buttonText,
+  onPress,
+  disabled = false,
+  customWidth,
+}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        disabled && styles.disabledButton,
+        {width: customWidth || 327},
+      ]}
+      onPress={onPress}
+      disabled={disabled}>
       <Text style={styles.buttonText}>{buttonText}</Text>
     </TouchableOpacity>
   );
 };
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colours.pink,
     borderRadius: 8,
-    width: 327,
     padding: 15,
     alignItems: 'center',
     alignSelf: 'center',
     marginTop: 20,
+    zIndex: 1,
+  },
+  disabledButton: {
+    backgroundColor: Colours.disabledPink, // Use an appropriate color for disabled state
   },
   buttonText: {
     fontSize: 16,
@@ -34,5 +50,4 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
 export default PinkButton;

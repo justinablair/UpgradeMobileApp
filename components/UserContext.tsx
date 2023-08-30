@@ -1,6 +1,7 @@
+// UserContext.tsx
 import React, {createContext, useContext, useState} from 'react';
 
-type UserType = 'soleTrader' | 'limitedCompany';
+export type UserType = 'soleTrader' | 'limitedCompany'; // Export UserType
 
 type UserContextType = {
   userType: UserType | null;
@@ -19,7 +20,9 @@ export const useUserContext = () => {
   return context;
 };
 
-export const UserContextProvider: React.FC = ({children}) => {
+export const UserContextProvider: React.FC<{children: React.ReactNode}> = ({
+  children,
+}) => {
   const [userType, setUserType] = useState<UserType | null>(null);
   const [businessName, setBusinessName] = useState('');
 
