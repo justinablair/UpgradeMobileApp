@@ -14,7 +14,7 @@ type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
 const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   navigation,
 }) => {
-  const {userType} = useUserContext(); 
+  const {userType} = useUserContext();
   const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
 
   const handleCheckboxToggle = () => {
@@ -22,7 +22,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   };
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeConsents'); // Navigate to the desired screen
+    navigation.navigate('UpgradeNationality'); // Navigate to the desired screen
   };
 
   const renderContent = () => {

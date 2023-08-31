@@ -72,7 +72,6 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {/* SoleTraderCopy */}
         <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
           Terms and Privacy Notice
         </Text>

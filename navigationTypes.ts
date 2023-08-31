@@ -15,6 +15,10 @@ export type RootStackParamList = {
   Marketing: undefined;
   UpgradeTaxCompliant: undefined;
   UpgradeTaxReporting: undefined;
+  UpgradeNationality: undefined;
+  UpgradeUSPerson: undefined;
+  UpgradeUSPersonIneligble: undefined;
+  ConfirmAddress: undefined;
 };
 
 export type NavigationProps<T extends keyof RootStackParamList> = {

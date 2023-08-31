@@ -14,6 +14,9 @@ interface InfoModalProps {
   title: string;
   content: string;
   accessibilityLabel?: string;
+  contentStyle?: object;
+  titleStyle?: object;
+  bodyTextStyle?: object;
 }
 
 const InfoModal: React.FC<InfoModalProps> = ({
@@ -22,11 +25,14 @@ const InfoModal: React.FC<InfoModalProps> = ({
   title,
   content,
   accessibilityLabel,
+  contentStyle,
+  titleStyle,
+  bodyTextStyle,
 }) => {
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
+        <View style={[styles.modalContent, contentStyle]}>
           <TouchableOpacity
             style={styles.modalCloseIcon}
             onPress={onPressClose}>
@@ -36,8 +42,8 @@ const InfoModal: React.FC<InfoModalProps> = ({
               accessibilityLabel={accessibilityLabel}
             />
           </TouchableOpacity>
-          <Text style={styles.modalTitle}>{title}</Text>
-          <Text style={styles.bodyText}>{content}</Text>
+          <Text style={[styles.modalTitle, titleStyle]}>{title}</Text>
+          <Text style={[styles.bodyText, bodyTextStyle]}>{content}</Text>
         </View>
       </View>
     </Modal>
@@ -53,12 +59,13 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#454949',
-    width: 327,
-    height: 199,
+    width: '90%',
+    maxHeight: '90%', // Set maxHeight to allow expansion based on content
     borderRadius: 8,
     padding: 20,
     paddingTop: 50, // Add more padding at the top for the Close.png icon
     position: 'relative',
+    overflow: 'hidden', // Hide content overflow
   },
   modalTitle: {
     fontSize: 22,

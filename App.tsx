@@ -19,6 +19,10 @@ import CompanyDetailsScreen from './screens/CompanyDetails';
 import MarketingScreen from './screens/Marketing';
 import UpgradeTaxCompliantScreen from './screens/UpgradeTaxCompliant';
 import UpgradeTaxReportingScreen from './screens/UpgradeTaxReporting';
+import UpgradeNationalityScreen from './screens/UpgradeNationality';
+import UpgradeUSPersonScreen from './screens/UpgradeUsPerson';
+import UpgradeUSPersonIneligbleScreen from './ErrorScreens/UpgradeUSPersonIneligbleScreen';
+import ConfirmAddressScreen from './screens/ConfirmAddress';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -67,6 +71,22 @@ function App(): JSX.Element {
             <Stack.Screen
               name="UpgradeTaxReporting"
               component={UpgradeTaxReportingScreen}
+            />
+            <Stack.Screen
+              name="UpgradeNationality"
+              component={UpgradeNationalityScreen}
+            />
+            <Stack.Screen
+              name="UpgradeUSPerson"
+              component={UpgradeUSPersonScreen}
+            />
+            <Stack.Screen
+              name="UpgradeUSPersonIneligble"
+              component={UpgradeUSPersonIneligbleScreen}
+            />
+            <Stack.Screen
+              name="ConfirmAddress"
+              component={ConfirmAddressScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>

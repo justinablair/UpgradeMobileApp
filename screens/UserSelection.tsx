@@ -6,6 +6,7 @@ import {useUserContext, UserType} from '../components/UserContext';
 import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Import ChevronRightIcon
 import Colours from '../components/theme/Colour'; // Import Colours
 import {NavigationProps} from '../navigationTypes';
+import OptionsWithChevron from '../components/OptionsWithChevron';
 
 type UserSelectionScreenProps = NavigationProps<'UserSelection'>;
 
@@ -28,36 +29,19 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
         style={[{color: Colours.black}, styles.space]}>
         What type of business are you?
       </Text>
-      <TouchableOpacity
-        style={styles.optionContainer}
-        onPress={() => handleUserTypeSelect('soleTrader')}>
-        <View style={styles.optionContent}>
-          <Text variant="bodyText" style={{color: Colours.black}}>
-            Sole trader or side business
-          </Text>
-          <Text variant="bodyText" style={{color: Colours.black60}}>
-            Maybe you’re self-employed, work as a freelancer, or make money
-            independently
-          </Text>
-        </View>
-        <ChevronRightIcon stroke={Colours.pink} />
-      </TouchableOpacity>
+
+      <OptionsWithChevron
+        title="Sole trader or side business"
+        description="Maybe you’re self-employed, work as a freelancer, or make money independently"
+        onPress={() => handleUserTypeSelect('soleTrader')}
+      />
       <View style={styles.separator} />
 
-      <TouchableOpacity
-        style={styles.optionContainer}
-        onPress={() => handleUserTypeSelect('limitedCompany')}>
-        <View style={styles.optionContent}>
-          <Text variant="bodyText" style={{color: Colours.black}}>
-            Private Limited Company
-          </Text>
-          <Text variant="bodyText" style={{color: Colours.black60}}>
-            Your business is registered with Companies House and will have at
-            least one director
-          </Text>
-        </View>
-        <ChevronRightIcon stroke={Colours.pink} />
-      </TouchableOpacity>
+      <OptionsWithChevron
+        title="Private Limited Company"
+        description="Your business is registered with Companies House and will have at least one director"
+        onPress={() => handleUserTypeSelect('limitedCompany')}
+      />
       <View style={styles.separator} />
     </View>
   );
