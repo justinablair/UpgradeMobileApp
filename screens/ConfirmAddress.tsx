@@ -1,6 +1,6 @@
 //ConfirmAddress.tsx
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 // import InfoModal from '../components/InfoModal';
@@ -11,19 +11,30 @@ import Colours from '../components/theme/Colour';
 import InfoBox from '../components/InfoBox';
 import PinkButton from '../components/PinkButton';
 import WhiteButton from '../components/WhiteButton';
+import {useUserContext} from '../components/UserContext';
 
 type ConfirmAddressProps = NavigationProps<'ConfirmAddress'>;
 
 const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
+  const {addressLine1, town, postcode} = useUserContext();
+
+  const [displayedAddress, setDisplayedAddress] = useState({
+    addressLine1: '',
+    town: '',
+    postcode: '',
+  });
+
+  useEffect(() => {
+    setDisplayedAddress({addressLine1, town, postcode});
+  }, [addressLine1, town, postcode]);
+
   const handleUpgradeAddressClick = () => {
-    navigation.navigate('UpgradeNationality'); // Navigate to the desired screen
+    navigation.navigate('UpgradeNationality');
   };
 
   const handleConfirmAddressClick = () => {
-    navigation.navigate('UpgradeNationality'); // Navigate to the desired screen
+    navigation.navigate('UpgradeNationality');
   };
-
-  //   const [showUSPersonInfoModal, setShowUSPersonInfoModal] = useState(false);
 
   return (
     <ScrollView>
@@ -37,10 +48,9 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
         </Text>
         <InfoBox
           title="Your address"
-          description="38 The Keep
-          London
-          SE3 0AF"
+          description={`${displayedAddress.addressLine1}\n${displayedAddress.town}\n${displayedAddress.postcode}`}
           titleStyle={styles.titleCustomisation}
+          descriptionStyle={styles.descriptionCustomisation}
         />
         <WhiteButton
           buttonText="No thanks"
@@ -66,6 +76,9 @@ const styles = StyleSheet.create({
   },
   titleCustomisation: {
     color: Colours.black30,
+  },
+  descriptionCustomisation: {
+    color: Colours.black,
   },
 });
 

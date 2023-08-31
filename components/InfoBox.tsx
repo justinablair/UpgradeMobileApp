@@ -1,6 +1,6 @@
 //InfoBox.tsx
 import React, {ReactNode} from 'react';
-import {View, StyleSheet, TextStyle} from 'react-native';
+import {View, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import Text from '../components/Text';
 import Colour from './theme/Colour';
 
@@ -8,6 +8,7 @@ interface InfoBoxProps {
   icon?: ReactNode; // Accept any icon component as a prop
   title: string;
   description: string;
+  descriptionStyle?: TextStyle;
   titleStyle?: TextStyle; // Allow custom title style to be passed
 }
 
@@ -15,6 +16,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   icon,
   title,
   description,
+  descriptionStyle = {},
   titleStyle,
 }) => {
   return (
@@ -24,7 +26,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({
         <Text variant="bodyTextBold" style={titleStyle}>
           {title}
         </Text>
-        <Text variant="bodyText" style={{color: 'black'}}>
+        <Text variant="bodyText" style={[styles.description, descriptionStyle]}>
           {description}
         </Text>
       </View>
@@ -49,6 +51,9 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+  },
+  description: {
+    color: Colour.black,
   },
 });
 

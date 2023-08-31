@@ -1,9 +1,8 @@
 //UserSelection.tsx
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import {useUserContext, UserType} from '../components/UserContext';
-import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Import ChevronRightIcon
 import Colours from '../components/theme/Colour'; // Import Colours
 import {NavigationProps} from '../navigationTypes';
 import OptionsWithChevron from '../components/OptionsWithChevron';
@@ -18,7 +17,7 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'UpgradeIntro' : 'CompanyDetails',
+      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
     ); // Navigate based on userType
   };
 

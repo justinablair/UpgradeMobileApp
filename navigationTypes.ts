@@ -3,6 +3,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export type RootStackParamList = {
+  Address: undefined;
   UserSelection: undefined;
   CompanyDetails: undefined;
   UpgradeIntro: undefined;

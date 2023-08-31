@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
 import PinkButton from '../components/PinkButton';
-import {UncheckedIcon} from '../components/theme/UncheckedIcon';
-import {CheckmarkIcon} from '../components/theme/CheckboxIcon';
 import CheckboxToggle from '../components/CheckboxToggle';
 
 type CompanyDetailsScreenProps = NavigationProps<'CompanyDetails'>;
@@ -21,7 +19,7 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
   const handleNextPress = () => {
     if (isChecked && companyName.trim() !== '') {
       setBusinessName(companyName);
-      navigation.navigate('UpgradeIntro');
+      navigation.navigate('Address');
     }
   };
 

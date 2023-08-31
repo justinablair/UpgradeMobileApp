@@ -23,7 +23,7 @@ import UpgradeNationalityScreen from './screens/UpgradeNationality';
 import UpgradeUSPersonScreen from './screens/UpgradeUsPerson';
 import UpgradeUSPersonIneligbleScreen from './ErrorScreens/UpgradeUSPersonIneligbleScreen';
 import ConfirmAddressScreen from './screens/ConfirmAddress';
-
+import EnterAddressScreen from './screens/Address';
 const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
@@ -37,6 +37,7 @@ function App(): JSX.Element {
               name="UserSelection"
               component={UserSelectionScreen}
             />
+            <Stack.Screen name="Address" component={EnterAddressScreen} />
             <Stack.Screen
               name="CompanyDetails"
               component={CompanyDetailsScreen}
