@@ -20,6 +20,14 @@ export type RootStackParamList = {
   UpgradeUSPerson: undefined;
   UpgradeUSPersonIneligble: undefined;
   ConfirmAddress: undefined;
+  PersonalDetails: undefined;
+  UpgradeConfirm: undefined;
+  UpgradeRecap: undefined;
+  UpgradeStarted: undefined;
+  UpgradeComplete: undefined;
+  Login: undefined;
+  UpgradedWelcome: undefined;
+  UpgradedEmail: undefined;
 };
 
 export type NavigationProps<T extends keyof RootStackParamList> = {

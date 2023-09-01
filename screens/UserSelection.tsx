@@ -1,11 +1,12 @@
 //UserSelection.tsx
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../components/Text';
 import {useUserContext, UserType} from '../components/UserContext';
 import Colours from '../components/theme/Colour'; // Import Colours
 import {NavigationProps} from '../navigationTypes';
 import OptionsWithChevron from '../components/OptionsWithChevron';
+// import AuthModal from '../components/AuthModal';
 
 type UserSelectionScreenProps = NavigationProps<'UserSelection'>;
 
@@ -14,6 +15,14 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
 }) => {
   const {setUserType} = useUserContext();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleNext = (code: string) => {
+    // Handle authentication logic here
+    console.log('Authentication code:', code);
+    // Close the modal
+    setModalVisible(false);
+  };
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
@@ -42,6 +51,11 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
         onPress={() => handleUserTypeSelect('limitedCompany')}
       />
       <View style={styles.separator} />
+      {/* <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Text variant="bodyText" style={{color: Colours.black}}>
+          Open Authentication Modal
+        </Text>
+      </TouchableOpacity> */}
     </View>
   );
 };

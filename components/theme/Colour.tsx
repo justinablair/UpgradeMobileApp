@@ -13,14 +13,11 @@ const Colours = {
   red: '#C81F4B',
   disabledPink: '#FBBFC9',
   white: '#FFFFFF',
-
-  // Add other color definitions that you need based on your copied code
-  // ...
+  green: '#1FC8A9',
 
   // Add semantic color values that are used
-  stroke: '#171B1B', // You might need to adjust this based on usage
-  fill: '#171B1B', // You might need to adjust this based on usage
-  // ...
+  stroke: '#171B1B',
+  fill: '#171B1B',
 };
 
 export default Colours;

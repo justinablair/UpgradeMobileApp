@@ -14,6 +14,7 @@ import PinkButton from '../components/PinkButton';
 import InfoModal from '../components/InfoModal';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
+import Colours from '../components/theme/Colour';
 
 type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
@@ -126,11 +127,11 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#171B1B',
+    backgroundColor: Colours.black,
     padding: 25,
   },
   safeAreaContainer: {
-    backgroundColor: '#171B1B',
+    backgroundColor: Colours.black,
   },
 
   largeImage: {
@@ -138,28 +139,11 @@ const styles = StyleSheet.create({
     height: 210,
     alignSelf: 'center',
   },
-  //   headerMedium: {
-  //     fontSize: 24,
-  //     fontWeight: 'bold',
-  //     textAlign: 'left',
-  //     marginTop: 10,
-  //     color: 'white',
-  //   },
-  //   bodyText: {
-  //     fontSize: 16,
-  //     lineHeight: 21,
-  //     textAlign: 'left', // Updated to 'left'
-  //     marginTop: 10,
-  //     color: 'white',
-  //   },
+
   centeredText: {
     textAlign: 'center',
   },
-  //   headerSmall: {
-  //     fontSize: 18,
-  //     fontWeight: 'bold',
-  //     color: 'white',
-  //   },
+
   section: {
     marginTop: 20,
   },

@@ -24,6 +24,13 @@ import UpgradeUSPersonScreen from './screens/UpgradeUsPerson';
 import UpgradeUSPersonIneligbleScreen from './ErrorScreens/UpgradeUSPersonIneligbleScreen';
 import ConfirmAddressScreen from './screens/ConfirmAddress';
 import EnterAddressScreen from './screens/Address';
+import PersonalDetailsScreen from './screens/PersonalDetails';
+import UpgradeConfirmScreen from './screens/UpgradeConfirmScreen';
+import UpgradeRecapScreen from './screens/UpgradeRecap';
+import UpgradeStartedScreen from './screens/UpgradeStarted';
+import UpgradeCompleteScreen from './screens/UpgradeComplete';
+import LoginScreen from './screens/Login';
+import UpgradedWelcomeScreen from './screens/UpgradedWelcome';
 const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
@@ -88,6 +95,28 @@ function App(): JSX.Element {
             <Stack.Screen
               name="ConfirmAddress"
               component={ConfirmAddressScreen}
+            />
+            <Stack.Screen
+              name="PersonalDetails"
+              component={PersonalDetailsScreen}
+            />
+            <Stack.Screen
+              name="UpgradeConfirm"
+              component={UpgradeConfirmScreen}
+            />
+            <Stack.Screen name="UpgradeRecap" component={UpgradeRecapScreen} />
+            <Stack.Screen
+              name="UpgradeStarted"
+              component={UpgradeStartedScreen}
+            />
+            <Stack.Screen
+              name="UpgradeComplete"
+              component={UpgradeCompleteScreen}
+            />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen
+              name="UpgradedWelcome"
+              component={UpgradedWelcomeScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>

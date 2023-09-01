@@ -71,6 +71,9 @@ const styles = StyleSheet.create({
   leftAlign: {
     textAlign: 'left',
   },
+  centerAlign: {
+    textAlign: 'center',
+  },
 });
 
 export default Text;
