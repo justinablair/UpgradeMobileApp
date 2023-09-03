@@ -1,15 +1,22 @@
 import React, {useState} from 'react';
-import {View, FlatList, Image, StyleSheet} from 'react-native';
+import {View, FlatList, Image, StyleSheet, SectionList} from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
 import CheckboxToggle from '../components/CheckboxToggle';
 
+interface Item {
+  flag: any; // Change 'any' to the actual type of 'flag'
+  name: string; // Change 'string' to the actual type of 'name'
+}
+
 type Nationality = {
   name: string;
-  flag: number; // Assume the image resource identifier (require('./path/to/image.png'))
+  flag: any; // Assume the image resource identifier (require('./path/to/image.png'))
 };
+
+// type CheckboxStates = boolean[];
 
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 
@@ -19,13 +26,37 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeUSPerson'); // Navigate to the desired screen
   };
-  const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
 
-  const handleCheckboxToggle = () => {
-    setIsChecked(!isChecked); // Toggle the checkbox state
-  };
+  const frequentlySelectedNationalities: Nationality[] = [
+    {
+      name: 'United Kingdom',
+      flag: require('../assets/Flags/UnitedKingdom.png'),
+    },
+    {
+      name: 'Poland',
+      flag: require('../assets/Flags/Poland.png'),
+    },
+    {
+      name: 'Romania',
+      flag: require('../assets/Flags/Romania.png'),
+    },
+    {
+      name: 'India',
+      flag: require('../assets/Flags/India.png'),
+    },
 
-  const nationalities: Nationality[] = [
+    {
+      name: 'Italy',
+      flag: require('../assets/Flags/Italy.png'),
+    },
+
+    {
+      name: 'Portugal',
+      flag: require('../assets/Flags/Portugal.png'),
+    },
+  ];
+
+  const allNationalities: Nationality[] = [
     {name: 'Afghanistan', flag: require('../assets/Flags/Afghanistan.png')},
     {name: 'Albania', flag: require('../assets/Flags/Albania.png')},
     {name: 'Algeria', flag: require('../assets/Flags/Algeria.png')},
@@ -52,10 +83,6 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     {name: 'Bermuda', flag: require('../assets/Flags/Bermuda.png')},
     {name: 'Bhutan', flag: require('../assets/Flags/Bhutan.png')},
     {name: 'Bolivia', flag: require('../assets/Flags/Bolivia.png')},
-    // {
-    //   name: 'Bonaire, Sint Eustatius and Saba',
-    //   flag: require('./assets/Flags/Bonaire, Sint Eustatius and Saba.png'),
-    // },
     {
       name: 'Bosnia and Herzegovina',
       flag: require('../assets/Flags/BosniaAndHerzegovina.png'),
@@ -88,15 +115,13 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     {name: 'Chad', flag: require('../assets/Flags/Chad.png')},
     {name: 'Chile', flag: require('../assets/Flags/Chile.png')},
     {name: 'China', flag: require('../assets/Flags/China.png')},
-    // ...
     {name: 'Colombia', flag: require('../assets/Flags/Colombia.png')},
     {name: 'Comoros', flag: require('../assets/Flags/Comoros.png')},
-    // ...
+
     {name: 'Cook Islands', flag: require('../assets/Flags/CookIslands.png')},
     {name: 'Costa Rica', flag: require('../assets/Flags/CostaRica.png')},
     {name: 'Croatia', flag: require('../assets/Flags/Croatia.png')},
     {name: 'Cuba', flag: require('../assets/Flags/Cuba.png')},
-    // ...
     {name: 'Cyprus', flag: require('../assets/Flags/Cyprus.png')},
     {
       name: 'Czech Republic',
@@ -292,7 +317,6 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
       flag: require('../assets/Flags/TristanDaCunha.png'),
     },
     {name: 'Tunisia', flag: require('../assets/Flags/Tunisia.png')},
-    // Continue adding all the nationalities and flags here
     {name: 'Turkey', flag: require('../assets/Flags/Turkey.png')},
     {name: 'Turkmenistan', flag: require('../assets/Flags/Turkmenistan.png')},
     {
@@ -331,35 +355,108 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     {name: 'Zimbabwe', flag: require('../assets/Flags/Zimbabwe.png')},
   ];
 
-  const renderNationality = ({item}: {item: Nationality}) => (
-    <View>
-      <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
+  // Combine frequently selected and unique all nationalities into a single array
+  const combinedNationalities: Nationality[] = [
+    ...frequentlySelectedNationalities,
+    ...allNationalities, // Now using uniqueAllNationalities
+  ].filter(
+    (nationality, index, self) =>
+      index ===
+      self.findIndex(
+        n =>
+          n.name.trim().toLowerCase() === nationality.name.trim().toLowerCase(),
+      ),
+  );
+  // Sort the combined nationalities alphabetically by name
+  combinedNationalities.sort((a, b) => a.name.localeCompare(b.name));
+
+  // Create an object to store nationalities under their respective sections (A, B, C, etc.)
+  const nationalitiesBySection: {
+    [letter: string]: Nationality[];
+  } = {};
+
+  combinedNationalities.forEach(nationality => {
+    const firstLetter = nationality.name.charAt(0).toUpperCase();
+    if (!nationalitiesBySection[firstLetter]) {
+      nationalitiesBySection[firstLetter] = [];
+    }
+    nationalitiesBySection[firstLetter].push(nationality);
+  });
+
+  const sectionData = [
+    {
+      letter: 'Frequently Selected',
+      data: frequentlySelectedNationalities,
+    },
+    ...Object.keys(nationalitiesBySection).map(letter => ({
+      letter,
+      data: nationalitiesBySection[letter],
+    })),
+  ];
+
+  const [checkboxStates, setCheckboxStates] = useState<boolean[]>(
+    new Array(combinedNationalities.length).fill(false),
+  );
+
+  const handleCheckboxToggle = (index: number) => {
+    const updatedStates = [...checkboxStates];
+    updatedStates[index] = !updatedStates[index];
+    setCheckboxStates(updatedStates);
+  };
+
+  const renderNationality = ({
+    item,
+    index,
+  }: {
+    item: Nationality;
+    index: number;
+  }) => (
+    <View style={{backgroundColor: 'white'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingLeft: 27,
+          paddingVertical: 10,
+          paddingHorizontal: 16,
+        }}>
         <Image
           source={item.flag}
           style={{width: 32, height: 32, marginRight: 10}}
         />
-        <Text variant="bodyText" style={{color: Colours.black}}>
+        <Text variant="bodyText" style={{color: 'black', padding: 10}}>
           {item.name}
         </Text>
+        <View style={{marginLeft: 'auto', marginRight: 8}}>
+          <CheckboxToggle
+            checked={checkboxStates[index]}
+            onToggle={() => handleCheckboxToggle(index)}
+          />
+        </View>
       </View>
-      <CheckboxToggle checked={isChecked} onToggle={handleCheckboxToggle} />
-
       <View style={styles.separator} />
     </View>
   );
 
+  const renderSectionHeader = ({
+    section: {letter},
+  }: {
+    section: {letter: string};
+  }) => (
+    <Text
+      variant="bodyTextDescription"
+      style={[styles.sectionHeader, {color: Colours.black30}]}>
+      {letter}
+    </Text>
+  );
+
   return (
     <View style={styles.container}>
-      <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-        What is your tax residency?
-      </Text>
-      <Text variant="bodyText" style={{color: Colours.black}}>
-        Please confirm all countries where you are a tax resident.
-      </Text>
-      <FlatList
-        data={nationalities}
-        renderItem={renderNationality}
-        keyExtractor={item => item.name}
+      <SectionList
+        sections={sectionData}
+        renderItem={({item, index}) => renderNationality({item, index})}
+        renderSectionHeader={({section}) => renderSectionHeader({section})}
+        keyExtractor={(_, index) => `${index}`}
       />
       <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
     </View>
@@ -369,16 +466,20 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
-    padding: 16,
+    // padding: 16,
   },
   separator: {
     width: 327,
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
-    marginBottom: 16,
+    alignSelf: 'center', // Center the separator horizontally
+    marginLeft: 16, // Add marginLeft
+    marginRight: 16, // Add marginRight
   },
-  checkboxContainer: {},
+  sectionHeader: {
+    paddingVertical: 15, // Add padding to increase the height
+    marginLeft: 16, // Add marginLeft
+  },
 });
 
 export default UpgradeNationalityScreen;
