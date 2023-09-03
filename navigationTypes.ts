@@ -17,8 +17,8 @@ export type RootStackParamList = {
   UpgradeTaxCompliant: undefined;
   UpgradeTaxReporting: undefined;
   UpgradeNationality: undefined;
+  UpgradeIneligible: undefined;
   UpgradeUSPerson: undefined;
-  UpgradeUSPersonIneligble: undefined;
   ConfirmAddress: undefined;
   PersonalDetails: undefined;
   UpgradeConfirm: undefined;

@@ -21,7 +21,7 @@ import UpgradeTaxCompliantScreen from './screens/UpgradeTaxCompliant';
 import UpgradeTaxReportingScreen from './screens/UpgradeTaxReporting';
 import UpgradeNationalityScreen from './screens/UpgradeNationality';
 import UpgradeUSPersonScreen from './screens/UpgradeUsPerson';
-import UpgradeUSPersonIneligbleScreen from './ErrorScreens/UpgradeUSPersonIneligbleScreen';
+import UpgradeIneligibleScreen from './ErrorScreens/UpgradeIneligibleScreen';
 import ConfirmAddressScreen from './screens/ConfirmAddress';
 import EnterAddressScreen from './screens/Address';
 import PersonalDetailsScreen from './screens/PersonalDetails';
@@ -29,9 +29,9 @@ import UpgradeConfirmScreen from './screens/UpgradeConfirmScreen';
 import UpgradeRecapScreen from './screens/UpgradeRecap';
 import UpgradeStartedScreen from './screens/UpgradeStarted';
 import UpgradeCompleteScreen from './screens/UpgradeComplete';
-import LoginScreen from './screens/Login';
 import UpgradedWelcomeScreen from './screens/UpgradedWelcome';
 import UpgradedEmailScreen from './screens/UpgradedEmail';
+
 const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
@@ -90,8 +90,8 @@ function App(): JSX.Element {
               component={UpgradeUSPersonScreen}
             />
             <Stack.Screen
-              name="UpgradeUSPersonIneligble"
-              component={UpgradeUSPersonIneligbleScreen}
+              name="UpgradeIneligible"
+              component={UpgradeIneligibleScreen}
             />
             <Stack.Screen
               name="ConfirmAddress"

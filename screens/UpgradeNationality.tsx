@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {View, FlatList, Image, StyleSheet, SectionList} from 'react-native';
+import {View, TextInput, Image, StyleSheet, SectionList} from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
 import CheckboxToggle from '../components/CheckboxToggle';
+import SearchIcon from '../components/theme/SearchIcon';
 
 interface Item {
   flag: any; // Change 'any' to the actual type of 'flag'
@@ -16,15 +17,22 @@ type Nationality = {
   flag: any; // Assume the image resource identifier (require('./path/to/image.png'))
 };
 
-// type CheckboxStates = boolean[];
-
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 
 const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   navigation,
 }) => {
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeUSPerson'); // Navigate to the desired screen
+    // Check if any checkbox other than 'United Kingdom' is selected
+    const isOtherSelected = Object.keys(checkboxStates).some(
+      name => name !== 'United Kingdom' && checkboxStates[name],
+    );
+
+    if (isOtherSelected) {
+      navigation.navigate('UpgradeIneligible');
+    } else {
+      navigation.navigate('UpgradeUSPerson');
+    }
   };
 
   const frequentlySelectedNationalities: Nationality[] = [
@@ -327,7 +335,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     {name: 'Uganda', flag: require('../assets/Flags/Uganda.png')},
     {name: 'Ukraine', flag: require('../assets/Flags/Ukraine.png')},
     {
-      name: 'UnitedArabEmirates',
+      name: 'United Arab Emirates',
       flag: require('../assets/Flags/UnitedArabEmirates.png'),
     },
     {
@@ -370,6 +378,24 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   // Sort the combined nationalities alphabetically by name
   combinedNationalities.sort((a, b) => a.name.localeCompare(b.name));
 
+  // Initialize checkbox states using an object
+  const initialCheckboxStates: {[key: string]: boolean} =
+    combinedNationalities.reduce((acc, nationality) => {
+      acc[nationality.name] = false;
+      return acc;
+    }, {} as {[key: string]: boolean});
+
+  const [checkboxStates, setCheckboxStates] = useState<{
+    [key: string]: boolean;
+  }>(initialCheckboxStates);
+
+  const handleCheckboxToggle = (name: string) => {
+    setCheckboxStates(prevStates => ({
+      ...prevStates,
+      [name]: !prevStates[name],
+    }));
+  };
+
   // Create an object to store nationalities under their respective sections (A, B, C, etc.)
   const nationalitiesBySection: {
     [letter: string]: Nationality[];
@@ -394,15 +420,32 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     })),
   ];
 
-  const [checkboxStates, setCheckboxStates] = useState<boolean[]>(
-    new Array(combinedNationalities.length).fill(false),
-  );
+  //changes
 
-  const handleCheckboxToggle = (index: number) => {
-    const updatedStates = [...checkboxStates];
-    updatedStates[index] = !updatedStates[index];
-    setCheckboxStates(updatedStates);
+  //changes
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredNationalities, setFilteredNationalities] = useState<
+    Nationality[]
+  >([]);
+
+  const handleSearch = (query: string) => {
+    const lowercaseQuery = query.toLowerCase();
+
+    if (lowercaseQuery === '') {
+      // If the query is empty, show the default frequently selected nationalities
+      setFilteredNationalities(frequentlySelectedNationalities);
+    } else {
+      // Filter the nationalities based on the search query
+      const filtered = combinedNationalities.filter(nationality =>
+        nationality.name.toLowerCase().includes(lowercaseQuery),
+      );
+      setFilteredNationalities(filtered);
+    }
+
+    setSearchQuery(query);
   };
+
+  console.log('filteredNationalities length:', filteredNationalities.length);
 
   const renderNationality = ({
     item,
@@ -429,8 +472,8 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
         </Text>
         <View style={{marginLeft: 'auto', marginRight: 8}}>
           <CheckboxToggle
-            checked={checkboxStates[index]}
-            onToggle={() => handleCheckboxToggle(index)}
+            checked={checkboxStates[item.name]}
+            onToggle={() => handleCheckboxToggle(item.name)}
           />
         </View>
       </View>
@@ -452,12 +495,64 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
 
   return (
     <View style={styles.container}>
+      <View style={{backgroundColor: Colours.white}}>
+        <Text
+          variant="screenTitle leftAlign"
+          style={[
+            {color: Colours.black},
+            styles.paddingLeft,
+            styles.paddingTop,
+          ]}>
+          Add your tax residencies
+        </Text>
+        <Text
+          variant="bodyText leftAlign"
+          style={[{color: Colours.black}, styles.paddingLeft]}>
+          Select all countries where you are a tax resident.
+        </Text>
+        <View style={styles.searchBar}>
+          <SearchIcon />
+          <TextInput
+            style={styles.input}
+            placeholder="Search"
+            value={searchQuery}
+            onChangeText={handleSearch}
+          />
+        </View>
+      </View>
       <SectionList
-        sections={sectionData}
-        renderItem={({item, index}) => renderNationality({item, index})}
+        style={{border: '1px solid red'}}
+        sections={
+          searchQuery === ''
+            ? [
+                {
+                  letter: 'Frequently Selected',
+                  data: frequentlySelectedNationalities,
+                },
+                ...Object.keys(nationalitiesBySection).map(letter => ({
+                  letter,
+                  data: nationalitiesBySection[letter],
+                })),
+              ]
+            : [
+                {
+                  letter: `Results for "${searchQuery}"`,
+                  data: filteredNationalities,
+                },
+              ]
+        }
+        renderItem={({item, index}) => (
+          <View
+            style={{
+              border: '1px solid green',
+            }}>
+            {renderNationality({item, index})}
+          </View>
+        )}
         renderSectionHeader={({section}) => renderSectionHeader({section})}
         keyExtractor={(_, index) => `${index}`}
       />
+
       <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
     </View>
   );
@@ -467,6 +562,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // padding: 16,
+  },
+
+  paddingTop: {
+    paddingTop: 16,
+  },
+  paddingLeft: {
+    marginLeft: 16,
+    marginRight: 16,
+  },
+  searchBar: {
+    // backgroundColor: 'white',
+    flexDirection: 'row', // Arrange input and icon side by side
+    alignItems: 'center', // Align items vertically
+    backgroundColor: Colours.black05,
+    borderRadius: 8,
+    padding: 4,
+    margin: 16,
+  },
+  searchIcon: {
+    // Style for the SearchIcon component
+    marginRight: 8, // Space between icon and input
+  },
+  input: {
+    flex: 1, // Take up remaining space in the search bar
   },
   separator: {
     width: 327,
@@ -479,6 +598,14 @@ const styles = StyleSheet.create({
   sectionHeader: {
     paddingVertical: 15, // Add padding to increase the height
     marginLeft: 16, // Add marginLeft
+  },
+  searchContainer: {
+    // Container for search input and icon
+    backgroundColor: 'white',
+    flexDirection: 'row', // Arrange input and icon side by side
+    alignItems: 'center', // Align items vertically
+    padding: 8,
+    margin: 16,
   },
 });
 

@@ -6,12 +6,11 @@ import PinkButton from '../components/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 
-type UpgradeUSPersonIneligbleProps =
-  NavigationProps<'UpgradeUSPersonIneligble'>;
+type UpgradeIneligibleProps = NavigationProps<'UpgradeIneligible'>;
 
-const UpgradeUSPersonIneligbleScreen: React.FC<
-  UpgradeUSPersonIneligbleProps
-> = ({navigation}) => {
+const UpgradeIneligibleScreen: React.FC<UpgradeIneligibleProps> = ({
+  navigation,
+}) => {
   const handleSwitchExitJourneyPress = () => {
     navigation.navigate('UpgradeIntro'); // Navigate to the desired screen
   };
@@ -53,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpgradeUSPersonIneligbleScreen;
+export default UpgradeIneligibleScreen;

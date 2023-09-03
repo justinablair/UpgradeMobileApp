@@ -22,7 +22,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
     navigation.navigate('ConfirmAddress'); // Navigate to the desired screen
   };
   const handleYesButtonPress = () => {
-    navigation.navigate('UpgradeUSPersonIneligble'); // Navigate to the desired screen
+    navigation.navigate('UpgradeIneligible'); // Navigate to the desired screen
   };
 
   const [showUSPersonInfoModal, setShowUSPersonInfoModal] = useState(false);
