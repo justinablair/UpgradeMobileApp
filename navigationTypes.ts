@@ -25,7 +25,6 @@ export type RootStackParamList = {
   UpgradeRecap: undefined;
   UpgradeStarted: undefined;
   UpgradeComplete: undefined;
-  Login: undefined;
   UpgradedWelcome: undefined;
   UpgradedEmail: undefined;
 };

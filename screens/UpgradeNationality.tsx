@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, FlatList, Image, StyleSheet} from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
+import CheckboxToggle from '../components/CheckboxToggle';
 
 type Nationality = {
   name: string;
@@ -17,6 +18,11 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
 }) => {
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeUSPerson'); // Navigate to the desired screen
+  };
+  const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
+
+  const handleCheckboxToggle = () => {
+    setIsChecked(!isChecked); // Toggle the checkbox state
   };
 
   const nationalities: Nationality[] = [
@@ -326,12 +332,19 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   ];
 
   const renderNationality = ({item}: {item: Nationality}) => (
-    <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
-      <Image
-        source={item.flag}
-        style={{width: 32, height: 32, marginRight: 10}}
-      />
-      <Text>{item.name}</Text>
+    <View>
+      <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
+        <Image
+          source={item.flag}
+          style={{width: 32, height: 32, marginRight: 10}}
+        />
+        <Text variant="bodyText" style={{color: Colours.black}}>
+          {item.name}
+        </Text>
+      </View>
+      <CheckboxToggle checked={isChecked} onToggle={handleCheckboxToggle} />
+
+      <View style={styles.separator} />
     </View>
   );
 
@@ -359,6 +372,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colours.white,
     padding: 16,
   },
+  separator: {
+    width: 327,
+    borderBottomWidth: 1,
+    borderBottomColor: Colours.black30,
+    marginBottom: 16,
+  },
+  checkboxContainer: {},
 });
 
 export default UpgradeNationalityScreen;

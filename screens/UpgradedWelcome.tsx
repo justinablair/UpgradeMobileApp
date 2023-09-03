@@ -24,6 +24,7 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
           <Image
             source={require('../assets/MettleStars.png')}
             style={styles.largeImage}
+            resizeMode="contain" // Add resizeMode property
             accessibilityLabel="Mettle logo with stars around it"
           />
           <Text variant="screenTitle">
@@ -51,9 +52,9 @@ const styles = StyleSheet.create({
   },
 
   largeImage: {
-    width: 280,
-    height: 260,
     alignSelf: 'center',
+    width: 279,
+    height: 200,
   },
 
   centeredText: {

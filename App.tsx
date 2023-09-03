@@ -31,6 +31,7 @@ import UpgradeStartedScreen from './screens/UpgradeStarted';
 import UpgradeCompleteScreen from './screens/UpgradeComplete';
 import LoginScreen from './screens/Login';
 import UpgradedWelcomeScreen from './screens/UpgradedWelcome';
+import UpgradedEmailScreen from './screens/UpgradedEmail';
 const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
@@ -113,10 +114,14 @@ function App(): JSX.Element {
               name="UpgradeComplete"
               component={UpgradeCompleteScreen}
             />
-            <Stack.Screen name="Login" component={LoginScreen} />
+            {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
             <Stack.Screen
               name="UpgradedWelcome"
               component={UpgradedWelcomeScreen}
+            />
+            <Stack.Screen
+              name="UpgradedEmail"
+              component={UpgradedEmailScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -6,24 +6,33 @@ import {PinBackIcon} from './theme/pinbackIcon';
 
 interface AuthModalProps {
   visible: boolean;
-  navigation: any;
-  onNext: (code: string) => void;
+  navigation?: any;
+  onNext?: () => void; // Make onNext callback optional
   onClose: () => void;
+  onDigitsEntered?: () => void; // Make onDigitsEntered callback optional
 }
 const AuthModal: React.FC<AuthModalProps> = ({
   visible,
   onClose,
   navigation,
+  onDigitsEntered,
+  onNext,
 }) => {
   const [code, setCode] = useState('');
   const [selectedCount, setSelectedCount] = useState(0);
 
   useEffect(() => {
     if (selectedCount === 6) {
-      navigation.navigate('UpgradeStarted');
+      if (onNext) {
+        onNext(); // Call onNext if provided
+      }
+      if (onDigitsEntered) {
+        onDigitsEntered(); // Call onDigitsEntered if provided
+      }
       onClose();
     }
-  }, [selectedCount, navigation, onClose]);
+  }, [selectedCount, onNext, onDigitsEntered, navigation, onClose]);
+
   const handleDigitPress = (digit: number) => {
     if (selectedCount < 6) {
       setCode(prevCode => prevCode + digit.toString());

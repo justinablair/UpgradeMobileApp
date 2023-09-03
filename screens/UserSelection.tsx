@@ -15,18 +15,10 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
 }) => {
   const {setUserType} = useUserContext();
 
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleNext = (code: string) => {
-    // Handle authentication logic here
-    console.log('Authentication code:', code);
-    // Close the modal
-    setModalVisible(false);
-  };
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
+      userType === 'soleTrader' ? 'UpgradeNationality' : 'CompanyDetails',
     ); // Navigate based on userType
   };
 

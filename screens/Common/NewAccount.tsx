@@ -1,7 +1,6 @@
 // ChangesWeDo.tsx
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import WhiteButton from '../../components/WhiteButton';
 import InfoBox from '../../components/InfoBox';
 import {LockedIcon} from '../../components/theme/LockedIcon';
 import {MobilePhoneIcon} from '../../components/theme/MobilePhoneIcon';
@@ -30,7 +29,7 @@ const NewAccount: React.FC<NewAccountProps> = () => {
       <View style={styles.space} />
       {/* Box 2 */}
       <InfoBox
-        icon={<MobilePhoneIcon stroke={Colours.black} />}
+        icon={<MobilePhoneIcon fill={Colours.black} />}
         title=" You’ll use the same app"
         description="No need to download anything else."
       />

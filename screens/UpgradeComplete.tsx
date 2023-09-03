@@ -1,20 +1,31 @@
 //UpgradeIntro.tsx
 
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
 
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import PinkButton from '../components/PinkButton';
+import AuthModal from '../components/AuthModal';
 
 type UpgradeCompleteProps = NavigationProps<'UpgradeComplete'>;
 
 const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
   navigation,
 }) => {
-  const handleSwitchButtonPress = () => {
-    navigation.navigate('Login'); // Navigate to the desired screen
+  const [authModalVisible, setAuthModalVisible] = useState(false);
+
+  const onCloseAuthModal = () => {
+    setAuthModalVisible(false); // Close the AuthModal
+  };
+  const handleLoginButtonPress = () => {
+    setAuthModalVisible(true); // Open the AuthModal
+  };
+  const handleAuthModalNext = () => {
+    const targetScreen = 'UpgradedWelcome'; // Define the target screen
+    navigation.navigate(targetScreen); // Navigate to the target screen
+    onCloseAuthModal(); // Close the AuthModal
   };
 
   return (
@@ -32,8 +43,14 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
             emails soon with your new account details and your e-money scheduled
             payments and Direct Debits.
           </Text>
-          <PinkButton buttonText="Log in" onPress={handleSwitchButtonPress} />
+          <PinkButton buttonText="Log in" onPress={handleLoginButtonPress} />
         </View>
+        <AuthModal
+          visible={authModalVisible}
+          onClose={onCloseAuthModal}
+          navigation={navigation}
+          onNext={handleAuthModalNext}
+        />
       </ScrollView>
     </SafeAreaView>
   );

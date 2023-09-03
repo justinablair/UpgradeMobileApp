@@ -31,7 +31,7 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
       <View style={styles.space} />
       {/* Box 2 */}
       <InfoBox
-        icon={<LeasingIcon stroke={Colours.black} />}
+        icon={<LeasingIcon fill={Colours.black} />}
         title="Set up your Direct Debits and scheduled payments"
         description="Use the email we send you to set them up again."
       />
@@ -53,7 +53,7 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
       <View style={styles.space} />
       {/* Box 5 */}
       <InfoBox
-        icon={<ComputerSoftwareIcon stroke={Colours.black} />}
+        icon={<ComputerSoftwareIcon fill={Colours.black} />}
         title="Reconnect Xero or Quickbooks"
         description="Any connections you currently have will expire."
       />

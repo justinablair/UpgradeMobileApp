@@ -10,7 +10,6 @@ import ChangesYouDo from './Common/ChangesYouDo';
 import ChangesWeDo from './Common/ChangesWeDo';
 import NewAccount from './Common/NewAccount';
 import WhiteButton from '../components/WhiteButton';
-import Text from '../components/Text';
 import AuthModal from '../components/AuthModal';
 
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
@@ -66,8 +65,8 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
         <AuthModal
           visible={modalVisible}
           navigation={navigation}
-          onNext={handleNext} // Pass the onNext prop
-          onClose={onClose} // Pass the onClose function
+          onDigitsEntered={handleSwitchButtonExitJourney}
+          onClose={onClose}
         />
       </View>
     </ScrollView>
