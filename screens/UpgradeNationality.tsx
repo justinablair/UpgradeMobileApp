@@ -445,8 +445,6 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     setSearchQuery(query);
   };
 
-  console.log('filteredNationalities length:', filteredNationalities.length);
-
   const renderNationality = ({
     item,
     index,
@@ -487,10 +485,20 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     section: {letter: string};
   }) => (
     <Text
-      variant="bodyTextDescription"
+      variant="bodyTextDescription bodyTextBold"
       style={[styles.sectionHeader, {color: Colours.black30}]}>
       {letter}
     </Text>
+  );
+
+  const renderCustomSectionHeader = ({section}) => (
+    <View style={styles.stickySectionHeader}>
+      <Text
+        variant="bodyTextDescription bodyTextBold"
+        style={{color: Colours.black60}}>
+        {section.letter}
+      </Text>
+    </View>
   );
 
   return (
@@ -515,6 +523,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           <TextInput
             style={styles.input}
             placeholder="Search"
+            placeholderTextColor={Colours.black60} // Set the color to black60
             value={searchQuery}
             onChangeText={handleSearch}
           />
@@ -542,15 +551,17 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
               ]
         }
         renderItem={({item, index}) => (
-          <View
-            style={{
-              border: '1px solid green',
-            }}>
+          <View style={{border: '1px solid green'}}>
             {renderNationality({item, index})}
           </View>
         )}
-        renderSectionHeader={({section}) => renderSectionHeader({section})}
+        renderSectionHeader={({section}) => (
+          <View style={[{backgroundColor: Colours.black05, padding: 16}]}>
+            {renderCustomSectionHeader({section})}
+          </View>
+        )}
         keyExtractor={(_, index) => `${index}`}
+        stickySectionHeadersEnabled={true}
       />
 
       <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
