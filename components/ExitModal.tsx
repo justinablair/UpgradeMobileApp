@@ -1,10 +1,12 @@
 //ExitModal.tsx
 import React from 'react';
-import {Modal, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Modal, View, StyleSheet} from 'react-native';
 import Colours from '../components/theme/Colour'; // Update the path to Colour.js
 import PinkButton from './PinkButton';
 import WhiteButton from './WhiteButton';
 import Text from './Text';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProps} from '../navigationTypes';
 
 interface ExitModalProps {
   visible: boolean;
@@ -12,8 +14,8 @@ interface ExitModalProps {
   title: string;
   content: string;
   accessibilityLabel?: string;
-  onAgree?: () => void; // Optional callback for Agree button
-  navigation: any; // Add navigation prop for navigation
+  onAgree?: () => void;
+  onNavigateToUpgradeIntro: () => void; // Define the callback prop
 }
 
 const ExitModal: React.FC<ExitModalProps> = ({
@@ -21,10 +23,11 @@ const ExitModal: React.FC<ExitModalProps> = ({
   onPressClose,
   title,
   content,
-  //   accessibilityLabel,
   onAgree,
-  navigation,
+  onNavigateToUpgradeIntro,
 }) => {
+  const navigation = useNavigation();
+
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.backgroundContainer}>
@@ -53,12 +56,11 @@ const ExitModal: React.FC<ExitModalProps> = ({
               <WhiteButton
                 buttonText="Exit Switch"
                 onPress={() => {
-                  onAgree && onAgree();
-                  onPressClose(); // Close the modal after agreeing
-                  // Navigate to "UpgradeIntro" screen here
-                  navigation.navigate('UpgradeIntro');
+                  onNavigateToUpgradeIntro();
+                  onPressClose();
+                  navigation.navigate('UpgradeIntro'); // Use the navigation prop here
                 }}
-                customWidth={158} // Set a custom width for the WhiteButton
+                customWidth={158}
               />
             </View>
           </View>

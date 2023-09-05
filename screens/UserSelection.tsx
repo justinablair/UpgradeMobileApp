@@ -18,7 +18,7 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'UpgradeNationality' : 'CompanyDetails',
+      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
     ); // Navigate based on userType
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
@@ -7,14 +7,20 @@ import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import ListItem from '../components/ListItem';
+import Toast from '../components/Toast';
+import WhiteButton from '../components/WhiteButton';
 
 type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 
-const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = ({navigation}) => {
-  const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeConsents'); // Navigate to the desired screen
+const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
+  const [showBankAccountToast, setShowBankAccountToast] = useState(false);
+  const [showOpenMailToast, setShowOpenMailToast] = useState(false);
+  const bankAccountToast = () => {
+    return <Toast message="This would navigate to bank account" />;
   };
-
+  const openMailToast = () => {
+    return <Toast message="This would navigate to the mail app" />;
+  };
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -40,7 +46,14 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = ({navigation}) => {
           text="Share your new bank details"
           description="You can find these at any time in the Account tab"
         />
-        <PinkButton buttonText="Got it" onPress={handleSwitchButtonPress} />
+        <WhiteButton
+          buttonText="Got it"
+          onPress={() => setShowBankAccountToast(true)}
+        />
+        <PinkButton
+          buttonText="Open email app"
+          onPress={() => setShowOpenMailToast(true)}
+        />
       </View>
     </ScrollView>
   );

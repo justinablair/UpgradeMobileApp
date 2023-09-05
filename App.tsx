@@ -66,17 +66,37 @@ function App(): JSX.Element {
               component={UserSelectionScreen}
               options={commonHeaderOptions}
             />
-            <Stack.Screen name="Address" component={EnterAddressScreen} />
+            <Stack.Screen
+              name="Address"
+              component={EnterAddressScreen}
+              options={commonHeaderOptions}
+            />
             <Stack.Screen
               name="CompanyDetails"
               component={CompanyDetailsScreen}
               options={commonHeaderOptions}
             />
-            <Stack.Screen name="UpgradeIntro" component={UpgradeIntroScreen} />
+            <Stack.Screen
+              name="UpgradeIntro"
+              component={UpgradeIntroScreen}
+              options={{
+                ...commonHeaderOptions,
+                headerStyle: {
+                  backgroundColor: Colours.black, // Change the background color
+                  shadowOpacity: 0, // For iOS, remove shadow
+                },
+              }}
+            />
             <Stack.Screen
               name="UpgradeChangesHow"
               component={UpgradeChangesHowScreen}
-              options={commonHeaderOptions}
+              options={{
+                ...commonHeaderOptions,
+                headerStyle: {
+                  backgroundColor: Colours.black, // Change the background color
+                  shadowOpacity: 0, // For iOS, remove shadow
+                },
+              }}
             />
             <Stack.Screen
               name="UpgradeChangesWeDo"
@@ -93,13 +113,21 @@ function App(): JSX.Element {
               component={UpgradeChangesNewAccountScreen}
               options={commonHeaderOptions}
             />
-            <Stack.Screen name="UpgradeTerms" component={UpgradeTermsScreen} />
+            <Stack.Screen
+              name="UpgradeTerms"
+              component={UpgradeTermsScreen}
+              options={commonHeaderOptions}
+            />
             <Stack.Screen
               name="UpgradeConsents"
               component={UpgradeConsentsScreen}
               options={commonHeaderOptions}
             />
-            <Stack.Screen name="Marketing" component={MarketingScreen} />
+            <Stack.Screen
+              name="Marketing"
+              component={MarketingScreen}
+              options={commonHeaderOptions}
+            />
             <Stack.Screen
               name="UpgradeTaxCompliant"
               component={UpgradeTaxCompliantScreen}
@@ -140,21 +168,43 @@ function App(): JSX.Element {
               component={UpgradeConfirmScreen}
               options={commonHeaderOptions}
             />
-            <Stack.Screen name="UpgradeRecap" component={UpgradeRecapScreen} />
+            <Stack.Screen
+              name="UpgradeRecap"
+              component={UpgradeRecapScreen}
+              options={commonHeaderOptions}
+            />
             <Stack.Screen
               name="UpgradeStarted"
               component={UpgradeStartedScreen}
-              options={commonHeaderOptions}
+              options={{
+                ...commonHeaderOptions,
+                headerStyle: {
+                  backgroundColor: Colours.black, // Change the background color
+                  shadowOpacity: 0, // For iOS, remove shadow
+                },
+              }}
             />
             <Stack.Screen
               name="UpgradeComplete"
               component={UpgradeCompleteScreen}
-              options={commonHeaderOptions}
+              options={{
+                ...commonHeaderOptions,
+                headerStyle: {
+                  backgroundColor: Colours.black, // Change the background color
+                  shadowOpacity: 0, // For iOS, remove shadow
+                },
+              }}
             />
             <Stack.Screen
               name="UpgradedWelcome"
               component={UpgradedWelcomeScreen}
-              options={commonHeaderOptions}
+              options={{
+                ...commonHeaderOptions,
+                headerStyle: {
+                  backgroundColor: Colours.black, // Change the background color
+                  shadowOpacity: 0, // For iOS, remove shadow
+                },
+              }}
             />
             <Stack.Screen
               name="UpgradedEmail"
@@ -162,17 +212,17 @@ function App(): JSX.Element {
               options={commonHeaderOptions}
             />
           </Stack.Navigator>
+          <ExitModal
+            visible={isExitModalVisible}
+            onPressClose={() => setIsExitModalVisible(false)}
+            title="Exit Modal Title"
+            content="Exit Modal Content"
+            onNavigateToUpgradeIntro={() => {
+              // Handle any navigation logic here if needed
+            }}
+          />
         </NavigationContainer>
       </UserContextProvider>
-      {isExitModalVisible && (
-        <ExitModal
-          visible={isExitModalVisible}
-          onPressClose={() => setIsExitModalVisible(false)}
-          title="Are you sure you want to exit?"
-          content="Your progress won’t be saved."
-          navigation={null} // Pass your navigation prop here if needed
-        />
-      )}
     </SafeAreaProvider>
   );
 }
