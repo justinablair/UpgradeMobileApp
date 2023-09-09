@@ -36,8 +36,8 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             agreements.{'\n\n'}I agree to inform Mettle of any change in
             circumstance that causes my information to become incorrect or
             incomplete and to provide an updated Self Certification Declaration
-            within 30 days.{'\n\n'}I declare that I declare that the business is
-            compliant with all relevant tax laws and all statements made in this
+            within 30 days.{'\n\n'} I declare that the business is compliant
+            with all relevant tax laws and all statements made in this
             declaration are, to the best of my knowledge and belief, correct and
             complete.
           </Text>
