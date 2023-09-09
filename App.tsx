@@ -215,8 +215,8 @@ function App(): JSX.Element {
           <ExitModal
             visible={isExitModalVisible}
             onPressClose={() => setIsExitModalVisible(false)}
-            title="Exit Modal Title"
-            content="Exit Modal Content"
+            title="Are you sure you want to exit?"
+            content="Your progress won’t be saved."
             onNavigateToUpgradeIntro={() => {
               // Handle any navigation logic here if needed
             }}

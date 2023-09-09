@@ -44,7 +44,7 @@ const ExitModal: React.FC<ExitModalProps> = ({
               {content}
             </Text>
             <View style={styles.buttonContainer}>
-              <PinkButton
+              <WhiteButton
                 buttonText="Continue Switch"
                 onPress={() => {
                   onAgree && onAgree();
@@ -53,12 +53,12 @@ const ExitModal: React.FC<ExitModalProps> = ({
                 customWidth={158} // Set a custom width for the PinkButton
               />
               <View style={{width: 10}} />
-              <WhiteButton
+              <PinkButton
                 buttonText="Exit Switch"
                 onPress={() => {
                   onNavigateToUpgradeIntro();
                   onPressClose();
-                  navigation.navigate('UpgradeIntro'); // Use the navigation prop here
+                  navigation.navigate('UserSelection'); // Use the navigation prop here
                 }}
                 customWidth={158}
               />

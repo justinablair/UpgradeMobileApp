@@ -19,6 +19,15 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   const [postcodeLocal, setPostcodeLocal] = useState(''); // Local state for postcode
   const [formError, setFormError] = useState('');
 
+  // Trim the input values to remove leading and trailing spaces
+  const trimmedAddressLine1 = addressLine1Local.trim();
+  const trimmedTown = townLocal.trim();
+  const trimmedPostcode = postcodeLocal.trim();
+
+  setAddressLine1(trimmedAddressLine1); // Set trimmed value in UserContext
+  setTown(trimmedTown); // Set trimmed value in UserContext
+  setPostcode(trimmedPostcode); // Set trimmed value in UserContext
+
   const handleSwitchButtonPress = () => {
     if (!isFormValid()) {
       setFormError('Please complete all required fields.');

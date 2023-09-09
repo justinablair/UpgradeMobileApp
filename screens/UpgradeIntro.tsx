@@ -91,7 +91,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
         </View>
         <View style={styles.box}>
           <Text variant="bodyText">
-            Scheduled payments will be processed on business days only.
+            Scheduled payments will be processed on business days only
           </Text>
         </View>
         <View style={styles.section}>

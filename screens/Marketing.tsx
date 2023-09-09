@@ -45,7 +45,7 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
           variant="bodyText leftAlign"
           style={[{color: Colours.black}, styles.space]}>
           We’d like to contact you from time to time so you can get the most out
-          of Mettle, our partners and the wider NatWest group.
+          of Mettle, our partners and the wider NatWest Group.
         </Text>
 
         <PreferenceToggle
