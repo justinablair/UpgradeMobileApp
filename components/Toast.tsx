@@ -20,11 +20,8 @@ const Toast: React.FC<ToastProps> = ({message}) => {
 const styles = StyleSheet.create({
   toastContainer: {
     backgroundColor: 'black',
-    width: 378,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
+    width: '100%',
+    height: 50,
   },
 });
 

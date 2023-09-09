@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/PinkButton';
@@ -15,12 +15,35 @@ type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
   const [showBankAccountToast, setShowBankAccountToast] = useState(false);
   const [showOpenMailToast, setShowOpenMailToast] = useState(false);
+
   const bankAccountToast = () => {
-    return <Toast message="This would navigate to bank account" />;
+    return <Toast message="This would navigate to the users bank account" />;
   };
   const openMailToast = () => {
-    return <Toast message="This would navigate to the mail app" />;
+    return <Toast message="This would navigate to the users mail app" />;
   };
+
+  useEffect(() => {
+    // Close the bank account toast after 5 seconds
+    if (showBankAccountToast) {
+      const bankAccountToastTimer = setTimeout(() => {
+        setShowBankAccountToast(false);
+      }, 2000);
+
+      // Clear the timer when the component unmounts or if the other button is clicked
+      return () => clearTimeout(bankAccountToastTimer);
+    }
+  }, [showBankAccountToast]);
+
+  useEffect(() => {
+    // Close the open mail toast after 5 seconds
+    if (showOpenMailToast) {
+      const openMailToastTimer = setTimeout(() => {
+        setShowOpenMailToast(false);
+      }, 2000);
+      return () => clearTimeout(openMailToastTimer);
+    }
+  }, [showOpenMailToast]);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -48,12 +71,21 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
         />
         <WhiteButton
           buttonText="Got it"
-          onPress={() => setShowBankAccountToast(true)}
+          onPress={() => {
+            setShowBankAccountToast(true);
+            setShowOpenMailToast(false); // Close the open mail toast if it's open
+          }}
         />
         <PinkButton
           buttonText="Open email app"
-          onPress={() => setShowOpenMailToast(true)}
+          onPress={() => {
+            setShowOpenMailToast(true);
+            setShowBankAccountToast(false); // Close the bank account toast if it's open
+          }}
         />
+        {/* Conditionally render the toasts */}
+        {showBankAccountToast && bankAccountToast()}
+        {showOpenMailToast && openMailToast()}
       </View>
     </ScrollView>
   );
