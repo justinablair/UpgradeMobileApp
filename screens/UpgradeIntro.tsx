@@ -10,8 +10,8 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import PinkButton from '../components/PinkButton';
-import InfoModal from '../components/InfoModal';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import InfoModal from '../components/theme/modals/InfoModal';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
@@ -32,7 +32,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
         <StatusBar backgroundColor="#171B1B" translucent={false} />
         <View>
           <Image
-            source={require('../assets/rocket.png')}
+            source={require('../assets/RocketStationary.png')}
             style={styles.largeImage}
             accessibilityLabel="Mettle Bank Account Logo"
           />
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     backgroundColor: Colours.black,
+    height: '100%',
   },
 
   largeImage: {

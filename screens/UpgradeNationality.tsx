@@ -3,25 +3,23 @@ import {View, TextInput, Image, StyleSheet, SectionList} from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
-import CheckboxToggle from '../components/CheckboxToggle';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import CheckboxToggle from '../components/toggles/CheckboxToggle';
 import SearchIcon from '../components/theme/SearchIcon';
 
-interface Item {
-  flag: any; // Change 'any' to the actual type of 'flag'
-  name: string; // Change 'string' to the actual type of 'name'
-}
-
+// Define the shape of the nationality data
 type Nationality = {
   name: string;
-  flag: any; // Assume the image resource identifier (require('./path/to/image.png'))
+  flag: any;
 };
 
+// Define props for the UpgradeNationalityScreen
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 
 const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   navigation,
 }) => {
+  // Handle the press event when the switch button is pressed
   const handleSwitchButtonPress = () => {
     // Check if any checkbox other than 'United Kingdom' is selected
     const isOtherSelected = Object.keys(checkboxStates).some(
@@ -380,11 +378,12 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
 
   // Initialize checkbox states using an object
   const initialCheckboxStates: {[key: string]: boolean} =
-    combinedNationalities.reduce((acc, nationality) => {
-      acc[nationality.name] = false;
-      return acc;
+    combinedNationalities.reduce((checkboxStates, nationality) => {
+      checkboxStates[nationality.name] = false;
+      return checkboxStates;
     }, {} as {[key: string]: boolean});
 
+  // Handle checkbox state changes
   const [checkboxStates, setCheckboxStates] = useState<{
     [key: string]: boolean;
   }>(initialCheckboxStates);
@@ -409,24 +408,13 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     nationalitiesBySection[firstLetter].push(nationality);
   });
 
-  const sectionData = [
-    {
-      letter: 'Frequently Selected',
-      data: frequentlySelectedNationalities,
-    },
-    ...Object.keys(nationalitiesBySection).map(letter => ({
-      letter,
-      data: nationalitiesBySection[letter],
-    })),
-  ];
-
-  //changes
-
   //changes
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredNationalities, setFilteredNationalities] = useState<
     Nationality[]
   >([]);
+
+  // Handle search input changes
 
   const handleSearch = (query: string) => {
     const lowercaseQuery = query.toLowerCase();
@@ -445,13 +433,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     setSearchQuery(query);
   };
 
-  const renderNationality = ({
-    item,
-    index,
-  }: {
-    item: Nationality;
-    index: number;
-  }) => (
+  const renderNationality = ({item}: {item: Nationality; index: number}) => (
     <View style={{backgroundColor: 'white'}}>
       <View
         style={{
@@ -477,18 +459,6 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
       </View>
       <View style={styles.separator} />
     </View>
-  );
-
-  const renderSectionHeader = ({
-    section: {letter},
-  }: {
-    section: {letter: string};
-  }) => (
-    <Text
-      variant="bodyTextDescription bodyTextBold"
-      style={[styles.sectionHeader, {color: Colours.black30}]}>
-      {letter}
-    </Text>
   );
 
   const renderCustomSectionHeader = ({section}) => (

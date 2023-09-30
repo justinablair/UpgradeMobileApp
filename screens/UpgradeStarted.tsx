@@ -25,9 +25,9 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
       <ScrollView contentContainerStyle={styles.container}>
         <View>
           <Image
-            source={require('../assets/padlock.png')}
+            source={require('../assets/Padlock.png')}
             style={styles.largeImage}
-            accessibilityLabel="Padlock image"
+            accessibilityLabel="Image of a padlock"
           />
           <Text variant="screenTitle">We’ve started your switch</Text>
           <Text variant="bodyText centerAlign">
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     backgroundColor: Colours.black,
+    height: '100%',
   },
 
   largeImage: {

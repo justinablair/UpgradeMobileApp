@@ -1,7 +1,7 @@
 //ConfirmAddress.tsx
 
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 // import InfoModal from '../components/InfoModal';
 
@@ -9,11 +9,11 @@ import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import InfoBox from '../components/InfoBox';
-import PinkButton from '../components/PinkButton';
-import WhiteButton from '../components/WhiteButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import WhiteButton from '../components/theme/buttons/WhiteButton';
 import {useUserContext} from '../components/UserContext';
-import InfoModal from '../components/InfoModal';
-import InteractiveModal from '../components/InteractiveModal';
+import InfoModal from '../components/theme/modals/InfoModal';
+import InteractiveModal from '../components/theme/modals/InteractiveModal';
 
 type ConfirmAddressProps = NavigationProps<'ConfirmAddress'>;
 
@@ -53,66 +53,68 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Confirm your address
-        </Text>
-        <Text
-          variant="bodyText"
-          style={[{color: Colours.black}, styles.spaceMedium]}>
-          We’ll send your new card to this address. If your address has changed,
-          you’ll need to update it before continuing.
-        </Text>
-        <View>
-          <InfoBox
-            title="Your address"
-            description={`${displayedAddress.addressLine1}\n${displayedAddress.town}\n${displayedAddress.postcode}`}
-            titleStyle={styles.titleCustomisation}
-            descriptionStyle={styles.descriptionCustomisation}
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+            Confirm your address
+          </Text>
+          <Text
+            variant="bodyText"
+            style={[{color: Colours.black}, styles.spaceMedium]}>
+            We’ll send your new card to this address. If your address has
+            changed, you’ll need to update it before continuing.
+          </Text>
+          <View>
+            <InfoBox
+              title="Your address"
+              description={`${displayedAddress.addressLine1}\n${displayedAddress.town}\n${displayedAddress.postcode}`}
+              titleStyle={styles.titleCustomisation}
+              descriptionStyle={styles.descriptionCustomisation}
+            />
+          </View>
+          <Pressable onPress={() => setShowSendingCardInfoModal(true)}>
+            <Text
+              variant="bodyText bodyTextBold"
+              style={[{color: Colours.pink}, styles.centerText]}>
+              Why we're sending a new card
+            </Text>
+          </Pressable>
+          <InfoModal
+            visible={showSendingCardInfoModal}
+            onPressClose={() => setShowSendingCardInfoModal(false)}
+            title="You’ll get a new card"
+            content="Because we’re closing your e-money account, your current card will no longer work. We’ll send you a new card that’s connected to your new bank account."
+            accessibilityLabel="Close US Person Info Modal"
+            contentStyle={[
+              {backgroundColor: Colours.white},
+              styles.InfoModalCustomisation,
+            ]}
+            titleStyle={{color: Colours.black}} // Customize title text color
+            bodyTextStyle={{color: Colours.black}}
+          />
+          <InteractiveModal
+            modalVisible={showInteractiveModal}
+            closeModal={handleCloseInteractiveModalModal}
+            modalTitle="Need to update your address?"
+            modalContent="Updating your address will also change the address in the Personal details section of the app."
+            pinkButtonText="Update address"
+            onPinkButtonClick={handleChangeAddressClick}
+            whiteButtonText="Cancel"
+            onWhiteButtonClick={handleCloseInteractiveModalModal}
+          />
+
+          <WhiteButton
+            buttonText="Update address"
+            onPress={handleOpenInteractivenModal}
+          />
+          <PinkButton
+            buttonText="Confirm address"
+            onPress={handleConfirmAddressClick}
           />
         </View>
-        <Pressable onPress={() => setShowSendingCardInfoModal(true)}>
-          <Text
-            variant="bodyText bodyTextBold"
-            style={[{color: Colours.pink}, styles.centerText]}>
-            Why we're sending a new card
-          </Text>
-        </Pressable>
-        <InfoModal
-          visible={showSendingCardInfoModal}
-          onPressClose={() => setShowSendingCardInfoModal(false)}
-          title="You’ll get a new card"
-          content="Because we’re closing your e-money account, your current card will no longer work. We’ll send you a new card that’s connected to your new bank account."
-          accessibilityLabel="Close US Person Info Modal"
-          contentStyle={[
-            {backgroundColor: Colours.white},
-            styles.InfoModalCustomisation,
-          ]}
-          titleStyle={{color: Colours.black}} // Customize title text color
-          bodyTextStyle={{color: Colours.black}}
-        />
-        <InteractiveModal
-          modalVisible={showInteractiveModal}
-          closeModal={handleCloseInteractiveModalModal}
-          modalTitle="Need to update your address?"
-          modalContent="Updating your address will also change the address in the Personal details section of the app."
-          pinkButtonText="Update address"
-          onPinkButtonClick={handleChangeAddressClick}
-          whiteButtonText="Cancel"
-          onWhiteButtonClick={handleCloseInteractiveModalModal}
-        />
-
-        <WhiteButton
-          buttonText="Update address"
-          onPress={handleOpenInteractivenModal}
-        />
-        <PinkButton
-          buttonText="Confirm address"
-          onPress={handleConfirmAddressClick}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -136,6 +138,10 @@ const styles = StyleSheet.create({
   },
   centerText: {
     alignSelf: 'center',
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

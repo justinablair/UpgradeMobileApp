@@ -4,8 +4,8 @@ import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
-import PinkButton from '../components/PinkButton';
-import CheckboxToggle from '../components/CheckboxToggle';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import CheckboxToggle from '../components/toggles/CheckboxToggle';
 
 type CompanyDetailsScreenProps = NavigationProps<'CompanyDetails'>;
 

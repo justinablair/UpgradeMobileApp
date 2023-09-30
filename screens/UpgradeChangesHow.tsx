@@ -3,7 +3,7 @@
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 
 type UpgradeChangesHowProps = NavigationProps<'UpgradeChangesHow'>;

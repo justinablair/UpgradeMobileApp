@@ -1,10 +1,10 @@
 //Marketing.tsx
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
-import WhiteButton from '../components/WhiteButton';
-import PreferenceToggle from '../components/PreferenceToggle';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import WhiteButton from '../components/theme/buttons/WhiteButton';
+import PreferenceToggle from '../components/toggles/PreferenceToggle';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -36,73 +36,78 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
     navigation.navigate('UpgradeTaxCompliant'); // Navigate to the desired screen
   };
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Marketing preferences
-        </Text>
-        <Text
-          variant="bodyText leftAlign"
-          style={[{color: Colours.black}, styles.space]}>
-          We’d like to contact you from time to time so you can get the most out
-          of Mettle, our partners and the wider NatWest Group.
-        </Text>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+            Marketing preferences
+          </Text>
+          <Text
+            variant="bodyText leftAlign"
+            style={[{color: Colours.black}, styles.space]}>
+            We’d like to contact you from time to time so you can get the most
+            out of Mettle, our partners and the wider NatWest Group.
+          </Text>
 
-        <PreferenceToggle
-          label="Email"
-          value={toggleStates.email}
-          onChange={() => handleToggleChange('email')}
-        />
-        <View style={styles.separator} />
+          <PreferenceToggle
+            label="Email"
+            value={toggleStates.email}
+            onChange={() => handleToggleChange('email')}
+          />
+          <View style={styles.separator} />
 
-        <PreferenceToggle
-          label="Push notifications"
-          value={toggleStates.pushNotifications}
-          onChange={() => handleToggleChange('pushNotifications')}
-        />
-        <View style={styles.separator} />
+          <PreferenceToggle
+            label="Push notifications"
+            value={toggleStates.pushNotifications}
+            onChange={() => handleToggleChange('pushNotifications')}
+          />
+          <View style={styles.separator} />
 
-        <PreferenceToggle
-          label="Text messages"
-          value={toggleStates.textMessages}
-          onChange={() => handleToggleChange('textMessages')}
-        />
-        <View style={styles.separator} />
-        <PreferenceToggle
-          label="Online advertising"
-          value={toggleStates.onlineAdvertising}
-          onChange={() => handleToggleChange('onlineAdvertising')}
-          description="Relevant ads shown to you and others on social media and online
+          <PreferenceToggle
+            label="Text messages"
+            value={toggleStates.textMessages}
+            onChange={() => handleToggleChange('textMessages')}
+          />
+          <View style={styles.separator} />
+          <PreferenceToggle
+            label="Online advertising"
+            value={toggleStates.onlineAdvertising}
+            onChange={() => handleToggleChange('onlineAdvertising')}
+            description="Relevant ads shown to you and others on social media and online
           advertising platforms based on contact and device details that we
           match."
-        />
-        <View style={styles.separator} />
-        <Text
-          variant="bodyText bodyTextDescription"
-          style={{color: Colours.black60}}>
-          You can change these later in your settings or by using the in-app
-          chat.
-        </Text>
+          />
+          <View style={styles.separator} />
+          <Text
+            variant="bodyText bodyTextDescription"
+            style={{color: Colours.black60}}>
+            You can change these later in your settings or by using the in-app
+            chat.
+          </Text>
 
-        {isClicked ? (
-          <PinkButton buttonText="Continue" onPress={handleSwitchButtonPress} />
-        ) : (
-          <View style={styles.buttonRow}>
-            <WhiteButton
-              buttonText="No thanks"
-              onPress={handleButtonClick}
-              customWidth={155}
-            />
-            <View style={styles.buttonSeparator} />
+          {isClicked ? (
             <PinkButton
-              buttonText="Yes to all"
-              onPress={handleButtonClick}
-              customWidth={155}
+              buttonText="Continue"
+              onPress={handleSwitchButtonPress}
             />
-          </View>
-        )}
-      </View>
-    </ScrollView>
+          ) : (
+            <View style={styles.buttonRow}>
+              <WhiteButton
+                buttonText="No thanks"
+                onPress={handleButtonClick}
+                customWidth={155}
+              />
+              <View style={styles.buttonSeparator} />
+              <PinkButton
+                buttonText="Yes to all"
+                onPress={handleButtonClick}
+                customWidth={155}
+              />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -132,6 +137,10 @@ const styles = StyleSheet.create({
   },
   space: {
     marginBottom: 40,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

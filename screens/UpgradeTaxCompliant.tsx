@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
-import CheckboxToggle from '../components/CheckboxToggle'; // Import the CheckboxToggle component
+import PinkButton from '../components/theme/buttons/PinkButton';
+import CheckboxToggle from '../components/toggles/CheckboxToggle'; // Import the CheckboxToggle component
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -24,35 +24,40 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Are you tax compliant?
-        </Text>
-        <Text
-          variant="bodyText leftAlign"
-          style={[{color: Colours.black}, styles.space]}>
-          This means that you've not previously evaded tax and are not engaged
-          in any tax avoidance arrangements.
-        </Text>
-
-        <View style={styles.space} />
-        {/* Place the CheckboxToggle component and text */}
-        <View style={styles.checkboxContainer}>
-          <Text variant="bodyText" style={styles.checkboxText}>
-            I confirm that I am tax compliant
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+            Are you tax compliant?
           </Text>
-          <CheckboxToggle checked={isChecked} onToggle={handleCheckboxToggle} />
-        </View>
+          <Text
+            variant="bodyText leftAlign"
+            style={[{color: Colours.black}, styles.space]}>
+            This means that you've not previously evaded tax and are not engaged
+            in any tax avoidance arrangements.
+          </Text>
 
-        <View style={styles.space} />
-        <PinkButton
-          buttonText="Next"
-          onPress={handleSwitchButtonPress}
-          disabled={!isChecked}
-        />
-      </View>
-    </ScrollView>
+          <View style={styles.space} />
+          {/* Place the CheckboxToggle component and text */}
+          <View style={styles.checkboxContainer}>
+            <Text variant="bodyText" style={styles.checkboxText}>
+              I confirm that I am tax compliant
+            </Text>
+            <CheckboxToggle
+              checked={isChecked}
+              onToggle={handleCheckboxToggle}
+            />
+          </View>
+
+          <View style={styles.space} />
+          <PinkButton
+            buttonText="Next"
+            onPress={handleSwitchButtonPress}
+            disabled={!isChecked}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -75,6 +80,10 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: Colours.black,
     flex: 1,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

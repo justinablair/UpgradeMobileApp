@@ -1,12 +1,12 @@
 //ExitModal.tsx
 import React from 'react';
 import {Modal, View, StyleSheet} from 'react-native';
-import Colours from '../components/theme/Colour'; // Update the path to Colour.js
-import PinkButton from './PinkButton';
-import WhiteButton from './WhiteButton';
-import Text from './Text';
+import Colours from '../Colour'; // Update the path to Colour.js
+import PinkButton from '../buttons/PinkButton';
+import WhiteButton from '../buttons/WhiteButton';
+import Text from '../../Text';
 import {useNavigation} from '@react-navigation/native';
-import {NavigationProps} from '../navigationTypes';
+import {NavigationProps} from '../../../navigationTypes';
 
 interface ExitModalProps {
   visible: boolean;

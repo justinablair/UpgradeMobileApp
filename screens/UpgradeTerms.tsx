@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Linking, Pressable} from 'react-native';
+import {View, StyleSheet, Linking, Pressable, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 import InfoBox from '../components/InfoBox';
 import {PersonIcon} from '../components/theme/PersonIcon';
 
@@ -70,28 +70,30 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Terms and Privacy Notice
-        </Text>
-        {renderContent()}
-        <View style={styles.spaceMedium} />
-        <Pressable onPress={openTermsLink}>
-          <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
-            Terms
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+            Terms and Privacy Notice
           </Text>
-        </Pressable>
-        <View style={styles.spaceMedium} />
-        <Pressable onPress={openPrivacyLink}>
-          <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
-            Privacy Notice
-          </Text>
-        </Pressable>
-        <View style={styles.spaceMedium} />
-        <PinkButton buttonText="Agree" onPress={handleSwitchButtonPress} />
-      </View>
-    </ScrollView>
+          {renderContent()}
+          <View style={styles.spaceMedium} />
+          <Pressable onPress={openTermsLink}>
+            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
+              Terms
+            </Text>
+          </Pressable>
+          <View style={styles.spaceMedium} />
+          <Pressable onPress={openPrivacyLink}>
+            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
+              Privacy Notice
+            </Text>
+          </Pressable>
+          <View style={styles.spaceMedium} />
+          <PinkButton buttonText="Agree" onPress={handleSwitchButtonPress} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -106,6 +108,10 @@ const styles = StyleSheet.create({
   },
   spaceMedium: {
     marginBottom: 15,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

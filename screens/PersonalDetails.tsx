@@ -4,7 +4,7 @@ import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 import {useUserContext} from '../components/UserContext';
 
 type PersonalDetailsProps = NavigationProps<'PersonalDetails'>;

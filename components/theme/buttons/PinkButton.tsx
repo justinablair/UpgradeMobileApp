@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import Colours from '../components/theme/Colour'; // Update the path to Colour.js
+import Colours from '../Colour'; // Update the path to Colour.js
 
 interface PinkButtonProps {
   buttonText: string;

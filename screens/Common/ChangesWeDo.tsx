@@ -7,7 +7,7 @@ import {RefreshIcon} from '../../components/theme/RefreshIcon';
 import {TransferIcon} from '../../components/theme/TransferIcon';
 import {ExportIcon} from '../../components/theme/ExportIcon';
 import {PostageIcon} from '../../components/theme/Postage';
-import {FreeAgentIcon} from '../../components/theme/FreeAgent';
+import {FreeAgentIcon} from '../../components/theme/FreeAgentIcon';
 import Colours from '../../components/theme/Colour';
 import Text from '../../components/Text';
 

@@ -2,10 +2,10 @@
 
 import React from 'react';
 import {Modal, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Text from '../components/Text';
-import Colours from '../components/theme/Colour';
-import PinkButton from './PinkButton'; // Import the PinkButton component from the correct path
-import WhiteButton from './WhiteButton'; // Import the WhiteButton component from the correct path
+import Text from '../../Text';
+import Colours from '../Colour';
+import PinkButton from '../buttons/PinkButton'; // Import the PinkButton component from the correct path
+import WhiteButton from '../buttons/WhiteButton'; // Import the WhiteButton component from the correct path
 
 interface InteractiveModalProps {
   modalVisible: boolean;
@@ -52,7 +52,7 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
         <View style={styles.modalContent}>
           <TouchableOpacity style={styles.modalCloseIcon} onPress={closeModal}>
             <Image
-              source={require('../assets/Close.png')}
+              source={require('../../../assets/Close.png')}
               style={styles.modalCloseIcon}
             />
           </TouchableOpacity>

@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Toggle} from './Toggle';
-import Text from './Text';
-import Colours from './theme/Colour';
+import Text from '../Text';
+import Colours from '../theme/Colour';
 
 interface PreferenceToggleProps {
   label: string;

@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from '../components/UserContext'; // Import the user context
-import CheckboxToggle from '../components/CheckboxToggle';
+import CheckboxToggle from '../components/toggles/CheckboxToggle';
 
 type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
 
@@ -64,28 +64,33 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {/* SoleTraderCopy */}
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Tax reporting
-        </Text>
-        {renderContent()}
-        <View style={styles.spaceMedium} />
-        <View style={styles.checkboxContainer}>
-          <Text variant="bodyText" style={styles.checkboxText}>
-            I confirm that I am tax compliant
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          {/* SoleTraderCopy */}
+          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+            Tax reporting
           </Text>
-          <CheckboxToggle checked={isChecked} onToggle={handleCheckboxToggle} />
+          {renderContent()}
+          <View style={styles.spaceMedium} />
+          <View style={styles.checkboxContainer}>
+            <Text variant="bodyText" style={styles.checkboxText}>
+              I confirm that I am tax compliant
+            </Text>
+            <CheckboxToggle
+              checked={isChecked}
+              onToggle={handleCheckboxToggle}
+            />
+          </View>
+          <View style={styles.spaceMedium} />
+          <PinkButton
+            buttonText="Agree"
+            onPress={handleSwitchButtonPress}
+            disabled={!isChecked}
+          />
         </View>
-        <View style={styles.spaceMedium} />
-        <PinkButton
-          buttonText="Agree"
-          onPress={handleSwitchButtonPress}
-          disabled={!isChecked}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -110,6 +115,10 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: Colours.black,
     flex: 1,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

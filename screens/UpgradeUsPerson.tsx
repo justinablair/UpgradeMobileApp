@@ -1,9 +1,9 @@
 //UpgradeUSPerson.tsx
 
 import React, {useState} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
-import InfoModal from '../components/InfoModal';
+import InfoModal from '../components/theme/modals/InfoModal';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -74,20 +74,22 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {renderContent()}
-        <View style={styles.spaceMedium} />
-        <Pressable onPress={() => setShowUSPersonInfoModal(true)}>
-          <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
-            What is a US person?
-          </Text>
-        </Pressable>
-        <OptionsWithChevron title="Yes" onPress={handleYesButtonPress} />
-        <View style={styles.spaceMedium} />
-        <OptionsWithChevron title="No" onPress={handleNoButtonPress} />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          {renderContent()}
+          <View style={styles.spaceMedium} />
+          <Pressable onPress={() => setShowUSPersonInfoModal(true)}>
+            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
+              What is a US person?
+            </Text>
+          </Pressable>
+          <OptionsWithChevron title="Yes" onPress={handleYesButtonPress} />
+          <View style={styles.spaceMedium} />
+          <OptionsWithChevron title="No" onPress={handleNoButtonPress} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -106,6 +108,10 @@ const styles = StyleSheet.create({
   },
   InfoModalCustomisation: {
     margin: 50,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

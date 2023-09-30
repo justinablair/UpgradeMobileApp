@@ -1,13 +1,13 @@
 //UpgradeConfirmScreen.tsx
 
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 import Colour from '../components/theme/Colour';
 
 type UpgradeConfirmProps = NavigationProps<'UpgradeConfirm'>;
@@ -18,28 +18,30 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Image
-          source={require('../assets/RocketTakeoff.png')}
-          style={styles.largeImage}
-          accessibilityLabel="Mettle Bank Account Logo"
-        />
-        <Text variant="screenTitle" style={{color: Colour.black}}>
-          Ready to switch?
-        </Text>
-        <Text variant="bodyText centerAlign" style={{color: Colour.black}}>
-          We’ll open your new account and move your money. We’ll also close your
-          e-money account.{'\n\n'}Only do this if you’re ready. We can’t undo it
-          once we’ve started.
-        </Text>
-        <View style={styles.spaceMedium} />
-        <PinkButton
-          buttonText="View recap of changes"
-          onPress={handleSwitchButtonPress}
-        />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Image
+            source={require('../assets/RocketTakeoff.png')}
+            style={styles.largeImage}
+            accessibilityLabel="Mettle Bank Account Logo"
+          />
+          <Text variant="screenTitle" style={{color: Colour.black}}>
+            Ready to switch?
+          </Text>
+          <Text variant="bodyText centerAlign" style={{color: Colour.black}}>
+            We’ll open your new account and move your money. We’ll also close
+            your e-money account.{'\n\n'}Only do this if you’re ready. We can’t
+            undo it once we’ve started.
+          </Text>
+          <View style={styles.spaceMedium} />
+          <PinkButton
+            buttonText="View recap of changes"
+            onPress={handleSwitchButtonPress}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -63,6 +65,10 @@ const styles = StyleSheet.create({
     width: 210,
     height: 210,
     alignSelf: 'center',
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

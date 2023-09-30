@@ -8,10 +8,11 @@ import {
   StyleSheet,
   Linking,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
-import PinkButton from '../components/PinkButton'; // Update the path to your PinkButton component
+import PinkButton from '../components/theme/buttons/PinkButton'; // Update the path to your PinkButton component
 import {NavigationProps} from '../navigationTypes';
 import {CheckmarkIcon} from '../components/theme/CheckboxIcon'; // Update the path to your CheckmarkIcon component
 import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Update the path to your ChevronRightIcon component
@@ -103,64 +104,74 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-            Your consents to switch
-          </Text>
-          <Text variant="bodyText" style={{color: Colours.black}}>
-            To switch your e-money account to a Mettle bank account, you need to
-            agree to the following:
-          </Text>
-        </View>
-        <View style={styles.space} />
-        {consentTitles.map((title, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.box}
-            onPress={() => handleConsentToggle(index)}>
-            <View style={styles.textContainer}>
-              <Text variant="bodyText leftAlign" style={{color: Colours.black}}>
-                {title}
-              </Text>
-            </View>
-            {consentsAccepted[index] ? <CheckmarkIcon /> : <ChevronRightIcon />}
-          </TouchableOpacity>
-        ))}
-
-        <PinkButton
-          buttonText="Next"
-          onPress={handleSwitchButtonPress}
-          disabled={!consentsAccepted.every(accepted => accepted)}
-        />
-      </View>
-      <Modal visible={modalVisible} animationType="slide" transparent>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity
-              style={styles.modalCloseIcon}
-              onPress={() => setModalVisible(false)}>
-              <Image
-                source={require('../assets/Close.png')}
-                style={styles.modalCloseIcon}
-              />
-            </TouchableOpacity>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
             <Text
-              variant="leftAlign"
-              style={[styles.modalTitle, {color: Colours.black}]}>
-              {modalTitle}
+              variant="screenTitle leftAlign"
+              style={{color: Colours.black}}>
+              Your consents to switch
             </Text>
-            <Text
-              variant="leftAlign"
-              style={[styles.bodyText, {color: Colours.black}]}>
-              {modalContent}
+            <Text variant="bodyText" style={{color: Colours.black}}>
+              To switch your e-money account to a Mettle bank account, you need
+              to agree to the following:
             </Text>
-            <PinkButton buttonText="Agree" onPress={handleAgree} />
           </View>
+          <View style={styles.space} />
+          {consentTitles.map((title, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.box}
+              onPress={() => handleConsentToggle(index)}>
+              <View style={styles.textContainer}>
+                <Text
+                  variant="bodyText leftAlign"
+                  style={{color: Colours.black}}>
+                  {title}
+                </Text>
+              </View>
+              {consentsAccepted[index] ? (
+                <CheckmarkIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </TouchableOpacity>
+          ))}
+
+          <PinkButton
+            buttonText="Next"
+            onPress={handleSwitchButtonPress}
+            disabled={!consentsAccepted.every(accepted => accepted)}
+          />
         </View>
-      </Modal>
-    </ScrollView>
+        <Modal visible={modalVisible} animationType="slide" transparent>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity
+                style={styles.modalCloseIcon}
+                onPress={() => setModalVisible(false)}>
+                <Image
+                  source={require('../assets/Close.png')}
+                  style={styles.modalCloseIcon}
+                />
+              </TouchableOpacity>
+              <Text
+                variant="leftAlign"
+                style={[styles.modalTitle, {color: Colours.black}]}>
+                {modalTitle}
+              </Text>
+              <Text
+                variant="leftAlign"
+                style={[styles.bodyText, {color: Colours.black}]}>
+                {modalContent}
+              </Text>
+              <PinkButton buttonText="Agree" onPress={handleAgree} />
+            </View>
+          </View>
+        </Modal>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -224,6 +235,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     marginBottom: 20,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

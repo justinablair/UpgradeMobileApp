@@ -1,38 +1,37 @@
+//Modal.tsx
 import React from 'react';
 import {
+  Modal,
   View,
   Text,
-  Modal,
   TouchableOpacity,
   Image,
   StyleSheet,
 } from 'react-native';
+import Colours from '../Colour'; // Update the path to Colour.js
+import PinkButton from '../buttons/PinkButton';
 
-interface InfoModalProps {
+interface CustomModalProps {
   visible: boolean;
   onPressClose: () => void;
   title: string;
   content: string;
   accessibilityLabel?: string;
-  contentStyle?: object;
-  titleStyle?: object;
-  bodyTextStyle?: object;
+  onAgree?: () => void; // Optional callback for Agree button
 }
 
-const InfoModal: React.FC<InfoModalProps> = ({
+const CustomModal: React.FC<CustomModalProps> = ({
   visible,
   onPressClose,
   title,
   content,
   accessibilityLabel,
-  contentStyle,
-  titleStyle,
-  bodyTextStyle,
+  onAgree,
 }) => {
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.modalContainer}>
-        <View style={[styles.modalContent, contentStyle]}>
+        <View style={styles.modalContent}>
           <TouchableOpacity
             style={styles.modalCloseIcon}
             onPress={onPressClose}>
@@ -42,8 +41,19 @@ const InfoModal: React.FC<InfoModalProps> = ({
               accessibilityLabel={accessibilityLabel}
             />
           </TouchableOpacity>
-          <Text style={[styles.modalTitle, titleStyle]}>{title}</Text>
-          <Text style={[styles.bodyText, bodyTextStyle]}>{content}</Text>
+          <Text style={[styles.modalTitle, {color: Colours.black}]}>
+            {title}
+          </Text>
+          <Text style={[styles.bodyText, {color: Colours.black}]}>
+            {content}
+          </Text>
+          <PinkButton
+            buttonText="Agree"
+            onPress={() => {
+              onAgree && onAgree();
+              onPressClose(); // Close the modal after agreeing
+            }}
+          />
         </View>
       </View>
     </Modal>
@@ -54,24 +64,21 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: '#454949',
-    width: '90%',
-    maxHeight: '90%', // Set maxHeight to allow expansion based on content
+    backgroundColor: Colours.white,
+    width: '100%',
     borderRadius: 8,
     padding: 20,
     paddingTop: 50, // Add more padding at the top for the Close.png icon
     position: 'relative',
-    overflow: 'hidden', // Hide content overflow
   },
   modalTitle: {
     fontSize: 22,
     lineHeight: 26,
     marginBottom: 10,
-    color: 'white',
     fontWeight: '500',
   },
   modalCloseIcon: {
@@ -86,8 +93,11 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 16,
     lineHeight: 21,
-    color: 'white',
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    marginTop: 20,
   },
 });
 
-export default InfoModal;
+export default CustomModal;

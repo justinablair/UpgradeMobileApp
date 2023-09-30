@@ -6,7 +6,7 @@ import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 
 type UpgradedWelcomeProps = NavigationProps<'UpgradedWelcome'>;
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     backgroundColor: Colours.black,
+    height: '100%',
   },
 
   largeImage: {

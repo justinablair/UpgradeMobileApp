@@ -3,6 +3,11 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "types": ["react-navigation"]
+    // "types": ["react-native", "@react-navigation/native"],
     // Other compiler options...
-  }
+    // "paths": {
+    //   "*": ["./screens/*"] // Adjust the paths to match your project structure
+    // }
+  },
+  "include": ["**/*.ts", "**/*.tsx"] // Include your TypeScript files
 }

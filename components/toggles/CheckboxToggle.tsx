@@ -1,9 +1,9 @@
 // CheckboxToggle.tsx
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {UncheckedIcon} from '../components/theme/UncheckedIcon';
-import {CheckmarkIcon} from '../components/theme/CheckboxIcon';
-import Colours from '../components/theme/Colour';
+import {UncheckedIcon} from '../theme/UncheckedIcon';
+import {CheckmarkIcon} from '../theme/CheckboxIcon';
+import Colours from '../theme/Colour';
 
 interface CheckboxProps {
   checked: boolean;

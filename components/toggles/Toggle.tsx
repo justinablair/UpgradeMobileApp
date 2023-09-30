@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {Platform, StyleSheet, Switch, SwitchProps} from 'react-native';
-import Colours from '../components/theme/Colour';
+import Colours from '../theme/Colour';
 
 type Props = Omit<SwitchProps, 'trackColor' | 'thumbColor'>;
 

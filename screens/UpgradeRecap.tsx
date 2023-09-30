@@ -1,7 +1,7 @@
 //UpgradeRecap.tsx
 import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import PinkButton from '../components/PinkButton';
+import {View, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
+import PinkButton from '../components/theme/buttons/PinkButton';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -9,8 +9,8 @@ import Colours from '../components/theme/Colour';
 import ChangesYouDo from './Common/ChangesYouDo';
 import ChangesWeDo from './Common/ChangesWeDo';
 import NewAccount from './Common/NewAccount';
-import WhiteButton from '../components/WhiteButton';
-import AuthModal from '../components/AuthModal';
+import WhiteButton from '../components/theme/buttons/WhiteButton';
+import AuthModal from '../components/theme/modals/AuthModal';
 
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
 
@@ -44,32 +44,37 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
     toggleModal();
   };
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <ChangesWeDo />
-        <ChangesYouDo />
-        <NewAccount />
-        <WhiteButton
-          buttonText="I'm not sure"
-          onPress={handleSwitchButtonExitJourney}
-        />
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView>
+        <View style={styles.container}>
+          <ChangesWeDo />
+          <ChangesYouDo />
+          <NewAccount />
+          <WhiteButton
+            buttonText="I'm not sure"
+            onPress={handleSwitchButtonExitJourney}
+          />
 
-        <PinkButton buttonText="I understand" onPress={handlePinkButtonPress} />
+          <PinkButton
+            buttonText="I understand"
+            onPress={handlePinkButtonPress}
+          />
 
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          {/* <Text variant="bodyText" style={{color: Colours.black}}>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            {/* <Text variant="bodyText" style={{color: Colours.black}}>
             Open Authentication Modal
           </Text> */}
-        </TouchableOpacity>
-        {/* Render the authentication modal */}
-        <AuthModal
-          visible={modalVisible}
-          navigation={navigation}
-          onDigitsEntered={handleSwitchButtonExitJourney}
-          onClose={onClose}
-        />
-      </View>
-    </ScrollView>
+          </TouchableOpacity>
+          {/* Render the authentication modal */}
+          <AuthModal
+            visible={modalVisible}
+            navigation={navigation}
+            onDigitsEntered={handleSwitchButtonExitJourney}
+            onClose={onClose}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -78,6 +83,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colours.white,
     padding: 16,
+  },
+  safeAreaContainer: {
+    backgroundColor: Colours.white,
+    height: '100%',
   },
 });
 

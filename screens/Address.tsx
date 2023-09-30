@@ -1,10 +1,10 @@
 //Address.tsx
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 import Text from '../components/Text';
-import PinkButton from '../components/PinkButton';
+import PinkButton from '../components/theme/buttons/PinkButton';
 import {useUserContext} from '../components/UserContext';
 
 type EnterAddressScreenProps = NavigationProps<'Address'>;
@@ -19,14 +19,25 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   const [postcodeLocal, setPostcodeLocal] = useState(''); // Local state for postcode
   const [formError, setFormError] = useState('');
 
-  // Trim the input values to remove leading and trailing spaces
-  const trimmedAddressLine1 = addressLine1Local.trim();
-  const trimmedTown = townLocal.trim();
-  const trimmedPostcode = postcodeLocal.trim();
+  useEffect(() => {
+    // Trim the input values to remove leading and trailing spaces
+    const trimmedAddressLine1 = addressLine1Local.trim();
+    const trimmedTown = townLocal.trim();
+    const trimmedPostcode = postcodeLocal.trim();
 
-  setAddressLine1(trimmedAddressLine1); // Set trimmed value in UserContext
-  setTown(trimmedTown); // Set trimmed value in UserContext
-  setPostcode(trimmedPostcode); // Set trimmed value in UserContext
+    // This effect will run after the initial render and whenever any of the local state variables change.
+    // It updates the context values when the local state changes.
+    setAddressLine1(trimmedAddressLine1);
+    setTown(trimmedTown);
+    setPostcode(trimmedPostcode);
+  }, [
+    addressLine1Local,
+    townLocal,
+    postcodeLocal,
+    setAddressLine1,
+    setTown,
+    setPostcode,
+  ]);
 
   const handleSwitchButtonPress = () => {
     if (!isFormValid()) {
@@ -34,9 +45,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
       return;
     }
 
-    setAddressLine1(addressLine1Local); // Set value in UserContext
-    setTown(townLocal); // Set value in UserContext
-    setPostcode(postcodeLocal); // Set value in UserContext
+    // No need to call setAddressLine1, setTown, and setPostcode here since they are handled by the useEffect.
 
     // Navigate to the desired screen
     navigation.navigate('UpgradeIntro');
