@@ -14,7 +14,6 @@ import {RootStackParamList} from './navigationTypes';
 
 // Import all screen components
 import UpgradeIntroScreen from './screens/UpgradeIntro';
-import UpgradeChangesHowScreen from './screens/UpgradeChangesHow';
 import UpgradeChangesWeDoScreen from './screens/UpgradeChangesWeDo';
 import UpgradeChangesYouDoScreen from './screens/UpgradeChangesYouDo';
 import UpgradeChangesNewAccountScreen from './screens/UpgradeChangesNewAccount';
@@ -37,6 +36,7 @@ import UpgradeStartedScreen from './screens/UpgradeStarted';
 import UpgradeCompleteScreen from './screens/UpgradeComplete';
 import UpgradedWelcomeScreen from './screens/UpgradedWelcome';
 import UpgradedEmailScreen from './screens/UpgradedEmail';
+import StepperScreen1 from './screens/Stepper1';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -66,21 +66,22 @@ function App(): JSX.Element {
         <NavigationContainer>
           <StatusBar backgroundColor="#171B1B" />
           <Stack.Navigator>
-            {renderScreen('UserSelection', UserSelectionScreen)}
+            {/* {renderScreen('UserSelection', UserSelectionScreen)}
             {renderScreen('Address', EnterAddressScreen)}
-            {renderScreen('CompanyDetails', CompanyDetailsScreen)}
+            {renderScreen('CompanyDetails', CompanyDetailsScreen)} */}
             {renderScreen('UpgradeIntro', UpgradeIntroScreen, {
               headerStyle: {
                 backgroundColor: Colours.black,
                 shadowOpacity: 0,
               },
             })}
-            {renderScreen('UpgradeChangesHow', UpgradeChangesHowScreen, {
+            {renderScreen('StepperScreen1', StepperScreen1, {
               headerStyle: {
                 backgroundColor: Colours.black,
                 shadowOpacity: 0,
               },
             })}
+
             {renderScreen('UpgradeChangesWeDo', UpgradeChangesWeDoScreen)}
             {renderScreen('UpgradeChangesYouDo', UpgradeChangesYouDoScreen)}
             {renderScreen(

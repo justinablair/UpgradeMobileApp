@@ -7,6 +7,8 @@ import {MobilePhoneIcon} from '../../components/theme/MobilePhoneIcon';
 import {EmailIcon} from '../../components/theme/EmailIcon';
 import Colours from '../../components/theme/Colour';
 import Text from '../../components/Text';
+import VoidIcon from '../../components/theme/VoidIcon';
+import CalendarIcon from '../../components/theme/CalendarIcon';
 
 type NewAccountProps = {};
 
@@ -14,8 +16,8 @@ const NewAccount: React.FC<NewAccountProps> = () => {
   return (
     <View>
       <View style={styles.titleContainer}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Your new bank account
+        <Text variant="screenTitle centreAlign" style={{color: Colours.black}}>
+          How your new account will work
         </Text>
       </View>
       <View style={styles.space} />
@@ -23,23 +25,33 @@ const NewAccount: React.FC<NewAccountProps> = () => {
       <InfoBox
         icon={<LockedIcon stroke={Colours.black} />}
         title=" Your app will be locked while we open your new account"
-        description="This usually takes less than a couple of minutes, but can take up to 2
-          hours."
+        description="This usually takes less than a couple of minutes, but can take up to 2 hours. You’ll still be able to contact support during this time."
       />
       <View style={styles.space} />
       {/* Box 2 */}
+      <InfoBox
+        icon={<VoidIcon fill={Colours.black} />}
+        title="Your account won’t accept CHAPS payments"
+        description="This is a type of payment, usually used to send high-value amounts."
+      />
+      {/* Box 3 */}
       <InfoBox
         icon={<MobilePhoneIcon fill={Colours.black} />}
         title=" You’ll use the same app"
         description="No need to download anything else."
       />
       <View style={styles.space} />
-      {/* Box 3 */}
+      {/* Box 4 */}
       <InfoBox
         icon={<EmailIcon stroke={Colours.black} />}
         title="We’ll send you a welcome email"
-        description="  This email will include all the information you need to start using
-          your new bank account."
+        description="  This email will include all the information you need to start using your new bank account."
+      />
+      {/* Box 5 */}
+      <InfoBox
+        icon={<CalendarIcon fill={Colours.black} />}
+        title="Scheduled payments will be processed on business days"
+        description="Payments scheduled for a weekend or bank holiday will be processed the next working day."
       />
       <View style={styles.space} />
     </View>

@@ -17,7 +17,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
   return (
     <View>
       <View style={styles.titleContainer}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <Text variant="screenTitle centreAlign" style={{color: Colours.black}}>
           What we’ll do during the switch
         </Text>
         <View style={styles.space} />
@@ -26,7 +26,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<CardSvg stroke={Colours.black} fill={Colours.black} />}
         title="Give you a new account number and sort code"
-        description="Your old account details will no longer work."
+        description="When you start the switch your old account details will no longer work, you’ll get new account details as soon as the switch is complete."
       />
       <View style={styles.space} />
 
@@ -34,7 +34,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<RefreshIcon stroke={Colours.black} />}
         title="Close your e-money account"
-        description="Your new bank account will replace your e-money account."
+        description="Your new bank account will replace your existing e-money account. This means payments to your old account will be rejected."
       />
       <View style={styles.space} />
 
@@ -42,7 +42,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<TransferIcon fill={Colours.black} />}
         title="Move your money"
-        description="Your e-money balance (including money in pots) will be safely moved to your new account."
+        description="Your existing e-money balance (including money in pots) will be safely moved to your new account as soon as the switch is complete."
       />
       <View style={styles.space} />
 
@@ -50,7 +50,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<ExportIcon stroke={Colours.black} />}
         title="Email your data"
-        description="We’ll email your standing orders and Direct Debit information, with instructions on how you can set them up again."
+        description="We’ll email your standing orders and Direct Debit information, with instructions on you can set them up again."
       />
       <View style={styles.space} />
 
@@ -58,7 +58,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<PostageIcon stroke={Colours.black} />}
         title="Send you a new card in 3-5 working days"
-        description="The card you currently use will no longer work when your new account has opened."
+        description="When you start the switch, we’ll open your new account and the card you currently use will no longer work."
       />
       <View style={styles.space} />
 
@@ -66,7 +66,7 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
       <InfoBox
         icon={<FreeAgentIcon stroke={Colours.black} />}
         title="Keep FreeAgent connected"
-        description="Any connection you currently have with FreeAgent will remain connected in your new account."
+        description="The connection you currently have with FreeAgent will remain connected in your new account."
       />
       <View style={styles.space} />
     </View>
