@@ -16,7 +16,7 @@ const UpgradeChangesNewAccountScreen: React.FC<
   UpgradeChangesNewAccountProps
 > = ({navigation}) => {
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeTerms'); // Navigate to the desired screen
+    navigation.navigate('StepperScreen2'); // Navigate to the desired screen
   };
   const handleSwitchExitJourneyPress = () => {
     navigation.navigate('UpgradeIntro'); // Navigate to the desired screen
