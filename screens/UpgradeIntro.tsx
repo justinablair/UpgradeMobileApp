@@ -52,7 +52,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
           </Text>
 
           <Text variant="bodyText centerAlign">
-            We’ve built a new bank account, which will replace the{' '}
+            We’ve built a new bank account, which will replace the
             <Pressable onPress={handleEmoneyPress}>
               <Text variant="bodyText" style={emoneyTextStyles}>
                 e-money
