@@ -11,9 +11,11 @@ export type RootStackParamList = {
   UpgradeChangesWeDo: undefined;
   UpgradeChangesYouDo: undefined;
   UpgradeChangesNewAccount: undefined;
+  StepperScreen2: undefined;
   UpgradeTerms: undefined;
   UpgradeConsents: undefined;
   Marketing: undefined;
+  StepperScreen3: undefined;
   UpgradeTaxCompliant: undefined;
   UpgradeTaxReporting: undefined;
   UpgradeNationality: undefined;

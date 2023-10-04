@@ -37,6 +37,8 @@ import UpgradeCompleteScreen from './screens/UpgradeComplete';
 import UpgradedWelcomeScreen from './screens/UpgradedWelcome';
 import UpgradedEmailScreen from './screens/UpgradedEmail';
 import StepperScreen1 from './screens/Stepper1';
+import StepperScreen2 from './screens/Stepper2';
+import StepperScreen3 from './screens/Screen3';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -88,9 +90,21 @@ function App(): JSX.Element {
               'UpgradeChangesNewAccount',
               UpgradeChangesNewAccountScreen,
             )}
+            {renderScreen('StepperScreen2', StepperScreen2, {
+              headerStyle: {
+                backgroundColor: Colours.black,
+                shadowOpacity: 0,
+              },
+            })}
             {renderScreen('UpgradeTerms', UpgradeTermsScreen)}
             {renderScreen('UpgradeConsents', UpgradeConsentsScreen)}
             {renderScreen('Marketing', MarketingScreen)}
+            {renderScreen('StepperScreen3', StepperScreen3, {
+              headerStyle: {
+                backgroundColor: Colours.black,
+                shadowOpacity: 0,
+              },
+            })}
             {renderScreen('UpgradeTaxCompliant', UpgradeTaxCompliantScreen)}
             {renderScreen('UpgradeTaxReporting', UpgradeTaxReportingScreen)}
             {renderScreen('UpgradeNationality', UpgradeNationalityScreen)}
