@@ -40,19 +40,19 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
           </Text>
           <View style={styles.spaceLarge} />
           <InfoBox
-            icon={<PersonIcon stroke={Colours.black} />}
+            icon={<PersonIcon fill={Colours.black} />}
             title="Only 1 user has access"
-            description="As the person opening the account, you’ll be the only one with access."
+            description="Just like before, as the person opening the account, you’ll be the only one with access."
           />
           <View style={styles.spaceLarge} />
           <Text variant="bodyText" style={{color: Colours.black}}>
             By tapping ‘Agree’ you’re confirming that:{'\n\n'}1. You’re
             authorised by {businessName} to switch to a Mettle bank account and
             agree to our Terms.{'\n\n'}2. {businessName} has taken all actions
-            necessary, such as passing a board resolution, to approve switching
-            to a Mettle bank account and agreeing to our Terms.{'\n\n'}Take a
-            moment to read our Privacy Notice. It explains how we collect and
-            use your personal data.
+            necessary, for example passing a board resolution, to approve
+            switching to a Mettle bank account and agreeing to our Terms.
+            {'\n\n'}Take a moment to read our Privacy Notice. It explains how we
+            collect and use your personal data.
           </Text>
         </>
       );
