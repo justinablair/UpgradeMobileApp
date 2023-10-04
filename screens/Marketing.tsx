@@ -19,7 +19,6 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
     textMessages: false,
     onlineAdvertising: false,
   });
-  const [isClicked, setIsClicked] = useState(false);
 
   const handleToggleChange = (preference: string) => {
     setToggleStates(prevState => ({
@@ -29,11 +28,16 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
   };
 
   const handleButtonClick = () => {
-    setIsClicked(true);
+    navigation.navigate('StepperScreen3'); // Navigate to the desired screen
   };
 
-  const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeTaxCompliant'); // Navigate to the desired screen
+  const handleYesToAllClick = () => {
+    const allToggledOn = Object.keys(toggleStates).reduce((acc, preference) => {
+      acc[preference] = true;
+      return acc;
+    }, {} as typeof toggleStates);
+    setToggleStates(allToggledOn);
+    handleButtonClick();
   };
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -73,38 +77,29 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
             label="Online advertising"
             value={toggleStates.onlineAdvertising}
             onChange={() => handleToggleChange('onlineAdvertising')}
-            description="Relevant ads shown to you and others on social media and online
-          advertising platforms based on contact and device details that we
-          match."
+            description="Relevant ads shown to you and others on social media and online advertising platforms based on contact and device details that we match."
           />
           <View style={styles.separator} />
           <Text
             variant="bodyText bodyTextDescription"
             style={{color: Colours.black60}}>
-            You can change these later in your settings or by using the in-app
-            chat.
+            You can change these later in your settings by selecting ‘Marketing
+            preferences’ in the Account tab, or by using the in-app chat.
           </Text>
 
-          {isClicked ? (
-            <PinkButton
-              buttonText="Continue"
-              onPress={handleSwitchButtonPress}
+          <View style={styles.buttonRow}>
+            <WhiteButton
+              buttonText="No thanks"
+              onPress={handleButtonClick}
+              customWidth={155}
             />
-          ) : (
-            <View style={styles.buttonRow}>
-              <WhiteButton
-                buttonText="No thanks"
-                onPress={handleButtonClick}
-                customWidth={155}
-              />
-              <View style={styles.buttonSeparator} />
-              <PinkButton
-                buttonText="Yes to all"
-                onPress={handleButtonClick}
-                customWidth={155}
-              />
-            </View>
-          )}
+            <View style={styles.buttonSeparator} />
+            <PinkButton
+              buttonText="Yes to all"
+              onPress={handleYesToAllClick}
+              customWidth={155}
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
