@@ -1,40 +1,36 @@
-//UpgradeConsents.tsx
 import React, {useState} from 'react';
 import {
-  Modal,
   View,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  Linking,
-  Image,
   SafeAreaView,
+  Linking,
+  Pressable,
 } from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import PinkButton from '../components/theme/buttons/PinkButton'; // Update the path to your PinkButton component
 import {NavigationProps} from '../navigationTypes';
-import {CheckmarkIcon} from '../components/theme/CheckboxIcon'; // Update the path to your CheckmarkIcon component
-import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Update the path to your ChevronRightIcon component
+import CheckboxToggle from '../components/toggles/CheckboxToggle';
 
 type UpgradeConsentsProps = NavigationProps<'UpgradeConsents'>;
 
 const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   navigation,
 }) => {
-  const [consentsAccepted, setConsentsAccepted] = useState([
+  const [checkboxesChecked, setCheckboxesChecked] = useState([
     false,
     false,
     false,
     false,
-  ]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalContent, setModalContent] = useState('');
-  const [activeConsentIndex, setActiveConsentIndex] = useState(-1);
-  const [modalContentJSX, setModalContentJSX] = useState<JSX.Element | null>(
-    null,
-  );
+  ]); // Initially unchecked
+  const [descriptionsExpanded, setDescriptionsExpanded] = useState([
+    true,
+    true,
+    true,
+    true,
+  ]); // Initially expanded
 
   const consentTitles = [
     'Opening your new account',
@@ -43,65 +39,20 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
     'Transferring your balance',
   ];
 
-  const handleConsentToggle = (index: number) => {
-    const title = consentTitles[index];
-    const content = getModalContentForTitle(title);
-    setModalTitle(title);
-    setModalContent(content);
-    setActiveConsentIndex(index);
+  const consentDescriptions = [
+    'Once you’ve started the switch and everything is in order, we’ll open your new bank account. We’ll send you a welcome email with your new account details.',
+    'As part of the switch, we’ll close your existing e-money account. We’ll email your scheduled payment and Direct Debit information, so you can set them up again in your new bank account.',
+    'We’ll use the data you gave us when you opened your e-money account, and data we’ve collected since, to open your new bank account. You’ll be able to update your details in your account settings. If your business has a second owner, you’ll also need to download and share this document with them.  ',
+    'We’ll move your total balance (including money in pots) to your new account.',
+  ];
 
-    setModalVisible(true);
+  const toggleCheckbox = (index: number) => {
+    const updatedCheckboxes = [...checkboxesChecked];
+    updatedCheckboxes[index] = !updatedCheckboxes[index];
+    setCheckboxesChecked(updatedCheckboxes);
   };
 
-  const handleSwitchButtonPress = () => {
-    navigation.navigate('Marketing');
-  };
-
-  const handleAgree = () => {
-    if (activeConsentIndex !== -1) {
-      const updatedConsents = [...consentsAccepted];
-      updatedConsents[activeConsentIndex] = true;
-      setConsentsAccepted(updatedConsents);
-      setModalVisible(false);
-      setActiveConsentIndex(-1); // Reset activeConsentIndex after agreement
-    }
-  };
-  const getModalContentForTitle = (title: string) => {
-    // Implement the logic to return the appropriate content based on the title
-    // For instance:
-    switch (title) {
-      case 'Opening your new account':
-        return 'Once we’ve confirmed your switch, we’ll open a new bank account on your behalf. We’ll send you a welcome email with your new account details.';
-      case 'Closing your e-money account':
-        return 'As part of the switch, we’ll close your e-money account. We’ll email your scheduled payment and Direct Debit information, so you can set them up again in your new bank account.';
-      case 'Sharing your data':
-        return (
-          <>
-            Data you gave us when you opened your e-money account, and any data
-            we’ve collected since, will be used to open your new bank account.
-            {'\n\n'}
-            <Text variant="bodyText" style={{color: Colours.black}}>
-              <Text
-                onPress={() =>
-                  Linking.openURL(
-                    'https://www.mettle.co.uk/upgrade-data-use.pdf',
-                  )
-                }
-                variant="bodyText bodyTextBold"
-                style={{color: Colours.pink}}>
-                Read more about how we’ll use your data.{'\n\n'}
-              </Text>
-              If your business has a second owner, you’ll also need to download
-              and share this document with them.
-            </Text>
-          </>
-        );
-      case 'Transferring your balance':
-        return 'We’ll move your total balance (including money in pots) to your new account.';
-      default:
-        return '';
-    }
-  };
+  const isButtonDisabled = !checkboxesChecked.every(checked => checked);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -123,53 +74,57 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
             <TouchableOpacity
               key={index}
               style={styles.box}
-              onPress={() => handleConsentToggle(index)}>
+              onPress={() => toggleCheckbox(index)}>
               <View style={styles.textContainer}>
                 <Text
-                  variant="bodyText leftAlign"
+                  variant="bodyText bodyTextBold"
                   style={{color: Colours.black}}>
                   {title}
                 </Text>
+                {descriptionsExpanded[index] ? (
+                  <>
+                    <Text
+                      variant="bodyText leftAlign"
+                      style={{color: Colours.black}}>
+                      {consentDescriptions[index]}
+                    </Text>
+                    {index === 2 && (
+                      <Pressable
+                        onPress={() =>
+                          Linking.openURL(
+                            'https://www.mettle.co.uk/upgrade-data-use.pdf',
+                          )
+                        }>
+                        <Text
+                          variant="bodyText bodyTextBold"
+                          style={{
+                            color: Colours.pink,
+                            textDecorationLine: 'underline',
+                          }}>
+                          Read more about how we’ll use your data
+                        </Text>
+                        <Text variant="bodyText" style={{color: Colours.black}}>
+                          If your business has a second owner, you’ll also need
+                          to download and share this document with them.
+                        </Text>
+                      </Pressable>
+                    )}
+                  </>
+                ) : null}
               </View>
-              {consentsAccepted[index] ? (
-                <CheckmarkIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
+              <CheckboxToggle
+                checked={checkboxesChecked[index]}
+                onToggle={() => toggleCheckbox(index)}
+              />
             </TouchableOpacity>
           ))}
 
           <PinkButton
             buttonText="Next"
-            onPress={handleSwitchButtonPress}
-            disabled={!consentsAccepted.every(accepted => accepted)}
+            onPress={() => navigation.navigate('Marketing')}
+            disabled={isButtonDisabled}
           />
         </View>
-        <Modal visible={modalVisible} animationType="slide" transparent>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <TouchableOpacity
-                style={styles.modalCloseIcon}
-                onPress={() => setModalVisible(false)}>
-                <Image
-                  source={require('../assets/Close.png')}
-                  style={styles.modalCloseIcon}
-                />
-              </TouchableOpacity>
-              <Text
-                variant="leftAlign"
-                style={[styles.modalTitle, {color: Colours.black}]}>
-                {modalTitle}
-              </Text>
-              <Text
-                variant="leftAlign"
-                style={[styles.bodyText, {color: Colours.black}]}>
-                {modalContent}
-              </Text>
-              <PinkButton buttonText="Agree" onPress={handleAgree} />
-            </View>
-          </View>
-        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
@@ -188,7 +143,7 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     paddingVertical: 16,
     marginBottom: 8,
     alignSelf: 'center',
@@ -201,40 +156,6 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     paddingLeft: 10,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: Colours.white,
-    width: '100%',
-    borderRadius: 8,
-    padding: 20,
-    paddingTop: 50,
-    position: 'relative',
-  },
-  modalTitle: {
-    fontSize: 22,
-    lineHeight: 26,
-    marginBottom: 10,
-    fontWeight: '500',
-  },
-  modalCloseIcon: {
-    position: 'absolute',
-    top: 7,
-    right: 10,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    padding: 5,
-  },
-  bodyText: {
-    fontSize: 16,
-    lineHeight: 21,
-    marginBottom: 20,
   },
   safeAreaContainer: {
     backgroundColor: Colours.white,
