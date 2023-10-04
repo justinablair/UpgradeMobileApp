@@ -6,9 +6,9 @@ import stepsData from '../components/StepsData';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 
-type UpgradeIntroProps = NavigationProps<'StepperScreen1'>;
+type UpgradeStepper1Props = NavigationProps<'StepperScreen1'>;
 
-const StepperScreen1: React.FC<UpgradeIntroProps> = ({navigation}) => {
+const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeChangesWeDo');
   };

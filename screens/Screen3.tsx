@@ -69,9 +69,9 @@ const Step = ({item}: {item: StepItem}) => {
     </View>
   );
 };
-type UpgradeStepper2Props = NavigationProps<'StepperScreen2'>;
+type UpgradeStepper3Props = NavigationProps<'StepperScreen3'>;
 
-const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
+const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeTerms');
   };
@@ -91,7 +91,7 @@ const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
         </View>
       </ScrollView>
       <PinkButton
-        buttonText="Your consents"
+        buttonText="Tax reporting"
         onPress={handleSwitchButtonPress}
       />
     </View>
@@ -231,4 +231,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepperScreen2;
+export default StepperScreen3;
