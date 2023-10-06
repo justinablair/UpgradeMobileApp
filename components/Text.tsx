@@ -14,7 +14,8 @@ type TextVariant =
   | 'headerSmall'
   | 'bodyText'
   | 'bodyTextBold'
-  | 'leftAlign';
+  | 'leftAlign'
+  | 'centerAlign';
 
 // Define the props for the Text component, extending RNTextProps
 interface TextProps extends RNTextProps {
