@@ -82,7 +82,7 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
           <View style={styles.separator} />
           <Text
             variant="bodyText bodyTextDescription"
-            style={{color: Colours.black60}}>
+            style={{color: Colours.black80}}>
             You can change these later in your settings by selecting ‘Marketing
             preferences’ in the Account tab, or by using the in-app chat.
           </Text>
