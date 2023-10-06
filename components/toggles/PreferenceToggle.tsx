@@ -26,7 +26,7 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
         {description && (
           <Text
             variant="bodyText bodyTextDescription"
-            style={{color: Colours.black60}}>
+            style={{color: Colours.black80}}>
             {description}
           </Text>
         )}
