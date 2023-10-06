@@ -24,16 +24,29 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
           <Image
             source={require('../assets/MettleStars.png')}
             style={styles.largeImage}
-            resizeMode="contain" // Add resizeMode property
+            resizeMode="contain"
             accessibilityLabel="Mettle logo with stars around it"
           />
-          <Text variant="screenTitle">
+          <Text variant="screenTitle centerAlign">
+            {' '}
+            {/* Fix the typo here */}
             Welcome to your new Mettle bank account
           </Text>
           <Text variant="bodyText centerAlign">
             It may look like nothing’s changed, but we’ve done a lot of work
             under the hood.
           </Text>
+          <View style={styles.bottomContainer}>
+            <Image
+              source={require('../assets/FSCSLogo.png')}
+              style={styles.smallImage}
+              accessibilityLabel="FSCS logo"
+            />
+            <Text variant="bodyTextDescription centerAlign" style={styles.text}>
+              Your eligible deposits at Mettle are covered by the Financial
+              Services Compensation Scheme.
+            </Text>
+          </View>
           <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
         </View>
       </ScrollView>
@@ -45,21 +58,32 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colours.black,
     padding: 25,
-    height: '100%',
   },
   safeAreaContainer: {
     backgroundColor: Colours.black,
-    height: '100%',
+    flex: 1,
   },
-
   largeImage: {
     alignSelf: 'center',
     width: 279,
     height: 200,
   },
-
   centeredText: {
     textAlign: 'center',
+  },
+  bottomContainer: {
+    marginTop: '40%',
+    flexDirection: 'row',
+    width: 327,
+  },
+  smallImage: {
+    width: 32,
+    height: 32,
+  },
+
+  text: {
+    flex: 1,
+    color: Colours.white,
   },
 });
 
