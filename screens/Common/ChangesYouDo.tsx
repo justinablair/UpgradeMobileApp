@@ -15,12 +15,6 @@ type ChangesYouDoProps = {};
 const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
   return (
     <View>
-      <View style={styles.titleContainer}>
-        <Text variant="screenTitle centreAlign" style={{color: Colours.black}}>
-          What you’ll need to do after the switch
-        </Text>
-      </View>
-      <View style={styles.space} />
       {/* Box 1 */}
       <InfoBox
         icon={<DrawingsPaidToUserIcon stroke={Colours.black} />}
