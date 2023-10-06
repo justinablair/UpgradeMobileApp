@@ -33,15 +33,18 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
       <ScrollView contentContainerStyle={styles.container}>
         <View>
           <Image
-            source={require('../assets/RocketTakeoff.png')}
+            source={require('../assets/Supertick.png')}
             style={styles.largeImage}
             accessibilityLabel="Rocket taking off image"
           />
-          <Text variant="screenTitle">Switch complete</Text>
+          <Text variant="screenTitle">
+            Congratulations your switch is complete!
+          </Text>
           <Text variant="bodyText centerAlign">
-            You can now log in to your new account. We’ll send you a couple of
-            emails soon with your new account details and your e-money scheduled
-            payments and Direct Debits.
+            You can now log in to your new account, where you’ll find your
+            account number and sort code.{'/n/n'} To help you get started we’ll
+            send you a couple of emails soon. Look out for your new account
+            details and your old scheduled payments and Direct Debits.
           </Text>
           <PinkButton buttonText="Log in" onPress={handleLoginButtonPress} />
         </View>
@@ -68,8 +71,8 @@ const styles = StyleSheet.create({
   },
 
   largeImage: {
-    width: 280,
-    height: 260,
+    width: 200,
+    height: 200,
     alignSelf: 'center',
   },
 
