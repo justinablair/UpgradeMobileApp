@@ -12,7 +12,6 @@ type StepItem = {
   description: string;
   active: boolean;
 };
-
 const Step = ({item}: {item: StepItem}) => {
   const isActive = item.active;
   let stepCircleStyles = styles.inactiveStepCircle;
@@ -20,22 +19,20 @@ const Step = ({item}: {item: StepItem}) => {
   let stepTitleStyles = styles.inactiveStepTitle;
   let stepDescriptionStyles = styles.inactiveStepDescription;
 
-  if (isActive) {
-    if (item.number === '1') {
-      stepCircleStyles = {
-        ...styles.stepCircle,
-        width: 32,
-        height: 32,
-        marginLeft: 10,
-        backgroundColor: Colours.green,
-        borderColor: Colours.green,
-      };
-      stepNumberStyles = {
-        ...styles.stepNumber,
-        color: Colours.green, // Set the color to green when active and number is '1'
-      };
-    }
-  } else if (item.number === '2') {
+  if (item.number === '1' || item.number === '2') {
+    stepCircleStyles = {
+      ...styles.stepCircle,
+      width: 32,
+      height: 32,
+      marginLeft: 10,
+      backgroundColor: Colours.green,
+      borderColor: Colours.green,
+    };
+    stepNumberStyles = {
+      ...styles.stepNumber,
+      color: Colours.green, // Set the color to green when active and number is '1' or '2'
+    };
+  } else if (item.number === '3') {
     stepCircleStyles = {
       ...styles.activeStepCircle,
       width: 48,
@@ -67,17 +64,19 @@ const Step = ({item}: {item: StepItem}) => {
           {item.title}
         </Text>
         <Text variant="bodyText leftAlign" style={stepDescriptionStyles}>
-          {isActive && item.number === '1' ? 'Completed' : item.description}
+          {isActive && (item.number === '1' || item.number === '2')
+            ? 'Completed'
+            : item.description}
         </Text>
       </View>
     </View>
   );
 };
-type UpgradeStepper2Props = NavigationProps<'StepperScreen2'>;
+type UpgradeStepper3Props = NavigationProps<'StepperScreen3'>;
 
-const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
+const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeTerms');
+    navigation.navigate('UpgradeTaxReporting');
   };
 
   return (
@@ -95,7 +94,7 @@ const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
         </View>
       </ScrollView>
       <PinkButton
-        buttonText="Your consents"
+        buttonText="Tax reporting"
         onPress={handleSwitchButtonPress}
       />
     </View>
@@ -235,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepperScreen2;
+export default StepperScreen3;
