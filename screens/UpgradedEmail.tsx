@@ -53,8 +53,9 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
           </Text>
           <Text variant="bodyText" style={{color: Colours.black}}>
             If you haven’t received it already, we’re sending you an email with
-            scheduled payment and Direct Debit information from your e-money
-            account.
+            scheduled payment and Direct Debit information from your old
+            account.{'\n\n'} You can also message us via in-app chat, we’re
+            happy to help!
           </Text>
           <View style={styles.spaceMedium} />
           <Text variant="bodyText bodyTextBold" style={{color: Colours.black}}>
@@ -67,7 +68,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
           </Text>
           <ListItem text="Set up scheduled payments" />
           <ListItem text="Set up Direct Debits" />
-          <ListItem text="Update outstanding invoices" />
+          <ListItem text="Re-create unpaid invoices" />
           <ListItem
             text="Share your new bank details"
             description="You can find these at any time in the Account tab"
