@@ -73,6 +73,9 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             text="Share your new bank details"
             description="You can find these at any time in the Account tab"
           />
+          {/* Conditionally render the toasts */}
+          {showBankAccountToast && bankAccountToast()}
+          {showOpenMailToast && openMailToast()}
           <WhiteButton
             buttonText="Got it"
             onPress={() => {
@@ -87,9 +90,6 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
               setShowBankAccountToast(false); // Close the bank account toast if it's open
             }}
           />
-          {/* Conditionally render the toasts */}
-          {showBankAccountToast && bankAccountToast()}
-          {showOpenMailToast && openMailToast()}
         </View>
       </ScrollView>
     </SafeAreaView>
