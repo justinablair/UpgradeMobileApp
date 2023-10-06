@@ -1,7 +1,14 @@
 //ConfirmAddress.tsx
 
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Pressable, SafeAreaView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  SafeAreaView,
+  Image,
+  TextStyle,
+} from 'react-native';
 import Text from '../components/Text';
 // import InfoModal from '../components/InfoModal';
 
@@ -23,12 +30,27 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
 
   const [showInteractiveModal, setShowInteractiveModal] = useState(false);
 
-  const handleOpenInteractivenModal = () => {
+  const [newCardPressed, setNewCardPressed] = useState(false);
+
+  const handleOpenInteractiveModal = () => {
     setShowInteractiveModal(true);
+    setNewCardPressed(true);
   };
 
-  const handleCloseInteractiveModalModal = () => {
+  const handleCloseInteractiveModal = () => {
     setShowInteractiveModal(false);
+  };
+
+  const handleNewCardTextPress = () => {
+    setNewCardPressed(true);
+    setShowSendingCardInfoModal(true);
+    // Add any other logic you want to perform when the text is pressed
+  };
+
+  const newCardTextStyles: TextStyle = {
+    ...styles.newCardText,
+    color: newCardPressed ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
   };
 
   const {addressLine1, town, postcode} = useUserContext();
@@ -56,15 +78,23 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
         <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Image
+            source={require('../assets/Envelope.png')}
+            style={[styles.centerText, styles.spaceMedium]}
+            accessibilityLabel="Mettle Card In Envelope"
+          />
+          <Text
+            variant="screenTitle centreAlign"
+            style={{color: Colours.black}}>
             Confirm your address
           </Text>
           <Text
-            variant="bodyText"
+            variant="bodyText centreAlign"
             style={[{color: Colours.black}, styles.spaceMedium]}>
             We’ll send your new card to this address. If your address has
             changed, you’ll need to update it before continuing.
           </Text>
+
           <View>
             <InfoBox
               title="Your address"
@@ -73,10 +103,14 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               descriptionStyle={styles.descriptionCustomisation}
             />
           </View>
-          <Pressable onPress={() => setShowSendingCardInfoModal(true)}>
+          <Pressable onPress={handleNewCardTextPress}>
             <Text
               variant="bodyText bodyTextBold"
-              style={[{color: Colours.pink}, styles.centerText]}>
+              style={[
+                {color: Colours.pink},
+                styles.centerText,
+                newCardTextStyles,
+              ]}>
               Why we're sending a new card
             </Text>
           </Pressable>
@@ -95,18 +129,18 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
           />
           <InteractiveModal
             modalVisible={showInteractiveModal}
-            closeModal={handleCloseInteractiveModalModal}
+            closeModal={handleCloseInteractiveModal}
             modalTitle="Need to update your address?"
             modalContent="Updating your address will also change the address in the Personal details section of the app."
             pinkButtonText="Update address"
             onPinkButtonClick={handleChangeAddressClick}
             whiteButtonText="Cancel"
-            onWhiteButtonClick={handleCloseInteractiveModalModal}
+            onWhiteButtonClick={handleCloseInteractiveModal}
           />
 
           <WhiteButton
             buttonText="Update address"
-            onPress={handleOpenInteractivenModal}
+            onPress={handleOpenInteractiveModal}
           />
           <PinkButton
             buttonText="Confirm address"
@@ -142,6 +176,10 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+
+  newCardText: {
+    fontWeight: 'bold',
   },
 });
 
