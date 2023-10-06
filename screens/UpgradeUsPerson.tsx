@@ -19,7 +19,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   const {userType} = useUserContext();
 
   const handleNoButtonPress = () => {
-    navigation.navigate('ConfirmAddress'); // Navigate to the desired screen
+    navigation.navigate('StepperScreen4'); // Navigate to the desired screen
   };
   const handleYesButtonPress = () => {
     navigation.navigate('UpgradeIneligibleUS'); // Navigate to the desired screen
@@ -88,15 +88,10 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
       <ScrollView>
         <View style={styles.container}>
           {renderContent()}
-          <View style={styles.spaceMedium} />
           <Pressable onPress={handleUsPersonPress}>
             <Text
               variant="bodyText bodyTextBold"
-              style={[
-                {color: Colours.pink},
-                styles.spaceLarge,
-                usPersonTextStyles,
-              ]}>
+              style={[{color: Colours.pink}, usPersonTextStyles]}>
               What is a US person?
             </Text>
           </Pressable>
