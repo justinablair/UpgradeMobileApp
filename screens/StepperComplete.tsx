@@ -19,7 +19,12 @@ const Step = ({item}: {item: StepItem}) => {
   let stepTitleStyles = styles.inactiveStepTitle;
   let stepDescriptionStyles = styles.inactiveStepDescription;
 
-  if (item.number === '1' || item.number === '2' || item.number === '3') {
+  if (
+    item.number === '1' ||
+    item.number === '2' ||
+    item.number === '3' ||
+    item.number === '4'
+  ) {
     stepCircleStyles = {
       ...styles.stepCircle,
       width: 32,
@@ -30,28 +35,7 @@ const Step = ({item}: {item: StepItem}) => {
     };
     stepNumberStyles = {
       ...styles.stepNumber,
-      color: Colours.green, // Set the color to green when active and number is '1' or '2'
-    };
-  } else if (item.number === '4') {
-    stepCircleStyles = {
-      ...styles.activeStepCircle,
-      width: 48,
-      height: 48,
-      borderColor: 'white',
-      backgroundColor: Colours.black,
-      marginTop: -30,
-    };
-    stepNumberStyles = {
-      ...styles.activeStepNumber,
-      color: 'white',
-    };
-    stepTitleStyles = {
-      ...styles.activeStepTitle,
-      color: 'white',
-    };
-    stepDescriptionStyles = {
-      ...styles.activeStepDescription,
-      color: 'white',
+      color: Colours.green,
     };
   }
   return (
@@ -64,7 +48,10 @@ const Step = ({item}: {item: StepItem}) => {
           {item.title}
         </Text>
         <Text variant="bodyText leftAlign" style={stepDescriptionStyles}>
-          {item.number === '1' || item.number === '2' || item.number === '3'
+          {item.number === '1' ||
+          item.number === '2' ||
+          item.number === '3' ||
+          item.number === '4'
             ? 'Completed'
             : item.description}
         </Text>
@@ -72,32 +59,27 @@ const Step = ({item}: {item: StepItem}) => {
     </View>
   );
 };
-type UpgradeStepper4Props = NavigationProps<'StepperScreen4'>;
+type UpgradeStepperCompleteProps = NavigationProps<'StepperComplete'>;
 
-const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
+const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
+  navigation,
+}) => {
   const handleSwitchButtonPress = () => {
-    navigation.navigate('ConfirmAddress');
+    navigation.navigate('UpgradeRecap');
   };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.leftContainer}>
-          <View style={styles.lineContainer}>
-            <View style={styles.line} />
-          </View>
+          <View style={styles.lineContainer} />
           <View style={styles.completeLine} />
-          <View style={styles.completeLine} />
-          <View style={styles.activeLine} />
           {stepsData.map(item => (
             <Step key={item.number} item={item} />
           ))}
         </View>
       </ScrollView>
-      <PinkButton
-        buttonText="Confirm details"
-        onPress={handleSwitchButtonPress}
-      />
+      <PinkButton buttonText="Continue" onPress={handleSwitchButtonPress} />
     </View>
   );
 };
@@ -148,7 +130,8 @@ const styles = StyleSheet.create({
   lineContainer: {
     position: 'absolute',
     width: 2,
-    height: '20%',
+    height: '10%',
+    backgroundColor: Colours.black60,
     left: 24,
     top: 250,
   },
@@ -160,19 +143,12 @@ const styles = StyleSheet.create({
   completeLine: {
     position: 'absolute',
     width: 2,
-    height: '30%',
+    height: '50%',
     left: 24,
     backgroundColor: Colours.green,
     top: 40,
   },
-  activeLine: {
-    position: 'absolute',
-    width: 2,
-    height: '15%',
-    left: 24,
-    backgroundColor: Colours.white,
-    top: 200,
-  },
+
   stepCircle: {
     width: 32,
     height: 32,
@@ -187,12 +163,7 @@ const styles = StyleSheet.create({
   stepNumber: {
     fontSize: 18,
   },
-  activeStepNumber: {
-    color: Colours.white,
-  },
-  inactiveStepNumber: {
-    color: Colours.black60,
-  },
+
   stepContent: {
     flex: 1,
     marginLeft: 20,
@@ -234,4 +205,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepperScreen4;
+export default StepperCompleteScreen;

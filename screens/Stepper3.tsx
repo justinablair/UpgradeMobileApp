@@ -64,9 +64,11 @@ const Step = ({item}: {item: StepItem}) => {
           {item.title}
         </Text>
         <Text variant="bodyText leftAlign" style={stepDescriptionStyles}>
-          {isActive && (item.number === '1' || item.number === '2')
-            ? 'Completed'
-            : item.description}
+          <Text variant="bodyText leftAlign" style={stepDescriptionStyles}>
+            {item.number === '1' || item.number === '2'
+              ? 'Completed'
+              : item.description}
+          </Text>
         </Text>
       </View>
     </View>
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
     height: '20%',
     backgroundColor: Colours.black60,
     left: 24,
-    top: 250,
+    top: 210,
   },
   stepContainer: {
     flexDirection: 'row',
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
     height: '15%',
     left: 24,
     backgroundColor: Colours.white,
-    top: 145,
+    top: 130,
   },
   stepCircle: {
     width: 32,
