@@ -16,12 +16,6 @@ type ChangesWeDoProps = {};
 const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
   return (
     <View>
-      <View style={styles.titleContainer}>
-        <Text variant="screenTitle centreAlign" style={{color: Colours.black}}>
-          What we’ll do during the switch
-        </Text>
-        <View style={styles.space} />
-      </View>
       {/* Box 1 */}
       <InfoBox
         icon={<CardSvg stroke={Colours.black} fill={Colours.black} />}

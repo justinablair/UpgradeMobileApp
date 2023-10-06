@@ -21,6 +21,14 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text
+              variant="screenTitle centreAlign"
+              style={{color: Colours.black}}>
+              What you’ll need to do after the switch
+            </Text>
+          </View>
+          <View style={styles.space} />
           <ChangesYouDo />
           <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
         </View>
@@ -38,6 +46,13 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+
+  titleContainer: {
+    paddingLeft: 10, // Adjust this value as needed
+  },
+  space: {
+    marginVertical: 8,
   },
 });
 

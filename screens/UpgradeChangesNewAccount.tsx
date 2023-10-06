@@ -8,6 +8,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
 import NewAccount from './Common/NewAccount';
+import Text from '../components/Text';
 
 type UpgradeChangesNewAccountProps =
   NavigationProps<'UpgradeChangesNewAccount'>;
@@ -26,6 +27,13 @@ const UpgradeChangesNewAccountScreen: React.FC<
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text
+              variant="screenTitle centreAlign"
+              style={{color: Colours.black}}>
+              How your new account will work
+            </Text>
+          </View>
           <NewAccount />
           <WhiteButton
             buttonText="Maybe later"
@@ -50,6 +58,12 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+  space: {
+    marginVertical: 8,
+  },
+  titleContainer: {
+    paddingLeft: 10, // Adjust this value as needed
   },
 });
 

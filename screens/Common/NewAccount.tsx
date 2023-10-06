@@ -6,7 +6,6 @@ import {LockedIcon} from '../../components/theme/LockedIcon';
 import {MobilePhoneIcon} from '../../components/theme/MobilePhoneIcon';
 import {EmailIcon} from '../../components/theme/EmailIcon';
 import Colours from '../../components/theme/Colour';
-import Text from '../../components/Text';
 import VoidIcon from '../../components/theme/VoidIcon';
 import CalendarIcon from '../../components/theme/CalendarIcon';
 
@@ -15,11 +14,6 @@ type NewAccountProps = {};
 const NewAccount: React.FC<NewAccountProps> = () => {
   return (
     <View>
-      <View style={styles.titleContainer}>
-        <Text variant="screenTitle centreAlign" style={{color: Colours.black}}>
-          How your new account will work
-        </Text>
-      </View>
       <View style={styles.space} />
       {/* Box 1 */}
       <InfoBox

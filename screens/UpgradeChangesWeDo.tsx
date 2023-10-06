@@ -7,6 +7,7 @@ import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import ChangesWeDo from './Common/ChangesWeDo';
+import Text from '../components/Text';
 
 type UpgradeChangesWeDoProps = NavigationProps<'UpgradeChangesWeDo'>;
 
@@ -20,6 +21,14 @@ const UpgradeChangesWeDoScreen: React.FC<UpgradeChangesWeDoProps> = ({
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
         <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text
+              variant="screenTitle centreAlign"
+              style={{color: Colours.black}}>
+              What we’ll do during the switch
+            </Text>
+            <View style={styles.space} />
+          </View>
           <ChangesWeDo />
           <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
         </View>
@@ -37,6 +46,12 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+  space: {
+    marginVertical: 8,
+  },
+  titleContainer: {
+    paddingLeft: 10, // Adjust this value as needed
   },
 });
 
