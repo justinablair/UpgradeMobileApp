@@ -84,12 +84,12 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
             accessibilityLabel="Mettle Card In Envelope"
           />
           <Text
-            variant="screenTitle centreAlign"
+            variant="screenTitle centerAlign"
             style={{color: Colours.black}}>
             Confirm your address
           </Text>
           <Text
-            variant="bodyText centreAlign"
+            variant="bodyText centerAlign"
             style={[{color: Colours.black}, styles.spaceMedium]}>
             We’ll send your new card to this address. If your address has
             changed, you’ll need to update it before continuing.
