@@ -55,6 +55,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
             We’ve built a new bank account, which will replace the
             <Pressable onPress={handleEmoneyPress}>
               <Text variant="bodyText" style={emoneyTextStyles}>
+                {' '}
                 e-money
               </Text>
             </Pressable>{' '}
@@ -151,8 +152,8 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   emoneyText: {
-    // Define your emoney text style here
     lineHeight: 90,
+    fontWeight: 'bold',
   },
 });
 

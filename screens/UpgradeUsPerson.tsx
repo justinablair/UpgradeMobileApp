@@ -16,16 +16,27 @@ type UpgradeUSPersonProps = NavigationProps<'UpgradeUSPerson'>;
 const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   navigation,
 }) => {
-  const {userType} = useUserContext(); // Get the userType and businessName from the context
+  const {userType} = useUserContext();
 
   const handleNoButtonPress = () => {
     navigation.navigate('ConfirmAddress'); // Navigate to the desired screen
   };
   const handleYesButtonPress = () => {
-    navigation.navigate('UpgradeIneligible'); // Navigate to the desired screen
+    navigation.navigate('UpgradeIneligibleUS'); // Navigate to the desired screen
   };
 
   const [showUSPersonInfoModal, setShowUSPersonInfoModal] = useState(false);
+  const [usPersonPressed, setUsPersonPressed] = useState(false);
+
+  const handleUsPersonPress = () => {
+    setShowUSPersonInfoModal(true);
+    setUsPersonPressed(true); // Set to true to keep it blue
+  };
+  const usPersonTextStyles: TextStyle = {
+    ...styles.usPersonText,
+    color: usPersonPressed ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
+  };
 
   const renderContent = () => {
     if (userType === 'limitedCompany') {
@@ -38,8 +49,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             visible={showUSPersonInfoModal}
             onPressClose={() => setShowUSPersonInfoModal(false)}
             title="What is a US person?"
-            content="An entity is considered a United States person for tax purposes if it is a partnership or corporation organised in the United States or under the laws of the United States or any State thereof."
-            accessibilityLabel="Close US Person Info Modal"
+            content="For tax purposes, a business is considered a United States entity, and therefore a US person, if it is a partnership or corporation registered in the United States or under U.S. state laws."
             contentStyle={[
               {backgroundColor: Colours.white},
               styles.InfoModalCustomisation,
@@ -59,7 +69,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             visible={showUSPersonInfoModal}
             onPressClose={() => setShowUSPersonInfoModal(false)}
             title="What is a US person?"
-            content="You are considered a U.S. Person for tax purposes if you are a U.S. Citizen, or a resident (alien) of the U.S. under the ‘green card’ or the ‘substantial presence’ tests."
+            content="You are considered a United States person for tax purposes if you are a US citizen, or a resident (alien) of the US under the ‘green card’ or the ‘substantial presence’ tests."
             accessibilityLabel="Close US Person Info Modal"
             contentStyle={[
               {backgroundColor: Colours.white},
@@ -79,13 +89,19 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
         <View style={styles.container}>
           {renderContent()}
           <View style={styles.spaceMedium} />
-          <Pressable onPress={() => setShowUSPersonInfoModal(true)}>
-            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
+          <Pressable onPress={handleUsPersonPress}>
+            <Text
+              variant="bodyText bodyTextBold"
+              style={[
+                {color: Colours.pink},
+                styles.spaceLarge,
+                usPersonTextStyles,
+              ]}>
               What is a US person?
             </Text>
           </Pressable>
           <OptionsWithChevron title="Yes" onPress={handleYesButtonPress} />
-          <View style={styles.spaceMedium} />
+          <View style={[styles.spaceMedium, styles.separator]} />
           <OptionsWithChevron title="No" onPress={handleNoButtonPress} />
         </View>
       </ScrollView>
@@ -103,6 +119,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colours.white,
     color: Colours.black,
   },
+  spaceLarge: {
+    marginBottom: 25,
+  },
   spaceMedium: {
     marginBottom: 15,
   },
@@ -112,6 +131,16 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+  separator: {
+    width: 327,
+    borderBottomWidth: 1,
+    borderBottomColor: Colours.black30,
+    // alignSelf: 'center', // Center the separator horizontally
+  },
+  usPersonText: {
+    lineHeight: 90,
+    fontWeight: 'bold',
   },
 });
 
