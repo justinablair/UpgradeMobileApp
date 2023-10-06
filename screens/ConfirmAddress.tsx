@@ -44,7 +44,6 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   const handleNewCardTextPress = () => {
     setNewCardPressed(true);
     setShowSendingCardInfoModal(true);
-    // Add any other logic you want to perform when the text is pressed
   };
 
   const newCardTextStyles: TextStyle = {
@@ -71,7 +70,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   };
 
   const handleConfirmAddressClick = () => {
-    navigation.navigate('UpgradeConfirm');
+    navigation.navigate('StepperComplete');
   };
 
   return (
