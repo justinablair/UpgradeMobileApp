@@ -22,17 +22,19 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
       <ScrollView>
         <View style={styles.container}>
           <Image
-            source={require('../assets/RocketTakeoff.png')}
+            source={require('../assets/SwitchArrows.png')}
             style={styles.largeImage}
             accessibilityLabel="Mettle Bank Account Logo"
           />
-          <Text variant="screenTitle" style={{color: Colour.black}}>
+          <Text variant="screenTitle centerAlign" style={{color: Colour.white}}>
             Ready to switch?
           </Text>
-          <Text variant="bodyText centerAlign" style={{color: Colour.black}}>
+          <Text variant="bodyText centerAlign" style={{color: Colour.white}}>
             We’ll open your new account and move your money. We’ll also close
-            your e-money account.{'\n\n'}Only do this if you’re ready. We can’t
-            undo it once we’ve started.
+            your e-money account.{'\n\n'}
+          </Text>
+          <Text variant="bodyText centerAlign" style={{color: Colour.pink}}>
+            Only do this if you’re ready. We can’t undo it once we’ve started.
           </Text>
           <View style={styles.spaceMedium} />
           <PinkButton
@@ -48,7 +50,7 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
+    backgroundColor: Colours.black,
     padding: 16,
   },
   modal: {
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
+    backgroundColor: Colours.black,
     height: '100%',
   },
 });
