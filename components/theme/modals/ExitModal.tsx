@@ -6,7 +6,6 @@ import PinkButton from '../buttons/PinkButton';
 import WhiteButton from '../buttons/WhiteButton';
 import Text from '../../Text';
 import {useNavigation} from '@react-navigation/native';
-import {NavigationProps} from '../../../navigationTypes';
 
 interface ExitModalProps {
   visible: boolean;
@@ -15,7 +14,7 @@ interface ExitModalProps {
   content: string;
   accessibilityLabel?: string;
   onAgree?: () => void;
-  onNavigateToUpgradeIntro: () => void; // Define the callback prop
+  toggleExitModal: any; // Receive the toggle function
 }
 
 const ExitModal: React.FC<ExitModalProps> = ({
@@ -24,9 +23,14 @@ const ExitModal: React.FC<ExitModalProps> = ({
   title,
   content,
   onAgree,
-  onNavigateToUpgradeIntro,
+  toggleExitModal, // Receive the toggle function
 }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // Obtain the navigation prop
+
+  const handleExitButtonPress = () => {
+    toggleExitModal(); // Close the modal
+    navigation.navigate('UserSelection'); // Navigate to UserSelection
+  };
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -56,9 +60,8 @@ const ExitModal: React.FC<ExitModalProps> = ({
               <PinkButton
                 buttonText="Exit Switch"
                 onPress={() => {
-                  onNavigateToUpgradeIntro();
+                  handleExitButtonPress();
                   onPressClose();
-                  navigation.navigate('UserSelection'); // Use the navigation prop here
                 }}
                 customWidth={158}
               />
