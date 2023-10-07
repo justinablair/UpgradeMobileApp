@@ -68,28 +68,38 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
       );
     }
   };
-
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContentContainer}
+        keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-            Terms and Privacy Notice
-          </Text>
-          {renderContent()}
-          <View style={styles.spaceMedium} />
-          <Pressable onPress={openTermsLink}>
-            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
-              Terms
+          <View style={styles.contentContainer}>
+            <Text
+              variant="screenTitle leftAlign"
+              style={{color: Colours.black}}>
+              Terms and Privacy Notice
             </Text>
-          </Pressable>
-          <View style={styles.spaceMedium} />
-          <Pressable onPress={openPrivacyLink}>
-            <Text variant="bodyText bodyTextBold" style={{color: Colours.pink}}>
-              Privacy Notice
-            </Text>
-          </Pressable>
-          <View style={styles.spaceMedium} />
+            {renderContent()}
+            <View style={styles.spaceMedium} />
+            <Pressable onPress={openTermsLink}>
+              <Text
+                variant="bodyText bodyTextBold"
+                style={{color: Colours.pink}}>
+                Terms
+              </Text>
+            </Pressable>
+            <View style={styles.spaceMedium} />
+            <Pressable onPress={openPrivacyLink}>
+              <Text
+                variant="bodyText bodyTextBold"
+                style={{color: Colours.pink}}>
+                Privacy Notice
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.bottomButtonContainer}>
           <PinkButton buttonText="Agree" onPress={handleSwitchButtonPress} />
         </View>
       </ScrollView>
@@ -98,10 +108,21 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+    backgroundColor: Colours.white,
+  },
+  scrollViewContentContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
   container: {
     flex: 1,
     backgroundColor: Colours.white,
     padding: 16,
+  },
+  contentContainer: {
+    flex: 1, // Content takes remaining space
   },
   spaceLarge: {
     marginBottom: 25,
@@ -109,9 +130,9 @@ const styles = StyleSheet.create({
   spaceMedium: {
     marginBottom: 15,
   },
-  safeAreaContainer: {
-    backgroundColor: Colours.white,
-    height: '100%',
+  bottomButtonContainer: {
+    alignSelf: 'center',
+    marginVertical: 20, // Adjust this value as needed
   },
 });
 

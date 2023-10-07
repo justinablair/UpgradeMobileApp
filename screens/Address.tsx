@@ -68,37 +68,40 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
 
   return (
     <View style={styles.container}>
-      <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-        Tell us your address
-      </Text>
+      <View style={styles.contentContainer}>
+        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          Tell us your address
+        </Text>
 
-      <Text variant="bodyText" style={styles.label}>
-        First line of address
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter first line of address"
-        value={addressLine1Local}
-        onChangeText={setAddressLine1Local}
-      />
-      <Text variant="bodyText" style={styles.label}>
-        Town
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter town"
-        value={townLocal}
-        onChangeText={setTownLocal}
-      />
-      <Text variant="bodyText" style={styles.label}>
-        Postcode
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter postcode"
-        value={postcodeLocal}
-        onChangeText={setPostcodeLocal}
-      />
+        <Text variant="bodyText" style={styles.label}>
+          First line of address
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter first line of address"
+          value={addressLine1Local}
+          onChangeText={setAddressLine1Local}
+        />
+        <Text variant="bodyText" style={styles.label}>
+          Town
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter town"
+          value={townLocal}
+          onChangeText={setTownLocal}
+        />
+        <Text variant="bodyText" style={styles.label}>
+          Postcode
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter postcode"
+          value={postcodeLocal}
+          onChangeText={setPostcodeLocal}
+        />
+      </View>
+
       {formError ? (
         <Text variant="bodyText leftAlign" style={styles.errorText}>
           {formError}
@@ -114,6 +117,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colours.white,
     padding: 16,
+  },
+  contentContainer: {
+    flex: 1, // Content takes remaining space
   },
   label: {
     color: 'black',

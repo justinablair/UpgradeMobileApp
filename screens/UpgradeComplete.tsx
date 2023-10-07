@@ -1,4 +1,4 @@
-//UpgradeIntro.tsx
+// UpgradeComplete.tsx
 
 import React, {useState} from 'react';
 import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
@@ -31,7 +31,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.container}>
-        <View>
+        <View style={styles.contentContainer}>
           <Image
             source={require('../assets/Supertick.png')}
             style={styles.largeImage}
@@ -42,12 +42,12 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
           </Text>
           <Text variant="bodyText centerAlign">
             You can now log in to your new account, where you’ll find your
-            account number and sort code.{'/n/n'} To help you get started we’ll
+            account number and sort code.{'\n\n'} To help you get started, we’ll
             send you a couple of emails soon. Look out for your new account
             details and your old scheduled payments and Direct Debits.
           </Text>
-          <PinkButton buttonText="Log in" onPress={handleLoginButtonPress} />
         </View>
+        <PinkButton buttonText="Log in" onPress={handleLoginButtonPress} />
         <AuthModal
           visible={authModalVisible}
           onClose={onCloseAuthModal}
@@ -65,19 +65,17 @@ const styles = StyleSheet.create({
     padding: 25,
     height: '100%',
   },
+  contentContainer: {
+    flex: 1, // Content takes remaining space
+  },
   safeAreaContainer: {
     backgroundColor: Colours.black,
     height: '100%',
   },
-
   largeImage: {
     width: 200,
     height: 200,
     alignSelf: 'center',
-  },
-
-  centeredText: {
-    textAlign: 'center',
   },
 });
 
