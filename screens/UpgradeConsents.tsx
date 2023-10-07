@@ -49,9 +49,14 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   const toggleCheckbox = (index: number) => {
     const updatedCheckboxes = [...checkboxesChecked];
     updatedCheckboxes[index] = !updatedCheckboxes[index];
+
+    // Update the descriptionsExpanded state here
+    const updatedDescriptionsExpanded = [...descriptionsExpanded];
+    updatedDescriptionsExpanded[index] = !updatedCheckboxes[index];
+    setDescriptionsExpanded(updatedDescriptionsExpanded);
+
     setCheckboxesChecked(updatedCheckboxes);
   };
-
   const isButtonDisabled = !checkboxesChecked.every(checked => checked);
 
   return (
