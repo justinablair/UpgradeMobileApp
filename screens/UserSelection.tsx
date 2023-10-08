@@ -14,6 +14,7 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   navigation,
 }) => {
   const {setUserType} = useUserContext();
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
@@ -21,12 +22,30 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
       userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
     ); // Navigate based on userType
   };
-
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: isDarkMode ? Colours.black : Colours.white, // Change background color
+      padding: 16,
+    },
+    separator: {
+      width: 327,
+      borderBottomWidth: 1,
+      borderBottomColor: isDarkMode ? Colours.black05 : Colours.black05,
+      marginBottom: 16,
+    },
+    space: {
+      marginBottom: 40,
+    },
+    title: {
+      color: isDarkMode ? Colours.white : Colours.black,
+    },
+  });
   return (
     <View style={styles.container}>
       <Text
         variant="screenTitle leftAlign"
-        style={[{color: Colours.black}, styles.space]}>
+        style={[styles.title, styles.space]}>
         What type of business are you?
       </Text>
 
@@ -43,38 +62,8 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
         onPress={() => handleUserTypeSelect('limitedCompany')}
       />
       <View style={styles.separator} />
-      {/* <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text variant="bodyText" style={{color: Colours.black}}>
-          Open Authentication Modal
-        </Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colours.white,
-    padding: 16,
-  },
-  optionContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  optionContent: {
-    flex: 1,
-  },
-  separator: {
-    borderBottomWidth: 1,
-    borderBottomColor: Colours.black30,
-    marginBottom: 16,
-  },
-  space: {
-    marginBottom: 25,
-  },
-});
 
 export default UserSelectionScreen;

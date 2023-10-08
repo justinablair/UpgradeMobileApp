@@ -95,10 +95,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
             onPress={handleSwitchButtonExitJourney}
           />
 
-          <PinkButton
-            buttonText="I understand"
-            onPress={handlePinkButtonPress}
-          />
+          <PinkButton buttonText="Switch now" onPress={handlePinkButtonPress} />
 
           <TouchableOpacity onPress={() => setModalVisible(true)} />
           {/* Render the authentication modal */}

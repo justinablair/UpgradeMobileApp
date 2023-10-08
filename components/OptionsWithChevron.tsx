@@ -3,6 +3,7 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
 import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Import ChevronRightIcon
 import Colours from '../components/theme/Colour'; // Import Colours
+import {useUserContext} from './UserContext';
 
 interface OptionsWithChevronProps {
   title: string;
@@ -15,14 +16,20 @@ const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
   description,
   onPress,
 }) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
   return (
     <TouchableOpacity style={styles.optionContainer} onPress={onPress}>
       <View style={styles.optionContent}>
-        <Text variant="bodyText" style={{color: Colours.black}}>
+        <Text
+          variant="bodyText"
+          style={{color: isDarkMode ? Colours.white : Colours.black}}>
           {title}
         </Text>
         {description && (
-          <Text variant="bodyText" style={{color: Colours.black60}}>
+          <Text
+            variant="bodyText"
+            style={{color: isDarkMode ? Colours.black05 : Colours.black60}}>
             {description}
           </Text>
         )}

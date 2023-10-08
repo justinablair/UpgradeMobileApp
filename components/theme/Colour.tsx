@@ -8,6 +8,7 @@ const Colours = {
   black30: '#B9BBBB',
   black60: '#747676',
   black80: '#454949',
+  black90: '#2e3232',
   blue: '#64D2DC',
   blue40: '#C1EDF1',
   pink: '#f45f78',

@@ -16,9 +16,24 @@ import InfoModal from '../components/theme/modals/InfoModal';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
+import {useUserContext} from '../components/UserContext';
 type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
 const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+  const boxColour = isDarkMode ? Colours.black90 : Colours.black05;
+  // Define the source for the image based on the value of isoletrader
+  const FSCSImageSource = isDarkMode
+    ? require('../assets/FSCSLogo.png')
+    : require('../assets/FSCSLightMode.png');
+
+  const MettleLogoImageSource = isDarkMode
+    ? require('../assets/MettleLogo.png')
+    : require('../assets/MettleLogoLightMode.png');
+
   const [showEMoneyInfoModal, setShowEMoneyInfoModal] = useState(false);
   const [emoneyPressed, setEmoneyPressed] = useState(false);
 
@@ -38,20 +53,26 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView contentContainerStyle={styles.container}>
         <StatusBar backgroundColor="#171B1B" translucent={false} />
         <View style={styles.padding}>
           <Image
-            source={require('../assets/MettleLogo.png')}
+            source={MettleLogoImageSource}
             style={styles.largeImage}
             accessibilityLabel="Mettle Bank Account Logo"
           />
-          <Text variant="headerMedium centerAlign" style={styles.padding}>
+          <Text
+            variant="headerMedium centerAlign"
+            style={[styles.padding, {color: textColour}]}>
             Introducing the Mettle bank account
           </Text>
 
-          <Text variant="bodyText centerAlign">
+          <Text variant="bodyText centerAlign" style={{color: textColour}}>
             We’ve built a new bank account, which will replace the
             <Pressable onPress={handleEmoneyPress}>
               <Text variant="bodyText" style={emoneyTextStyles}>
@@ -63,15 +84,19 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
           </Text>
         </View>
         <View style={styles.section}>
-          <Text variant="headerSmall centerAlign">What’s new?</Text>
+          <Text variant="headerSmall centerAlign" style={{color: textColour}}>
+            What’s new?
+          </Text>
         </View>
-        <View style={styles.box}>
+        <View style={[styles.box, {backgroundColor: boxColour}]}>
           <Image
-            source={require('../assets/FSCSLogo.png')}
+            source={FSCSImageSource}
             style={styles.fscsLogo}
             accessibilityLabel="FSCS Logo"
           />
-          <Text variant="bodyText" style={styles.centeredText}>
+          <Text
+            variant="bodyText"
+            style={[styles.centeredText, {color: textColour}]}>
             With the new Mettle bank account, your funds are protected by the
             Financial Services Compensation Scheme (FSCS) up to £85k.
           </Text>
@@ -96,11 +121,9 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colours.black,
     padding: 25,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.black,
     height: '100%',
   },
 
@@ -121,7 +144,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   box: {
-    backgroundColor: '#2e3232',
     borderRadius: 8,
     width: 327,
     padding: 20,
@@ -144,7 +166,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 16,
     lineHeight: 21,
-    color: 'white',
   },
   infoIcon: {
     width: 32,

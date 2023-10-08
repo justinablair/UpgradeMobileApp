@@ -15,6 +15,11 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
   const {setBusinessName} = useUserContext();
   const [companyName, setCompanyName] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  // Define the background color and borderBottomColor based on isDarkMode
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const separatorBorderColor = isDarkMode ? Colours.black05 : Colours.black30;
 
   const handleNextPress = () => {
     if (isChecked && companyName.trim() !== '') {
@@ -26,27 +31,51 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
   const isCompanyNameEntered = companyName.trim() !== '';
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
       <View style={styles.contentContainer}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <Text
+          variant="screenTitle leftAlign"
+          style={{
+            color: isDarkMode ? Colours.white : Colours.black,
+          }}>
           Tell us about your company
         </Text>
-        <Text variant="bodyText" style={[{color: Colours.black}, styles.space]}>
+        <Text
+          variant="bodyText"
+          style={[
+            {
+              color: isDarkMode ? Colours.white : Colours.black,
+            },
+            styles.space,
+          ]}>
           Company name
         </Text>
         <TextInput
-          style={styles.input}
+          style={[
+            styles.input,
+            {
+              color: isDarkMode ? Colours.white : Colours.black,
+            },
+          ]}
           placeholder="Enter your company name"
-          placeholderTextColor={Colours.black60}
+          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={companyName}
           onChangeText={setCompanyName}
         />
-        <View style={styles.separator} />
+        <View
+          style={[styles.separator, {borderBottomColor: separatorBorderColor}]}
+        />
       </View>
 
       {/* Consent section */}
       <View style={styles.checkboxContainer}>
-        <Text variant="bodyText" style={[styles.checkboxText]}>
+        <Text
+          variant="bodyText"
+          style={[
+            styles.checkboxText,
+            {color: isDarkMode ? Colours.white : Colours.black},
+          ]}>
           I confirm{' '}
           {companyName !== '' ? companyName : 'the company name I entered'} is
           correct

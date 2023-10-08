@@ -14,6 +14,9 @@ type UserContextType = {
   setTown: React.Dispatch<React.SetStateAction<string>>;
   setPostcode: React.Dispatch<React.SetStateAction<string>>;
   setUserType: React.Dispatch<React.SetStateAction<UserType | null>>;
+  isDarkMode: boolean; // Add isDarkMode property
+
+  toggleDarkMode: () => void; // Add toggleDarkMode function
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -34,18 +37,25 @@ export const UserContextProvider: React.FC<{children: React.ReactNode}> = ({
   const [addressLine1, setAddressLine1] = useState('');
   const [town, setTown] = useState('');
   const [postcode, setPostcode] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false); // Initialize isDarkMode state
 
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(prevMode => !prevMode);
+  };
   const contextValue = {
     userType,
     businessName,
     addressLine1,
     town,
     postcode,
+    isDarkMode, // Add isDarkMode to the context
     setBusinessName,
     setAddressLine1,
     setTown,
     setPostcode,
     setUserType,
+    toggleDarkMode, // Add toggleDarkMode to the context
   };
 
   return (

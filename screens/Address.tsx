@@ -12,8 +12,11 @@ type EnterAddressScreenProps = NavigationProps<'Address'>;
 const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   navigation,
 }) => {
-  const {setAddressLine1, setTown, setPostcode} = useUserContext();
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
+  const {setAddressLine1, setTown, setPostcode} = useUserContext();
   const [addressLine1Local, setAddressLine1Local] = useState(''); // Local state for addressLine1
   const [townLocal, setTownLocal] = useState(''); // Local state for town
   const [postcodeLocal, setPostcodeLocal] = useState(''); // Local state for postcode
@@ -67,36 +70,42 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
       <View style={styles.contentContainer}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <Text
+          variant="screenTitle leftAlign"
+          style={{color: isDarkMode ? Colours.white : Colours.black}}>
           Tell us your address
         </Text>
 
-        <Text variant="bodyText" style={styles.label}>
+        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
           First line of address
         </Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: textColour}]}
           placeholder="Enter first line of address"
+          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={addressLine1Local}
           onChangeText={setAddressLine1Local}
         />
-        <Text variant="bodyText" style={styles.label}>
+        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
           Town
         </Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: textColour}]}
           placeholder="Enter town"
+          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={townLocal}
           onChangeText={setTownLocal}
         />
-        <Text variant="bodyText" style={styles.label}>
+        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
           Postcode
         </Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: textColour}]}
           placeholder="Enter postcode"
+          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={postcodeLocal}
           onChangeText={setPostcodeLocal}
         />
@@ -115,14 +124,12 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
   },
   contentContainer: {
     flex: 1, // Content takes remaining space
   },
   label: {
-    color: 'black',
     marginBottom: 4,
   },
   input: {
