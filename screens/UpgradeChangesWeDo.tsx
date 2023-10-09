@@ -8,23 +8,29 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import ChangesWeDo from './Common/ChangesWeDo';
 import Text from '../components/Text';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeChangesWeDoProps = NavigationProps<'UpgradeChangesWeDo'>;
 
 const UpgradeChangesWeDoScreen: React.FC<UpgradeChangesWeDoProps> = ({
   navigation,
 }) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+
+  const title = isDarkMode ? Colours.white : Colours.black;
+
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeChangesYouDo'); // Navigate to the desired screen
   };
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
       <ScrollView>
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
-            <Text
-              variant="screenTitle centreAlign"
-              style={{color: Colours.black}}>
+            <Text variant="screenTitle centreAlign" style={{color: title}}>
               What we’ll do during the switch
             </Text>
             <View style={styles.space} />

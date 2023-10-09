@@ -5,33 +5,52 @@ import PinkButton from '../components/theme/buttons/PinkButton';
 import stepsData from '../components/StepsData';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeStepper1Props = NavigationProps<'StepperScreen1'>;
 
 const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const activeColor = isDarkMode ? Colours.white : Colours.black;
+
+  const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;
+
+  const activeCircle = isDarkMode ? Colours.black : Colours.white;
+
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeChangesWeDo');
   };
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={[styles.container, {backgroundColor: activeCircle}]}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.scrollContainer,
+          {backgroundColor: activeCircle},
+        ]}>
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer} />
-          <View style={styles.activeLine} />
+          <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
           {stepsData.map(item => (
             <View key={item.number} style={styles.stepContainer}>
               <View
                 style={[
                   item.active
-                    ? styles.activeStepCircle
-                    : styles.inactiveStepCircle,
+                    ? {
+                        ...styles.activeStepCircle,
+                        backgroundColor: activeCircle,
+                        borderColor: activeColor,
+                      }
+                    : {
+                        ...styles.inactiveStepCircle,
+                        borderColor: inactiveColor,
+                        backgroundColor: activeCircle,
+                      },
                 ]}>
                 <Text
                   style={[
                     styles.stepNumber,
-                    item.active
-                      ? styles.activeStepNumber
-                      : styles.inactiveStepNumber,
+                    item.active ? {color: activeColor} : {color: inactiveColor},
                   ]}>
                   {item.number}
                 </Text>
@@ -41,8 +60,8 @@ const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
                   variant="headerSmall leftAlign"
                   style={[
                     item.number === '1'
-                      ? styles.activeStepTitle
-                      : styles.inactiveStepTitle,
+                      ? {...styles.activeStepTitle, color: activeColor}
+                      : {...styles.inactiveStepTitle, color: inactiveColor},
                   ]}>
                   {item.title}
                 </Text>
@@ -50,8 +69,11 @@ const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
                   variant="bodyText leftAlign"
                   style={[
                     item.number === '1'
-                      ? styles.activeStepDescription
-                      : styles.inactiveStepDescription,
+                      ? {...styles.activeStepDescription, color: activeColor}
+                      : {
+                          ...styles.inactiveStepDescription,
+                          color: inactiveColor,
+                        },
                   ]}>
                   {item.description}
                 </Text>
@@ -98,13 +120,11 @@ const commonStyles = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.black,
     flexDirection: 'column',
     padding: 16,
   },
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: Colours.black,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -130,23 +150,23 @@ const styles = StyleSheet.create({
     width: 2,
     height: '25%',
     left: 24,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     top: 40,
   },
   activeStepCircle: {
     ...commonStyles.stepCircle,
     width: 48,
     height: 48,
-    borderColor: Colours.white,
+    // borderColor: Colours.white,
     justifyContent: 'center',
-    backgroundColor: Colours.black,
+    // backgroundColor: Colours.black,
     alignItems: 'center',
     marginTop: -60,
   },
   inactiveStepCircle: {
     ...commonStyles.stepCircle,
-    borderColor: Colours.black60,
-    backgroundColor: Colours.black,
+    // borderColor: Colours.black60,
+    // backgroundColor: Colours.black,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
@@ -154,22 +174,22 @@ const styles = StyleSheet.create({
   stepNumber: {
     fontSize: 18,
   },
-  activeStepNumber: {
-    color: Colours.white,
-  },
-  inactiveStepNumber: {
-    color: Colours.black60,
-  },
+  // activeStepNumber: {
+  //   color: Colours.white,
+  // },
+  // inactiveStepNumber: {
+  //   color: Colours.black60,
+  // },
   stepContent: {
     flex: 1,
     marginLeft: 20,
   },
   activeStepTitle: {
-    color: Colours.white,
+    // color: Colours.white,
     marginTop: 10,
   },
   inactiveStepTitle: {
-    color: Colours.black60,
+    // color: Colours.black60,
     marginTop: 10,
   },
   activeStepDescription: {

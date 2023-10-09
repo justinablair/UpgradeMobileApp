@@ -2,7 +2,8 @@
 import React, {ReactNode} from 'react';
 import {View, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import Text from '../components/Text';
-import Colour from './theme/Colour';
+import Colours from '../components/theme/Colour';
+import {useUserContext} from './UserContext';
 
 interface InfoBoxProps {
   icon?: ReactNode; // Accept any icon component as a prop
@@ -17,16 +18,23 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   title,
   description,
   descriptionStyle = {},
-  titleStyle,
+  titleStyle = {}, // Default to an empty object
 }) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const colourMode = isDarkMode ? Colours.white : Colours.black;
+
+  const boxColor = isDarkMode ? Colours.black90 : Colours.black05;
+
   return (
-    <View style={styles.box}>
+    <View style={[styles.box, {backgroundColor: boxColor}]}>
       <View style={styles.iconContainer}>{icon}</View>
       <View style={styles.textContainer}>
-        <Text variant="bodyTextBold" style={titleStyle}>
+        <Text variant="bodyTextBold" style={[titleStyle, {color: colourMode}]}>
           {title}
         </Text>
-        <Text variant="bodyText" style={[styles.description, descriptionStyle]}>
+        <Text
+          variant="bodyText"
+          style={[descriptionStyle, {color: colourMode}]}>
           {description}
         </Text>
       </View>
@@ -36,7 +44,6 @@ const InfoBox: React.FC<InfoBoxProps> = ({
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: Colour.black03,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -51,9 +58,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-  },
-  description: {
-    color: Colour.black,
   },
 });
 
