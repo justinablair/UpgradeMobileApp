@@ -9,9 +9,7 @@ import {ExportIcon} from '../../components/theme/ExportIcon';
 import {PostageIcon} from '../../components/theme/Postage';
 import {FreeAgentIcon} from '../../components/theme/FreeAgentIcon';
 import Colours from '../../components/theme/Colour';
-import Text from '../../components/Text';
 import {useUserContext} from '../../components/UserContext';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 type ChangesWeDoProps = {};
 

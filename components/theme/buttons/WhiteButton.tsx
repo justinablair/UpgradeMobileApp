@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Colours from '../Colour';
+import {useUserContext} from '../../UserContext';
 
 interface WhiteButtonProps {
   buttonText: string;
@@ -13,9 +14,17 @@ const WhiteButton: React.FC<WhiteButtonProps> = ({
   onPress,
   customWidth,
 }) => {
+  const {isDarkMode} = useUserContext();
+
+  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+
   return (
     <TouchableOpacity
-      style={[styles.button, {width: customWidth || 327}]}
+      style={[
+        styles.button,
+        {width: customWidth || 327},
+        {backgroundColor: backgroundColour},
+      ]}
       onPress={onPress}>
       <Text style={styles.buttonText}>{buttonText}</Text>
     </TouchableOpacity>
@@ -24,7 +33,6 @@ const WhiteButton: React.FC<WhiteButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'white',
     borderColor: Colours.pink, // Pink outline
     borderWidth: 1, // Pink outline width
     borderRadius: 8,

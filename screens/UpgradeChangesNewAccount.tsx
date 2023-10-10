@@ -9,6 +9,7 @@ import Colours from '../components/theme/Colour';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
 import NewAccount from './Common/NewAccount';
 import Text from '../components/Text';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeChangesNewAccountProps =
   NavigationProps<'UpgradeChangesNewAccount'>;
@@ -16,6 +17,12 @@ type UpgradeChangesNewAccountProps =
 const UpgradeChangesNewAccountScreen: React.FC<
   UpgradeChangesNewAccountProps
 > = ({navigation}) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+
+  const title = isDarkMode ? Colours.white : Colours.black;
+
   const handleSwitchButtonPress = () => {
     navigation.navigate('StepperScreen2'); // Navigate to the desired screen
   };
@@ -24,13 +31,12 @@ const UpgradeChangesNewAccountScreen: React.FC<
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
       <ScrollView>
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
-            <Text
-              variant="screenTitle centreAlign"
-              style={{color: Colours.black}}>
+            <Text variant="screenTitle centreAlign" style={{color: title}}>
               How your new account will work
             </Text>
           </View>
@@ -52,11 +58,9 @@ const UpgradeChangesNewAccountScreen: React.FC<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
     height: '100%',
   },
   space: {
