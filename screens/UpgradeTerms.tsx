@@ -13,7 +13,9 @@ import {useUserContext} from '../components/UserContext'; // Import the user con
 type UpgradeTermsProps = NavigationProps<'UpgradeTerms'>;
 
 const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
-  const {userType, businessName} = useUserContext(); // Get the userType and businessName from the context
+  const {userType, businessName, isDarkMode} = useUserContext(); // Get the userType and businessName from the context
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const openTermsLink = () => {
     Linking.openURL(
@@ -34,18 +36,18 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
     if (userType === 'limitedCompany') {
       return (
         <>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             To switch from an e-money account to a Mettle bank account, you must
             be a director of {businessName}.
           </Text>
           <View style={styles.spaceLarge} />
           <InfoBox
-            icon={<PersonIcon fill={Colours.black} />}
+            icon={<PersonIcon fill={textColour} />}
             title="Only 1 user has access"
             description="Just like before, as the person opening the account, you’ll be the only one with access."
           />
           <View style={styles.spaceLarge} />
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             By tapping ‘Agree’ you’re confirming that:{'\n\n'}1. You’re
             authorised by {businessName} to switch to a Mettle bank account and
             agree to our Terms.{'\n\n'}2. {businessName} has taken all actions
@@ -59,7 +61,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
     } else if (userType === 'soleTrader') {
       return (
         <>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             Take your time to read these documents. By tapping ‘Agree’, you’re
             agreeing to our Terms.{'\n\n'}Take a moment to read our Privacy
             Notice. It explains how we collect and use your personal data.
@@ -69,15 +71,17 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
     }
   };
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView
         contentContainerStyle={styles.scrollViewContentContainer}
         keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.contentContainer}>
-            <Text
-              variant="screenTitle leftAlign"
-              style={{color: Colours.black}}>
+            <Text variant="screenTitle leftAlign" style={{color: textColour}}>
               Terms and Privacy Notice
             </Text>
             {renderContent()}
@@ -110,7 +114,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
   },
   scrollViewContentContainer: {
     flexGrow: 1,
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     padding: 16,
   },
   contentContainer: {
