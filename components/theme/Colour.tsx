@@ -13,7 +13,9 @@ const Colours = {
   blue40: '#C1EDF1',
   pink: '#f45f78',
   red: '#C81F4B',
-  disabledPink: '#FBBFC9',
+  disabledPinkLight: '#FBBFC9',
+  disabledPinkDark: '#853D4A',
+  disabledWhite: '#8B8D8D',
   white: '#FFFFFF',
   green: '#1FC8A9',
 

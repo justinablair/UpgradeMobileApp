@@ -9,10 +9,15 @@ import PreferenceToggle from '../components/toggles/PreferenceToggle';
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
+import {useUserContext} from '../components/UserContext';
 
 type MarketingProps = NavigationProps<'Marketing'>;
 
 const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const [toggleStates, setToggleStates] = useState({
     email: false,
     pushNotifications: false,
@@ -40,15 +45,23 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
     handleButtonClick();
   };
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Marketing preferences
           </Text>
           <Text
             variant="bodyText leftAlign"
-            style={[{color: Colours.black}, styles.space]}>
+            style={[{color: textColour}, styles.space]}>
             We’d like to contact you from time to time so you can get the most
             out of Mettle, our partners and the wider NatWest Group.
           </Text>
@@ -82,7 +95,7 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
           <View style={styles.separator} />
           <Text
             variant="bodyText bodyTextDescription"
-            style={{color: Colours.black80}}>
+            style={{color: textColour}}>
             You can change these later in your settings by selecting ‘Marketing
             preferences’ in the Account tab, or by using the in-app chat.
           </Text>
@@ -109,7 +122,7 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     padding: 16,
   },
 

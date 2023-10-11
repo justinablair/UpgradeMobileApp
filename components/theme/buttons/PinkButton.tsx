@@ -3,6 +3,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Colours from '../Colour'; // Update the path to Colour.js
+import {useUserContext} from '../../UserContext';
 
 interface PinkButtonProps {
   buttonText: string;
@@ -17,16 +18,31 @@ const PinkButton: React.FC<PinkButtonProps> = ({
   disabled = false,
   customWidth,
 }) => {
+  const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
+  const disabledButton = isDarkMode
+    ? Colours.disabledPinkDark
+    : Colours.disabledPinkLight;
+
+  const disabledText = isDarkMode ? Colours.disabledWhite : Colours.white;
+
   return (
     <TouchableOpacity
       style={[
         styles.button,
-        disabled && styles.disabledButton,
+        disabled && {backgroundColor: disabledButton},
         {width: customWidth || 327},
       ]}
       onPress={onPress}
       disabled={disabled}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
+      <Text
+        style={[
+          styles.buttonText,
+          {
+            color: disabled ? disabledText : 'white',
+          },
+        ]}>
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -40,9 +56,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     zIndex: 1,
   },
-  disabledButton: {
-    backgroundColor: Colours.disabledPink, // Use an appropriate color for disabled state
-  },
+
   buttonText: {
     fontSize: 16,
     lineHeight: 21,

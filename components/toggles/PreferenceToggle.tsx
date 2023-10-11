@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {Toggle} from './Toggle';
 import Text from '../Text';
 import Colours from '../theme/Colour';
+import {useUserContext} from '../UserContext';
 
 interface PreferenceToggleProps {
   label: string;
@@ -17,16 +18,19 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
   description,
   onChange,
 }) => {
+  const {isDarkMode} = useUserContext();
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   return (
     <View style={styles.preferenceContainer}>
       <View style={styles.textContainer}>
-        <Text variant="bodyText" style={{color: Colours.black}}>
+        <Text variant="bodyText" style={{color: textColour}}>
           {label}
         </Text>
         {description && (
           <Text
             variant="bodyText bodyTextDescription"
-            style={{color: Colours.black80}}>
+            style={{color: textColour}}>
             {description}
           </Text>
         )}
@@ -46,7 +50,6 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
   },
   descriptionText: {
-    color: Colours.black60,
     marginTop: 8,
   },
 });

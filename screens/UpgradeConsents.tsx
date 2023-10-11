@@ -10,15 +10,21 @@ import {
 } from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
-import PinkButton from '../components/theme/buttons/PinkButton'; // Update the path to your PinkButton component
+import PinkButton from '../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 import CheckboxToggle from '../components/toggles/CheckboxToggle';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeConsentsProps = NavigationProps<'UpgradeConsents'>;
 
 const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   navigation,
 }) => {
+  const {isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const [checkboxesChecked, setCheckboxesChecked] = useState([
     false,
     false,
@@ -60,16 +66,22 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   const isButtonDisabled = !checkboxesChecked.every(checked => checked);
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
           <View style={styles.titleContainer}>
-            <Text
-              variant="screenTitle leftAlign"
-              style={{color: Colours.black}}>
+            <Text variant="screenTitle leftAlign" style={{color: textColour}}>
               Your consents to switch
             </Text>
-            <Text variant="bodyText" style={{color: Colours.black}}>
+            <Text variant="bodyText" style={{color: textColour}}>
               To switch your e-money account to a Mettle bank account, you need
               to agree to the following:
             </Text>
@@ -83,14 +95,14 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
               <View style={styles.textContainer}>
                 <Text
                   variant="bodyText bodyTextBold"
-                  style={{color: Colours.black}}>
+                  style={{color: textColour}}>
                   {title}
                 </Text>
                 {descriptionsExpanded[index] ? (
                   <>
                     <Text
                       variant="bodyText leftAlign"
-                      style={{color: Colours.black}}>
+                      style={{color: textColour}}>
                       {consentDescriptions[index]}
                     </Text>
                     {index === 2 && (
@@ -108,7 +120,7 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
                           }}>
                           Read more about how we’ll use your data
                         </Text>
-                        <Text variant="bodyText" style={{color: Colours.black}}>
+                        <Text variant="bodyText" style={{color: textColour}}>
                           If your business has a second owner, you’ll also need
                           to download and share this document with them.
                         </Text>
@@ -138,7 +150,6 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
   },
 
@@ -163,7 +174,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     height: '100%',
   },
 });
