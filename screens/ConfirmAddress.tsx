@@ -78,7 +78,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   };
 
   const handleConfirmAddressClick = () => {
-    navigation.navigate('StepperScreen4');
+    navigation.navigate('StepperComplete');
   };
 
   return (
