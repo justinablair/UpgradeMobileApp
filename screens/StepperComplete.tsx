@@ -5,77 +5,72 @@ import PinkButton from '../components/theme/buttons/PinkButton';
 import Colours from '../components/theme/Colour';
 import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
+import {useUserContext} from '../components/UserContext';
 
-type StepItem = {
-  number: string;
-  title: string;
-  description: string;
-  active: boolean;
-};
-const Step = ({item}: {item: StepItem}) => {
-  const isActive = item.active;
-  let stepCircleStyles = styles.inactiveStepCircle;
-  let stepNumberStyles = styles.inactiveStepNumber;
-  let stepTitleStyles = styles.inactiveStepTitle;
-  let stepDescriptionStyles = styles.inactiveStepDescription;
-
-  if (
-    item.number === '1' ||
-    item.number === '2' ||
-    item.number === '3' ||
-    item.number === '4'
-  ) {
-    stepCircleStyles = {
-      ...styles.stepCircle,
-      width: 32,
-      height: 32,
-      marginLeft: 10,
-      backgroundColor: Colours.green,
-      borderColor: Colours.green,
-    };
-    stepNumberStyles = {
-      ...styles.stepNumber,
-      color: Colours.green,
-    };
-  }
-  return (
-    <View key={item.number} style={styles.stepContainer}>
-      <View style={[styles.stepCircle, stepCircleStyles]}>
-        <Text style={[styles.stepNumber, stepNumberStyles]}>{item.number}</Text>
-      </View>
-      <View style={styles.stepContent}>
-        <Text variant="headerSmall leftAlign" style={stepTitleStyles}>
-          {item.title}
-        </Text>
-        <Text variant="bodyText leftAlign" style={stepDescriptionStyles}>
-          {item.number === '1' ||
-          item.number === '2' ||
-          item.number === '3' ||
-          item.number === '4'
-            ? 'Completed'
-            : item.description}
-        </Text>
-      </View>
-    </View>
-  );
-};
 type UpgradeStepperCompleteProps = NavigationProps<'StepperComplete'>;
 
 const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
   navigation,
 }) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const activeColor = isDarkMode ? Colours.white : Colours.black;
+  const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;
+
+  const activeCircle = isDarkMode ? Colours.black : Colours.white;
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeRecap');
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={[styles.container, {backgroundColor: activeCircle}]}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.scrollContainer,
+          {backgroundColor: activeCircle},
+        ]}>
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer} />
           <View style={styles.completeLine} />
           {stepsData.map(item => (
-            <Step key={item.number} item={item} />
+            <View key={item.number} style={styles.stepContainer}>
+              <View
+                style={[
+                  styles.stepCircle,
+                  {
+                    marginLeft: 10,
+                    backgroundColor: Colours.green,
+                    borderColor: Colours.green,
+                  },
+                ]}>
+                <Text
+                  style={[
+                    styles.stepNumber,
+                    {
+                      color: Colours.green,
+                    },
+                  ]}>
+                  {item.number}
+                </Text>
+              </View>
+              <View style={styles.stepContent}>
+                <Text
+                  variant="headerSmall leftAlign"
+                  style={{
+                    color: inactiveColor,
+                    marginTop: 10,
+                  }}>
+                  {item.title}
+                </Text>
+                <Text
+                  variant="bodyText leftAlign"
+                  style={{
+                    color: inactiveColor,
+                  }}>
+                  Completed
+                </Text>
+              </View>
+            </View>
           ))}
         </View>
       </ScrollView>
@@ -83,43 +78,15 @@ const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
     </View>
   );
 };
-const commonStyles = {
-  stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
-    borderColor: '#747676',
-    borderWidth: 1,
-    backgroundColor: '#171B1B',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -30,
-  },
-  stepNumber: {
-    fontSize: 18,
-  },
-  stepContent: {
-    flex: 1,
-    marginLeft: 20,
-  },
-  inactiveStepTitle: {
-    color: Colours.black60,
-    marginTop: 10,
-  },
-  inactiveStepDescription: {
-    color: Colours.black60,
-  },
-};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.black,
     flexDirection: 'column',
     padding: 16,
   },
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: Colours.black,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -131,7 +98,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 2,
     height: '10%',
-    backgroundColor: Colours.black60,
     left: 24,
     top: 250,
   },
@@ -148,14 +114,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colours.green,
     top: 40,
   },
-
   stepCircle: {
     width: 32,
     height: 32,
     borderRadius: 24,
-    borderColor: Colours.black60,
     borderWidth: 1,
-    backgroundColor: Colours.black,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: -30,
@@ -163,45 +126,9 @@ const styles = StyleSheet.create({
   stepNumber: {
     fontSize: 18,
   },
-
   stepContent: {
     flex: 1,
     marginLeft: 20,
-  },
-  activeStepTitle: {
-    color: Colours.white,
-    marginTop: 10,
-  },
-  inactiveStepTitle: {
-    color: Colours.black60,
-    marginTop: 10,
-  },
-  activeStepDescription: {
-    color: Colours.white,
-  },
-  inactiveStepDescription: {
-    color: Colours.black60,
-  },
-  margin: {
-    marginTop: 0,
-  },
-  activeStepCircle: {
-    ...commonStyles.stepCircle,
-    width: 48,
-    height: 48,
-    borderColor: Colours.white,
-    justifyContent: 'center',
-    backgroundColor: Colours.black,
-    alignItems: 'center',
-    marginTop: -60,
-  },
-  inactiveStepCircle: {
-    ...commonStyles.stepCircle,
-    borderColor: Colours.black60,
-    backgroundColor: Colours.black,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
   },
 });
 

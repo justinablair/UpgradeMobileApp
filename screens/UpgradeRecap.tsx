@@ -12,10 +12,16 @@ import AuthModal from '../components/theme/modals/AuthModal';
 import Text from '../components/Text';
 import ChevronUpIcon from '../components/theme/ChevronUp';
 import ChevronDownIcon from '../components/theme/ChevronDown';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
 
 const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+
+  const title = isDarkMode ? Colours.white : Colours.black;
+
   const [modalVisible, setModalVisible] = useState(false);
   const [changesWeDoVisible, setChangesWeDoVisible] = useState(true);
   const [changesYouDoVisible, setChangesYouDoVisible] = useState(true);
@@ -42,16 +48,19 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView>
-        <View style={styles.container}>
+    <SafeAreaView
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContainer} // Added contentContainerStyle
+      >
+        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <TouchableOpacity
             style={styles.titleContainer}
             onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
-                style={{color: Colours.black, marginRight: 13}}>
+                style={{color: title, marginRight: 13}}>
                 What we’ll do during the switch
               </Text>
               {changesWeDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
@@ -59,14 +68,13 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
             <View style={styles.space} />
           </TouchableOpacity>
           {changesWeDoVisible && <ChangesWeDo />}
-
           <TouchableOpacity
             style={styles.titleContainer}
             onPress={() => setChangesYouDoVisible(!changesYouDoVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
-                style={{color: Colours.black, marginRight: 10}}>
+                style={{color: title, marginRight: 10}}>
                 What you’ll need to do after the switch
               </Text>
               {changesYouDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
@@ -74,14 +82,13 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
             <View style={styles.space} />
           </TouchableOpacity>
           {changesYouDoVisible && <ChangesYouDo />}
-
           <TouchableOpacity
             style={styles.titleContainer}
             onPress={() => setNewAccountVisible(!newAccountVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
-                style={{color: Colours.black, marginRight: 7}}>
+                style={{color: title, marginRight: 7}}>
                 How your new account will work
               </Text>
               {newAccountVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
@@ -89,23 +96,22 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
             <View style={styles.space} />
           </TouchableOpacity>
           {newAccountVisible && <NewAccount />}
-
+        </View>
+        <View style={styles.buttonContainer}>
           <WhiteButton
             buttonText="I'm not sure"
             onPress={handleSwitchButtonExitJourney}
           />
-
           <PinkButton buttonText="Switch now" onPress={handlePinkButtonPress} />
-
-          <TouchableOpacity onPress={() => setModalVisible(true)} />
-          {/* Render the authentication modal */}
-          <AuthModal
-            visible={modalVisible}
-            navigation={navigation}
-            onDigitsEntered={handleSwitchButtonExitJourney}
-            onClose={onClose}
-          />
         </View>
+        <TouchableOpacity onPress={() => setModalVisible(true)} />
+        {/* Render the authentication modal */}
+        <AuthModal
+          visible={modalVisible}
+          navigation={navigation}
+          onDigitsEntered={handleSwitchButtonExitJourney}
+          onClose={onClose}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,7 +125,11 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     backgroundColor: Colours.white,
-    height: '100%',
+    flex: 1,
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between', // Arrange items vertically with space between
   },
   space: {
     marginVertical: 8,
@@ -130,6 +140,10 @@ const styles = StyleSheet.create({
   titleIconContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    alignItems: 'center', // Center the buttons horizontally
+    marginBottom: 16, // Add some bottom margin for spacing
   },
 });
 

@@ -12,7 +12,6 @@ import Colours from '../components/theme/Colour';
 import Text from '../components/Text';
 import {useUserContext} from '../components/UserContext';
 import OptionsWithChevron from '../components/OptionsWithChevron';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import InfoModal from '../components/theme/modals/InfoModal';
 
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
@@ -20,7 +19,11 @@ type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   navigation,
 }) => {
-  const {userType} = useUserContext();
+  const {userType, isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const [showNationalityModal, setShowNationalityModal] = useState(false);
   const [nationalityPressed, setNationalityPressed] = useState(false);
 
@@ -46,7 +49,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     if (userType === 'limitedCompany') {
       return (
         <>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Does your business have tax residency outside of the United Kingdom?
           </Text>
         </>
@@ -54,7 +57,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     } else if (userType === 'soleTrader') {
       return (
         <>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Do you have tax residency outside of the United Kingdom?
           </Text>
         </>
@@ -62,9 +65,17 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     }
   };
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
           {renderContent()}
           <Pressable onPress={handleNationalityPress}>
             <Text variant="bodyText" style={nationalityTextStyles}>
@@ -81,11 +92,11 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           title="What is tax residency?"
           content="The definition of tax residency varies between countries but generally, you’ll be tax resident in the country you live in."
           contentStyle={[
-            {backgroundColor: Colours.white},
+            {backgroundColor: containerBackgroundColor},
             styles.InfoModalCustomisation,
           ]}
-          titleStyle={{color: Colours.black}}
-          bodyTextStyle={{color: Colours.black}}
+          titleStyle={{color: textColour}}
+          bodyTextStyle={{color: textColour}}
         />
       </ScrollView>
     </SafeAreaView>
@@ -96,10 +107,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: Colors.white,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
     height: '100%',
   },
   nationalityText: {

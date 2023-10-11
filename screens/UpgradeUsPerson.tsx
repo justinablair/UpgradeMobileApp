@@ -16,7 +16,9 @@ type UpgradeUSPersonProps = NavigationProps<'UpgradeUSPerson'>;
 const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   navigation,
 }) => {
-  const {userType} = useUserContext();
+  const {userType, isDarkMode} = useUserContext();
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const handleNoButtonPress = () => {
     navigation.navigate('StepperScreen4'); // Navigate to the desired screen
@@ -42,7 +44,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
     if (userType === 'limitedCompany') {
       return (
         <>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Is your business a United States (US) person?
           </Text>
           <InfoModal
@@ -51,11 +53,11 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             title="What is a US person?"
             content="For tax purposes, a business is considered a United States entity, and therefore a US person, if it is a partnership or corporation registered in the United States or under U.S. state laws."
             contentStyle={[
-              {backgroundColor: Colours.white},
+              {backgroundColor: containerBackgroundColor},
               styles.InfoModalCustomisation,
             ]}
-            titleStyle={{color: Colours.black}} // Customize title text color
-            bodyTextStyle={{color: Colours.black}}
+            titleStyle={{color: textColour}} // Customize title text color
+            bodyTextStyle={{color: textColour}}
           />
         </>
       );
@@ -84,9 +86,17 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
           {renderContent()}
           <Pressable onPress={handleUsPersonPress}>
             <Text

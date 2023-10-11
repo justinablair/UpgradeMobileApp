@@ -1,11 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
-
-import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from '../components/UserContext';
+import {NavigationProps} from '../navigationTypes';
 
 type UpgradeIneligibleResidentProps =
   NavigationProps<'UpgradeIneligibleResident'>;
@@ -13,16 +12,20 @@ type UpgradeIneligibleResidentProps =
 const UpgradeIneligibleResidentScreen: React.FC<
   UpgradeIneligibleResidentProps
 > = ({navigation}) => {
-  const {userType} = useUserContext();
+  const {userType, isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const handleSwitchExitJourneyPress = () => {
-    navigation.navigate('UpgradeIntro'); // Navigate to the desired screen
+    navigation.navigate('UpgradeIntro');
   };
+
   const renderContent = () => {
     if (userType === 'limitedCompany') {
       return (
         <>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             We’re currently unable to support businesses that are liable to pay
             tax outside of the United Kingdom.
           </Text>
@@ -31,9 +34,9 @@ const UpgradeIneligibleResidentScreen: React.FC<
     } else if (userType === 'soleTrader') {
       return (
         <>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             We’re currently unable to support countries outside of the United
-            Kingdom where you’re liable to pay tax.
+            Kingdom where you’re liable to pay tax.{'\n'}
           </Text>
         </>
       );
@@ -41,41 +44,43 @@ const UpgradeIneligibleResidentScreen: React.FC<
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-          Sorry, we can’t open a bank account for you{' '}
-        </Text>
-        {renderContent()}
-        <Text variant="bodyText" style={{color: Colours.black}}>
-          {'\n\n'}Please continue to use your e-money account.
-          {'\n\n'}
-          If you have any questions about our decision, contact us via in-app
-          chat.
-        </Text>
-        <View style={styles.spaceMedium} />
-
-        <View style={styles.spaceMedium} />
-        <PinkButton
-          buttonText="Cancel switch"
-          onPress={handleSwitchExitJourneyPress}
-        />
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <View
+        style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
+        <ScrollView>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+            Sorry, we can’t open a bank account for you{' '}
+          </Text>
+          {renderContent()}
+          <Text variant="bodyText" style={{color: textColour}}>
+            Please continue to use your e-money account.
+            {'\n\n'}
+            If you have any questions about our decision, contact us via in-app
+            chat.
+          </Text>
+        </ScrollView>
+        <View style={styles.bottomButtonContainer}>
+          <PinkButton
+            buttonText="Cancel switch"
+            onPress={handleSwitchExitJourneyPress}
+          />
+        </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
+    justifyContent: 'space-between',
   },
-  spaceLarge: {
-    marginBottom: 25,
+  bottomButtonContainer: {
+    marginBottom: 10, // Some margin to separate the button from the content
   },
-  spaceMedium: {
-    marginBottom: 15,
+  safeAreaContainer: {
+    height: '100%',
   },
 });
 

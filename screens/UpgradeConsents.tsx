@@ -135,14 +135,15 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
               />
             </TouchableOpacity>
           ))}
-
-          <PinkButton
-            buttonText="Next"
-            onPress={() => navigation.navigate('Marketing')}
-            disabled={isButtonDisabled}
-          />
         </View>
       </ScrollView>
+      <View style={styles.bottomPadding}>
+        <PinkButton
+          buttonText="Next"
+          onPress={() => navigation.navigate('Marketing')}
+          disabled={isButtonDisabled}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -159,7 +160,6 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    // paddingHorizontal: 16,
     paddingVertical: 16,
     marginBottom: 8,
     alignSelf: 'center',
@@ -174,8 +174,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   safeAreaContainer: {
-    // backgroundColor: Colours.white,
-    height: '100%',
+    flex: 1,
+  },
+  bottomPadding: {
+    paddingBottom: 16,
   },
 });
 

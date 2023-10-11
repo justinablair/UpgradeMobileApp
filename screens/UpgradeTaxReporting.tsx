@@ -21,7 +21,11 @@ type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
 const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   navigation,
 }) => {
-  const {userType} = useUserContext();
+  const {userType, isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
   const [showFACTAModal, setShowFACTAModal] = useState(false);
   const [showCRSModal, setShowCRSModal] = useState(false);
@@ -56,7 +60,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
     if (userType === 'limitedCompany') {
       return (
         <View>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I acknowledge, on behalf of the business, that the information I
             supply may be reported to the HMRC, and may be transferred to the
             government of another territory in accordance with{' '}
@@ -74,14 +78,14 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             agreements.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I agree to inform Mettle of any change in circumstance that causes
             my information to become incorrect or incomplete and to provide an
             updated Self Certification Declaration which details my tax
             liabilities, within 30 days.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I declare that the business is compliant with all relevant tax laws
             and all statements made in this declaration are, to the best of my
             knowledge and belief, correct and complete.
@@ -92,7 +96,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
     } else if (userType === 'soleTrader') {
       return (
         <View>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I acknowledge that any relevant information I supply may be reported
             to the HMRC, and may be transferred to the government of another
             territory in accordance with{' '}
@@ -110,13 +114,13 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             agreements.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I agree to inform Mettle of any change in circumstance that causes
             my information to become incorrect or incomplete and to provide an
             updated Self Certification Declaration within 30 days.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             I declare that I am compliant with all relevant tax laws and all
             statements made in this declaration are, to the best of my knowledge
             and belief, correct and complete.
@@ -127,19 +131,29 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Tax reporting
           </Text>
-          <Text variant="bodyText leftAlign" style={{color: Colours.black}}>
+          <Text variant="bodyText leftAlign" style={{color: textColour}}>
             To open a Mettle bank account you need to agree to the following:{' '}
           </Text>
           {renderContent()}
           <View style={styles.spaceMedium} />
           <View style={styles.checkboxContainer}>
-            <Text variant="bodyText" style={styles.checkboxText}>
+            <Text
+              variant="bodyText"
+              style={[styles.checkboxText, {color: textColour}]}>
               I confirm that I am tax compliant
             </Text>
             <CheckboxToggle
@@ -159,10 +173,10 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             onPressClose={() => setShowFACTAModal(false)}
             title="FACTA"
             content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
-            contentStyle={{backgroundColor: Colours.white}}
             accessibilityLabel="FACTA Info Modal"
-            titleStyle={{color: Colours.black}}
-            bodyTextStyle={{color: Colours.black}}
+            contentStyle={[{backgroundColor: containerBackgroundColor}]}
+            titleStyle={{color: textColour}}
+            bodyTextStyle={{color: textColour}}
           />
 
           {/* CRS Info Modal */}
@@ -171,10 +185,10 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             onPressClose={() => setShowCRSModal(false)}
             title="CRS"
             content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
-            contentStyle={{backgroundColor: Colours.white}}
+            contentStyle={[{backgroundColor: containerBackgroundColor}]}
             accessibilityLabel="CRS Info Modal"
-            titleStyle={{color: Colours.black}}
-            bodyTextStyle={{color: Colours.black}}
+            titleStyle={{color: textColour}}
+            bodyTextStyle={{color: textColour}}
           />
         </View>
       </ScrollView>
@@ -185,7 +199,6 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
     margin: 16,
   },
@@ -201,11 +214,9 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   checkboxText: {
-    color: Colours.black,
     flex: 1,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
     height: '100%',
   },
   pressableText: {
