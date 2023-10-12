@@ -1,5 +1,5 @@
 //UserSelection.tsx
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from '../components/Text';
 import {useUserContext, UserType} from '../components/UserContext';
@@ -19,8 +19,8 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
-    ); // Navigate based on userType
+      userType === 'soleTrader' ? 'StepperScreen4' : 'ConfirmAddress',
+    );
   };
   const styles = StyleSheet.create({
     container: {

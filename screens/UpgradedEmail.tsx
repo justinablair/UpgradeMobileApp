@@ -9,10 +9,16 @@ import Colours from '../components/theme/Colour';
 import ListItem from '../components/ListItem';
 import Toast from '../components/Toast';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 
 const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const [showBankAccountToast, setShowBankAccountToast] = useState(false);
   const [showOpenMailToast, setShowOpenMailToast] = useState(false);
 
@@ -45,31 +51,49 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
     }
   }, [showOpenMailToast]);
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView>
-        <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+        <View
+          style={[
+            styles.safeAreaContainer,
+            {backgroundColor: containerBackgroundColor},
+          ]}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Look out for an email from us
           </Text>
-          <Text variant="bodyText" style={{color: Colours.black}}>
+          <Text variant="bodyText" style={{color: textColour}}>
             If you haven’t received it already, we’re sending you an email with
             scheduled payment and Direct Debit information from your old
             account.{'\n\n'} You can also message us via in-app chat, we’re
             happy to help!
           </Text>
           <View style={styles.spaceMedium} />
-          <Text variant="bodyText bodyTextBold" style={{color: Colours.black}}>
+          <Text variant="bodyText bodyTextBold" style={{color: textColour}}>
             Important things you’ll need to do:
           </Text>
           <Text
             variant="bodyText bodyTextBold"
-            style={{color: Colours.black30}}>
+            style={{color: Colours.black60}}>
             You can find all this in the email
           </Text>
-          <ListItem text="Set up scheduled payments" />
-          <ListItem text="Set up Direct Debits" />
-          <ListItem text="Re-create unpaid invoices" />
           <ListItem
+            text="Set up scheduled payments"
+            textStyle={{color: textColour}}
+          />
+          <ListItem
+            text="Set up Direct Debits"
+            textStyle={{color: textColour}}
+          />
+          <ListItem
+            text="Re-create unpaid invoices"
+            textStyle={{color: textColour}}
+          />
+          <ListItem
+            textStyle={{color: textColour}}
             text="Share your new bank details"
             description="You can find these at any time in the Account tab"
           />
@@ -99,8 +123,6 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
-    padding: 16,
   },
   spaceLarge: {
     marginBottom: 25,
@@ -109,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
+    padding: 16,
     height: '100%',
   },
 });

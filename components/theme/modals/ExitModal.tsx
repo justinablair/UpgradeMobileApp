@@ -6,6 +6,7 @@ import PinkButton from '../buttons/PinkButton';
 import WhiteButton from '../buttons/WhiteButton';
 import Text from '../../Text';
 import {useNavigation} from '@react-navigation/native';
+import {useUserContext} from '../../UserContext';
 
 interface ExitModalProps {
   visible: boolean;
@@ -25,6 +26,10 @@ const ExitModal: React.FC<ExitModalProps> = ({
   onAgree,
   toggleExitModal, // Receive the toggle function
 }) => {
+  const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const navigation = useNavigation(); // Obtain the navigation prop
 
   const handleExitButtonPress = () => {
@@ -36,15 +41,19 @@ const ExitModal: React.FC<ExitModalProps> = ({
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.backgroundContainer}>
         <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+          <View
+            style={[
+              styles.modalContent,
+              {backgroundColor: containerBackgroundColor},
+            ]}>
             <Text
               variant="bodyTextBold centerAlign"
-              style={[styles.modalTitle, {color: Colours.black}]}>
+              style={[styles.modalTitle, {color: textColour}]}>
               {title}
             </Text>
             <Text
               variant="centerAlign"
-              style={[styles.bodyText, {color: Colours.black}]}>
+              style={[styles.bodyText, {color: textColour}]}>
               {content}
             </Text>
             <View style={styles.buttonContainer}>
@@ -89,7 +98,7 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     // width: 327, // Set the width to 327
     borderRadius: 8,
     paddingTop: 18,

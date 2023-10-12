@@ -6,10 +6,16 @@ import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeStartedProps = NavigationProps<'UpgradeStarted'>;
 
 const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
+  const {isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   useEffect(() => {
     // Use setTimeout to navigate after 10 seconds (10000 milliseconds)
     const timeoutId = setTimeout(() => {
@@ -21,16 +27,25 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
+      <ScrollView
+        style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
         <View>
-          <Image
-            source={require('../assets/Padlock.png')}
-            style={styles.largeImage}
-            accessibilityLabel="Image of a padlock"
-          />
-          <Text variant="screenTitle">We’ve started your switch</Text>
-          <Text variant="bodyText centerAlign">
+          <View style={styles.largeImage}>
+            <Image
+              source={require('../assets/Padlock.png')}
+              style={styles.alignCentre}
+              accessibilityLabel="Image of a padlock"
+            />
+          </View>
+          <Text variant="screenTitle" style={{color: textColour}}>
+            We’ve started your switch
+          </Text>
+          <Text variant="bodyText centerAlign" style={{color: textColour}}>
             This usually takes less than a couple of minutes, but it can
             sometimes take up to 2 hours.{'\n\n'}If you need anything during
             this time, message us via in-app chat.
@@ -43,19 +58,22 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colours.black,
     padding: 25,
+    marginTop: 50,
     height: '100%',
   },
   safeAreaContainer: {
-    backgroundColor: Colours.black,
     height: '100%',
+  },
+  alignCentre: {
+    alignSelf: 'center',
   },
 
   largeImage: {
-    width: 280,
-    height: 260,
+    width: 200,
+    height: 200,
     alignSelf: 'center',
+    marginHorizontal: 50,
   },
 
   centeredText: {

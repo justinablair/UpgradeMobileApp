@@ -7,42 +7,66 @@ import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import PinkButton from '../components/theme/buttons/PinkButton';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradedWelcomeProps = NavigationProps<'UpgradedWelcome'>;
 
 const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
   navigation,
 }) => {
+  const {isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradedEmail'); // Navigate to the desired screen
   };
 
+  const MettleStarsImageSource = isDarkMode
+    ? require('../assets/MettleStars.png')
+    : require('../assets/MettleStarsLightMode.png');
+
+  const FSCSImageSource = isDarkMode
+    ? require('../assets/FSCSLogo.png')
+    : require('../assets/FSCSLightMode.png');
+
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          {backgroundColor: containerBackgroundColor},
+        ]}>
         <View>
           <Image
-            source={require('../assets/MettleStars.png')}
+            source={MettleStarsImageSource}
             style={styles.largeImage}
             resizeMode="contain"
             accessibilityLabel="Mettle logo with stars around it"
           />
-          <Text variant="screenTitle centerAlign">
+          <Text variant="screenTitle centerAlign" style={{color: textColour}}>
             {' '}
             {/* Fix the typo here */}
             Welcome to your new Mettle bank account
           </Text>
-          <Text variant="bodyText centerAlign">
+          <Text variant="bodyText centerAlign" style={{color: textColour}}>
             It may look like nothing’s changed, but we’ve done a lot of work
             under the hood.
           </Text>
           <View style={styles.bottomContainer}>
             <Image
-              source={require('../assets/FSCSLogo.png')}
+              source={FSCSImageSource}
               style={styles.smallImage}
               accessibilityLabel="FSCS logo"
             />
-            <Text variant="bodyTextDescription centerAlign" style={styles.text}>
+            <Text
+              variant="bodyTextDescription centerAlign"
+              style={[styles.text, {color: textColour}]}>
               Your eligible deposits at Mettle are covered by the Financial
               Services Compensation Scheme.
             </Text>
@@ -56,11 +80,9 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colours.black,
     padding: 25,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.black,
     flex: 1,
   },
   largeImage: {
@@ -83,7 +105,6 @@ const styles = StyleSheet.create({
 
   text: {
     flex: 1,
-    color: Colours.white,
   },
 });
 

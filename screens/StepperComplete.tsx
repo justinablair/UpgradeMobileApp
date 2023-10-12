@@ -14,12 +14,11 @@ const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
 }) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
-  const activeColor = isDarkMode ? Colours.white : Colours.black;
   const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;
 
   const activeCircle = isDarkMode ? Colours.black : Colours.white;
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeRecap');
+    navigation.navigate('UpgradeConfirm');
   };
 
   return (
