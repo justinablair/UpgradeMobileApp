@@ -6,6 +6,7 @@ import Text from '../../Text';
 import Colours from '../Colour';
 import PinkButton from '../buttons/PinkButton'; // Import the PinkButton component from the correct path
 import WhiteButton from '../buttons/WhiteButton'; // Import the WhiteButton component from the correct path
+import {useUserContext} from '../../UserContext';
 
 interface InteractiveModalProps {
   modalVisible: boolean;
@@ -28,6 +29,10 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   whiteButtonText,
   onWhiteButtonClick,
 }) => {
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+  const title = isDarkMode ? Colours.white : Colours.black;
+
   const renderPinkButton = () => (
     <PinkButton buttonText={pinkButtonText} onPress={onPinkButtonClick} />
   );
@@ -49,21 +54,18 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   return (
     <Modal visible={modalVisible} animationType="slide" transparent>
       <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
+        <View
+          style={[styles.modalContent, {backgroundColor: backgroundColour}]}>
           <TouchableOpacity style={styles.modalCloseIcon} onPress={closeModal}>
             <Image
               source={require('../../../assets/Close.png')}
               style={styles.modalCloseIcon}
             />
           </TouchableOpacity>
-          <Text
-            variant="leftAlign"
-            style={[styles.modalTitle, {color: Colours.black}]}>
+          <Text variant="leftAlign" style={[styles.modalTitle, {color: title}]}>
             {modalTitle}
           </Text>
-          <Text
-            variant="leftAlign"
-            style={[styles.bodyText, {color: Colours.black}]}>
+          <Text variant="leftAlign" style={[styles.bodyText, {color: title}]}>
             {modalContent}
           </Text>
           {renderPinkButton()}
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     width: '100%',
     borderRadius: 8,
     padding: 20,

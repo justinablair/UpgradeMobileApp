@@ -132,7 +132,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               content="Because we’re closing your e-money account, your current card will no longer work. We’ll send you a new card that’s connected to your new bank account."
               accessibilityLabel="Close US Person Info Modal"
               contentStyle={[
-                {backgroundColor: Colours.white},
+                {backgroundColor: containerBackgroundColor},
                 styles.InfoModalCustomisation,
               ]}
               titleStyle={{color: textColour}} // Customize title text color

@@ -1,4 +1,4 @@
-//Settings.tsx;
+//LightorDarkMode.tsx;
 
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
@@ -9,7 +9,7 @@ import PinkButton from '../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../components/toggles/CheckboxToggle';
 import Text from '../components/Text';
 
-type SettingsScreenProps = NavigationProps<'Settings'>;
+type SettingsScreenProps = NavigationProps<'ThemeScreen'>;
 
 const SettingsScreen: React.FC<SettingsScreenProps> = ({navigation}) => {
   const {isDarkMode, toggleDarkMode} = useUserContext(); // Access isDarkMode and toggleDarkMode from context

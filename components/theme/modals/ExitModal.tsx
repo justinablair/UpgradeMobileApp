@@ -34,7 +34,7 @@ const ExitModal: React.FC<ExitModalProps> = ({
 
   const handleExitButtonPress = () => {
     toggleExitModal(); // Close the modal
-    navigation.navigate('UserSelection'); // Navigate to UserSelection
+    navigation.navigate('ThemeScreen'); // Navigate to UserSelection
   };
 
   return (

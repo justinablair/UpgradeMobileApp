@@ -1,7 +1,13 @@
 //UpgradeUSPerson.tsx
 
 import React, {useState} from 'react';
-import {View, StyleSheet, Pressable, SafeAreaView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  SafeAreaView,
+  TextStyle,
+} from 'react-native';
 import Text from '../components/Text';
 import InfoModal from '../components/theme/modals/InfoModal';
 
@@ -64,7 +70,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
     } else if (userType === 'soleTrader') {
       return (
         <>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             Are you a United States (US) person?
           </Text>
           <InfoModal
@@ -74,11 +80,11 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             content="You are considered a United States person for tax purposes if you are a US citizen, or a resident (alien) of the US under the ‘green card’ or the ‘substantial presence’ tests."
             accessibilityLabel="Close US Person Info Modal"
             contentStyle={[
-              {backgroundColor: Colours.white},
+              {backgroundColor: containerBackgroundColor},
               styles.InfoModalCustomisation,
             ]} // Customize content background color
-            titleStyle={{color: Colours.black}} // Customize title text color
-            bodyTextStyle={{color: Colours.black}}
+            titleStyle={{color: textColour}} // Customize title text color
+            bodyTextStyle={{color: textColour}}
           />
         </>
       );
@@ -117,12 +123,12 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     padding: 16,
   },
   modal: {
-    backgroundColor: Colours.white,
-    color: Colours.black,
+    // backgroundColor: Colours.white,
+    // color: Colours.black,
   },
   spaceLarge: {
     marginBottom: 25,
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
     margin: 50,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     height: '100%',
   },
   separator: {

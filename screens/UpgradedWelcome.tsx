@@ -1,7 +1,14 @@
 //UpgradeIntro.tsx
 
 import React from 'react';
-import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  Dimensions,
+} from 'react-native';
 
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
@@ -77,6 +84,8 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
     </SafeAreaView>
   );
 };
+const screenHeight = Dimensions.get('window').height;
+const marginTop = screenHeight * 0.2; // Adjust the multiplier according to your layout requirements
 
 const styles = StyleSheet.create({
   container: {
@@ -94,7 +103,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   bottomContainer: {
-    marginTop: '40%',
+    marginTop: marginTop,
     flexDirection: 'row',
     width: 327,
   },

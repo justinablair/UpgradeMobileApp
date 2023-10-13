@@ -10,6 +10,7 @@ import WhiteButton from '../components/theme/buttons/WhiteButton';
 import NewAccount from './Common/NewAccount';
 import Text from '../components/Text';
 import {useUserContext} from '../components/UserContext';
+import ExitModal from '../components/theme/modals/ExitModal';
 
 type UpgradeChangesNewAccountProps =
   NavigationProps<'UpgradeChangesNewAccount'>;
@@ -19,6 +20,8 @@ const UpgradeChangesNewAccountScreen: React.FC<
 > = ({navigation}) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
+  const [isExitModalVisible, setExitModalVisible] = React.useState(false); // Add state for controlling the visibility of the exit modal
+
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
 
   const title = isDarkMode ? Colours.white : Colours.black;
@@ -27,7 +30,7 @@ const UpgradeChangesNewAccountScreen: React.FC<
     navigation.navigate('StepperScreen2'); // Navigate to the desired screen
   };
   const handleSwitchExitJourneyPress = () => {
-    navigation.navigate('UpgradeIntro'); // Navigate to the desired screen
+    setExitModalVisible(true); // Show the exit modal
   };
 
   return (
@@ -48,6 +51,13 @@ const UpgradeChangesNewAccountScreen: React.FC<
           <PinkButton
             buttonText="Get started"
             onPress={handleSwitchButtonPress}
+          />
+          <ExitModal
+            visible={isExitModalVisible} // Pass the visibility state
+            onPressClose={() => setExitModalVisible(false)} // Close the modal
+            title="Are you sure you want to quit?"
+            content="Your progress won't be saved"
+            toggleExitModal={() => setExitModalVisible(!isExitModalVisible)} // Pass the toggle function
           />
         </View>
       </ScrollView>

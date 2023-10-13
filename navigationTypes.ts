@@ -3,9 +3,11 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export type RootStackParamList = {
-  // Address: undefined;
-  // UserSelection: undefined;
-  // CompanyDetails: undefined;
+  ThemeScreen: undefined;
+  ExitModal: undefined;
+  Address: undefined;
+  UserSelection: undefined;
+  CompanyDetails: undefined;
   UpgradeIntro: undefined;
   StepperScreen1: undefined;
   UpgradeChangesWeDo: undefined;
@@ -19,9 +21,12 @@ export type RootStackParamList = {
   UpgradeTaxCompliant: undefined;
   UpgradeTaxReporting: undefined;
   UpgradeNationality: undefined;
-  UpgradeIneligible: undefined;
+  UpgradeIneligibleResident: undefined;
   UpgradeUSPerson: undefined;
+  UpgradeIneligibleUS: undefined;
+  StepperScreen4: undefined;
   ConfirmAddress: undefined;
+  StepperComplete: undefined;
   PersonalDetails: undefined;
   UpgradeConfirm: undefined;
   UpgradeRecap: undefined;

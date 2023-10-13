@@ -13,12 +13,15 @@ import Text from '../components/Text';
 import ChevronUpIcon from '../components/theme/ChevronUp';
 import ChevronDownIcon from '../components/theme/ChevronDown';
 import {useUserContext} from '../components/UserContext';
+import ExitModal from '../components/theme/modals/ExitModal';
 
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
 
 const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
+
+  const [isExitModalVisible, setExitModalVisible] = React.useState(false); // Add state for controlling the visibility of the exit modal
 
   const title = isDarkMode ? Colours.white : Colours.black;
 
@@ -35,6 +38,9 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
     navigation.navigate('UpgradeStarted');
   };
 
+  const exitModalVisible = () => {
+    setExitModalVisible(true);
+  };
   const onClose = () => {
     setModalVisible(false);
   };
@@ -98,10 +104,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           {newAccountVisible && <NewAccount />}
         </View>
         <View style={styles.buttonContainer}>
-          <WhiteButton
-            buttonText="I'm not sure"
-            onPress={handleSwitchButtonExitJourney}
-          />
+          <WhiteButton buttonText="I'm not sure" onPress={exitModalVisible} />
           <PinkButton buttonText="Switch now" onPress={handlePinkButtonPress} />
         </View>
         <TouchableOpacity onPress={() => setModalVisible(true)} />
@@ -111,6 +114,13 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           navigation={navigation}
           onDigitsEntered={handleSwitchButtonExitJourney}
           onClose={onClose}
+        />
+        <ExitModal
+          visible={isExitModalVisible} // Pass the visibility state
+          onPressClose={() => setExitModalVisible(false)} // Close the modal
+          title="Are you sure you want to quit?"
+          content="Your progress won't be saved"
+          toggleExitModal={() => setExitModalVisible(!isExitModalVisible)} // Pass the toggle function
         />
       </ScrollView>
     </SafeAreaView>
