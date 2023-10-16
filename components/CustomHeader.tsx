@@ -1,16 +1,17 @@
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {CloseIcon} from './theme/CloseIcon';
 import Colours from './theme/Colour';
 
 interface CustomHeaderProps {
-  isDarkMode: boolean;
-  toggleExitModal: () => void;
+  isDarkMode: boolean; // Boolean indicating whether the dark mode is enabled
+  toggleExitModal: () => void; // Function to handle the exit modal toggle
 }
 const CustomHeader: React.FC<CustomHeaderProps> = ({
   isDarkMode,
   toggleExitModal,
 }) => {
+  // Styling for the header based on the isDarkMode prop
   const headerStyle = {
     backgroundColor: isDarkMode ? Colours.black : Colours.white,
     borderBottomWidth: 0,
@@ -18,18 +19,13 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
     shadowOpacity: 0,
   };
 
-  const headerTextStyles = {
-    color: isDarkMode ? Colours.white : Colours.black,
-  };
-
   return (
     <View style={[styles.headerContainer, headerStyle]}>
+      {/* Exit modal appears on press of close component */}
       <TouchableOpacity onPress={() => toggleExitModal()}>
+        {/* Close icon component */}
         <CloseIcon />
       </TouchableOpacity>
-      <Text style={[styles.headerText, headerTextStyles]}>
-        Your Header Content
-      </Text>
     </View>
   );
 };
@@ -37,8 +33,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    height: 50, // adjust the height according to your needs
-    // justifyContent: 'center',
+    height: 50,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
