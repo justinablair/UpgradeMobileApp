@@ -2,12 +2,14 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "types": ["react-navigation"]
-    // "types": ["react-native", "@react-navigation/native"],
+    "types": ["react-navigation", "jest"] // Add "jest" to include the type definitions for Jest
     // Other compiler options...
     // "paths": {
     //   "*": ["./screens/*"] // Adjust the paths to match your project structure
     // }
   },
+  // "transformIgnorePatterns": [
+  //   "/node_modules/(?!react-native|@react-navigation)"
+  // ],
   "include": ["**/*.ts", "**/*.tsx"] // Include your TypeScript files
 }
