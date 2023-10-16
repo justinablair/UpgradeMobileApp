@@ -1,6 +1,6 @@
 //InfoBox.tsx
 import React, {ReactNode} from 'react';
-import {View, StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {View, StyleSheet, TextStyle} from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from './UserContext';
@@ -10,28 +10,38 @@ interface InfoBoxProps {
   title: string;
   description: string;
   descriptionStyle?: TextStyle;
-  titleStyle?: TextStyle; // Allow custom title style to be passed
+  titleStyle?: TextStyle;
 }
 
 const InfoBox: React.FC<InfoBoxProps> = ({
   icon,
   title,
   description,
-  descriptionStyle = {},
-  titleStyle = {}, // Default to an empty object
+  descriptionStyle = {}, // Default to an empty object
+  titleStyle = {},
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Accessing isDarkMode from context
+  const {isDarkMode} = useUserContext();
+  // Setting text color based on the dark mode
   const colourMode = isDarkMode ? Colours.white : Colours.black;
-
+  // Setting the background color based on the dark mode
   const boxColor = isDarkMode ? Colours.black90 : Colours.black05;
 
   return (
-    <View style={[styles.box, {backgroundColor: boxColor}]}>
+    <View
+      style={[styles.box, {backgroundColor: boxColor}]}
+      testID="InfoBox"
+      accessible={true}
+      accessibilityRole="text">
+      {/* Container for the icon */}
       <View style={styles.iconContainer}>{icon}</View>
+      {/* Container for the text content */}
       <View style={styles.textContainer}>
+        {/* Text component for the title */}
         <Text variant="bodyTextBold" style={[titleStyle, {color: colourMode}]}>
           {title}
         </Text>
+        {/* Text component for the description */}
         <Text
           variant="bodyText"
           style={[descriptionStyle, {color: colourMode}]}>
@@ -51,7 +61,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 8,
     alignSelf: 'center',
-    width: 327, // Set the width to take the available space
+    width: 327,
   },
   iconContainer: {
     marginRight: 16,

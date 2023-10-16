@@ -1,13 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
-import {ChevronRightIcon} from '../components/theme/ChevronRight'; // Import ChevronRightIcon
-import Colours from '../components/theme/Colour'; // Import Colours
+import {ChevronRightIcon} from '../components/theme/ChevronRight';
+import Colours from '../components/theme/Colour';
 import {useUserContext} from './UserContext';
 
 interface OptionsWithChevronProps {
   title: string;
-  description?: string; // Make description optional
+  description?: string;
   onPress: () => void;
 }
 
@@ -16,24 +16,39 @@ const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
   description,
   onPress,
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
+  // Setting text color based on the dark mode
+  const colourMode = isDarkMode ? Colours.white : Colours.black;
+  const blackShades = isDarkMode ? Colours.black05 : Colours.black60;
 
   return (
-    <TouchableOpacity style={styles.optionContainer} onPress={onPress}>
-      <View style={styles.optionContent}>
+    <TouchableOpacity
+      style={styles.optionContainer}
+      onPress={onPress}
+      testID="OptionsButton"
+      accessible={true}
+      accessibilityRole="button">
+      {/* Option Content */}
+      <View style={styles.optionContent} testID="OptionContent">
+        {/* Title Text */}
         <Text
           variant="bodyText"
-          style={{color: isDarkMode ? Colours.white : Colours.black}}>
+          style={{color: colourMode}}
+          accessibilityRole="text">
           {title}
         </Text>
+        {/* Description Text */}
         {description && (
           <Text
             variant="bodyText"
-            style={{color: isDarkMode ? Colours.black05 : Colours.black60}}>
+            style={{color: blackShades}}
+            accessibilityRole="text">
             {description}
           </Text>
         )}
       </View>
+      {/* Chevron Icon */}
       <ChevronRightIcon stroke={Colours.pink} />
     </TouchableOpacity>
   );

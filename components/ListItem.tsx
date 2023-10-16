@@ -8,23 +8,32 @@ type ListItemProps = {
   text: string;
   fill?: string;
   description?: string;
-  textStyle?: TextStyle; // Assign the TextStyle type for text styling
+  textStyle?: TextStyle;
 };
 
+// ListItem component renders a single list item with a green tick and text
 const ListItem: React.FC<ListItemProps> = ({
   text,
   fill,
   description,
   textStyle,
 }) => (
-  <View style={styles.container}>
-    <View style={styles.tickContainer}>
+  // Outer container for the list item
+  <View style={styles.container} testID="ListItem">
+    {/* Container for the green tick icon */}
+    <View
+      style={styles.tickContainer}
+      testID="TickContainer"
+      accessibilityRole="image">
       <GreenTickSvg fill={fill} />
     </View>
-    <View>
+    {/* Container for the text content */}
+    <View testID="ListItemContainer" accessibilityRole="list">
+      {/* Main text of the list item */}
       <Text variant="bodyText" style={textStyle}>
         {text}
       </Text>
+      {/* Additional description text if available */}
       <Text variant="bodyTextDescription" style={{color: Colours.black60}}>
         {description}
       </Text>

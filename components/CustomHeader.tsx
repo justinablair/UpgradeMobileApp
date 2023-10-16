@@ -20,11 +20,21 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
   };
 
   return (
-    <View style={[styles.headerContainer, headerStyle]}>
+    <View
+      style={[styles.headerContainer, headerStyle]}
+      testID="navigationHeader"
+      accessible={true}
+      accessibilityRole="header">
       {/* Exit modal appears on press of close component */}
-      <TouchableOpacity onPress={() => toggleExitModal()}>
+      <TouchableOpacity
+        onPress={() => toggleExitModal()}
+        testID="CloseButton"
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Close">
         {/* Close icon component */}
         <CloseIcon />
+        {/* accessible={true} accessibilityLabel="Close Icon" */}
       </TouchableOpacity>
     </View>
   );
