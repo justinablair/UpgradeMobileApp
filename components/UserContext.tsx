@@ -1,7 +1,7 @@
 // UserContext.tsx
 import React, {createContext, useContext, useState} from 'react';
 
-export type UserType = 'soleTrader' | 'limitedCompany'; // Export UserType
+export type UserType = 'soleTrader' | 'limitedCompany';
 
 type UserContextType = {
   userType: UserType | null;
@@ -19,8 +19,10 @@ type UserContextType = {
   toggleDarkMode: () => void; // Add toggleDarkMode function
 };
 
+// Create the UserContext
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// Custom hook for using the UserContext
 export const useUserContext = () => {
   const context = useContext(UserContext);
   if (!context) {
@@ -29,9 +31,12 @@ export const useUserContext = () => {
   return context;
 };
 
+// UserContextProvider component
 export const UserContextProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
+  // Define state variables and corresponding setters
+
   const [userType, setUserType] = useState<UserType | null>(null);
   const [businessName, setBusinessName] = useState('');
   const [addressLine1, setAddressLine1] = useState('');
