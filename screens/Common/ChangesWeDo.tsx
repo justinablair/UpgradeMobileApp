@@ -1,6 +1,8 @@
 // ChangesWeDo.tsx
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import Colours from '../../components/theme/Colour';
+import {useUserContext} from '../../components/UserContext';
 import InfoBox from '../../components/InfoBox';
 import CardSvg from '../../components/theme/icons/CardIcon';
 import {RefreshIcon} from '../../components/theme/icons/RefreshIcon';
@@ -8,14 +10,14 @@ import {TransferIcon} from '../../components/theme/icons/TransferIcon';
 import {ExportIcon} from '../../components/theme/icons/ExportIcon';
 import {PostageIcon} from '../../components/theme/icons/Postage';
 import {FreeAgentIcon} from '../../components/theme/icons/FreeAgentIcon';
-import Colours from '../../components/theme/Colour';
-import {useUserContext} from '../../components/UserContext';
 
 type ChangesWeDoProps = {};
 
 const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
+  // Set color mode based on dark mode
   const colourMode = isDarkMode ? Colours.white : Colours.black;
 
   return (
