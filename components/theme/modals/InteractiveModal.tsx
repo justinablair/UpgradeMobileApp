@@ -1,11 +1,9 @@
-// ActionableModal.tsx
-
 import React from 'react';
 import {Modal, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Text from '../../Text';
 import Colours from '../Colour';
-import PinkButton from '../buttons/PinkButton'; // Import the PinkButton component from the correct path
-import WhiteButton from '../buttons/WhiteButton'; // Import the WhiteButton component from the correct path
+import PinkButton from '../buttons/PinkButton';
+import WhiteButton from '../buttons/WhiteButton';
 import {useUserContext} from '../../UserContext';
 
 interface InteractiveModalProps {
@@ -15,8 +13,8 @@ interface InteractiveModalProps {
   modalContent: string | JSX.Element;
   pinkButtonText: string;
   onPinkButtonClick: () => void;
-  whiteButtonText?: string; // Make the WhiteButton text optional
-  onWhiteButtonClick?: () => void; // Make the WhiteButton click handler optional
+  whiteButtonText?: string;
+  onWhiteButtonClick?: () => void;
 }
 
 const InteractiveModal: React.FC<InteractiveModalProps> = ({
@@ -29,14 +27,19 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   whiteButtonText,
   onWhiteButtonClick,
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from the user context
+  const {isDarkMode} = useUserContext();
+
+  // Determine the background and title colors based on the dark mode
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
   const title = isDarkMode ? Colours.white : Colours.black;
 
+  // Render the pink button with the provided text and click handler
   const renderPinkButton = () => (
     <PinkButton buttonText={pinkButtonText} onPress={onPinkButtonClick} />
   );
 
+  // Render the white button if the text and click handler are provided, otherwise render nothing
   const renderWhiteButton = () => {
     if (whiteButtonText && onWhiteButtonClick) {
       return (
@@ -45,30 +48,54 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
           onPress={onWhiteButtonClick}
         />
       );
-    } else {
-      // If whiteButtonText and onWhiteButtonClick are not provided, render nothing
-      return null;
     }
+    return null;
   };
 
   return (
     <Modal visible={modalVisible} animationType="slide" transparent>
-      <View style={styles.modalContainer}>
+      {/* Main modal container */}
+      <View
+        style={styles.modalContainer}
+        accessible={true}
+        accessibilityLabel="Interactive Modal Container">
+        {/* Modal content */}
         <View
-          style={[styles.modalContent, {backgroundColor: backgroundColour}]}>
-          <TouchableOpacity style={styles.modalCloseIcon} onPress={closeModal}>
+          style={[styles.modalContent, {backgroundColor: backgroundColour}]}
+          accessible={true}
+          accessibilityLabel="Interactive Modal Content">
+          {/* Close icon */}
+          <TouchableOpacity
+            style={styles.modalCloseIcon}
+            onPress={closeModal}
+            accessible={true}
+            accessibilityLabel="Close Button">
             <Image
               source={require('../../../assets/Close.png')}
               style={styles.modalCloseIcon}
+              accessible={true}
+              accessibilityLabel="Close Icon"
             />
           </TouchableOpacity>
-          <Text variant="leftAlign" style={[styles.modalTitle, {color: title}]}>
+          {/* Modal title */}
+          <Text
+            variant="leftAlign"
+            style={[styles.modalTitle, {color: title}]}
+            accessible={true}
+            accessibilityRole="header">
             {modalTitle}
           </Text>
-          <Text variant="leftAlign" style={[styles.bodyText, {color: title}]}>
+          {/* Modal content */}
+          <Text
+            variant="leftAlign"
+            style={[styles.bodyText, {color: title}]}
+            accessible={true}
+            accessibilityLabel="Modal Body Text">
             {modalContent}
           </Text>
+          {/* Render the pink button */}
           {renderPinkButton()}
+          {/* Render the white button (if available) */}
           {renderWhiteButton()}
         </View>
       </View>
@@ -79,13 +106,12 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background for the modal
+    justifyContent: 'flex-end', // Align the content at the bottom of the screen
+    alignItems: 'center', // Center align the items horizontally
   },
   modalContent: {
-    // backgroundColor: Colours.white,
-    width: '100%',
+    width: '100%', // Take up the full width of the screen
     borderRadius: 8,
     padding: 20,
     paddingTop: 50,

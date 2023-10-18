@@ -15,7 +15,7 @@ interface ExitModalProps {
   content: string;
   accessibilityLabel?: string;
   onAgree?: () => void;
-  toggleExitModal: any; // Receive the toggle function
+  toggleExitModal: () => void;
 }
 
 const ExitModal: React.FC<ExitModalProps> = ({
@@ -24,14 +24,18 @@ const ExitModal: React.FC<ExitModalProps> = ({
   title,
   content,
   onAgree,
-  toggleExitModal, // Receive the toggle function
+  toggleExitModal,
 }) => {
+  // Context and navigation hooks
+
   const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
+  const navigation = useNavigation(); // Obtain the navigation prop
+
+  // Style configurations
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
-  const navigation = useNavigation(); // Obtain the navigation prop
-
+  // Handle exit button press
   const handleExitButtonPress = () => {
     toggleExitModal(); // Close the modal
     navigation.navigate('ThemeScreen'); // Navigate to UserSelection
@@ -39,31 +43,47 @@ const ExitModal: React.FC<ExitModalProps> = ({
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View style={styles.backgroundContainer}>
+      <View
+        style={styles.backgroundContainer}
+        accessible={true}
+        accessibilityLabel="Exit Modal Background"
+        accessibilityRole="alert"
+        testID="backgroundContainer">
         <View style={styles.modalContainer}>
           <View
             style={[
               styles.modalContent,
               {backgroundColor: containerBackgroundColor},
-            ]}>
+            ]}
+            accessible={true}
+            accessibilityLabel="Exit Modal Content"
+            accessibilityRole="alert"
+            testID="modalContent">
             <Text
               variant="bodyTextBold centerAlign"
-              style={[styles.modalTitle, {color: textColour}]}>
+              style={[styles.modalTitle, {color: textColour}]}
+              accessibilityRole="header">
               {title}
             </Text>
             <Text
               variant="centerAlign"
-              style={[styles.bodyText, {color: textColour}]}>
+              style={[styles.bodyText, {color: textColour}]}
+              accessibilityRole="text">
               {content}
             </Text>
-            <View style={styles.buttonContainer}>
+            <View
+              style={styles.buttonContainer}
+              accessible={true}
+              accessibilityRole="toolbar">
               <WhiteButton
                 buttonText="Continue Switch"
                 onPress={() => {
                   onAgree && onAgree();
                   onPressClose(); // Close the modal after agreeing
                 }}
-                customWidth={158} // Set a custom width for the PinkButton
+                customWidth={158}
+                accessibilityLabel="Continue Switch Button"
+                testID="continueSwitchButton"
               />
               <View style={{width: 10}} />
               <PinkButton
@@ -73,6 +93,8 @@ const ExitModal: React.FC<ExitModalProps> = ({
                   onPressClose();
                 }}
                 customWidth={158}
+                accessibilityLabel="Exit Switch Button"
+                testID="exitSwitchButton"
               />
             </View>
           </View>
@@ -86,30 +108,19 @@ const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
-    justifyContent: 'center', // Center vertically
-    alignItems: 'center', // Center horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContainer: {
-    // flex: 1,
-    // backgroundColor: 'rgba(0, 0, 0, 1)', // Fully opaque background
-    // justifyContent: 'flex-end',
-    // alignItems: 'center',
     padding: 10,
   },
 
   modalContent: {
-    // backgroundColor: Colours.white,
-    // width: 327, // Set the width to 327
     borderRadius: 8,
     paddingTop: 18,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 15,
-
-    // paddingLeft: 18,
-    // paddingRight: 18,
-
-    // paddingTop: 50, // Add more padding at the top for the Close.png icon
     position: 'relative',
   },
   modalTitle: {
@@ -125,9 +136,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
-    flexDirection: 'row', // Arrange buttons side by side
+    flexDirection: 'row',
     justifyContent: 'space-between', // Add space between buttons
-    alignItems: 'center', // Align buttons vertically
+    alignItems: 'center',
   },
 });
 

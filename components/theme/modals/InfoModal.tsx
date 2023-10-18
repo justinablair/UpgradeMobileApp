@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import {CloseIcon} from '../icons/CloseIcon';
 
 interface InfoModalProps {
   visible: boolean;
@@ -31,21 +32,36 @@ const InfoModal: React.FC<InfoModalProps> = ({
 }) => {
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View style={styles.modalBackground}>
+      <View
+        style={styles.modalBackground}
+        accessible={true}
+        accessibilityLabel="Info Modal Background"
+        accessibilityRole="alert">
         {/* Background with opacity */}
         <View>
           {/* Modal Content */}
-          <View style={[styles.modalContent, contentStyle]}>
+          <View
+            style={[styles.modalContent, contentStyle]}
+            accessible={true}
+            accessibilityLabel="Info Modal Content"
+            testID="InfoModalContent"
+            accessibilityRole="alert">
             <TouchableOpacity
               style={styles.modalCloseIcon}
-              onPress={onPressClose}>
+              testID="CloseIcon"
+              onPress={onPressClose}
+              accessibilityLabel={accessibilityLabel}>
               <Image
                 source={require('../../../assets/Close.png')}
                 style={styles.modalCloseIcon}
                 accessibilityLabel={accessibilityLabel}
               />
             </TouchableOpacity>
-            <Text style={[styles.modalTitle, titleStyle]}>{title}</Text>
+            <Text
+              style={[styles.modalTitle, titleStyle]}
+              accessibilityRole="header">
+              {title}
+            </Text>
             <Text style={[styles.bodyText, bodyTextStyle]}>{content}</Text>
           </View>
         </View>
@@ -65,12 +81,12 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: '#454949',
     width: '90%',
-    maxHeight: '100%', // Set maxHeight to allow expansion based on content
+    maxHeight: '100%',
     borderRadius: 8,
     padding: 20,
-    paddingTop: 50, // Add more padding at the top for the Close.png icon
+    paddingTop: 50,
     position: 'relative',
-    overflow: 'hidden', // Hide content overflow
+    overflow: 'hidden',
   },
   modalTitle: {
     fontSize: 22,

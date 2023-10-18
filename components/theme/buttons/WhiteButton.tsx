@@ -6,13 +6,17 @@ import {useUserContext} from '../../UserContext';
 interface WhiteButtonProps {
   buttonText: string;
   onPress: () => void;
-  customWidth?: number; // New prop for custom width
+  customWidth?: number;
+  accessibilityLabel?: string;
+  testID?: string;
 }
 
 const WhiteButton: React.FC<WhiteButtonProps> = ({
   buttonText,
   onPress,
   customWidth,
+  accessibilityLabel,
+  testID,
 }) => {
   const {isDarkMode} = useUserContext();
 
@@ -25,16 +29,27 @@ const WhiteButton: React.FC<WhiteButtonProps> = ({
         {width: customWidth || 327},
         {backgroundColor: backgroundColour},
       ]}
-      onPress={onPress}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
+      onPress={onPress}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      testID={testID}>
+      <Text
+        style={styles.buttonText}
+        accessible={true}
+        testID="buttonText"
+        accessibilityRole="text"
+        accessibilityLabel={accessibilityLabel}>
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: Colours.pink, // Pink outline
-    borderWidth: 1, // Pink outline width
+    borderColor: Colours.pink,
+    borderWidth: 1,
     borderRadius: 8,
     padding: 14,
     alignItems: 'center',
@@ -45,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'bold',
-    color: Colours.pink, // Pink text color
+    color: Colours.pink,
   },
 });
 
