@@ -1,16 +1,21 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
-import Colours from './Colour'; // Update the path to Colour.js
+import Colours from '../Colour';
 
 type SvgCheckmarkProps = {
   fill?: string;
+  accessibilityLabel?: string;
 };
 
-const CheckmarkSvg: React.FC<SvgCheckmarkProps> = ({fill}) => (
+const CheckmarkSvg: React.FC<SvgCheckmarkProps> = ({
+  fill,
+  accessibilityLabel,
+}) => (
   <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <Path
       d="M0 4C0 1.79086 1.79086 0 4 0H20C22.2091 0 24 1.79086 24 4V20C24 22.2091 22.2091 24 20 24H4C1.79086 24 0 22.2091 0 20V4Z"
       fill={fill}
+      accessibilityLabel={accessibilityLabel}
     />
     <Path
       fillRule="evenodd"

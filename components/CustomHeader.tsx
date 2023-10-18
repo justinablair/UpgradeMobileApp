@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {CloseIcon} from './theme/CloseIcon';
+import {CloseIcon} from './theme/icons/CloseIcon';
 import Colours from './theme/Colour';
 
 interface CustomHeaderProps {
@@ -27,14 +27,13 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
       accessibilityRole="header">
       {/* Exit modal appears on press of close component */}
       <TouchableOpacity
-        onPress={() => toggleExitModal()}
+        onPress={toggleExitModal}
         testID="CloseButton"
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Close">
         {/* Close icon component */}
-        <CloseIcon />
-        {/* accessible={true} accessibilityLabel="Close Icon" */}
+        <CloseIcon accessibilityLabel="Close Icon" />
       </TouchableOpacity>
     </View>
   );

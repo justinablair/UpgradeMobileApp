@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
-import Colours from './Colour'; // Update the path to Colour.js
+import Colours from '../Colour'; // Update the path to Colour.js
 import {StyleSheet, View} from 'react-native';
 
 interface PotSvgProps {

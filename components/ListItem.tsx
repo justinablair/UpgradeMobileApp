@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextStyle} from 'react-native';
-import GreenTickSvg from '../components/theme/GreenTickIcon';
+import GreenTickSvg from '../components/theme/icons/GreenTickIcon';
 import Text from '../components/Text';
 import Colours from './theme/Colour';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, {Circle, G, Path, Rect} from 'react-native-svg';
-import Colours from './Colour';
+import Colours from '../Colour';
 
 interface CardSvgProps {
   stroke?: string;

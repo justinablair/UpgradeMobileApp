@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import Text from '../components/Text';
-import {ChevronRightIcon} from '../components/theme/ChevronRight';
+import {ChevronRightIcon} from '../components/theme/icons/ChevronRight';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from './UserContext';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, {Path, SvgProps} from 'react-native-svg';
-import Colours from './Colour'; // Update the path to Colour.js
+import Colours from '../Colour'; // Update the path to Colour.js
 
 interface TransferSvgProps extends SvgProps {
   fill?: string;

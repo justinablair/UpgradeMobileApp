@@ -1,6 +1,6 @@
 import React from 'react';
 import {Path, G, Svg} from 'react-native-svg';
-import Colours from './Colour'; // Update the path to Colour.js
+import Colours from '../Colour'; // Update the path to Colour.js
 
 type SvgGreenTickProps = {
   fill?: string;

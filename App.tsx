@@ -6,7 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 
-import {CloseIcon} from './components/theme/CloseIcon';
+import {CloseIcon} from './components/theme/icons/CloseIcon';
 import Colours from './components/theme/Colour';
 import ExitModal from './components/theme/modals/ExitModal';
 import {UserContextProvider} from './components/UserContext';

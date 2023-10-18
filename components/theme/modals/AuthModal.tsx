@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Modal, TouchableOpacity, StyleSheet} from 'react-native';
 import Colours from '../Colour';
 import Text from '../../Text';
-import {PinBackIcon} from '../PinbackIcon';
+import {PinBackIcon} from '../icons/PinbackIcon';
 
 interface AuthModalProps {
   visible: boolean;

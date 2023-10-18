@@ -10,8 +10,8 @@ import NewAccount from './Common/NewAccount';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
 import AuthModal from '../components/theme/modals/AuthModal';
 import Text from '../components/Text';
-import ChevronUpIcon from '../components/theme/ChevronUp';
-import ChevronDownIcon from '../components/theme/ChevronDown';
+import ChevronUpIcon from '../components/theme/icons/ChevronUp';
+import ChevronDownIcon from '../components/theme/icons/ChevronDown';
 import {useUserContext} from '../components/UserContext';
 import ExitModal from '../components/theme/modals/ExitModal';
 

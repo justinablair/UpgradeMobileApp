@@ -2,12 +2,12 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InfoBox from '../../components/InfoBox';
-import {LockedIcon} from '../../components/theme/LockedIcon';
-import {MobilePhoneIcon} from '../../components/theme/MobilePhoneIcon';
-import {EmailIcon} from '../../components/theme/EmailIcon';
+import {LockedIcon} from '../../components/theme/icons/LockedIcon';
+import {MobilePhoneIcon} from '../../components/theme/icons/MobilePhoneIcon';
+import {EmailIcon} from '../../components/theme/icons/EmailIcon';
 import Colours from '../../components/theme/Colour';
-import VoidIcon from '../../components/theme/VoidIcon';
-import CalendarIcon from '../../components/theme/CalendarIcon';
+import VoidIcon from '../../components/theme/icons/VoidIcon';
+import CalendarIcon from '../../components/theme/icons/CalendarIcon';
 import {useUserContext} from '../../components/UserContext';
 
 type NewAccountProps = {};

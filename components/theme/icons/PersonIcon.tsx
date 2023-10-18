@@ -1,7 +1,7 @@
 //PersonIcon.tsx
 import React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
-import Colours from './Colour';
+import Colours from '../Colour';
 
 type SvgPersonProps = {
   fill?: string;

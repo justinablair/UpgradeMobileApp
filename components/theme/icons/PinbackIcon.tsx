@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, {ClipPath, Defs, G, Path, Rect} from 'react-native-svg';
-import Colours from './Colour'; // Update the path to Colour.js
+import Colours from '../Colour'; // Update the path to Colour.js
 
 interface SvgPinBackProps {
   fill?: string;

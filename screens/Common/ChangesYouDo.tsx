@@ -2,13 +2,13 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InfoBox from '../../components/InfoBox';
-import {DrawingsPaidToUserIcon} from '../../components/theme/DrawingsPaidToUserIcon';
-import {PotSmallIcon} from '../../components/theme/PotIcon';
-import {ComputerSoftwareIcon} from '../../components/theme/ComputerSoftwareIcon';
+import {PotSmallIcon} from '../../components/theme/icons/PotIcon';
+import {ComputerSoftwareIcon} from '../../components/theme/icons/ComputerSoftwareIcon';
 import Colours from '../../components/theme/Colour';
-import CashIcon from '../../components/theme/CashIcon';
+import CashIcon from '../../components/theme/icons/CashIcon';
 import {useUserContext} from '../../components/UserContext';
-import ApplePaySvg from '../../components/theme/ApplePayIcon';
+import ApplePaySvg from '../../components/theme/icons/ApplePayIcon';
+import {DrawingsPaidToUserIcon} from '../../components/theme/icons/DrawingsPaidToUserIcon';
 
 type ChangesYouDoProps = {};
 

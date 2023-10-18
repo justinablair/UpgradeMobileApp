@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated} from 'react-native';
 import Svg, {G, Path} from 'react-native-svg';
-import Colours from './Colour';
+import Colours from '../Colour';
 
 interface TickSvgProps {
   stroke?: string;

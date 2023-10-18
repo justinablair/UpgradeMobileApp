@@ -2,12 +2,12 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InfoBox from '../../components/InfoBox';
-import CardSvg from '../../components/theme/CardIcon';
-import {RefreshIcon} from '../../components/theme/RefreshIcon';
-import {TransferIcon} from '../../components/theme/TransferIcon';
-import {ExportIcon} from '../../components/theme/ExportIcon';
-import {PostageIcon} from '../../components/theme/Postage';
-import {FreeAgentIcon} from '../../components/theme/FreeAgentIcon';
+import CardSvg from '../../components/theme/icons/CardIcon';
+import {RefreshIcon} from '../../components/theme/icons/RefreshIcon';
+import {TransferIcon} from '../../components/theme/icons/TransferIcon';
+import {ExportIcon} from '../../components/theme/icons/ExportIcon';
+import {PostageIcon} from '../../components/theme/icons/Postage';
+import {FreeAgentIcon} from '../../components/theme/icons/FreeAgentIcon';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext';
 

@@ -3,7 +3,7 @@ import {View, StyleSheet, Linking, Pressable, SafeAreaView} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import InfoBox from '../components/InfoBox';
-import {PersonIcon} from '../components/theme/PersonIcon';
+import {PersonIcon} from '../components/theme/icons/PersonIcon';
 
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';

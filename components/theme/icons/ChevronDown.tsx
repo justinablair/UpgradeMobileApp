@@ -1,6 +1,6 @@
 import React from 'react';
 import {G, Path, Svg} from 'react-native-svg';
-import Colours from './Colour';
+import Colours from '../Colour';
 
 interface ChevronDownIconProps {
   fill?: string;
