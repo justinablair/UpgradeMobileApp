@@ -1,4 +1,4 @@
-// CheckboxToggle.tsx
+//CheckboxToggle.tsx
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {UncheckedIcon} from '../theme/icons/UncheckedIcon';
@@ -20,15 +20,16 @@ const CheckboxToggle: React.FC<CheckboxProps> = ({
     <TouchableOpacity
       onPress={disabled ? undefined : onToggle}
       disabled={disabled}
-      accessibilityRole="checkbox"
-      accessibilityState={{checked: !!checked}} // Indicated the checked state for accessibility
-      accessibilityLiveRegion="polite" // Added live region for accessibility
-      accessibilityLabel={checked ? 'Checked' : 'Unchecked'}>
+      accessibilityRole="checkbox" // Defines accessibility role as checkbox
+      accessibilityState={{checked: !!checked}} // Indicates the checked state for accessibility
+      accessibilityLiveRegion="polite" // Adds live region for accessibility
+      accessibilityLabel={checked ? 'Checked' : 'Unchecked'} // Provides appropriate accessibility label
+    >
       {checked ? (
-        <CheckmarkIcon accessibilityLabel="Checked" />
+        <CheckmarkIcon accessibilityLabel="Checked" /> // Displays the checkmark icon for checked state
       ) : (
         <UncheckedIcon
-          stroke={disabled ? Colours.black30 : Colours.black}
+          stroke={disabled ? Colours.black30 : Colours.black} // Adjusts stroke color based on the disabled state
           accessibilityLabel="Unchecked"
         />
       )}
