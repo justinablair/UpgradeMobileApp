@@ -5,7 +5,7 @@ import Toggle from '../Toggle';
 describe('Toggle component', () => {
   const mockProps = {
     value: false,
-    onValueChange: jest.fn(), // Creating a mock function for the onValueChange callback
+    onValueChange: jest.fn(),
     label: 'Toggle Label',
     accessibilityLabel: 'toggle-switch',
   };

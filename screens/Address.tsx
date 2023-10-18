@@ -1,35 +1,32 @@
 //Address.tsx
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import Colours from '../components/theme/Colour';
-import {NavigationProps} from '../navigationTypes';
+import {useUserContext} from '../components/UserContext';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
-import {useUserContext} from '../components/UserContext';
+import Colours from '../components/theme/Colour';
+import {NavigationProps} from '../navigationTypes';
 
 type EnterAddressScreenProps = NavigationProps<'Address'>;
 
 const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   navigation,
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const {setAddressLine1, setTown, setPostcode} = useUserContext();
-  const [addressLine1Local, setAddressLine1Local] = useState(''); // Local state for addressLine1
-  const [townLocal, setTownLocal] = useState(''); // Local state for town
-  const [postcodeLocal, setPostcodeLocal] = useState(''); // Local state for postcode
-  const [formError, setFormError] = useState('');
+  const [addressLine1Local, setAddressLine1Local] = useState('');
+  const [townLocal, setTownLocal] = useState('');
+  const [postcodeLocal, setPostcodeLocal] = useState('');
+  const [formError, setFormError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Trim the input values to remove leading and trailing spaces
     const trimmedAddressLine1 = addressLine1Local.trim();
     const trimmedTown = townLocal.trim();
     const trimmedPostcode = postcodeLocal.trim();
 
-    // This effect will run after the initial render and whenever any of the local state variables change.
-    // It updates the context values when the local state changes.
     setAddressLine1(trimmedAddressLine1);
     setTown(trimmedTown);
     setPostcode(trimmedPostcode);
@@ -44,20 +41,17 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
 
   const handleSwitchButtonPress = () => {
     if (!isFormValid()) {
-      setFormError('Please complete all required fields.');
       return;
     }
 
-    // No need to call setAddressLine1, setTown, and setPostcode here since they are handled by the useEffect.
-
-    // Navigate to the desired screen
     navigation.navigate('UpgradeIntro');
   };
 
   const ukPostcodeRegex = /^[A-Za-z]{1,2}\d{1,2} ?\d[A-Za-z]{2}$/;
   const isFormValid = () => {
     if (!addressLine1Local || !townLocal || !postcodeLocal) {
-      return false; // Return false if any required field is empty
+      setFormError('Please complete all required fields.');
+      return false;
     }
 
     if (!ukPostcodeRegex.test(postcodeLocal)) {
@@ -65,7 +59,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
       return false;
     }
 
-    setFormError('');
+    setFormError(null);
     return true;
   };
 
@@ -73,9 +67,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
       <View style={styles.contentContainer}>
-        <Text
-          variant="screenTitle leftAlign"
-          style={{color: isDarkMode ? Colours.white : Colours.black}}>
+        <Text variant="screenTitle" style={{color: textColour}}>
           Tell us your address
         </Text>
 
@@ -83,11 +75,18 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           First line of address
         </Text>
         <TextInput
-          style={[styles.input, {color: textColour}]}
+          style={[
+            styles.input,
+            {
+              color: textColour,
+            },
+          ]}
           placeholder="Enter first line of address"
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={addressLine1Local}
           onChangeText={setAddressLine1Local}
+          accessibilityLabel="First line of address"
+          accessibilityRole="text"
         />
         <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
           Town
@@ -98,6 +97,8 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={townLocal}
           onChangeText={setTownLocal}
+          accessibilityLabel="Town"
+          accessibilityRole="text"
         />
         <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
           Postcode
@@ -108,15 +109,21 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={postcodeLocal}
           onChangeText={setPostcodeLocal}
+          accessibilityLabel="Postcode"
+          accessibilityRole="text"
         />
       </View>
 
-      {formError ? (
-        <Text variant="bodyText leftAlign" style={styles.errorText}>
+      {formError && (
+        <Text variant="bodyText" style={styles.errorText}>
           {formError}
         </Text>
-      ) : null}
-      <PinkButton buttonText="Confirm" onPress={handleSwitchButtonPress} />
+      )}
+      <PinkButton
+        buttonText="Confirm"
+        onPress={handleSwitchButtonPress}
+        accessibilityLabel="Confirm Button"
+      />
     </View>
   );
 };
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   contentContainer: {
-    flex: 1, // Content takes remaining space
+    flex: 1,
   },
   label: {
     marginBottom: 4,
