@@ -2,18 +2,33 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import EnterAddressScreen from '../Address';
 import {UserContextProvider} from '../../components/UserContext';
-import {StackNavigationProp, RootStackParamList} from '../../navigationTypes'; // Import necessary types
+import {RootStackParamList} from '../../navigationTypes'; // Import necessary types
+import {StackNavigationProp} from '@react-navigation/stack';
 
 describe('EnterAddressScreen', () => {
   const mockNavigation: StackNavigationProp<RootStackParamList, 'Address'> = {
     navigate: jest.fn(),
-    // add other required methods if needed
+    goBack: jest.fn(),
+    dispatch: jest.fn(),
+    setParams: jest.fn(),
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    canGoBack: () => true,
+    isFocused: () => true,
+    push: jest.fn(),
+    replace: jest.fn(),
+    pop: jest.fn(),
+    popToTop: jest.fn(),
+    setOptions: jest.fn(),
+    reset: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn(),
+    getId: jest.fn(),
   };
-
   test('Renders all input fields correctly', () => {
     const {getByPlaceholderText} = render(
       <UserContextProvider>
-        <EnterAddressScreen navigation={mockNavigation} />{' '}
+        <EnterAddressScreen navigation={mockNavigation} />
         {/* Pass navigation prop */}
       </UserContextProvider>,
     );
@@ -57,8 +72,7 @@ describe('EnterAddressScreen', () => {
   test('Form submits successfully with valid input', () => {
     const {getByPlaceholderText, getByText} = render(
       <UserContextProvider>
-        <EnterAddressScreen navigation={mockNavigation} />{' '}
-        {/* Pass navigation prop */}
+        <EnterAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const addressInput = getByPlaceholderText('Enter first line of address');

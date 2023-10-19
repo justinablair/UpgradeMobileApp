@@ -12,12 +12,10 @@ type CompanyDetailsScreenProps = NavigationProps<'CompanyDetails'>;
 const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
   navigation,
 }) => {
-  const {setBusinessName} = useUserContext();
+  const {setBusinessName, isDarkMode} = useUserContext();
   const [companyName, setCompanyName] = useState('');
   const [isChecked, setIsChecked] = useState(false);
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
-  // Define the background color and borderBottomColor based on isDarkMode
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const separatorBorderColor = isDarkMode ? Colours.black05 : Colours.black30;
 
@@ -30,67 +28,89 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
 
   const isCompanyNameEntered = companyName.trim() !== '';
 
+  const handleToggle = () => {
+    if (isCompanyNameEntered) {
+      setIsChecked(!isChecked);
+    }
+  };
+
   return (
     <View
-      style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
+      style={[styles.container, {backgroundColor: containerBackgroundColor}]}
+      accessible={true}
+      accessibilityLabel="companyDetailsScreenContainer">
       <View style={styles.contentContainer}>
         <Text
           variant="screenTitle leftAlign"
-          style={{
-            color: isDarkMode ? Colours.white : Colours.black,
-          }}>
+          style={{color: isDarkMode ? Colours.white : Colours.black}}
+          accessible={true}
+          accessibilityLabel="companyDetailsScreenTitle">
           Tell us about your company
         </Text>
         <Text
           variant="bodyText"
           style={[
-            {
-              color: isDarkMode ? Colours.white : Colours.black,
-            },
+            {color: isDarkMode ? Colours.white : Colours.black},
             styles.space,
-          ]}>
+          ]}
+          accessible={true}
+          accessibilityLabel="companyNameLabelText">
           Company name
         </Text>
         <TextInput
           style={[
             styles.input,
-            {
-              color: isDarkMode ? Colours.white : Colours.black,
-            },
+            {color: isDarkMode ? Colours.white : Colours.black},
           ]}
           placeholder="Enter your company name"
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={companyName}
           onChangeText={setCompanyName}
+          accessible={true}
+          accessibilityLabel="companyNameInput"
         />
         <View
           style={[styles.separator, {borderBottomColor: separatorBorderColor}]}
+          accessible={true}
+          accessibilityLabel="separator"
         />
       </View>
 
-      {/* Consent section */}
-      <View style={styles.checkboxContainer}>
+      <View
+        style={styles.checkboxContainer}
+        accessible={true}
+        accessibilityLabel="consentSection">
         <Text
           variant="bodyText"
           style={[
             styles.checkboxText,
             {color: isDarkMode ? Colours.white : Colours.black},
-          ]}>
-          I confirm{' '}
-          {companyName !== '' ? companyName : 'the company name I entered'} is
-          correct
+          ]}
+          accessible={true}
+          accessibilityLabel="consentText">
+          I confirm {companyName ? companyName : 'the company name I entered'}{' '}
+          is correct
         </Text>
         <CheckboxToggle
+          testID="checkboxToggle"
           checked={isChecked}
-          onToggle={() => setIsChecked(!isChecked)}
+          onToggle={handleToggle}
           disabled={!isCompanyNameEntered}
+          accessibilityLabel="consentCheckbox"
+          accessibilityRole="checkbox"
         />
       </View>
-      <View>
+
+      <View
+        accessible={true}
+        accessibilityLabel="nextButtonContainer"
+        accessibilityRole="button">
         <PinkButton
           buttonText="Next"
           onPress={handleNextPress}
-          disabled={!isChecked || companyName.trim() === ''}
+          disabled={!isChecked || !isCompanyNameEntered}
+          accessibilityLabel="nextButton"
+          testID="nextButton"
         />
       </View>
     </View>
@@ -104,7 +124,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   contentContainer: {
-    flex: 1, // Content takes remaining space
+    flex: 1,
   },
   input: {
     width: '100%',
@@ -124,9 +144,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
-    paddingRight: 8, // Add padding to the right side
+    paddingRight: 8,
   },
-
   checkboxText: {
     marginLeft: 8,
     color: Colours.black,

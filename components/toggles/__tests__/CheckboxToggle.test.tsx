@@ -18,7 +18,7 @@ describe('CheckboxToggle component', () => {
   it('calls onToggle when the checkbox is pressed', () => {
     const {getByRole} = render(<CheckboxToggle {...mockProps} />);
     const checkboxComponent = getByRole('checkbox');
-    fireEvent(checkboxComponent, 'press');
+    fireEvent.press(checkboxComponent); // Use fireEvent.press to simulate press
     expect(mockProps.onToggle).toHaveBeenCalled();
   });
 
@@ -27,9 +27,6 @@ describe('CheckboxToggle component', () => {
       <CheckboxToggle {...mockProps} disabled={true} />,
     );
     const checkboxComponent = getByRole('checkbox');
-    expect(checkboxComponent.props.accessibilityState).toHaveProperty(
-      'disabled',
-      true,
-    );
+    expect(checkboxComponent.props.accessibilityState.disabled).toEqual(true); // Check for the disabled property
   });
 });

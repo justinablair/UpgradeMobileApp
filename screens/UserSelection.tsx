@@ -19,7 +19,7 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'StepperScreen4' : 'ConfirmAddress',
+      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
     );
   };
   const styles = StyleSheet.create({

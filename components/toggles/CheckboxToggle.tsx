@@ -1,6 +1,9 @@
-//CheckboxToggle.tsx
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {
+  TouchableOpacity,
+  AccessibilityRole,
+  AccessibilityState,
+} from 'react-native';
 import {UncheckedIcon} from '../theme/icons/UncheckedIcon';
 import {CheckmarkIcon} from '../theme/icons/CheckboxIcon';
 import Colours from '../theme/Colour';
@@ -8,28 +11,45 @@ import Colours from '../theme/Colour';
 interface CheckboxProps {
   checked: boolean;
   onToggle: () => void;
-  disabled?: boolean; // Optional disabled prop
+  disabled?: boolean;
+  testID?: string;
+  accessibilityLabel?: string;
+  accessibilityRole?: AccessibilityRole;
 }
 
 const CheckboxToggle: React.FC<CheckboxProps> = ({
   checked,
   onToggle,
   disabled = false,
+  testID,
+  accessibilityLabel,
+  accessibilityRole,
 }) => {
+  const accessibilityState: AccessibilityState = {
+    disabled: disabled,
+    checked: checked,
+  };
+
+  const handleToggle = () => {
+    if (!disabled) {
+      onToggle();
+    }
+  };
+
   return (
     <TouchableOpacity
-      onPress={disabled ? undefined : onToggle}
+      testID={testID}
+      onPress={handleToggle}
       disabled={disabled}
-      accessibilityRole="checkbox" // Defines accessibility role as checkbox
-      accessibilityState={{checked: !!checked}} // Indicates the checked state for accessibility
-      accessibilityLiveRegion="polite" // Adds live region for accessibility
-      accessibilityLabel={checked ? 'Checked' : 'Unchecked'} // Provides appropriate accessibility label
-    >
+      accessibilityRole={accessibilityRole || 'checkbox'}
+      accessibilityState={accessibilityState}
+      accessibilityLiveRegion="polite"
+      accessibilityLabel={accessibilityLabel}>
       {checked ? (
-        <CheckmarkIcon accessibilityLabel="Checked" /> // Displays the checkmark icon for checked state
+        <CheckmarkIcon accessibilityLabel="Checked" />
       ) : (
         <UncheckedIcon
-          stroke={disabled ? Colours.black30 : Colours.black} // Adjusts stroke color based on the disabled state
+          stroke={disabled ? Colours.black30 : Colours.black}
           accessibilityLabel="Unchecked"
         />
       )}

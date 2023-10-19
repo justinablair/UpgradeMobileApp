@@ -67,7 +67,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
       <View style={styles.contentContainer}>
-        <Text variant="screenTitle" style={{color: textColour}}>
+        <Text variant="screenTitle leftAlign" style={{color: textColour}}>
           Tell us your address
         </Text>
 
