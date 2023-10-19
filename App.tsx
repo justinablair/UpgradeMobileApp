@@ -43,7 +43,7 @@ import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleScr
 import UpgradeIneligibleUSScreen from './ErrorScreens/UpgradeIneligibleUSScreen';
 import StepperScreen4 from './screens/Stepper4';
 import StepperCompleteScreen from './screens/StepperComplete';
-import SettingsScreen from './screens/LightorDarkMode';
+import ThemeScreen from './screens/ThemeScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -98,7 +98,7 @@ function AppContent(): JSX.Element {
     <NavigationContainer>
       <StatusBar backgroundColor="#171B1B" />
       <Stack.Navigator>
-        {renderScreen('ThemeScreen', SettingsScreen, headerOptions)}
+        {renderScreen('ThemeScreen', ThemeScreen, headerOptions)}
         {renderScreen('UserSelection', UserSelectionScreen, headerOptions)}
         {renderScreen('Address', EnterAddressScreen, headerOptions)}
         {renderScreen('CompanyDetails', CompanyDetailsScreen, headerOptions)}

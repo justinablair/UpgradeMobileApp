@@ -15,6 +15,7 @@ interface CheckboxProps {
   testID?: string;
   accessibilityLabel?: string;
   accessibilityRole?: AccessibilityRole;
+  accessibilityState?: AccessibilityState;
 }
 
 const CheckboxToggle: React.FC<CheckboxProps> = ({

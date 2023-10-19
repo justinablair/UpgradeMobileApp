@@ -2,7 +2,7 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import EnterAddressScreen from '../Address';
 import {UserContextProvider} from '../../components/UserContext';
-import {RootStackParamList} from '../../navigationTypes'; // Import necessary types
+import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 describe('EnterAddressScreen', () => {

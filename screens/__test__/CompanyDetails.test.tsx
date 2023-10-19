@@ -2,14 +2,35 @@ import React from 'react';
 import {render, fireEvent, waitFor, act} from '@testing-library/react-native';
 import CompanyDetailsScreen from '../CompanyDetails';
 import {UserContextProvider} from '../../components/UserContext';
+import {RootStackParamList} from '../../navigationTypes';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 (global as any).setImmediate = (callback: any, ...args: any[]) => {
   return setTimeout(callback, 0, ...args);
 };
 
 describe('CompanyDetailsScreen', () => {
-  const mockNavigation = {
+  const mockNavigation: StackNavigationProp<
+    RootStackParamList,
+    'CompanyDetails'
+  > = {
     navigate: jest.fn(),
+    goBack: jest.fn(),
+    dispatch: jest.fn(),
+    setParams: jest.fn(),
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    canGoBack: () => true,
+    isFocused: () => true,
+    push: jest.fn(),
+    replace: jest.fn(),
+    pop: jest.fn(),
+    popToTop: jest.fn(),
+    setOptions: jest.fn(),
+    reset: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn(),
+    getId: jest.fn(),
   };
 
   it('should render the company details screen correctly', () => {
@@ -31,7 +52,7 @@ describe('CompanyDetailsScreen', () => {
     expect(nextButton.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('should enable the Next button when the company name is entered and checkbox is checked', async () => {
+  it('should enable form submit button when the company name is entered and checkbox is checked', async () => {
     const {getByPlaceholderText, getByTestId, getByText} = render(
       <UserContextProvider>
         <CompanyDetailsScreen navigation={mockNavigation} />
@@ -53,5 +74,7 @@ describe('CompanyDetailsScreen', () => {
     // Check if the confirm text is rendered
     const confirmText = getByText(`I confirm Test Company is correct`);
     expect(confirmText).toBeDefined();
+    fireEvent.press(nextButton);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('Address');
   });
 });
