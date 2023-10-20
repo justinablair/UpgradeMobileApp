@@ -7,10 +7,20 @@ import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
 
+interface StepperScreenProps extends UpgradeStepperCompleteProps {
+  stepsData: {
+    number: string;
+    title: string;
+    description: string;
+    active: boolean;
+  }[];
+}
+
 type UpgradeStepperCompleteProps = NavigationProps<'StepperComplete'>;
 
-const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
+const StepperCompleteScreen: React.FC<StepperScreenProps> = ({
   navigation,
+  stepsData,
 }) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
