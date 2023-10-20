@@ -6,11 +6,17 @@ import Colours from '../components/theme/Colour';
 import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
+import {
+  commonStepCircleStyles,
+  commonStepNumberStyles,
+  commonStepContentStyles,
+} from './Common/CommonStyles';
 
 type UpgradeStepper3Props = NavigationProps<'StepperScreen3'>;
 
 const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const activeColor = isDarkMode ? Colours.white : Colours.black;
 
@@ -29,12 +35,16 @@ const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
           styles.scrollContainer,
           {backgroundColor: activeCircle},
         ]}>
+        {/* Indicator line for the steps */}
+
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer}>
-            <View style={styles.line} />
+            {/* <View style={styles.line} /> */}
           </View>
           <View style={styles.completeLine} />
+          {/* Active line showing progress */}
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
+          {/* Mapping through stepsData to display the steps */}
           {stepsData.map(item => (
             <View key={item.number} style={styles.stepContainer}>
               <View
@@ -163,54 +173,37 @@ const styles = StyleSheet.create({
     top: 130,
   },
   stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
-    // borderColor: Colours.black60,
-    borderWidth: 1,
-    // backgroundColor: Colours.black,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -30,
-    // marginLeft: 10,
+    ...commonStepCircleStyles.stepCircle,
   },
   stepNumber: {
-    fontSize: 18,
+    ...commonStepNumberStyles.stepNumber,
   },
 
   stepContent: {
-    flex: 1,
-    marginLeft: 20,
+    ...commonStepContentStyles.stepContent,
   },
   activeStepTitle: {
-    // color: Colours.white,
     marginTop: 10,
   },
   inactiveStepTitle: {
-    // color: Colours.black60,
     marginTop: 10,
   },
-  activeStepDescription: {
-    // color: Colours.white,
-  },
-  inactiveStepDescription: {
-    // color: Colours.black60,
-  },
+  // activeStepDescription: {
+  // },
+  // inactiveStepDescription: {
+  // },
   margin: {
     marginTop: 0,
   },
   activeStepCircle: {
     width: 48,
     height: 48,
-    // borderColor: Colours.white,
+
     justifyContent: 'center',
-    // backgroundColor: Colours.black,
     alignItems: 'center',
     marginTop: -60,
   },
   inactiveStepCircle: {
-    // borderColor: Colours.black60,
-    // backgroundColor: Colours.black,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,

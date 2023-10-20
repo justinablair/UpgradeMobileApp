@@ -6,11 +6,17 @@ import stepsData from '../components/StepsData';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
+import {
+  commonStepCircleStyles,
+  commonStepNumberStyles,
+  commonStepContentStyles,
+} from './Common/CommonStyles';
 
 type UpgradeStepper1Props = NavigationProps<'StepperScreen1'>;
 
 const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const activeColor = isDarkMode ? Colours.white : Colours.black;
 
@@ -28,9 +34,12 @@ const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
           styles.scrollContainer,
           {backgroundColor: activeCircle},
         ]}>
+        {/* Indicator line for the steps */}
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer} />
+          {/* Active line showing progress */}
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
+          {/* Mapping through stepsData to display the steps */}
           {stepsData.map(item => (
             <View key={item.number} style={styles.stepContainer}>
               <View
@@ -89,24 +98,16 @@ const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
     </View>
   );
 };
+// Common styles used across components
 const commonStyles = {
   stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
-    borderColor: '#747676',
-    borderWidth: 1,
-    backgroundColor: '#171B1B',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -30,
+    ...commonStepCircleStyles.stepCircle,
   },
   stepNumber: {
-    fontSize: 18,
+    ...commonStepNumberStyles.stepNumber,
   },
   stepContent: {
-    flex: 1,
-    marginLeft: 20,
+    ...commonStepContentStyles.stepContent,
   },
   inactiveStepTitle: {
     color: Colours.black60,
@@ -117,6 +118,7 @@ const commonStyles = {
   },
 };
 
+// Component-specific styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

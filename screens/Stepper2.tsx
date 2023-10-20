@@ -6,11 +6,17 @@ import Colours from '../components/theme/Colour';
 import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
+import {
+  commonStepCircleStyles,
+  commonStepNumberStyles,
+  commonStepContentStyles,
+} from './Common/CommonStyles';
 
 type UpgradeStepper2Props = NavigationProps<'StepperScreen2'>;
 
 const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const activeColor = isDarkMode ? Colours.white : Colours.black;
 
@@ -29,17 +35,19 @@ const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
           styles.scrollContainer,
           {backgroundColor: activeCircle},
         ]}>
+        {/* Indicator line for the steps */}
+
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer}>
-            <View style={styles.line} />
+            {/* <View style={styles.line} /> */}
           </View>
           <View style={styles.completeLine} />
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
+          {/* Mapping through stepsData to display the steps */}
           {stepsData.map(item => (
             <View key={item.number} style={styles.stepContainer}>
               <View
                 style={[
-                  // styles.stepCircle,
                   item.number === '1'
                     ? {
                         ...styles.activeStepCircle,
@@ -112,6 +120,7 @@ const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
   );
 };
 
+// Common styles used across components
 const commonStyles = {
   stepCircle: {
     width: 32,
@@ -131,6 +140,7 @@ const commonStyles = {
   },
 };
 
+// Component-specific styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -176,14 +186,10 @@ const styles = StyleSheet.create({
     top: 145,
   },
   stepCircle: {
-    ...commonStyles.stepCircle,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -30,
+    ...commonStepCircleStyles.stepCircle,
   },
   stepNumber: {
-    fontSize: 18,
-    color: Colours.black60,
+    ...commonStepNumberStyles.stepNumber,
   },
   activeStepNumber: {
     fontSize: 18,
@@ -196,8 +202,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   stepContent: {
-    flex: 1,
-    marginLeft: 20,
+    ...commonStepContentStyles.stepContent,
   },
   activeStepTitle: {
     // color: Colours.white,

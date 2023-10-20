@@ -6,6 +6,11 @@ import Colours from '../components/theme/Colour';
 import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
+import {
+  commonStepCircleStyles,
+  commonStepNumberStyles,
+  commonStepContentStyles,
+} from './Common/CommonStyles';
 
 type UpgradeStepper4Props = NavigationProps<'StepperScreen4'>;
 
@@ -28,13 +33,16 @@ const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
           styles.scrollContainer,
           {backgroundColor: activeCircle},
         ]}>
+        {/* Indicator line for the steps */}
+
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer}>
-            <View style={styles.line} />
+            {/* <View style={styles.line} /> */}
           </View>
           {/* <View style={styles.completeLine} /> */}
           <View style={styles.completeLine} />
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
+          {/* Mapping through stepsData to display the steps */}
           {stepsData.map(item => (
             <View key={item.number} style={styles.stepContainer}>
               <View
@@ -103,27 +111,20 @@ const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
   );
 };
 
+// Common styles used across components
 const commonStyles = {
   stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
-    // borderColor: '#747676',
-    borderWidth: 1,
-    // backgroundColor: '#171B1B',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: -30,
+    ...commonStepCircleStyles.stepCircle,
   },
   stepNumber: {
-    fontSize: 18,
+    ...commonStepNumberStyles.stepNumber,
   },
   stepContent: {
-    flex: 1,
-    marginLeft: 20,
+    ...commonStepContentStyles.stepContent,
   },
 };
 
+// Component-specific styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -133,7 +134,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    // backgroundColor: Colours.black,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
