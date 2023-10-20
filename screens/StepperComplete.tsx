@@ -1,9 +1,9 @@
+//StepperCompleteScreen.tsx
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import Colours from '../components/theme/Colour';
-import stepsData from '../components/StepsData';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
 
@@ -22,7 +22,8 @@ const StepperCompleteScreen: React.FC<StepperScreenProps> = ({
   navigation,
   stepsData,
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;
 
@@ -38,6 +39,7 @@ const StepperCompleteScreen: React.FC<StepperScreenProps> = ({
           styles.scrollContainer,
           {backgroundColor: activeCircle},
         ]}>
+        {/* Indicator line for the steps */}
         <View style={styles.leftContainer}>
           <View style={styles.lineContainer} />
           <View style={styles.completeLine} />

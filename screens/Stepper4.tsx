@@ -15,7 +15,8 @@ import {
 type UpgradeStepper4Props = NavigationProps<'StepperScreen4'>;
 
 const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const activeColor = isDarkMode ? Colours.white : Colours.black;
   const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;

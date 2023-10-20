@@ -14,6 +14,7 @@ interface ExitModalProps {
   title: string;
   content: string;
   accessibilityLabel?: string;
+  testID?: string;
   onAgree?: () => void;
   toggleExitModal: () => void;
 }
@@ -23,6 +24,7 @@ const ExitModal: React.FC<ExitModalProps> = ({
   onPressClose,
   title,
   content,
+  testID,
   onAgree,
   toggleExitModal,
 }) => {
@@ -48,7 +50,7 @@ const ExitModal: React.FC<ExitModalProps> = ({
         accessible={true}
         accessibilityLabel="Exit Modal Background"
         accessibilityRole="alert"
-        testID="backgroundContainer">
+        testID={testID}>
         <View style={styles.modalContainer}>
           <View
             style={[

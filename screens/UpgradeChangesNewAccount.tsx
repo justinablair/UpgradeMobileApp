@@ -31,11 +31,25 @@ const UpgradeChangesNewAccountScreen: React.FC<
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}
+      accessible={true}
+      accessibilityLabel="upgradeChangesNewAccountScreen"
+      accessibilityRole="none">
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        accessibilityLabel="upgradeChangesScrollView">
+        <View
+          style={[styles.container, {backgroundColor: backgroundColour}]}
+          accessible={true}
+          accessibilityLabel="upgradeChangesContainer"
+          accessibilityRole="none">
           <View style={styles.titleContainer}>
-            <Text variant="screenTitle centreAlign" style={{color: titleColor}}>
+            <Text
+              variant="screenTitle centreAlign"
+              style={{color: titleColor}}
+              accessible={true}
+              accessibilityLabel="upgradeChangesTitle"
+              accessibilityRole="header">
               How your new account will work
             </Text>
           </View>
@@ -43,10 +57,14 @@ const UpgradeChangesNewAccountScreen: React.FC<
           <WhiteButton
             buttonText="Maybe later"
             onPress={handleSwitchExitJourneyPress}
+            accessibilityLabel="maybeLaterButton"
+            testID="maybeLaterButton"
           />
           <PinkButton
             buttonText="Get started"
             onPress={handleSwitchButtonPress}
+            accessibilityLabel="getStartedButton"
+            testID="getStartedButton"
           />
           <ExitModal
             visible={isExitModalVisible}
@@ -54,6 +72,8 @@ const UpgradeChangesNewAccountScreen: React.FC<
             title="Are you sure you want to quit?"
             content="Your progress won't be saved"
             toggleExitModal={() => setExitModalVisible(!isExitModalVisible)}
+            accessibilityLabel="exitModal"
+            testID="exitModal"
           />
         </View>
       </ScrollView>

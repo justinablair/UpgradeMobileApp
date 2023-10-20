@@ -33,6 +33,8 @@ const NewAccount: React.FC<NewAccountProps> = () => {
         title="Your account won’t accept CHAPS payments"
         description="This is a type of payment, usually used to send high-value amounts."
       />
+      <View style={styles.space} />
+
       {/* Box 3 */}
       <InfoBox
         icon={<MobilePhoneIcon fill={colourMode} />}
@@ -46,6 +48,7 @@ const NewAccount: React.FC<NewAccountProps> = () => {
         title="We’ll send you a welcome email"
         description="  This email will include all the information you need to start using your new bank account."
       />
+      <View style={styles.space} />
       {/* Box 5 */}
       <InfoBox
         icon={<CalendarIcon fill={colourMode} />}

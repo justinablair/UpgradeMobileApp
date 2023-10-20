@@ -71,7 +71,7 @@ describe('ExitModal', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    expect(getByTestId('backgroundContainer')).toBeTruthy();
+
     expect(getByTestId('modalContent')).toBeTruthy();
     expect(getByTestId('continueSwitchButton')).toBeTruthy();
     expect(getByTestId('exitSwitchButton')).toBeTruthy();

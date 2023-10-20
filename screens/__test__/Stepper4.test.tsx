@@ -43,7 +43,7 @@ describe('StepperScreen4', () => {
     getId: jest.fn(),
   };
 
-  test('renders stepper screen with steps data', () => {
+  it('renders stepper screen with steps data', () => {
     const stepsData = [
       {
         number: '1',

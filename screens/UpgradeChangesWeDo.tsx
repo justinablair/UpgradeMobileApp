@@ -1,49 +1,79 @@
-//UpgradeChangesWeDo.tsx
-import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
-import PinkButton from '../components/theme/buttons/PinkButton';
-
+import React, {FC} from 'react';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  AccessibilityInfo,
+  ViewStyle,
+} from 'react-native';
 import {NavigationProps} from '../navigationTypes';
-import {ScrollView} from 'react-native-gesture-handler';
-import Colours from '../components/theme/Colour';
+import {useUserContext} from '../components/UserContext';
 import ChangesWeDo from './Common/ChangesWeDo';
 import Text from '../components/Text';
-import {useUserContext} from '../components/UserContext';
+import PinkButton from '../components/theme/buttons/PinkButton';
+import Colours from '../components/theme/Colour';
 
 type UpgradeChangesWeDoProps = NavigationProps<'UpgradeChangesWeDo'>;
 
-const UpgradeChangesWeDoScreen: React.FC<UpgradeChangesWeDoProps> = ({
+const UpgradeChangesWeDoScreen: FC<UpgradeChangesWeDoProps> = ({
   navigation,
 }) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
+  // Set background color based on isDarkMode
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
 
+  // Set title color based on isDarkMode
   const title = isDarkMode ? Colours.white : Colours.black;
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeChangesYouDo'); // Navigate to the desired screen
+    navigation.navigate('UpgradeChangesYouDo');
   };
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  React.useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(
+      'What we’ll do during the switch',
+    );
+  }, []);
+
   return (
     <SafeAreaView
       style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
       <ScrollView>
         <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
-            <Text variant="screenTitle centreAlign" style={{color: title}}>
+            <Text
+              variant="screenTitle"
+              accessibilityRole="header"
+              accessibilityLabel="Changes During Switch"
+              style={{color: title}}>
               What we’ll do during the switch
             </Text>
             <View style={styles.space} />
           </View>
+          {/* Render ChangesWeDo component */}
           <ChangesWeDo />
-          <PinkButton buttonText="Next" onPress={handleSwitchButtonPress} />
+          <PinkButton
+            buttonText="Next"
+            onPress={handleSwitchButtonPress}
+            accessibilityLabel="Next Button"
+            testID="nextButton"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
+interface Styles {
+  container: ViewStyle;
+  safeAreaContainer: ViewStyle;
+  space: ViewStyle;
+  titleContainer: ViewStyle;
+}
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     backgroundColor: Colours.white,
@@ -57,7 +87,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   titleContainer: {
-    paddingLeft: 10, // Adjust this value as needed
+    paddingLeft: 10,
   },
 });
 
