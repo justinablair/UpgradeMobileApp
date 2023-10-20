@@ -1,10 +1,11 @@
+// PersonalDetails.tsx
 import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
   TextInput,
-  Text as RNText,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
@@ -17,24 +18,35 @@ type PersonalDetailsProps = NavigationProps<'PersonalDetails'>;
 const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
   navigation,
 }) => {
-  const {isDarkMode} = useUserContext();
-  const backgroundColour = isDarkMode ? Colours.black : Colours.white;
-  const title = isDarkMode ? Colours.white : Colours.black;
+  // Access user context and initialize necessary states
+  const {
+    isDarkMode,
+    addressLine1,
+    town,
+    postcode,
+    setAddressLine1,
+    setTown,
+    setPostcode,
+  } = useUserContext();
 
-  const {addressLine1, town, postcode, setAddressLine1, setTown, setPostcode} =
-    useUserContext();
+  // Define colors based on dark mode
+  const backgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const titleColor = isDarkMode ? Colours.white : Colours.black;
 
+  // Initialize state variables
   const [isEditing, setIsEditing] = useState(false);
   const [newAddressLine1, setNewAddressLine1] = useState(addressLine1);
   const [newTown, setNewTown] = useState(town);
   const [newPostcode, setNewPostcode] = useState(postcode);
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
+  // Event handler to enable editing mode
   const handleEditAddress = () => {
     setIsEditing(true);
     setUpdateSuccess(false);
   };
 
+  // Event handler to update the address
   const handleUpdateAddress = () => {
     setAddressLine1(newAddressLine1);
     setTown(newTown);
@@ -43,66 +55,86 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
     setUpdateSuccess(true);
   };
 
+  // Render the component
   return (
-    <View style={[styles.container, {backgroundColor: backgroundColour}]}>
-      <ScrollView>
+    <KeyboardAvoidingView style={[styles.container, {backgroundColor}]}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {/* Display the title */}
         <Text
           variant="bodyText bodyTextBold"
           style={[{color: Colours.black60}, styles.titlePadding]}>
           Home address
         </Text>
+        {/* Input fields for address details */}
         <View style={styles.addressContainer}>
-          <Text variant="bodyText" style={{color: title}}>
+          <Text variant="bodyText" style={{color: titleColor}}>
             Address Line 1:
           </Text>
           <TextInput
-            style={[styles.input, {color: title}]}
+            style={[styles.input, {color: titleColor}]}
             placeholder="Enter address"
             value={isEditing ? newAddressLine1 : addressLine1}
             onChangeText={setNewAddressLine1}
             editable={isEditing}
+            accessibilityLabel="Address Line 1"
+            testID="addressLine1Input"
           />
-          <Text variant="bodyText" style={{color: title}}>
+          <Text variant="bodyText" style={{color: titleColor}}>
             Town:
           </Text>
           <TextInput
-            style={[styles.input, {color: title}]}
+            style={[styles.input, {color: titleColor}]}
             placeholder="Enter town"
             value={isEditing ? newTown : town}
             onChangeText={setNewTown}
             editable={isEditing}
+            accessibilityLabel="Town"
+            testID="townInput"
           />
-          <Text variant="bodyText" style={{color: title}}>
+          <Text variant="bodyText" style={{color: titleColor}}>
             Postcode:
           </Text>
           <TextInput
-            style={[styles.input, {color: title}]}
+            style={[styles.input, {color: titleColor}]}
             placeholder="Enter postcode"
             value={isEditing ? newPostcode : postcode}
             onChangeText={setNewPostcode}
             editable={isEditing}
+            accessibilityLabel="Postcode"
+            testID="postcodeInput"
           />
         </View>
+        {/* Display success message on address update */}
         {updateSuccess && (
-          <Text variant="bodyText leftAlign" style={styles.successMessage}>
+          <Text
+            variant="bodyText leftAlign"
+            style={styles.successMessage}
+            accessibilityLabel="Success Message">
             Address updated successfully!
           </Text>
         )}
       </ScrollView>
+      {/* Render the edit/save button */}
       <View style={styles.buttonContainer}>
-        {isEditing ? (
-          <PinkButton buttonText="Save" onPress={handleUpdateAddress} />
-        ) : (
-          <PinkButton buttonText="Edit Address" onPress={handleEditAddress} />
-        )}
+        <PinkButton
+          buttonText={isEditing ? 'Save' : 'Edit Address'}
+          onPress={isEditing ? handleUpdateAddress : handleEditAddress}
+          accessibilityLabel={isEditing ? 'Save Button' : 'Edit Address Button'}
+          testID="saveEditButton"
+        />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 100,
   },
   titlePadding: {
     padding: 16,

@@ -2,10 +2,7 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {
-  UserContextProvider,
-  useUserContext,
-} from '../../components/UserContext';
+import {useUserContext} from '../../components/UserContext';
 import ThemeScreen from '../ThemeScreen';
 
 jest.mock('../../components/UserContext', () => {

@@ -6,12 +6,12 @@ import {useUserContext} from '../UserContext';
 import Toggle from './Toggle';
 
 interface PreferenceToggleProps {
-  label: string;
-  value: boolean;
-  description?: string;
-  onChange: () => void;
+  label: string; // Label for the toggle
+  value: boolean; // Current value of the toggle
+  description?: string; // Optional description for the toggle
+  onChange: () => void; // Function to handle toggle change
+  testID: string; // Test ID for the toggle
   accessibilityLabel?: string;
-  testID: string;
 }
 
 const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
@@ -19,19 +19,18 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
   value,
   description,
   onChange,
-  accessibilityLabel,
   testID,
+  accessibilityLabel,
 }) => {
-  const {isDarkMode} = useUserContext();
+  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
+  // Function to handle the toggle change
   const handleToggle = () => {
-    console.log('Toggle pressed'); // Add a log to check if the toggle is pressed
     onChange();
   };
 
-  console.log('Toggle value:', value); // Log the value to check the initial value
-
+  // Rendering the toggle component
   return (
     <View
       style={styles.preferenceContainer}
