@@ -12,20 +12,9 @@ import {
   commonStepContentStyles,
 } from './Common/CommonStyles';
 
-interface StepperScreenProps extends UpgradeStepper3Props {
-  stepsData: {
-    number: string;
-    title: string;
-    description: string;
-    active: boolean;
-  }[];
-}
 type UpgradeStepper3Props = NavigationProps<'StepperScreen3'>;
 
-const StepperScreen3: React.FC<StepperScreenProps> = ({
-  navigation,
-  stepsData,
-}) => {
+const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
   // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
 
@@ -56,8 +45,11 @@ const StepperScreen3: React.FC<StepperScreenProps> = ({
           {/* Active line showing progress */}
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
           {/* Mapping through stepsData to display the steps */}
-          {stepsData.map(item => (
-            <View key={item.number} style={styles.stepContainer}>
+          {stepsData.map((item, index) => (
+            <View
+              key={item.number}
+              style={styles.stepContainer}
+              testID={`step-${index + 1}`}>
               <View
                 style={[
                   styles.stepCircle,
@@ -129,6 +121,7 @@ const StepperScreen3: React.FC<StepperScreenProps> = ({
       <PinkButton
         buttonText="Tax reporting"
         onPress={handleSwitchButtonPress}
+        testID="taxReportingButton"
       />
     </View>
   );

@@ -1,11 +1,26 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import StepperScreen3 from '../Stepper3';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
+import {getByTestId} from '@testing-library/react';
 
 describe('StepperScreen3', () => {
+  jest.mock('../../components/StepsData', () => [
+    {
+      number: '1',
+      title: 'How your new account will work',
+      description: 'Description for step 1',
+      active: true,
+    },
+    {
+      number: '2',
+      title: 'Step 2',
+      description: 'Description for step 2',
+      active: false,
+    },
+  ]);
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
     'StepperScreen3'
@@ -33,40 +48,51 @@ describe('StepperScreen3', () => {
     const stepsData = [
       {
         number: '1',
-        title: 'Step 1',
+        title: 'How your new account will work',
         description: 'Description for step 1',
         active: true,
       },
       {
         number: '2',
-        title: 'Step 2',
+        title: 'Your consents to switch',
         description: 'Description for step 2',
         active: false,
       },
       {
         number: '3',
-        title: 'Step 3',
+        title: 'Tax reporting',
         description: 'Description for step 3',
         active: false,
       },
     ];
 
-    const {getByText} = render(
+    const {getByText, getByTestId} = render(
       <UserContextProvider>
-        <StepperScreen3 navigation={mockNavigation} stepsData={stepsData} />
+        <StepperScreen3 navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
     // Check if the step titles are rendered
-    const step1Title = getByText('Step 1');
-    const step2Title = getByText('Step 2');
-    const step3Title = getByText('Step 3');
+    const step1Title = getByText('How your new account will work');
+    const step2Title = getByText('Your consents to switch');
+    const step3Title = getByTestId('step-3');
     expect(step1Title).toBeTruthy();
     expect(step2Title).toBeTruthy();
     expect(step3Title).toBeTruthy();
 
     // Check if the button is rendered
-    const buttonElement = getByText('Tax reporting');
+    const buttonElement = getByTestId('taxReportingButton');
     expect(buttonElement).toBeTruthy();
+  });
+
+  it('handles "tax reporting" button click', () => {
+    const {getByTestId} = render(
+      <UserContextProvider>
+        <StepperScreen3 navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const buttonElement = getByTestId('taxReportingButton');
+    fireEvent.press(buttonElement);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTaxReporting');
   });
 });

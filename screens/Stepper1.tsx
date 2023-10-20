@@ -12,21 +12,9 @@ import {
   commonStepContentStyles,
 } from './Common/CommonStyles';
 
-interface StepperScreenProps extends UpgradeStepper1Props {
-  stepsData: {
-    number: string;
-    title: string;
-    description: string;
-    active: boolean;
-  }[];
-}
-
 type UpgradeStepper1Props = NavigationProps<'StepperScreen1'>;
 
-const StepperScreen1: React.FC<StepperScreenProps> = ({
-  navigation,
-  stepsData,
-}) => {
+const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
   // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
 

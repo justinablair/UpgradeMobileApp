@@ -1,16 +1,13 @@
-//UpgradeChangesWeDo.tsx
-import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import PinkButton from '../components/theme/buttons/PinkButton';
-
 import {NavigationProps} from '../navigationTypes';
-import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
 import NewAccount from './Common/NewAccount';
 import Text from '../components/Text';
-import {useUserContext} from '../components/UserContext';
 import ExitModal from '../components/theme/modals/ExitModal';
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeChangesNewAccountProps =
   NavigationProps<'UpgradeChangesNewAccount'>;
@@ -18,28 +15,27 @@ type UpgradeChangesNewAccountProps =
 const UpgradeChangesNewAccountScreen: React.FC<
   UpgradeChangesNewAccountProps
 > = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
-
-  const [isExitModalVisible, setExitModalVisible] = React.useState(false); // Add state for controlling the visibility of the exit modal
+  const {isDarkMode} = useUserContext();
+  const [isExitModalVisible, setExitModalVisible] = useState(false);
 
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
-
-  const title = isDarkMode ? Colours.white : Colours.black;
+  const titleColor = isDarkMode ? Colours.white : Colours.black;
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('StepperScreen2'); // Navigate to the desired screen
+    navigation.navigate('StepperScreen2');
   };
+
   const handleSwitchExitJourneyPress = () => {
-    setExitModalVisible(true); // Show the exit modal
+    setExitModalVisible(true);
   };
 
   return (
     <SafeAreaView
       style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
-            <Text variant="screenTitle centreAlign" style={{color: title}}>
+            <Text variant="screenTitle centreAlign" style={{color: titleColor}}>
               How your new account will work
             </Text>
           </View>
@@ -53,11 +49,11 @@ const UpgradeChangesNewAccountScreen: React.FC<
             onPress={handleSwitchButtonPress}
           />
           <ExitModal
-            visible={isExitModalVisible} // Pass the visibility state
-            onPressClose={() => setExitModalVisible(false)} // Close the modal
+            visible={isExitModalVisible}
+            onPressClose={() => setExitModalVisible(false)}
             title="Are you sure you want to quit?"
             content="Your progress won't be saved"
-            toggleExitModal={() => setExitModalVisible(!isExitModalVisible)} // Pass the toggle function
+            toggleExitModal={() => setExitModalVisible(!isExitModalVisible)}
           />
         </View>
       </ScrollView>
@@ -71,13 +67,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   safeAreaContainer: {
-    height: '100%',
+    flex: 1,
   },
-  space: {
-    marginVertical: 8,
+  scrollViewContent: {
+    flexGrow: 1,
   },
   titleContainer: {
-    paddingLeft: 10, // Adjust this value as needed
+    paddingLeft: 10,
   },
 });
 

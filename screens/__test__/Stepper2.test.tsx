@@ -1,11 +1,25 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
 import StepperScreen2 from '../Stepper2';
 
 describe('StepperScreen2', () => {
+  jest.mock('../../components/StepsData', () => [
+    {
+      number: '1',
+      title: 'How your new account will work',
+      description: 'Description for step 1',
+      active: true,
+    },
+    {
+      number: '2',
+      title: 'Step 2',
+      description: 'Description for step 2',
+      active: false,
+    },
+  ]);
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
     'StepperScreen2'
@@ -33,13 +47,13 @@ describe('StepperScreen2', () => {
     const stepsData = [
       {
         number: '1',
-        title: 'Step 1',
+        title: 'How your new account will work',
         description: 'Description for step 1',
         active: true,
       },
       {
         number: '2',
-        title: 'Step 2',
+        title: 'Your consents to switch',
         description: 'Description for step 2',
         active: false,
       },
@@ -47,18 +61,29 @@ describe('StepperScreen2', () => {
 
     const {getByText} = render(
       <UserContextProvider>
-        <StepperScreen2 navigation={mockNavigation} stepsData={stepsData} />
+        <StepperScreen2 navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
     // Check if the step titles are rendered
-    const step1Title = getByText('Step 1');
-    const step2Title = getByText('Step 2');
+    const step1Title = getByText('How your new account will work');
+    const step2Title = getByText('Your consents to switch');
     expect(step1Title).toBeTruthy();
     expect(step2Title).toBeTruthy();
 
     // Check if the button is rendered
     const buttonElement = getByText('Your consents');
     expect(buttonElement).toBeTruthy();
+  });
+
+  it('handles "your consents" button click', () => {
+    const {getByText} = render(
+      <UserContextProvider>
+        <StepperScreen2 navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const buttonElement = getByText('Your consents');
+    fireEvent.press(buttonElement);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTerms');
   });
 });
