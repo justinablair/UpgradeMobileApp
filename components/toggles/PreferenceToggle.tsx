@@ -1,5 +1,3 @@
-//PreferencesToggle.tsx
-
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Text from '../Text';
@@ -12,7 +10,8 @@ interface PreferenceToggleProps {
   value: boolean;
   description?: string;
   onChange: () => void;
-  testID: any; // Ensure that the testID is being passed down to the Toggle component
+  accessibilityLabel?: string;
+  testID: string;
 }
 
 const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
@@ -20,44 +19,42 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
   value,
   description,
   onChange,
+  accessibilityLabel,
   testID,
 }) => {
-  // Accessing isDarkMode from the user context
   const {isDarkMode} = useUserContext();
-
-  // Determining text color based on the dark mode
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const handleToggle = () => {
-    onChange(); // Make sure the onChange function is called when the toggle is pressed
+    console.log('Toggle pressed'); // Add a log to check if the toggle is pressed
+    onChange();
   };
+
+  console.log('Toggle value:', value); // Log the value to check the initial value
+
   return (
     <View
       style={styles.preferenceContainer}
       accessible
       accessibilityLabel={`${label} Preference Toggle`}
-      testID={`${testID}Container`} // Adjust the testID to ensure uniqueness
-    >
+      testID={`${testID}Container`}>
       <View style={styles.textContainer}>
-        {/* Label text */}
         <Text variant="bodyText" style={{color: textColour}}>
           {label}
         </Text>
-        {/* Description text (if available) */}
         {description && (
           <Text
-            variant="bodyText bodyTextDescription"
-            style={{color: textColour}}>
+            variant="bodyText"
+            style={[styles.descriptionText, {color: textColour}]}>
             {description}
           </Text>
         )}
       </View>
-      {/* Toggle component */}
       <Toggle
         value={value}
-        onValueChange={handleToggle} // Call the handleToggle function here
+        onValueChange={handleToggle}
         accessibilityLabel={`${label} Toggle`}
-        testID={`${testID}Toggle`} // Adjust the testID to ensure uniqueness
+        testID={`${testID}Toggle`}
         accessibilityRole="switch"
         accessibilityState={{checked: value}}
       />
@@ -67,7 +64,7 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
 
 const styles = StyleSheet.create({
   preferenceContainer: {
-    flexDirection: 'row', // Aligning the elements in a row
+    flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 16,
   },
