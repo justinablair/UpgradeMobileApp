@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Linking,
   Pressable,
+  AccessibilityInfo,
 } from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
@@ -65,6 +66,12 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
   };
   const isButtonDisabled = !checkboxesChecked.every(checked => checked);
 
+  const title = 'Your consents to switch';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -79,7 +86,7 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
           ]}>
           <View style={styles.titleContainer}>
             <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-              Your consents to switch
+              {title}
             </Text>
             <Text variant="bodyText" style={{color: textColour}}>
               To switch your e-money account to a Mettle bank account, you need

@@ -1,6 +1,6 @@
 //Address.tsx
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
 import {useUserContext} from '../components/UserContext';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
@@ -63,12 +63,19 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
     return true;
   };
 
+  const title = 'What you’ll need to do after the switch';
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
       <View style={styles.contentContainer}>
         <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-          Tell us your address
+          {title}
         </Text>
 
         <Text variant="bodyText" style={[styles.label, {color: textColour}]}>

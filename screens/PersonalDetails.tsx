@@ -1,11 +1,12 @@
 // PersonalDetails.tsx
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  AccessibilityInfo,
 } from 'react-native';
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
@@ -55,6 +56,13 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
     setUpdateSuccess(true);
   };
 
+  const title = 'Home address';
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   // Render the component
   return (
     <KeyboardAvoidingView style={[styles.container, {backgroundColor}]}>
@@ -63,7 +71,7 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
         <Text
           variant="bodyText bodyTextBold"
           style={[{color: Colours.black60}, styles.titlePadding]}>
-          Home address
+          {title}
         </Text>
         {/* Input fields for address details */}
         <View style={styles.addressContainer}>

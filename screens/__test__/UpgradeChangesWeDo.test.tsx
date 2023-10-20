@@ -5,6 +5,7 @@ import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {AccessibilityInfo} from 'react-native';
 
 describe('UpgradeChangesWeDoScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -50,18 +51,20 @@ describe('UpgradeChangesWeDoScreen', () => {
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const announceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementationOnce(f => f());
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
     jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest.spyOn(React, 'useEffect').mockImplementationOnce(() => {
-      announceForAccessibility('What we’ll do during the switch');
-    });
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
     render(
       <UserContextProvider>
         <UpgradeChangesWeDoScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(announceForAccessibility).toHaveBeenCalledWith(
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
       'What we’ll do during the switch',
     );
   });

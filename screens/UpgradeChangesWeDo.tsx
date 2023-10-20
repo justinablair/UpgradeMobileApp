@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -32,12 +32,11 @@ const UpgradeChangesWeDoScreen: FC<UpgradeChangesWeDoProps> = ({
     navigation.navigate('UpgradeChangesYouDo');
   };
 
+  const titleText = 'What we’ll do during the switch';
   // Use AccessibilityInfo to set accessibility focus on the title
-  React.useEffect(() => {
-    AccessibilityInfo.announceForAccessibility(
-      'What we’ll do during the switch',
-    );
-  }, []);
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(titleText);
+  }, [titleText]);
 
   return (
     <SafeAreaView
@@ -50,7 +49,7 @@ const UpgradeChangesWeDoScreen: FC<UpgradeChangesWeDoProps> = ({
               accessibilityRole="header"
               accessibilityLabel="Changes During Switch"
               style={{color: title}}>
-              What we’ll do during the switch
+              {titleText}
             </Text>
             <View style={styles.space} />
           </View>

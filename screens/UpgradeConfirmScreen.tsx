@@ -1,5 +1,11 @@
-import React from 'react';
-import {View, StyleSheet, Image, SafeAreaView} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 
 import {NavigationProps} from '../navigationTypes';
@@ -21,6 +27,12 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
     navigation.navigate('UpgradeRecap');
   };
 
+  const title = 'Ready to switch?';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -40,7 +52,7 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
               accessibilityLabel="Switch arrows image"
             />
             <Text variant="screenTitle centerAlign" style={{color: textColour}}>
-              Ready to switch?
+              {title}
             </Text>
             <Text variant="bodyText centerAlign" style={{color: textColour}}>
               We’ll open your new account and move your money. We’ll also close

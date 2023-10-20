@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, AccessibilityInfo} from 'react-native';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
 import {useUserContext} from '../components/UserContext';
@@ -47,6 +47,12 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
     navigation.navigate('UserSelection');
   };
 
+  const title = 'Select App Theme';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <View
       style={styles.container}
@@ -59,7 +65,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
           accessible={true}
           accessibilityRole="header"
           testID="title">
-          Select App Theme
+          {title}
         </Text>
         <View style={styles.optionContainer}>
           <Text

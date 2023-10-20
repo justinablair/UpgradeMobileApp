@@ -4,6 +4,7 @@ import CompanyDetailsScreen from '../CompanyDetails';
 import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {AccessibilityInfo} from 'react-native';
 
 (global as any).setImmediate = (callback: any, ...args: any[]) => {
   return setTimeout(callback, 0, ...args);
@@ -76,5 +77,24 @@ describe('CompanyDetailsScreen', () => {
     expect(confirmText).toBeDefined();
     fireEvent.press(nextButton);
     expect(mockNavigation.navigate).toHaveBeenCalledWith('Address');
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <CompanyDetailsScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Tell us about your company',
+    );
   });
 });

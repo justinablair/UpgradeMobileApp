@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   Pressable,
   TextStyle,
+  AccessibilityInfo,
 } from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
@@ -39,6 +40,18 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     navigation.navigate('UpgradeIneligibleResident'); // Navigate to the desired screen
   };
 
+  const titleLimitedCompany =
+    'Does your business have tax residency outside of the United Kingdom?';
+
+  const titleSoleTrader =
+    'Do you have tax residency outside of the United Kingdom?';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    const title =
+      userType === 'limitedCompany' ? titleLimitedCompany : titleSoleTrader;
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [userType, titleLimitedCompany, titleSoleTrader]);
+
   const nationalityTextStyles: TextStyle = {
     ...styles.nationalityText,
     color: nationalityPressed ? Colours.blue : Colours.pink,
@@ -50,7 +63,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
       return (
         <>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Does your business have tax residency outside of the United Kingdom?
+            {titleLimitedCompany}
           </Text>
         </>
       );
@@ -58,12 +71,13 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
       return (
         <>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Do you have tax residency outside of the United Kingdom?
+            {titleSoleTrader}
           </Text>
         </>
       );
     }
   };
+
   return (
     <SafeAreaView
       style={[

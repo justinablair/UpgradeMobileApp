@@ -15,7 +15,6 @@ type UserContextType = {
   setPostcode: React.Dispatch<React.SetStateAction<string>>;
   setUserType: React.Dispatch<React.SetStateAction<UserType | null>>;
   isDarkMode: boolean; //// Boolean indicating whether the dark mode is enabled
-
   toggleDarkMode: () => void; // Add toggleDarkMode function
 };
 

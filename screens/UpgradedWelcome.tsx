@@ -1,6 +1,6 @@
 //UpgradeIntro.tsx
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Image,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Dimensions,
+  AccessibilityInfo,
 } from 'react-native';
 
 import Text from '../components/Text';
@@ -38,6 +39,12 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
     ? require('../assets/FSCSLogo.png')
     : require('../assets/FSCSLightMode.png');
 
+  const title = 'Welcome to your new Mettle bank account';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -57,9 +64,7 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
             accessibilityLabel="Mettle logo with stars around it"
           />
           <Text variant="screenTitle centerAlign" style={{color: textColour}}>
-            {' '}
-            {/* Fix the typo here */}
-            Welcome to your new Mettle bank account
+            {title}
           </Text>
           <Text variant="bodyText centerAlign" style={{color: textColour}}>
             It may look like nothing’s changed, but we’ve done a lot of work

@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Image,
   TextStyle,
+  AccessibilityInfo,
 } from 'react-native';
 import Text from '../components/Text';
 // import InfoModal from '../components/InfoModal';
@@ -81,6 +82,13 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
     navigation.navigate('StepperComplete');
   };
 
+  const title = 'Confirm your address';
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -97,7 +105,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               accessibilityLabel="Mettle Card In Envelope"
             />
             <Text variant="screenTitle centerAlign" style={{color: textColour}}>
-              Confirm your address
+              {title}
             </Text>
             <Text
               variant="bodyText centerAlign"

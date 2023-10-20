@@ -4,6 +4,7 @@ import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserContext} from '../../components/UserContext';
 import ThemeScreen from '../ThemeScreen';
+import {AccessibilityInfo} from 'react-native';
 
 jest.mock('../../components/UserContext', () => {
   const toggleDarkMode = jest.fn();
@@ -63,5 +64,19 @@ describe('SettingsScreen', () => {
     const lightModeCheckbox = getByTestId('lightModeCheckbox');
     fireEvent.press(lightModeCheckbox);
     expect(useUserContext().toggleDarkMode).toHaveBeenCalled();
+  });
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(<ThemeScreen navigation={mockNavigation} />);
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Select App Theme',
+    );
   });
 });

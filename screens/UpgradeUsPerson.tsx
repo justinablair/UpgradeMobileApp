@@ -1,12 +1,13 @@
 //UpgradeUSPerson.tsx
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
   Pressable,
   SafeAreaView,
   TextStyle,
+  AccessibilityInfo,
 } from 'react-native';
 import Text from '../components/Text';
 import InfoModal from '../components/theme/modals/InfoModal';
@@ -46,12 +47,22 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
     textDecorationLine: 'underline',
   };
 
+  const titleLimitedCompany = 'Is your business a United States (US) person?';
+
+  const titleSoleTrader = 'Are you a United States (US) person?';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    const title =
+      userType === 'limitedCompany' ? titleLimitedCompany : titleSoleTrader;
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [userType, titleLimitedCompany, titleSoleTrader]);
+
   const renderContent = () => {
     if (userType === 'limitedCompany') {
       return (
         <>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Is your business a United States (US) person?
+            {titleLimitedCompany}
           </Text>
           <InfoModal
             visible={showUSPersonInfoModal}
@@ -71,7 +82,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
       return (
         <>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Are you a United States (US) person?
+            {titleSoleTrader}
           </Text>
           <InfoModal
             visible={showUSPersonInfoModal}

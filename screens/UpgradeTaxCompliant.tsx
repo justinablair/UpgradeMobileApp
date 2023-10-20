@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, SafeAreaView, AccessibilityInfo} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../components/toggles/CheckboxToggle'; // Import the CheckboxToggle component
@@ -23,12 +23,18 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
     setIsChecked(!isChecked); // Toggle the checkbox state
   };
 
+  const title = 'Are you tax compliant?';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
         <View style={styles.container}>
           <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
-            Are you tax compliant?
+            {title}
           </Text>
           <Text
             variant="bodyText leftAlign"

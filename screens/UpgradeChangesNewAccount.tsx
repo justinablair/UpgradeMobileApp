@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  AccessibilityInfo,
+} from 'react-native';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
@@ -29,6 +35,12 @@ const UpgradeChangesNewAccountScreen: React.FC<
     setExitModalVisible(true);
   };
 
+  const title = 'How your new account will work';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}
@@ -50,7 +62,7 @@ const UpgradeChangesNewAccountScreen: React.FC<
               accessible={true}
               accessibilityLabel="upgradeChangesTitle"
               accessibilityRole="header">
-              How your new account will work
+              {title}
             </Text>
           </View>
           <NewAccount />

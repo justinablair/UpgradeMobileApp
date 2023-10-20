@@ -1,7 +1,13 @@
 // Marketing.tsx
 
-import React, {useState} from 'react';
-import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
@@ -86,13 +92,20 @@ const MarketingContent: React.FC<{
   handleButtonClick,
   handleYesToAllClick,
 }) => {
+  const title = 'Marketing preferences';
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}
       accessible={true}
       accessibilityLabel="Marketing Preferences Screen">
       <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-        Marketing preferences
+        {title}
       </Text>
       <Text
         variant="bodyText leftAlign"

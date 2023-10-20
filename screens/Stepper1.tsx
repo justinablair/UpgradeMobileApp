@@ -27,6 +27,7 @@ const StepperScreen1: React.FC<UpgradeStepper1Props> = ({navigation}) => {
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeChangesWeDo');
   };
+
   return (
     <View style={[styles.container, {backgroundColor: activeCircle}]}>
       <ScrollView

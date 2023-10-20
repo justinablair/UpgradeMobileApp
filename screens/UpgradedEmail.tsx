@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, AccessibilityInfo} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 
@@ -50,6 +50,13 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
       return () => clearTimeout(openMailToastTimer);
     }
   }, [showOpenMailToast]);
+
+  const title = 'Look out for an email from us';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -63,7 +70,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             {backgroundColor: containerBackgroundColor},
           ]}>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Look out for an email from us
+            {title}
           </Text>
           <Text variant="bodyText" style={{color: textColour}}>
             If you haven’t received it already, we’re sending you an email with

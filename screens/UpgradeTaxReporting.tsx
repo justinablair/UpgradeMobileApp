@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
   SafeAreaView,
   Pressable,
   TextStyle,
+  AccessibilityInfo,
 } from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
@@ -130,6 +131,12 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
     }
   };
 
+  const title = 'Tax reporting';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -143,7 +150,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             {backgroundColor: containerBackgroundColor},
           ]}>
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Tax reporting
+            {title}
           </Text>
           <Text variant="bodyText leftAlign" style={{color: textColour}}>
             To open a Mettle bank account you need to agree to the following:{' '}

@@ -4,6 +4,7 @@ import MarketingScreen from '../Marketing';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {AccessibilityInfo} from 'react-native';
 
 describe('Marketing Screen', () => {
   const mockNavigation: StackNavigationProp<RootStackParamList, 'Marketing'> = {
@@ -70,5 +71,24 @@ describe('Marketing Screen', () => {
     const button = getByTestId('YesToAllButton');
     fireEvent.press(button);
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen3');
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <MarketingScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Marketing preferences',
+    );
   });
 });

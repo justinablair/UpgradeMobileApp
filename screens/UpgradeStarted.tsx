@@ -1,7 +1,14 @@
 //UpgradeIntro.tsx
 
 import React, {useEffect} from 'react';
-import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
@@ -26,6 +33,12 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
     return () => clearTimeout(timeoutId);
   }, [navigation]);
 
+  const title = 'We’ve started your switch';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -43,7 +56,7 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
             />
           </View>
           <Text variant="screenTitle" style={{color: textColour}}>
-            We’ve started your switch
+            {title}
           </Text>
           <Text variant="bodyText centerAlign" style={{color: textColour}}>
             This usually takes less than a couple of minutes, but it can

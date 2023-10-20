@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -53,6 +59,32 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
     setModalVisible(false);
   };
 
+  const mainTitle = 'Recap of changes';
+  const weDoTitle = 'What we’ll do during the switch';
+  const youDoTitle = 'What you’ll need to do after the switch';
+  const newAccountTitle = 'How your new account will work';
+
+  // Use AccessibilityInfo to set accessibility focus on the titles
+  useEffect(() => {
+    let titleToAnnounce = mainTitle;
+    if (changesWeDoVisible) {
+      titleToAnnounce = weDoTitle;
+    } else if (changesYouDoVisible) {
+      titleToAnnounce = youDoTitle;
+    } else if (newAccountVisible) {
+      titleToAnnounce = newAccountTitle;
+    }
+    AccessibilityInfo.announceForAccessibility(titleToAnnounce);
+  }, [
+    mainTitle,
+    weDoTitle,
+    youDoTitle,
+    newAccountTitle,
+    changesWeDoVisible,
+    changesYouDoVisible,
+    newAccountVisible,
+  ]);
+
   return (
     <SafeAreaView
       style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
@@ -63,11 +95,16 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           <TouchableOpacity
             style={styles.titleContainer}
             onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}>
+            <Text
+              variant="screenTitle leftAlign"
+              style={{color: title, marginRight: 13, paddingBottom: 10}}>
+              {mainTitle}
+            </Text>
             <View style={styles.titleIconContainer}>
               <Text
-                variant="screenTitle"
+                variant="screenTitle leftAlign"
                 style={{color: title, marginRight: 13}}>
-                What we’ll do during the switch
+                {weDoTitle}
               </Text>
               {changesWeDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </View>
@@ -81,7 +118,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
               <Text
                 variant="screenTitle"
                 style={{color: title, marginRight: 10}}>
-                What you’ll need to do after the switch
+                {youDoTitle}
               </Text>
               {changesYouDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </View>

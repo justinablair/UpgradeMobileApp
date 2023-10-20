@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, StyleSheet, Linking, Pressable, SafeAreaView} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  Linking,
+  Pressable,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import InfoBox from '../components/InfoBox';
@@ -70,6 +77,12 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
       );
     }
   };
+  const title = 'Terms and Privacy Notice';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -82,7 +95,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
         <View style={styles.container}>
           <View style={styles.contentContainer}>
             <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-              Terms and Privacy Notice
+              {title}
             </Text>
             {renderContent()}
             <View style={styles.spaceMedium} />

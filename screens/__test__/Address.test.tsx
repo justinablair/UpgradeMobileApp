@@ -4,6 +4,7 @@ import EnterAddressScreen from '../Address';
 import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {AccessibilityInfo} from 'react-native';
 
 describe('EnterAddressScreen', () => {
   const mockNavigation: StackNavigationProp<RootStackParamList, 'Address'> = {
@@ -86,5 +87,24 @@ describe('EnterAddressScreen', () => {
     fireEvent.press(confirmButton);
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <EnterAddressScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'What you’ll need to do after the switch',
+    );
   });
 });

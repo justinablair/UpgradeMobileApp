@@ -1,6 +1,11 @@
 //UserSelection.tsx
-import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import {useUserContext, UserType} from '../components/UserContext';
 import Colours from '../components/theme/Colour'; // Import Colours
@@ -41,12 +46,19 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
       color: isDarkMode ? Colours.white : Colours.black,
     },
   });
+
+  const title = 'What type of business are you?';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <View style={styles.container}>
       <Text
         variant="screenTitle leftAlign"
         style={[styles.title, styles.space]}>
-        What type of business are you?
+        {title}
       </Text>
 
       <OptionsWithChevron

@@ -7,6 +7,8 @@ import UserContextProvider, {
   useUserContext,
 } from '../../components/UserContext';
 import {NavigationContainer} from '@react-navigation/native';
+import {AccessibilityInfo} from 'react-native';
+// import * as UserContext from '../../components/UserContext';
 
 describe('UpgradeChangesNewAccountScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -55,21 +57,46 @@ describe('UpgradeChangesNewAccountScreen', () => {
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen2');
   });
 
-  it('calls handleSwitchExitJourneyPress on "Maybe later" button press', () => {
-    const {getByTestId} = render(
+  it('opens the exit modal on "Maybe later" button press', () => {
+    const {getByTestId, queryByTestId} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeChangesNewAccountScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );
+
     const maybeLaterButton = getByTestId('maybeLaterButton');
     fireEvent.press(maybeLaterButton);
-    // Add your expected behavior here
+
+    const exitModal = queryByTestId('exitModal');
+
+    expect(exitModal).toBeTruthy();
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <NavigationContainer>
+          <UpgradeChangesNewAccountScreen navigation={mockNavigation} />
+        </NavigationContainer>
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'How your new account will work',
+    );
   });
 
   it('toggles the exit modal visibility', () => {
-    const {getByTestId, queryByTestId, debug} = render(
+    const {getByTestId, queryByTestId} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeChangesNewAccountScreen navigation={mockNavigation} />

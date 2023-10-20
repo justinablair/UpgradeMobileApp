@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
-import {View, Image, ScrollView, StyleSheet, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
@@ -32,6 +39,12 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
     onCloseAuthModal(); // Close the AuthModal
   };
 
+  const title = 'Congratulations your switch is complete!';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -51,7 +64,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
               accessibilityLabel="Rocket taking off image"
             />
             <Text variant="screenTitle" style={{color: textColour}}>
-              Congratulations your switch is complete!
+              {title}
             </Text>
             <Text variant="bodyText centerAlign" style={{color: textColour}}>
               You can now log in to your new account, where you’ll find your

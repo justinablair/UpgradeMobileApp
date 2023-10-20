@@ -1,6 +1,6 @@
 //UpgradeIntro.tsx
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Image,
@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   Pressable,
   TextStyle,
+  AccessibilityInfo,
 } from 'react-native';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import InfoModal from '../components/theme/modals/InfoModal';
@@ -20,7 +21,8 @@ import {useUserContext} from '../components/UserContext';
 type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
 const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
@@ -52,6 +54,12 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
     textDecorationLine: 'underline',
   };
 
+  const title = 'Introducing the Mettle bank account';
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <SafeAreaView
       style={[
@@ -69,7 +77,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
           <Text
             variant="headerMedium centerAlign"
             style={[styles.padding, {color: textColour}]}>
-            Introducing the Mettle bank account
+            {title}
           </Text>
 
           <Text variant="bodyText centerAlign" style={{color: textColour}}>

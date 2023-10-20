@@ -4,6 +4,7 @@ import PersonalDetailsScreen from '../PersonalDetails';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigationTypes';
 import UserContextProvider from '../../components/UserContext';
+import {AccessibilityInfo} from 'react-native';
 
 describe('PersonalDetailsScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -95,5 +96,22 @@ describe('PersonalDetailsScreen', () => {
     const saveButton = getByTestId('saveEditButton');
     fireEvent.press(saveButton);
     expect(getByText('Address updated successfully!')).toBeTruthy();
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <PersonalDetailsScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith('Home address');
   });
 });

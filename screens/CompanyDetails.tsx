@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import {NavigationProps} from '../navigationTypes';
@@ -34,6 +34,12 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
     }
   };
 
+  const title = 'Tell us about your company';
+
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
+
   return (
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}
@@ -45,7 +51,7 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
           style={{color: isDarkMode ? Colours.white : Colours.black}}
           accessible={true}
           accessibilityLabel="companyDetailsScreenTitle">
-          Tell us about your company
+          {title}
         </Text>
         <Text
           variant="bodyText"
