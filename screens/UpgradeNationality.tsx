@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {
-  View,
-  StyleSheet,
+  AccessibilityInfo,
+  Pressable,
   SafeAreaView,
   ScrollView,
-  Pressable,
+  StyleSheet,
   TextStyle,
-  AccessibilityInfo,
+  View,
 } from 'react-native';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
+import InfoModal from '../components/theme/modals/InfoModal';
+import OptionsWithChevron from '../components/OptionsWithChevron';
 import Text from '../components/Text';
 import {useUserContext} from '../components/UserContext';
-import OptionsWithChevron from '../components/OptionsWithChevron';
-import InfoModal from '../components/theme/modals/InfoModal';
 
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 
@@ -25,26 +25,30 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
+  // State for handling the display of the nationality modal and pressed state
   const [showNationalityModal, setShowNationalityModal] = useState(false);
   const [nationalityPressed, setNationalityPressed] = useState(false);
 
+  // Handler for the press event of the nationality text
   const handleNationalityPress = () => {
     setShowNationalityModal(true);
-    setNationalityPressed(true); // Set to true to keep it blue
+    setNationalityPressed(true);
   };
 
+  // Handlers for the press events of the Yes and No buttons
   const handleNoButtonPress = () => {
-    navigation.navigate('UpgradeUSPerson'); // Navigate to the desired screen
+    navigation.navigate('UpgradeUSPerson');
   };
   const handleYesButtonPress = () => {
-    navigation.navigate('UpgradeIneligibleResident'); // Navigate to the desired screen
+    navigation.navigate('UpgradeIneligibleResident');
   };
 
+  // Titles for different user types
   const titleLimitedCompany =
     'Does your business have tax residency outside of the United Kingdom?';
-
   const titleSoleTrader =
     'Do you have tax residency outside of the United Kingdom?';
+
   // Use AccessibilityInfo to set accessibility focus on the title
   useEffect(() => {
     const title =
@@ -52,30 +56,25 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
     AccessibilityInfo.announceForAccessibility(title);
   }, [userType, titleLimitedCompany, titleSoleTrader]);
 
+  // Styles for the nationality text
   const nationalityTextStyles: TextStyle = {
     ...styles.nationalityText,
     color: nationalityPressed ? Colours.blue : Colours.pink,
     textDecorationLine: 'underline',
   };
 
+  // Function to render content based on the user type
   const renderContent = () => {
-    if (userType === 'limitedCompany') {
-      return (
-        <>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            {titleLimitedCompany}
-          </Text>
-        </>
-      );
-    } else if (userType === 'soleTrader') {
-      return (
-        <>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            {titleSoleTrader}
-          </Text>
-        </>
-      );
-    }
+    const title =
+      userType === 'limitedCompany' ? titleLimitedCompany : titleSoleTrader;
+    return (
+      <Text
+        variant="screenTitle leftAlign"
+        style={{color: textColour}}
+        accessibilityRole="header">
+        {title}
+      </Text>
+    );
   };
 
   return (
@@ -89,15 +88,37 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           style={[
             styles.container,
             {backgroundColor: containerBackgroundColor},
-          ]}>
+          ]}
+          accessibilityRole="summary"
+          accessibilityLabel={
+            userType === 'limitedCompany'
+              ? titleLimitedCompany
+              : titleSoleTrader
+          }>
           {renderContent()}
-          <Pressable onPress={handleNationalityPress}>
-            <Text variant="bodyText" style={nationalityTextStyles}>
+          <Pressable
+            onPress={handleNationalityPress}
+            accessibilityRole="button"
+            accessibilityLabel="Press to learn more about tax residency">
+            <Text
+              variant="bodyText"
+              style={nationalityTextStyles}
+              accessibilityRole="text">
               What is tax residency?
             </Text>
-            <OptionsWithChevron title="Yes" onPress={handleYesButtonPress} />
+            <OptionsWithChevron
+              title="Yes"
+              onPress={handleYesButtonPress}
+              accessibilityRole="button"
+              accessibilityLabel="Select Yes to proceed"
+            />
             <View style={[styles.spaceMedium, styles.separator]} />
-            <OptionsWithChevron title="No" onPress={handleNoButtonPress} />
+            <OptionsWithChevron
+              title="No"
+              onPress={handleNoButtonPress}
+              accessibilityRole="button"
+              accessibilityLabel="Select No to proceed"
+            />
           </Pressable>
         </View>
         <InfoModal
@@ -106,8 +127,8 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           title="What is tax residency?"
           content="The definition of tax residency varies between countries but generally, you’ll be tax resident in the country you live in."
           contentStyle={[
-            {backgroundColor: containerBackgroundColor},
             styles.InfoModalCustomisation,
+            {backgroundColor: containerBackgroundColor},
           ]}
           titleStyle={{color: textColour}}
           bodyTextStyle={{color: textColour}}
@@ -123,7 +144,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   safeAreaContainer: {
-    height: '100%',
+    flex: 1,
   },
   nationalityText: {
     lineHeight: 90,
@@ -133,10 +154,6 @@ const styles = StyleSheet.create({
     width: 327,
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
-  },
-  sectionHeader: {
-    paddingVertical: 15, // Add padding to increase the height
-    marginLeft: 16, // Add marginLeft
   },
   spaceMedium: {
     marginBottom: 15,

@@ -1,5 +1,3 @@
-//UpgradeIntro.tsx
-
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -18,16 +16,16 @@ import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from '../components/UserContext';
+
 type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
 const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
-  // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
   const boxColour = isDarkMode ? Colours.black90 : Colours.black05;
-  // Define the source for the image based on the value of isoletrader
+
   const FSCSImageSource = isDarkMode
     ? require('../assets/FSCSLogo.png')
     : require('../assets/FSCSLightMode.png');
@@ -45,7 +43,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
 
   const handleEmoneyPress = () => {
     setShowEMoneyInfoModal(true);
-    setEmoneyPressed(true); // Set to true to keep it blue
+    setEmoneyPressed(true);
   };
 
   const emoneyTextStyles: TextStyle = {
@@ -55,34 +53,49 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   };
 
   const title = 'Introducing the Mettle bank account';
-  // Use AccessibilityInfo to set accessibility focus on the title
+
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
 
   return (
     <SafeAreaView
+      accessible={true}
+      accessibilityLabel="Upgrade Intro Screen"
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
       ]}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        accessible={true}
+        accessibilityLabel="Upgrade Intro Content">
         <StatusBar backgroundColor="#171B1B" translucent={false} />
         <View style={styles.padding}>
           <Image
             source={MettleLogoImageSource}
             style={styles.largeImage}
             accessibilityLabel="Mettle Bank Account Logo"
+            accessibilityRole="image"
           />
           <Text
+            accessible={true}
+            accessibilityLabel="Upgrade Intro Title"
             variant="headerMedium centerAlign"
             style={[styles.padding, {color: textColour}]}>
             {title}
           </Text>
 
-          <Text variant="bodyText centerAlign" style={{color: textColour}}>
+          <Text
+            accessible={true}
+            accessibilityLabel="Upgrade Intro Text"
+            variant="bodyText centerAlign"
+            style={{color: textColour}}>
             We’ve built a new bank account, which will replace the
-            <Pressable onPress={handleEmoneyPress}>
+            <Pressable
+              onPress={handleEmoneyPress}
+              accessible={true}
+              accessibilityLabel="E-money Pressable">
               <Text variant="bodyText" style={emoneyTextStyles}>
                 {' '}
                 e-money
@@ -92,15 +105,23 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
           </Text>
         </View>
         <View style={styles.section}>
-          <Text variant="headerSmall centerAlign" style={{color: textColour}}>
+          <Text
+            accessible={true}
+            accessibilityLabel="Upgrade Intro Section Header"
+            variant="headerSmall centerAlign"
+            style={{color: textColour}}>
             What’s new?
           </Text>
         </View>
-        <View style={[styles.box, {backgroundColor: boxColour}]}>
+        <View
+          style={[styles.box, {backgroundColor: boxColour}]}
+          accessible={true}
+          accessibilityLabel="Upgrade Intro Box">
           <Image
             source={FSCSImageSource}
             style={styles.fscsLogo}
             accessibilityLabel="FSCS Logo"
+            accessibilityRole="image"
           />
           <Text
             variant="bodyText"
@@ -113,6 +134,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
         <PinkButton
           buttonText="Get started"
           onPress={handleSwitchButtonPress}
+          accessibilityLabel="Get Started Button"
+          testID="getStartedButton"
         />
         {/* E-money Info Modal */}
         <InfoModal
@@ -134,20 +157,16 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     height: '100%',
   },
-
   padding: {
     paddingBottom: 20,
   },
-
   largeImage: {
     margin: 50,
     alignSelf: 'center',
   },
-
   centeredText: {
     textAlign: 'center',
   },
-
   section: {
     marginTop: 20,
   },
@@ -162,23 +181,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 30,
     marginTop: 30,
-  },
-  infoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingRight: 10,
-  },
-  bodyTextWithImage: {
-    width: '90%',
-    textAlign: 'left',
-    fontSize: 16,
-    lineHeight: 21,
-  },
-  infoIcon: {
-    width: 32,
-    height: 32,
-    alignSelf: 'flex-end',
   },
   emoneyText: {
     lineHeight: 90,

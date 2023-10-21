@@ -1,15 +1,15 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import UpgradedEmailScreen from '../UpgradedEmail';
+import UpgradeNationalityScreen from '../UpgradeNationality';
+import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import UserContextProvider from '../../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
 
-describe('UpgradedEmailScreen', () => {
+describe('UpgradeNationalityScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'UpgradedEmail'
+    'UpgradeNationality'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -29,46 +29,46 @@ describe('UpgradedEmailScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
-  it('renders correctly', () => {
-    render(
-      <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-  });
-
-  it('checks if the title is rendered', () => {
+  test('renders title based on userType', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByText('Look out for an email from us')).toBeTruthy();
+    expect(
+      getByText('Do you have tax residency outside of the United Kingdom?'),
+    ).toBeDefined();
   });
 
-  it('checks if the buttons are clickable', () => {
+  test('handles press event for Yes button', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const gotItButton = getByText('Got it');
-    const openEmailButton = getByText('Open email app');
-
-    fireEvent.press(gotItButton);
-    fireEvent.press(openEmailButton);
+    fireEvent.press(getByText('Yes'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith(
+      'UpgradeIneligibleResident',
+    );
   });
 
-  it('checks if list items are rendered', () => {
-    const {getByLabelText} = render(
+  test('handles press event for No button', () => {
+    const {getByText} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByLabelText('Scheduled payments')).toBeTruthy();
-    expect(getByLabelText('Direct Debits')).toBeTruthy();
-    expect(getByLabelText('Unpaid invoices')).toBeTruthy();
-    expect(getByLabelText('Share bank details')).toBeTruthy();
+    fireEvent.press(getByText('No'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeUSPerson');
+  });
+
+  test('displays "What is tax residency?" text', () => {
+    const {getByText} = render(
+      <UserContextProvider>
+        <UpgradeNationalityScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(getByText('What is tax residency?')).toBeDefined();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -81,7 +81,7 @@ describe('UpgradedEmailScreen', () => {
 
     render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
   });

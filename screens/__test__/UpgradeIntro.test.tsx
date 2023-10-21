@@ -1,15 +1,23 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import UpgradedEmailScreen from '../UpgradedEmail';
+import UpgradeIntroScreen from '../UpgradeIntro';
+import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import UserContextProvider from '../../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
 
-describe('UpgradedEmailScreen', () => {
+(global as any).setImmediate = (callback: any, ...args: any[]) => {
+  return setTimeout(callback, 0, ...args);
+};
+
+(global as any).clearImmediate = (timeoutId: NodeJS.Timeout) => {
+  return clearTimeout(timeoutId);
+};
+
+describe('UpgradeIntroScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'UpgradedEmail'
+    'UpgradeIntro'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -32,43 +40,40 @@ describe('UpgradedEmailScreen', () => {
   it('renders correctly', () => {
     render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
   });
 
-  it('checks if the title is rendered', () => {
+  it('displays the title correctly', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByText('Look out for an email from us')).toBeTruthy();
+    expect(getByText('Introducing the Mettle bank account')).toBeTruthy();
   });
 
-  it('checks if the buttons are clickable', () => {
-    const {getByText} = render(
+  it('calls the handleSwitchButtonPress function on button press', () => {
+    const {getByTestId} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const gotItButton = getByText('Got it');
-    const openEmailButton = getByText('Open email app');
-
-    fireEvent.press(gotItButton);
-    fireEvent.press(openEmailButton);
+    const button = getByTestId('getStartedButton');
+    fireEvent.press(button);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen1');
   });
 
-  it('checks if list items are rendered', () => {
-    const {getByLabelText} = render(
+  it('opens the e-money info modal on press', () => {
+    const {getByLabelText, getByText} = render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByLabelText('Scheduled payments')).toBeTruthy();
-    expect(getByLabelText('Direct Debits')).toBeTruthy();
-    expect(getByLabelText('Unpaid invoices')).toBeTruthy();
-    expect(getByLabelText('Share bank details')).toBeTruthy();
+    const emoneyPressable = getByLabelText('E-money Pressable');
+    fireEvent.press(emoneyPressable);
+    expect(getByText('Your e-money account')).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -81,7 +86,7 @@ describe('UpgradedEmailScreen', () => {
 
     render(
       <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
+        <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
   });

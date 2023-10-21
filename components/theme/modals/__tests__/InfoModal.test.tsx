@@ -2,6 +2,7 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import InfoModal from '../InfoModal';
 import {getByTestId} from '@testing-library/react';
+import UserContextProvider from '../../../UserContext';
 
 describe('InfoModal', () => {
   const mockProps = {
@@ -16,19 +17,31 @@ describe('InfoModal', () => {
   };
 
   it('renders with the correct title and content', () => {
-    const {getByText} = render(<InfoModal {...mockProps} />);
+    const {getByText} = render(
+      <UserContextProvider>
+        <InfoModal {...mockProps} />
+      </UserContextProvider>,
+    );
     expect(getByText('Test Title')).toBeTruthy();
     expect(getByText('Test Content')).toBeTruthy();
   });
 
   it('calls onPressClose when the close icon is pressed', () => {
-    const {getByTestId} = render(<InfoModal {...mockProps} />);
+    const {getByTestId} = render(
+      <UserContextProvider>
+        <InfoModal {...mockProps} />
+      </UserContextProvider>,
+    );
     fireEvent.press(getByTestId('CloseIcon'));
     expect(mockProps.onPressClose).toHaveBeenCalled();
   });
 
   it('has the correct accessibility attributes for the close icon', () => {
-    const {getByTestId} = render(<InfoModal {...mockProps} />);
+    const {getByTestId} = render(
+      <UserContextProvider>
+        <InfoModal {...mockProps} />
+      </UserContextProvider>,
+    );
     const closeIcon = getByTestId('CloseIcon');
     expect(closeIcon).toBeTruthy();
     expect(closeIcon.props.accessible).toEqual(true);

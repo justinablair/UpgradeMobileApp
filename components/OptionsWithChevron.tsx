@@ -1,5 +1,10 @@
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  AccessibilityRole,
+} from 'react-native';
 import Text from '../components/Text';
 import {ChevronRightIcon} from '../components/theme/icons/ChevronRight';
 import Colours from '../components/theme/Colour';
@@ -9,12 +14,16 @@ interface OptionsWithChevronProps {
   title: string;
   description?: string;
   onPress: () => void;
+  accessibilityRole?: AccessibilityRole | string;
+  accessibilityLabel?: string;
 }
 
 const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
   title,
   description,
   onPress,
+  accessibilityRole,
+  accessibilityLabel,
 }) => {
   // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
@@ -28,7 +37,8 @@ const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
       onPress={onPress}
       testID="OptionsButton"
       accessible={true}
-      accessibilityRole="button">
+      accessibilityRole={accessibilityRole}
+      accessibilityLabel={accessibilityLabel}>
       {/* Option Content */}
       <View style={styles.optionContent} testID="OptionContent">
         {/* Title Text */}
