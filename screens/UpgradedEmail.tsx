@@ -118,21 +118,21 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             text="Set up scheduled payments"
             textStyle={{color: textColour}}
             accessible={true}
-            accessibilityRole="listItem"
+            accessibilityRole="text"
             accessibilityLabel="Scheduled payments"
           />
           <ListItem
             text="Set up Direct Debits"
             textStyle={{color: textColour}}
             accessible={true}
-            accessibilityRole="listItem"
+            accessibilityRole="text"
             accessibilityLabel="Direct Debits"
           />
           <ListItem
             text="Re-create unpaid invoices"
             textStyle={{color: textColour}}
             accessible={true}
-            accessibilityRole="listItem"
+            accessibilityRole="text"
             accessibilityLabel="Unpaid invoices"
           />
           <ListItem
@@ -140,7 +140,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             text="Share your new bank details"
             description="You can find these at any time in the Account tab"
             accessible={true}
-            accessibilityRole="listItem"
+            accessibilityRole="text"
             accessibilityLabel="Share bank details"
           />
           {/* Conditionally render the toasts */}
