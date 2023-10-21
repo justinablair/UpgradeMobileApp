@@ -1,39 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {View, Modal, TouchableOpacity, StyleSheet} from 'react-native';
 import Colours from '../Colour';
-import Text from '../../Text';
 import {PinBackIcon} from '../icons/PinbackIcon';
+import Text from '../../Text';
 
 interface AuthModalProps {
   visible: boolean;
-  onNext?: () => void; // Make onNext callback optional
+  navigation: any;
+  onNext?: (code: string) => void;
   onClose: () => void;
-  onDigitsEntered?: () => void; // Make onDigitsEntered callback optional
 }
 const AuthModal: React.FC<AuthModalProps> = ({
   visible,
   onClose,
-  onDigitsEntered,
-  onNext,
+  navigation,
 }) => {
   const [code, setCode] = useState('');
   const [selectedCount, setSelectedCount] = useState(0);
 
   useEffect(() => {
-    if (selectedCount === 6 && code.length === 6) {
-      if (onNext) {
-        onNext(); // Call onNext if provided
-      }
-      if (onDigitsEntered) {
-        onDigitsEntered(); // Call onDigitsEntered if provided
-      }
-      if (code.length === 6) {
-        // Check if code length is 6
-        onClose(); // Close the modal if code length is 6
-      }
+    if (selectedCount === 6) {
+      navigation.navigate('UpgradeStarted');
+      onClose();
     }
-  }, [selectedCount, onNext, onDigitsEntered, onClose]);
-
+  }, [selectedCount, navigation, onClose]);
   const handleDigitPress = (digit: number) => {
     if (selectedCount < 6) {
       setCode(prevCode => prevCode + digit.toString());
@@ -49,28 +39,17 @@ const AuthModal: React.FC<AuthModalProps> = ({
   };
   return (
     <Modal transparent={true} visible={visible}>
-      <View
-        style={styles.modalContainer}
-        accessible={true}
-        accessibilityLabel="Authentication Modal"
-        accessibilityRole="alert">
-        <View style={styles.modalContent}>
-          <View style={styles.space} /> {/* Title of the modal */}
-          <Text
-            variant="screenTitle"
-            style={{color: Colours.white}}
-            accessibilityLabel="Authentication Screen Title"
-            accessibilityRole="text">
+      <View style={styles.modalContainer}>
+        <View
+          style={styles.modalContent}
+          accessibilityLabel="Authentication Modal">
+          <View style={styles.space} />
+          <Text variant="screenTitle" style={{color: Colours.white}}>
             Authorise
           </Text>
           <View style={styles.space} />
-          {/* Display the dots representing the pin */}
-          <View
-            style={styles.dotsContainer}
-            accessible={true}
-            accessibilityLabel="Authentication Pin Container"
-            accessibilityRole="alert"
-            accessibilityState={{busy: true}}>
+
+          <View style={styles.dotsContainer}>
             {/* Display 6 dots */}
             {Array.from({length: 6}).map((_, index) => (
               <View
@@ -82,120 +61,86 @@ const AuthModal: React.FC<AuthModalProps> = ({
               />
             ))}
           </View>
+
           <View style={styles.space} />
-          {/* Display the grid of digits */}
+
           <View style={styles.gridContainer}>
-            {/* Rows of digits 1-3 */}
+            {/* Display numbers 1-9 and 0 in a grid */}
             <View style={styles.row}>
               <TouchableOpacity
                 style={styles.gridItem}
-                onPress={() => handleDigitPress(1)}
-                accessibilityRole="button">
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-1">
+                onPress={() => handleDigitPress(1)}>
+                <Text style={styles.gridText} accessibilityLabel="digit-1">
                   1
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(2)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-2">
+                <Text style={styles.gridText} accessibilityLabel="digit-2">
                   2
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(3)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-3">
+                <Text style={styles.gridText} accessibilityLabel="digit-3">
                   3
                 </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.row}>
-              {/* Rows of digits 4-6 */}
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(4)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-4">
+                <Text style={styles.gridText} accessibilityLabel="digit-4">
                   4
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(5)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-5">
+                <Text style={styles.gridText} accessibilityLabel="digit-5">
                   5
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(6)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-6">
+                <Text style={styles.gridText} accessibilityLabel="digit-6">
                   6
                 </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.row}>
-              {/* Rows of digits 7-9 */}
-
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(7)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-7">
+                <Text style={styles.gridText} accessibilityLabel="digit-7">
                   7
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(8)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-8">
+                <Text style={styles.gridText} accessibilityLabel="digit-8">
                   8
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(9)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-9">
+                <Text style={styles.gridText} accessibilityLabel="digit-9">
                   9
                 </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.row}>
               <View style={styles.gridItem} />
-              {/* Row with the digit 0 and backspace button */}
               <TouchableOpacity
                 style={styles.gridItem}
                 onPress={() => handleDigitPress(0)}>
-                <Text
-                  style={styles.gridText}
-                  accessibilityRole="keyboardkey"
-                  accessibilityLabel="digit-0">
+                <Text style={styles.gridText} accessibilityLabel="digit-0">
                   0
                 </Text>
               </TouchableOpacity>

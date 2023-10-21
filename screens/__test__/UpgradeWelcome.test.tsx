@@ -4,9 +4,7 @@ import UpgradedWelcomeScreen from '../UpgradedWelcome';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
-import {getAllByRole} from '@testing-library/react';
 import {AccessibilityInfo} from 'react-native';
-import UpgradeConsentsScreen from '../UpgradeConsents';
 
 describe('UpgradedWelcomeScreen', () => {
   const mockNavigation: StackNavigationProp<

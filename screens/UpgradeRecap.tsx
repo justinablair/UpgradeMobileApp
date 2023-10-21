@@ -1,3 +1,4 @@
+//UpgradeRecap.tsx
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -24,10 +25,10 @@ import ExitModal from '../components/theme/modals/ExitModal';
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
 
 const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
   const backgroundColour = isDarkMode ? Colours.black : Colours.white;
 
-  const [isExitModalVisible, setExitModalVisible] = React.useState(false); // Add state for controlling the visibility of the exit modal
+  const [isExitModalVisible, setExitModalVisible] = useState(false);
 
   const title = isDarkMode ? Colours.white : Colours.black;
 
@@ -52,7 +53,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
   };
 
   const handlePinkButtonPress = () => {
-    toggleModal(); // Open the AuthModal
+    toggleModal();
   };
 
   const closeAuthModal = () => {
@@ -64,7 +65,6 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
   const youDoTitle = 'What you’ll need to do after the switch';
   const newAccountTitle = 'How your new account will work';
 
-  // Use AccessibilityInfo to set accessibility focus on the titles
   useEffect(() => {
     let titleToAnnounce = mainTitle;
     if (changesWeDoVisible) {
@@ -87,14 +87,19 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContainer} // Added contentContainerStyle
-      >
-        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}
+      accessibilityRole="summary"
+      accessibilityLabel="Upgrade Recap Screen Summary">
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View
+          style={[styles.container, {backgroundColor: backgroundColour}]}
+          accessibilityRole="summary">
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}>
+            onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Toggle Changes We Do Section">
             <Text
               variant="screenTitle leftAlign"
               style={{color: title, marginRight: 13, paddingBottom: 10}}>
@@ -113,7 +118,10 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           {changesWeDoVisible && <ChangesWeDo />}
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setChangesYouDoVisible(!changesYouDoVisible)}>
+            onPress={() => setChangesYouDoVisible(!changesYouDoVisible)}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Toggle Changes You Do Section">
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
@@ -127,7 +135,10 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           {changesYouDoVisible && <ChangesYouDo />}
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setNewAccountVisible(!newAccountVisible)}>
+            onPress={() => setNewAccountVisible(!newAccountVisible)}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Toggle New Account Section">
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
@@ -141,11 +152,24 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           {newAccountVisible && <NewAccount />}
         </View>
         <View style={styles.buttonContainer}>
-          <WhiteButton buttonText="I'm not sure" onPress={exitModalVisible} />
-          <PinkButton buttonText="Switch now" onPress={handlePinkButtonPress} />
+          <WhiteButton
+            buttonText="I'm not sure"
+            onPress={exitModalVisible}
+            accessibilityLabel="Select if you are not sure"
+            testID="notSureButton"
+          />
+          <PinkButton
+            buttonText="Switch now"
+            onPress={handlePinkButtonPress}
+            accessibilityLabel="Select to switch now"
+            testID="switchNow"
+          />
         </View>
-        <TouchableOpacity onPress={() => setModalVisible(true)} />
-        {/* Render the authentication modal */}
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          accessible={true}
+          accessibilityRole="button"
+        />
         <AuthModal
           visible={modalVisible}
           navigation={navigation}
@@ -153,11 +177,13 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           onClose={onClose}
         />
         <ExitModal
-          visible={isExitModalVisible} // Pass the visibility state
-          onPressClose={() => setExitModalVisible(false)} // Close the modal
+          visible={isExitModalVisible}
+          onPressClose={() => setExitModalVisible(false)}
           title="Are you sure you want to quit?"
           content="Your progress won't be saved"
-          toggleExitModal={() => setExitModalVisible(!isExitModalVisible)} // Pass the toggle function
+          toggleExitModal={() => setExitModalVisible(!isExitModalVisible)}
+          accessibilityLabel="Exit Modal"
+          testID="exitModal"
         />
       </ScrollView>
     </SafeAreaView>
@@ -176,7 +202,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     flexGrow: 1,
-    justifyContent: 'space-between', // Arrange items vertically with space between
+    justifyContent: 'space-between',
   },
   space: {
     marginVertical: 8,
@@ -189,8 +215,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    alignItems: 'center', // Center the buttons horizontally
-    marginBottom: 16, // Add some bottom margin for spacing
+    alignItems: 'center',
+    marginBottom: 16,
   },
 });
 

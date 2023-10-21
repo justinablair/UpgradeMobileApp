@@ -1,9 +1,32 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import AuthModal from '../AuthModal';
-import {getByText} from '@testing-library/react';
+import {RootStackParamList} from '../../../../navigationTypes';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 describe('AuthModal component', () => {
+  const mockNavigation: StackNavigationProp<
+    RootStackParamList,
+    'PersonalDetails'
+  > = {
+    navigate: jest.fn(),
+    goBack: jest.fn(),
+    dispatch: jest.fn(),
+    setParams: jest.fn(),
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    canGoBack: () => true,
+    isFocused: () => true,
+    push: jest.fn(),
+    replace: jest.fn(),
+    pop: jest.fn(),
+    popToTop: jest.fn(),
+    setOptions: jest.fn(),
+    reset: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn(),
+    getId: jest.fn(),
+  };
   jest.setTimeout(10000); // Set the test timeout to 10000 ms or as needed
 
   it('should render properly', () => {
@@ -40,7 +63,11 @@ describe('AuthModal component', () => {
   it('should handle modal close correctly', () => {
     const mockOnClose = jest.fn();
     const {getByLabelText} = render(
-      <AuthModal visible={true} onClose={mockOnClose} />,
+      <AuthModal
+        visible={true}
+        onClose={mockOnClose}
+        navigation={mockNavigation}
+      />,
     );
     const digitButtons = [...Array(6).keys()].map(num =>
       getByLabelText(`digit-${num}`),
