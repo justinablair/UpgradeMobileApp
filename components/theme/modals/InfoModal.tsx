@@ -7,7 +7,8 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import {CloseIcon} from '../icons/CloseIcon';
+import {useUserContext} from '../../UserContext';
+import Colours from '../Colour';
 
 interface InfoModalProps {
   visible: boolean;
@@ -30,6 +31,12 @@ const InfoModal: React.FC<InfoModalProps> = ({
   titleStyle,
   bodyTextStyle,
 }) => {
+  const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
+
+  // Style configurations
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View
@@ -41,7 +48,11 @@ const InfoModal: React.FC<InfoModalProps> = ({
         <View>
           {/* Modal Content */}
           <View
-            style={[styles.modalContent, contentStyle]}
+            style={[
+              styles.modalContent,
+              contentStyle,
+              {backgroundColor: containerBackgroundColor},
+            ]}
             accessible={true}
             accessibilityLabel="Info Modal Content"
             testID="InfoModalContent"
@@ -58,11 +69,13 @@ const InfoModal: React.FC<InfoModalProps> = ({
               />
             </TouchableOpacity>
             <Text
-              style={[styles.modalTitle, titleStyle]}
+              style={[styles.modalTitle, titleStyle, {color: textColour}]}
               accessibilityRole="header">
               {title}
             </Text>
-            <Text style={[styles.bodyText, bodyTextStyle]}>{content}</Text>
+            <Text style={[styles.bodyText, {color: textColour}]}>
+              {content}
+            </Text>
           </View>
         </View>
       </View>
@@ -79,7 +92,6 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: '#454949',
     width: '90%',
     maxHeight: '100%',
     borderRadius: 8,
@@ -92,7 +104,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 26,
     marginBottom: 10,
-    color: 'white',
     fontWeight: '500',
   },
   modalCloseIcon: {
