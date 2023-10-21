@@ -80,7 +80,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
         <AuthModal
           visible={authModalVisible}
           onClose={onCloseAuthModal}
-          navigation={navigation}
+          // navigation={navigation}
           onNext={handleAuthModalNext}
         />
       </View>

@@ -1,20 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SafeAreaView, AccessibilityInfo} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
-
 import {NavigationProps} from '../navigationTypes';
-import {ScrollView} from 'react-native-gesture-handler';
+import {useUserContext} from '../components/UserContext';
 import Colours from '../components/theme/Colour';
 import ListItem from '../components/ListItem';
 import Toast from '../components/Toast';
 import WhiteButton from '../components/theme/buttons/WhiteButton';
-import {useUserContext} from '../components/UserContext';
 
 type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 
 const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
-  const {isDarkMode} = useUserContext(); // Access isDarkMode from context
+  const {isDarkMode} = useUserContext();
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
@@ -23,26 +27,23 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
   const [showOpenMailToast, setShowOpenMailToast] = useState(false);
 
   const bankAccountToast = () => {
-    return <Toast message="This would navigate to the users bank account" />;
+    return <Toast message="Would navigate to the bank account" />;
   };
+
   const openMailToast = () => {
-    return <Toast message="This would navigate to the users mail app" />;
+    return <Toast message="Would navigate to the mail app" />;
   };
 
   useEffect(() => {
-    // Close the bank account toast after 5 seconds
     if (showBankAccountToast) {
       const bankAccountToastTimer = setTimeout(() => {
         setShowBankAccountToast(false);
       }, 2000);
-
-      // Clear the timer when the component unmounts or if the other button is clicked
       return () => clearTimeout(bankAccountToastTimer);
     }
   }, [showBankAccountToast]);
 
   useEffect(() => {
-    // Close the open mail toast after 5 seconds
     if (showOpenMailToast) {
       const openMailToastTimer = setTimeout(() => {
         setShowOpenMailToast(false);
@@ -52,7 +53,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
   }, [showOpenMailToast]);
 
   const title = 'Look out for an email from us';
-  // Use AccessibilityInfo to set accessibility focus on the title
+
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
@@ -62,67 +63,110 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
+      ]}
+      accessible={true}
+      accessibilityLabel="Email screen"
+      accessibilityRole="summary">
       <ScrollView>
         <View
           style={[
             styles.safeAreaContainer,
             {backgroundColor: containerBackgroundColor},
           ]}>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+          {/* Title section */}
+          <Text
+            variant="screenTitle leftAlign"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityRole="header"
+            accessibilityLabel="Email title">
             {title}
           </Text>
-          <Text variant="bodyText" style={{color: textColour}}>
+
+          {/* Body text */}
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityRole="text"
+            accessibilityLabel="Email body">
             If you haven’t received it already, we’re sending you an email with
             scheduled payment and Direct Debit information from your old
             account.{'\n\n'} You can also message us via in-app chat, we’re
             happy to help!
           </Text>
+
+          {/* Important instructions */}
           <View style={styles.spaceMedium} />
-          <Text variant="bodyText bodyTextBold" style={{color: textColour}}>
+          <Text
+            variant="bodyText bodyTextBold"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="Important instructions">
             Important things you’ll need to do:
           </Text>
           <Text
             variant="bodyText bodyTextBold"
-            style={{color: Colours.black60}}>
+            style={{color: Colours.black60}}
+            accessible={true}
+            accessibilityLabel="Email instructions">
             You can find all this in the email
           </Text>
+
+          {/* List items */}
           <ListItem
             text="Set up scheduled payments"
             textStyle={{color: textColour}}
+            accessible={true}
+            accessibilityRole="listItem"
+            accessibilityLabel="Scheduled payments"
           />
           <ListItem
             text="Set up Direct Debits"
             textStyle={{color: textColour}}
+            accessible={true}
+            accessibilityRole="listItem"
+            accessibilityLabel="Direct Debits"
           />
           <ListItem
             text="Re-create unpaid invoices"
             textStyle={{color: textColour}}
+            accessible={true}
+            accessibilityRole="listItem"
+            accessibilityLabel="Unpaid invoices"
           />
           <ListItem
             textStyle={{color: textColour}}
             text="Share your new bank details"
             description="You can find these at any time in the Account tab"
+            accessible={true}
+            accessibilityRole="listItem"
+            accessibilityLabel="Share bank details"
           />
           {/* Conditionally render the toasts */}
           {showBankAccountToast && bankAccountToast()}
           {showOpenMailToast && openMailToast()}
-          <WhiteButton
-            buttonText="Got it"
-            onPress={() => {
-              setShowBankAccountToast(true);
-              setShowOpenMailToast(false); // Close the open mail toast if it's open
-            }}
-          />
-          <PinkButton
-            buttonText="Open email app"
-            onPress={() => {
-              setShowOpenMailToast(true);
-              setShowBankAccountToast(false); // Close the bank account toast if it's open
-            }}
-          />
+
+          {/* Buttons */}
         </View>
       </ScrollView>
+      <WhiteButton
+        buttonText="Got it"
+        onPress={() => {
+          setShowBankAccountToast(true);
+          setShowOpenMailToast(false);
+        }}
+        accessibilityLabel="Got it button"
+      />
+      <PinkButton
+        buttonText="Open email app"
+        onPress={() => {
+          setShowOpenMailToast(true);
+          setShowBankAccountToast(false);
+        }}
+        accessibilityLabel="Open email app button"
+      />
+      <View style={styles.spaceMedium}></View>
     </SafeAreaView>
   );
 };

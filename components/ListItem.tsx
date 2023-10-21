@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextStyle} from 'react-native';
+import {View, StyleSheet, TextStyle, AccessibilityRole} from 'react-native';
 import GreenTickSvg from '../components/theme/icons/GreenTickIcon';
 import Text from '../components/Text';
 import Colours from './theme/Colour';
@@ -9,6 +9,9 @@ type ListItemProps = {
   fill?: string;
   description?: string;
   textStyle?: TextStyle;
+  accessibilityLabel?: string;
+  accessibilityRole?: AccessibilityRole;
+  accessible?: boolean;
 };
 
 // ListItem component renders a single list item with a green tick and text
@@ -17,9 +20,17 @@ const ListItem: React.FC<ListItemProps> = ({
   fill,
   description,
   textStyle,
+  accessibilityLabel,
+  accessibilityRole,
+  accessible,
 }) => (
   // Outer container for the list item
-  <View style={styles.container} testID="ListItem">
+  <View
+    style={styles.container}
+    testID="ListItem"
+    accessible={accessible}
+    accessibilityLabel={accessibilityLabel}
+    accessibilityRole={accessibilityRole}>
     {/* Container for the green tick icon */}
     <View
       style={styles.tickContainer}

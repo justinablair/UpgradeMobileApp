@@ -13,8 +13,10 @@ import {NavigationProps} from '../navigationTypes';
 import ChangesYouDo from './Common/ChangesYouDo';
 import Colours from '../components/theme/Colour';
 
+// Define type for the props
 type UpgradeChangesYouDoProps = NavigationProps<'UpgradeChangesYouDo'>;
 
+// Component definition
 const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
   navigation,
 }) => {
@@ -25,43 +27,51 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
   const backgroundColor = isDarkMode ? Colours.black : Colours.white;
   const titleColor = isDarkMode ? Colours.white : Colours.black;
 
-  // Function to handle button press
+  // Function to handle button press and navigate to the next screen
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeChangesNewAccount');
   };
 
   // Use AccessibilityInfo to set accessibility focus on the title
+  const title = 'What you’ll need to do after the switch';
   useEffect(() => {
-    AccessibilityInfo.announceForAccessibility(
-      'What you’ll need to do after the switch',
-    );
-  }, []);
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
 
+  // Component JSX
   return (
     <SafeAreaView
       style={[styles.safeAreaContainer, {backgroundColor}]}
-      accessibilityRole="none">
+      accessibilityRole="summary">
       <ScrollView>
         <View
           style={[styles.container, {backgroundColor}]}
           accessible
-          accessibilityRole="text">
+          accessibilityRole="summary">
+          {/* Title Section */}
           <View style={styles.titleContainer}>
             <Text
               variant="screenTitle centreAlign"
               style={{color: titleColor}}
               accessible
               accessibilityRole="header"
-              accessibilityLabel="Changes You Need to Make After the Switch">
-              What you’ll need to do after the switch
+              accessibilityLabel="What you’ll need to do after the switch.">
+              {title}
             </Text>
           </View>
+
+          {/* Space */}
           <View style={styles.space} />
+
+          {/* Changes You Do Component */}
           <ChangesYouDo />
+
+          {/* Next Button */}
           <PinkButton
             buttonText="Next"
             onPress={handleSwitchButtonPress}
             accessibilityLabel="Proceed to the next step"
+            testID="nextButton"
           />
         </View>
       </ScrollView>
@@ -69,6 +79,7 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
   );
 };
 
+// Styles for the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,

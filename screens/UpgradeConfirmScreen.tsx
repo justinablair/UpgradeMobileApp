@@ -5,15 +5,13 @@ import {
   Image,
   SafeAreaView,
   AccessibilityInfo,
+  ScrollView,
 } from 'react-native';
 import Text from '../components/Text';
-
 import {NavigationProps} from '../navigationTypes';
-import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 import PinkButton from '../components/theme/buttons/PinkButton';
-import Colour from '../components/theme/Colour';
-import {useUserContext} from '../components/UserContext'; // Import the user context
+import {useUserContext} from '../components/UserContext';
 
 type UpgradeConfirmProps = NavigationProps<'UpgradeConfirm'>;
 
@@ -28,7 +26,7 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
   };
 
   const title = 'Ready to switch?';
-  // Use AccessibilityInfo to set accessibility focus on the title
+
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
@@ -38,37 +36,55 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
-      <View style={{flex: 1}}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View
-            style={[
-              styles.container,
-              {backgroundColor: containerBackgroundColor},
-            ]}>
-            <Image
-              source={require('../assets/SwitchArrows.png')}
-              style={styles.largeImage}
-              accessibilityLabel="Switch arrows image"
-            />
-            <Text variant="screenTitle centerAlign" style={{color: textColour}}>
-              {title}
-            </Text>
-            <Text variant="bodyText centerAlign" style={{color: textColour}}>
-              We’ll open your new account and move your money. We’ll also close
-              your e-money account.{'\n'}
-            </Text>
-            <Text variant="bodyText centerAlign" style={{color: Colour.pink}}>
-              Only do this if you’re ready. We can’t undo it once we’ve started.
-            </Text>
-          </View>
-        </ScrollView>
-        <View style={styles.bottomButtonContainer}>
-          <PinkButton
-            buttonText="View recap of changes"
-            onPress={handleSwitchButtonPress}
+      ]}
+      accessible={true}
+      accessibilityRole="alert">
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: containerBackgroundColor},
+          ]}
+          accessible={true}
+          accessibilityLabel="Upgrade Confirm Screen"
+          accessibilityRole="summary">
+          <Image
+            source={require('../assets/SwitchArrows.png')}
+            style={styles.largeImage}
+            accessibilityLabel="Switch arrows image"
+            accessible={true}
+            accessibilityRole="image"
           />
+          <Text variant="screenTitle centerAlign" style={{color: textColour}}>
+            {title}
+          </Text>
+          <Text
+            variant="bodyText centerAlign"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityRole="text">
+            We’ll open your new account and move your money. We’ll also close
+            your e-money account.{'\n'}
+          </Text>
+          <Text
+            variant="bodyText centerAlign"
+            style={{color: Colours.pink}}
+            accessible={true}
+            accessibilityRole="text">
+            Only do this if you’re ready. We can’t undo it once we’ve started.
+          </Text>
         </View>
+      </ScrollView>
+      <View
+        style={styles.bottomButtonContainer}
+        accessible={true}
+        accessibilityRole="button">
+        <PinkButton
+          buttonText="View recap of changes"
+          onPress={handleSwitchButtonPress}
+          accessibilityLabel="Switch Recap Button"
+          testID="switchRecapButton"
+        />
       </View>
     </SafeAreaView>
   );
@@ -82,16 +98,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     marginTop: 50,
-  },
-  modal: {
-    backgroundColor: Colours.white,
-    color: Colours.black,
-  },
-  spaceMedium: {
-    marginBottom: 15,
-  },
-  InfoModalCustomisation: {
-    margin: 50,
   },
   largeImage: {
     width: 210,
