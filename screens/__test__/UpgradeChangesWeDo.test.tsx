@@ -4,7 +4,6 @@ import UpgradeChangesWeDoScreen from '../UpgradeChangesWeDo';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
 import {AccessibilityInfo} from 'react-native';
 
 describe('UpgradeChangesWeDoScreen', () => {
