@@ -28,6 +28,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   const textColour = isDarkMode ? Colours.white : Colours.black;
   const boxColour = isDarkMode ? Colours.black90 : Colours.black05;
 
+  const title = 'Introducing the Mettle bank account';
+
   const FSCSImageSource = isDarkMode
     ? require('../assets/FSCSLogo.png')
     : require('../assets/FSCSLightMode.png');
@@ -53,8 +55,6 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
     color: emoneyPressed ? Colours.blue : Colours.pink,
     textDecorationLine: 'underline',
   };
-
-  const title = 'Introducing the Mettle bank account';
 
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);

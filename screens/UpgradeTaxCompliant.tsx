@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SafeAreaView, AccessibilityInfo} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../components/toggles/CheckboxToggle'; // Import the CheckboxToggle component
 
 import {NavigationProps} from '../navigationTypes';
-import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
 
 type UpgradeTaxCompliantProps = NavigationProps<'UpgradeTaxCompliant'>;
@@ -24,43 +29,56 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   };
 
   const title = 'Are you tax compliant?';
-  // Use AccessibilityInfo to set accessibility focus on the title
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
-          <Text variant="screenTitle leftAlign" style={{color: Colours.black}}>
+          <Text
+            variant="screenTitle leftAlign"
+            style={{color: Colours.black}}
+            accessibilityRole="header"
+            accessibilityLabel="Tax Compliance Check">
             {title}
           </Text>
           <Text
             variant="bodyText leftAlign"
-            style={[{color: Colours.black}, styles.space]}>
+            style={[{color: Colours.black}, styles.space]}
+            accessibilityRole="text"
+            accessibilityLabel="Tax Compliance Description">
             This means that you've not previously evaded tax and are not engaged
             in any tax avoidance arrangements.
           </Text>
 
           <View style={styles.space} />
-          {/* Place the CheckboxToggle component and text */}
-          <View style={styles.checkboxContainer}>
-            <Text variant="bodyText" style={styles.checkboxText}>
+          <View style={styles.flex} />
+          <View style={styles.checkboxContainer} accessibilityRole="checkbox">
+            <Text
+              variant="bodyText"
+              style={styles.checkboxText}
+              accessibilityLabel="Tax Compliance Confirmation Text">
               I confirm that I am tax compliant
             </Text>
             <CheckboxToggle
               checked={isChecked}
               onToggle={handleCheckboxToggle}
+              accessibilityRole="button"
+              accessibilityLabel="Checkbox Toggle"
+              testID="checkboxToggle"
             />
           </View>
-
-          <View style={styles.space} />
-          <PinkButton
-            buttonText="Next"
-            onPress={handleSwitchButtonPress}
-            disabled={!isChecked}
-          />
+          <View style={styles.buttonContainer}>
+            <PinkButton
+              buttonText="Next"
+              onPress={handleSwitchButtonPress}
+              disabled={!isChecked}
+              accessibilityLabel="Next Button"
+              testID="nextButton"
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -73,7 +91,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colours.white,
     padding: 16,
   },
-
   space: {
     marginVertical: 8,
   },
@@ -86,6 +103,16 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     color: Colours.black,
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 0.1,
+    justifyContent: 'flex-end',
   },
   safeAreaContainer: {
     backgroundColor: Colours.white,
