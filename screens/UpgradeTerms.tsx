@@ -24,26 +24,34 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
+  // Open the terms link in a browser
   const openTermsLink = () => {
     Linking.openURL(
       'https://www.mettle.co.uk/docs/mettle-natwest-app-terms-and-conditions/1.1.pdf',
     );
   };
 
+  // Open the privacy link in a browser
   const openPrivacyLink = () => {
     Linking.openURL(
       'https://www.mettle.co.uk/docs/mettle-natwest-privacy-notice/1.1.pdf',
     );
   };
+
+  // Navigate to the desired screen
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeConsents'); // Navigate to the desired screen
   };
 
+  // Render the content based on the user type
   const renderContent = () => {
     if (userType === 'limitedCompany') {
       return (
         <>
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessibilityRole="text">
             To switch from an e-money account to a Mettle bank account, you must
             be a director of {businessName}.
           </Text>
@@ -54,7 +62,10 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
             description="Just like before, as the person opening the account, you’ll be the only one with access."
           />
           <View style={styles.spaceLarge} />
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessibilityRole="text">
             By tapping ‘Agree’ you’re confirming that:{'\n\n'}1. You’re
             authorised by {businessName} to switch to a Mettle bank account and
             agree to our Terms.{'\n\n'}2. {businessName} has taken all actions
@@ -68,7 +79,10 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
     } else if (userType === 'soleTrader') {
       return (
         <>
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessibilityRole="text">
             Take your time to read these documents. By tapping ‘Agree’, you’re
             agreeing to our Terms.{'\n\n'}Take a moment to read our Privacy
             Notice. It explains how we collect and use your personal data.
@@ -77,6 +91,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
       );
     }
   };
+
   const title = 'Terms and Privacy Notice';
   // Use AccessibilityInfo to set accessibility focus on the title
   useEffect(() => {
@@ -88,18 +103,28 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
+      ]}
+      accessibilityRole="summary"
+      accessibilityLabel="Upgrade Terms Screen">
       <ScrollView
         contentContainerStyle={styles.scrollViewContentContainer}
         keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
           <View style={styles.contentContainer}>
-            <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+            <Text
+              variant="screenTitle leftAlign"
+              style={{color: textColour}}
+              accessibilityRole="header"
+              accessibilityLabel="Terms and Privacy Notice Title">
               {title}
             </Text>
             {renderContent()}
             <View style={styles.spaceMedium} />
-            <Pressable onPress={openTermsLink}>
+            <Pressable
+              onPress={openTermsLink}
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Open Terms Link">
               <Text
                 variant="bodyText bodyTextBold"
                 style={{color: Colours.pink}}>
@@ -107,7 +132,11 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
               </Text>
             </Pressable>
             <View style={styles.spaceMedium} />
-            <Pressable onPress={openPrivacyLink}>
+            <Pressable
+              onPress={openPrivacyLink}
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Open Privacy Link">
               <Text
                 variant="bodyText bodyTextBold"
                 style={{color: Colours.pink}}>
@@ -117,7 +146,12 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
           </View>
         </View>
         <View style={styles.bottomButtonContainer}>
-          <PinkButton buttonText="Agree" onPress={handleSwitchButtonPress} />
+          <PinkButton
+            buttonText="Agree"
+            onPress={handleSwitchButtonPress}
+            accessibilityLabel="Agree Button"
+            testID="agreeButton"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

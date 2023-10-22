@@ -1,5 +1,3 @@
-//UpgradeUSPerson.tsx
-
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -11,11 +9,10 @@ import {
 } from 'react-native';
 import Text from '../components/Text';
 import InfoModal from '../components/theme/modals/InfoModal';
-
 import {NavigationProps} from '../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../components/theme/Colour';
-import {useUserContext} from '../components/UserContext'; // Import the user context
+import {useUserContext} from '../components/UserContext';
 import OptionsWithChevron from '../components/OptionsWithChevron';
 
 type UpgradeUSPersonProps = NavigationProps<'UpgradeUSPerson'>;
@@ -28,10 +25,11 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const handleNoButtonPress = () => {
-    navigation.navigate('StepperScreen4'); // Navigate to the desired screen
+    navigation.navigate('StepperScreen4');
   };
+
   const handleYesButtonPress = () => {
-    navigation.navigate('UpgradeIneligibleUS'); // Navigate to the desired screen
+    navigation.navigate('UpgradeIneligibleUS');
   };
 
   const [showUSPersonInfoModal, setShowUSPersonInfoModal] = useState(false);
@@ -39,8 +37,9 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
 
   const handleUsPersonPress = () => {
     setShowUSPersonInfoModal(true);
-    setUsPersonPressed(true); // Set to true to keep it blue
+    setUsPersonPressed(true);
   };
+
   const usPersonTextStyles: TextStyle = {
     ...styles.usPersonText,
     color: usPersonPressed ? Colours.blue : Colours.pink,
@@ -48,9 +47,8 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   };
 
   const titleLimitedCompany = 'Is your business a United States (US) person?';
-
   const titleSoleTrader = 'Are you a United States (US) person?';
-  // Use AccessibilityInfo to set accessibility focus on the title
+
   useEffect(() => {
     const title =
       userType === 'limitedCompany' ? titleLimitedCompany : titleSoleTrader;
@@ -58,48 +56,34 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
   }, [userType, titleLimitedCompany, titleSoleTrader]);
 
   const renderContent = () => {
-    if (userType === 'limitedCompany') {
-      return (
-        <>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            {titleLimitedCompany}
-          </Text>
-          <InfoModal
-            visible={showUSPersonInfoModal}
-            onPressClose={() => setShowUSPersonInfoModal(false)}
-            title="What is a US person?"
-            content="For tax purposes, a business is considered a United States entity, and therefore a US person, if it is a partnership or corporation registered in the United States or under U.S. state laws."
-            contentStyle={[
-              {backgroundColor: containerBackgroundColor},
-              styles.InfoModalCustomisation,
-            ]}
-            titleStyle={{color: textColour}} // Customize title text color
-            bodyTextStyle={{color: textColour}}
-          />
-        </>
-      );
-    } else if (userType === 'soleTrader') {
-      return (
-        <>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            {titleSoleTrader}
-          </Text>
-          <InfoModal
-            visible={showUSPersonInfoModal}
-            onPressClose={() => setShowUSPersonInfoModal(false)}
-            title="What is a US person?"
-            content="You are considered a United States person for tax purposes if you are a US citizen, or a resident (alien) of the US under the ‘green card’ or the ‘substantial presence’ tests."
-            accessibilityLabel="Close US Person Info Modal"
-            contentStyle={[
-              {backgroundColor: containerBackgroundColor},
-              styles.InfoModalCustomisation,
-            ]} // Customize content background color
-            titleStyle={{color: textColour}} // Customize title text color
-            bodyTextStyle={{color: textColour}}
-          />
-        </>
-      );
-    }
+    const title =
+      userType === 'limitedCompany' ? titleLimitedCompany : titleSoleTrader;
+    const content =
+      userType === 'limitedCompany'
+        ? 'For tax purposes, a business is considered a United States entity, and therefore a US person, if it is a partnership or corporation registered in the United States or under U.S. state laws.'
+        : 'You are considered a United States person for tax purposes if you are a US citizen, or a resident (alien) of the US under the ‘green card’ or the ‘substantial presence’ tests.';
+
+    return (
+      <>
+        <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+          {title}
+        </Text>
+        <InfoModal
+          visible={showUSPersonInfoModal}
+          onPressClose={() => setShowUSPersonInfoModal(false)}
+          title="What is a US person?"
+          content={content}
+          contentStyle={[
+            {backgroundColor: containerBackgroundColor},
+            styles.InfoModalCustomisation,
+          ]}
+          titleStyle={{color: textColour}}
+          bodyTextStyle={{color: textColour}}
+          accessibilityLabel="US Person Info modal"
+          testID="USPersonModal"
+        />
+      </>
+    );
   };
 
   return (
@@ -107,7 +91,9 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
+      ]}
+      accessibilityLabel="Upgrade US Person Screen"
+      accessibilityRole="summary">
       <ScrollView>
         <View
           style={[
@@ -115,16 +101,30 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             {backgroundColor: containerBackgroundColor},
           ]}>
           {renderContent()}
-          <Pressable onPress={handleUsPersonPress}>
+          <Pressable
+            onPress={handleUsPersonPress}
+            accessible
+            accessibilityRole="button">
             <Text
               variant="bodyText bodyTextBold"
-              style={[{color: Colours.pink}, usPersonTextStyles]}>
+              style={[{color: Colours.pink}, usPersonTextStyles]}
+              accessibilityLabel="US Person Button">
               What is a US person?
             </Text>
           </Pressable>
-          <OptionsWithChevron title="Yes" onPress={handleYesButtonPress} />
+          <OptionsWithChevron
+            title="Yes"
+            onPress={handleYesButtonPress}
+            accessibilityLabel="yesButton"
+            accessibilityRole="button"
+          />
           <View style={[styles.spaceMedium, styles.separator]} />
-          <OptionsWithChevron title="No" onPress={handleNoButtonPress} />
+          <OptionsWithChevron
+            title="No"
+            onPress={handleNoButtonPress}
+            accessibilityLabel="noButton"
+            accessibilityRole="button"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -134,15 +134,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: Colours.white,
     padding: 16,
-  },
-  modal: {
-    // backgroundColor: Colours.white,
-    // color: Colours.black,
-  },
-  spaceLarge: {
-    marginBottom: 25,
   },
   spaceMedium: {
     marginBottom: 15,
@@ -151,14 +143,12 @@ const styles = StyleSheet.create({
     margin: 50,
   },
   safeAreaContainer: {
-    // backgroundColor: Colours.white,
     height: '100%',
   },
   separator: {
     width: 327,
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
-    // alignSelf: 'center', // Center the separator horizontally
   },
   usPersonText: {
     lineHeight: 90,

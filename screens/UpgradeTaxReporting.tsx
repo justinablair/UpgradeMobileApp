@@ -65,13 +65,18 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             I acknowledge, on behalf of the business, that the information I
             supply may be reported to the HMRC, and may be transferred to the
             government of another territory in accordance with{' '}
-            <Pressable onPress={handleFACTAPress}>
-              <Text variant="bodyText" style={factaTextStyles}>
+            <Pressable
+              onPress={handleFACTAPress}
+              accessibilityLabel="FACTA Pressable">
+              <Text variant="bodyText" style={factaTextStyles} testID="facta">
                 {' FACTA '}
               </Text>
             </Pressable>
             and
-            <Pressable onPress={handleCRSPress}>
+            <Pressable
+              onPress={handleCRSPress}
+              accessibilityLabel="CRS Pressable"
+              testID="crs">
               <Text variant="bodyText" style={crsTextStyles}>
                 {' CRS '}
               </Text>
@@ -142,7 +147,8 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
+      ]}
+      accessibilityLabel="Upgrade Tax Reporting Screen">
       <ScrollView>
         <View
           style={[
@@ -152,7 +158,11 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
           <Text variant="screenTitle leftAlign" style={{color: textColour}}>
             {title}
           </Text>
-          <Text variant="bodyText leftAlign" style={{color: textColour}}>
+          <Text
+            variant="bodyText leftAlign"
+            style={{color: textColour}}
+            accessibilityRole="header"
+            accessibilityLabel="Tax Reporting Title">
             To open a Mettle bank account you need to agree to the following:{' '}
           </Text>
           {renderContent()}
@@ -161,11 +171,12 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             <Text
               variant="bodyText"
               style={[styles.checkboxText, {color: textColour}]}>
-              I confirm that I am tax compliant
+              I agree with these statements
             </Text>
             <CheckboxToggle
               checked={isChecked}
               onToggle={handleCheckboxToggle}
+              testID="checkboxToggle"
             />
           </View>
           <View style={styles.spaceMedium} />
@@ -173,6 +184,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             buttonText="Agree"
             onPress={handleSwitchButtonPress}
             disabled={!isChecked}
+            testID="agreeButton"
           />
           {/* FACTA Info Modal */}
           <InfoModal
@@ -184,6 +196,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             contentStyle={[{backgroundColor: containerBackgroundColor}]}
             titleStyle={{color: textColour}}
             bodyTextStyle={{color: textColour}}
+            testID="FactaModal"
           />
 
           {/* CRS Info Modal */}

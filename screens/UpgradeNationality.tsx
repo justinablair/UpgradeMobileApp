@@ -100,12 +100,12 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           {renderContent()}
           <Pressable
             onPress={handleNationalityPress}
-            accessibilityRole="button"
-            accessibilityLabel="Press to learn more about tax residency">
+            accessibilityRole="button">
             <Text
               variant="bodyText"
               style={nationalityTextStyles}
-              accessibilityRole="text">
+              accessibilityRole="text"
+              accessibilityLabel="Press to learn more about tax residency">
               What is tax residency?
             </Text>
             <OptionsWithChevron
@@ -134,6 +134,7 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           ]}
           titleStyle={{color: textColour}}
           bodyTextStyle={{color: textColour}}
+          testID="taxResidentInfoModal"
         />
       </ScrollView>
     </SafeAreaView>

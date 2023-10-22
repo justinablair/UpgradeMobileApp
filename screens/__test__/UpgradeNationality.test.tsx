@@ -40,7 +40,7 @@ describe('UpgradeNationalityScreen', () => {
     ).toBeDefined();
   });
 
-  test('handles press event for Yes button', () => {
+  it('handles press event for Yes button', () => {
     const {getByText} = render(
       <UserContextProvider>
         <UpgradeNationalityScreen navigation={mockNavigation} />
@@ -62,13 +62,17 @@ describe('UpgradeNationalityScreen', () => {
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeUSPerson');
   });
 
-  test('displays "What is tax residency?" text', () => {
-    const {getByText} = render(
+  it('displays "What is tax residency?" info modal', () => {
+    const {getByLabelText, getByTestId} = render(
       <UserContextProvider>
         <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByText('What is tax residency?')).toBeDefined();
+    const taxAvoidancePressable = getByLabelText(
+      'Press to learn more about tax residency',
+    );
+    fireEvent.press(taxAvoidancePressable);
+    expect(getByTestId('taxResidentInfoModal')).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {

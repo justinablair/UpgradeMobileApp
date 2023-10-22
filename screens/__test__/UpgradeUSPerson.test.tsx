@@ -1,19 +1,17 @@
 import React from 'react';
-import {render, act, waitFor} from '@testing-library/react-native';
-import UpgradeStartedScreen from '../UpgradeStarted';
-import UserContextProvider from '../../components/UserContext';
+import {render, fireEvent} from '@testing-library/react-native';
+import UpgradeUSPersonScreen from '../UpgradeUsPerson';
+import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {AccessibilityInfo} from 'react-native';
-import UpgradeRecapScreen from '../UpgradeRecap';
+import UpgradeStartedScreen from '../UpgradeStarted';
 
-jest.useRealTimers();
-
-describe('UpgradeStartedScreen', () => {
+describe('UpgradeUSPersonScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'UpgradeStarted'
+    'UpgradeUSPerson'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -33,24 +31,29 @@ describe('UpgradeStartedScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
-  it('navigates to the next screen after 10 seconds', async () => {
-    render(
+  it('renders correctly', () => {
+    const {getByLabelText} = render(
       <UserContextProvider>
-        <UpgradeStartedScreen navigation={mockNavigation} />
+        <UpgradeUSPersonScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    await new Promise(resolve => setTimeout(resolve, 10000));
+    expect(getByLabelText('Upgrade US Person Screen')).toBeTruthy();
+  });
 
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeComplete');
-  }, 30000);
-
-  it('should render title correctly', () => {
-    const {getByText} = render(
+  it('handles button presses correctly', () => {
+    const {getByLabelText, getByTestId} = render(
       <UserContextProvider>
-        <UpgradeStartedScreen navigation={mockNavigation} />
+        <UpgradeUSPersonScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByText('We’ve started your switch')).toBeDefined();
+    fireEvent.press(getByLabelText('US Person Button'));
+    expect(getByTestId('USPersonModal')).toBeTruthy();
+
+    fireEvent.press(getByLabelText('yesButton'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIneligibleUS');
+
+    fireEvent.press(getByLabelText('noButton'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen4');
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -64,7 +67,7 @@ describe('UpgradeStartedScreen', () => {
     render(
       <UserContextProvider>
         <NavigationContainer>
-          <UpgradeStartedScreen navigation={mockNavigation} />
+          <UpgradeUSPersonScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );

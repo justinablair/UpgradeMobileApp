@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
+  Pressable,
+  TextStyle,
 } from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
@@ -12,6 +14,7 @@ import CheckboxToggle from '../components/toggles/CheckboxToggle'; // Import the
 
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
+import InfoModal from '../components/theme/modals/InfoModal';
 
 type UpgradeTaxCompliantProps = NavigationProps<'UpgradeTaxCompliant'>;
 
@@ -20,12 +23,46 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
 }) => {
   const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
 
+  const [showEvasionInfoModal, setShowEvasionInfoModal] = useState(false);
+
+  const [showAvoidanceInfoModal, setShowAvoidanceInfoModal] = useState(false);
+
+  const [taxEvasionPressed, setTaxEvasionPressed] = useState(false);
+
+  const [taxAvoidancePressed, setTaxAvoidancePressed] = useState(false);
+
+  // const [taxAvoidancePressed, setTaxAvoidancePressed] = useState(false);
+
+  // Navigate to the desired screen
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeTaxReporting'); // Navigate to the desired screen
+    navigation.navigate('UpgradeTaxReporting');
   };
 
+  // Function to toggle the checkbox state
   const handleCheckboxToggle = () => {
-    setIsChecked(!isChecked); // Toggle the checkbox state
+    setIsChecked(!isChecked);
+  };
+
+  const handleEvasionPress = () => {
+    setShowEvasionInfoModal(true);
+    setTaxEvasionPressed(true);
+  };
+
+  const handleAvoidancePress = () => {
+    setShowAvoidanceInfoModal(true);
+    setTaxAvoidancePressed(true);
+  };
+
+  const pressedEvasionTextStyles: TextStyle = {
+    ...styles.linkText,
+    color: taxEvasionPressed ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
+  };
+
+  const pressedAvoidanceTextStyles: TextStyle = {
+    ...styles.linkText,
+    color: taxAvoidancePressed ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
   };
 
   const title = 'Are you tax compliant?';
@@ -37,6 +74,7 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
+          {/* Title text */}
           <Text
             variant="screenTitle leftAlign"
             style={{color: Colours.black}}
@@ -44,15 +82,32 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
             accessibilityLabel="Tax Compliance Check">
             {title}
           </Text>
+          {/* Title text */}
           <Text
             variant="bodyText leftAlign"
             style={[{color: Colours.black}, styles.space]}
             accessibilityRole="text"
             accessibilityLabel="Tax Compliance Description">
-            This means that you've not previously evaded tax and are not engaged
-            in any tax avoidance arrangements.
+            This means that you've not previously{' '}
+            <Text
+              variant="bodyText leftAlign"
+              onPress={handleEvasionPress}
+              style={pressedEvasionTextStyles}
+              accessibilityLabel="Evaded Tax Pressable">
+              evaded tax
+            </Text>{' '}
+            and are not engaged in any{' '}
+            <Text
+              variant="bodyText leftAlign"
+              onPress={handleAvoidancePress}
+              style={pressedAvoidanceTextStyles}
+              accessibilityLabel="Avoided Tax Pressable">
+              tax avoidance
+            </Text>{' '}
+            arrangements.
           </Text>
 
+          {/* </Text> */}
           <View style={styles.space} />
           <View style={styles.flex} />
           <View style={styles.checkboxContainer} accessibilityRole="checkbox">
@@ -77,6 +132,22 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
               disabled={!isChecked}
               accessibilityLabel="Next Button"
               testID="nextButton"
+            />
+            {/* Tax evasion Info Modal */}
+            <InfoModal
+              visible={showEvasionInfoModal}
+              onPressClose={() => setShowEvasionInfoModal(false)}
+              title="Tax evasion"
+              content="This is a deliberate attempt not to declare and account for the taxes which are owed. It includes the hidden economy, where the presence of taxable sources of income are concealed."
+              accessibilityLabel="tax evasion Info Modal"
+            />
+            {/* Tax avoidance Info Modal */}
+            <InfoModal
+              visible={showAvoidanceInfoModal}
+              onPressClose={() => setShowAvoidanceInfoModal(false)}
+              title="Tax avoidance"
+              content="This involves bending the rules of the tax system to try to gain a tax advantage that Parliament never intended. It often involves contrived, artificial transactions with no genuine purpose other than to produce a tax advantage. This is operating within the letter, but not the spirit of the law."
+              accessibilityLabel="tax avoidance Info Modal"
             />
           </View>
         </View>
@@ -117,6 +188,10 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
+  },
+  linkText: {
+    lineHeight: 90,
+    fontWeight: 'bold',
   },
 });
 

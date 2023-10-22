@@ -19,6 +19,7 @@ interface InfoModalProps {
   contentStyle?: object;
   titleStyle?: object;
   bodyTextStyle?: object;
+  testID?: string;
 }
 
 const InfoModal: React.FC<InfoModalProps> = ({
@@ -30,6 +31,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
   contentStyle,
   titleStyle,
   bodyTextStyle,
+  testID,
 }) => {
   const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
 
@@ -43,7 +45,8 @@ const InfoModal: React.FC<InfoModalProps> = ({
         style={styles.modalBackground}
         accessible={true}
         accessibilityLabel="Info Modal Background"
-        accessibilityRole="alert">
+        accessibilityRole="alert"
+        testID={testID}>
         {/* Background with opacity */}
         <View>
           {/* Modal Content */}

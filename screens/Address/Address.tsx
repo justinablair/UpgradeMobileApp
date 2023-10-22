@@ -2,11 +2,11 @@
 
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
-import {useUserContext} from '../components/UserContext';
-import Text from '../components/Text';
-import PinkButton from '../components/theme/buttons/PinkButton';
-import Colours from '../components/theme/Colour';
-import {NavigationProps} from '../navigationTypes';
+import {useUserContext} from '../../components/UserContext';
+import Text from '../../components/Text';
+import PinkButton from '../../components/theme/buttons/PinkButton';
+import Colours from '../../components/theme/Colour';
+import {NavigationProps} from '../../navigationTypes';
 
 type EnterAddressScreenProps = NavigationProps<'Address'>;
 

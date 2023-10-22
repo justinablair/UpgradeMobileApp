@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import UpgradeConfirmScreen from '../UpgradeConfirm';
+import UpgradeConfirmScreen from '../UpgradeConfirmScreen';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';

@@ -42,6 +42,28 @@ describe('UpgradeTaxCompliantScreen', () => {
     );
   });
 
+  it('opens the evaded tax info modal on press of evaded tax', () => {
+    const {getByLabelText, getByText} = render(
+      <UserContextProvider>
+        <UpgradeTaxCompliantScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const taxEvasionPressable = getByLabelText('Evaded Tax Pressable');
+    fireEvent.press(taxEvasionPressable);
+    expect(getByText('Tax evasion')).toBeTruthy();
+  });
+
+  it('opens the avoided tax info modal on press of tax avoidance', () => {
+    const {getByLabelText, getByText} = render(
+      <UserContextProvider>
+        <UpgradeTaxCompliantScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const taxAvoidancePressable = getByLabelText('Avoided Tax Pressable');
+    fireEvent.press(taxAvoidancePressable);
+    expect(getByText('Tax avoidance')).toBeTruthy();
+  });
+
   it('should enable form submit when the checkbox is checked', () => {
     const {getByTestId} = render(
       <UserContextProvider>
