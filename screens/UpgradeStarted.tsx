@@ -1,5 +1,3 @@
-//UpgradeIntro.tsx
-
 import React, {useEffect} from 'react';
 import {
   View,
@@ -9,7 +7,6 @@ import {
   SafeAreaView,
   AccessibilityInfo,
 } from 'react-native';
-
 import Text from '../components/Text';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
@@ -22,19 +19,17 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
+  const title = 'We’ve started your switch';
 
+  //Timer simulates a switch taking place
   useEffect(() => {
-    // Use setTimeout to navigate after 10 seconds (10000 milliseconds)
     const timeoutId = setTimeout(() => {
-      navigation.navigate('UpgradeComplete'); // Navigate to the desired screen
+      navigation.navigate('UpgradeComplete');
     }, 10000);
 
-    // Clear the timeout if the component unmounts before 10 seconds
     return () => clearTimeout(timeoutId);
   }, [navigation]);
 
-  const title = 'We’ve started your switch';
-  // Use AccessibilityInfo to set accessibility focus on the title
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
@@ -44,21 +39,35 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
+      ]}
+      accessible={true}
+      accessibilityLabel="Upgrade Started Screen">
       <ScrollView
-        style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
+        style={[styles.container, {backgroundColor: containerBackgroundColor}]}
+        accessibilityRole="scrollbar">
         <View>
-          <View style={styles.largeImage}>
+          <View
+            style={styles.largeImage}
+            accessibilityRole="image"
+            accessible={true}
+            accessibilityLabel="Image of a padlock">
             <Image
               source={require('../assets/Padlock.png')}
-              style={styles.alignCentre}
+              style={styles.alignCenter}
               accessibilityLabel="Image of a padlock"
             />
           </View>
-          <Text variant="screenTitle" style={{color: textColour}}>
+          <Text
+            variant="screenTitle"
+            style={{color: textColour}}
+            accessibilityRole="header">
             {title}
           </Text>
-          <Text variant="bodyText centerAlign" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={[styles.centeredText, {color: textColour}]}
+            accessible={true}
+            accessibilityRole="text">
             This usually takes less than a couple of minutes, but it can
             sometimes take up to 2 hours.{'\n\n'}If you need anything during
             this time, message us via in-app chat.
@@ -76,19 +85,17 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   safeAreaContainer: {
-    height: '100%',
+    flex: 1,
   },
-  alignCentre: {
+  alignCenter: {
     alignSelf: 'center',
   },
-
   largeImage: {
     width: 200,
     height: 200,
     alignSelf: 'center',
     marginHorizontal: 50,
   },
-
   centeredText: {
     textAlign: 'center',
   },

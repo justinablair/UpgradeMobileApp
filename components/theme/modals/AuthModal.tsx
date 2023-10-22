@@ -5,7 +5,7 @@ import {PinBackIcon} from '../icons/PinbackIcon';
 import Text from '../../Text';
 
 interface AuthModalProps {
-  visible: boolean;
+  visible?: boolean;
   navigation: any;
   onNext?: (code: string) => void;
   onClose: () => void;
