@@ -1,4 +1,5 @@
-//StepperCompleteScreen.tsx
+//StepperComplete.tsx
+
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Text from '../components/Text';

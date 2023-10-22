@@ -1,3 +1,5 @@
+//CompanyDetails.tsx
+
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
 import Text from '../components/Text';

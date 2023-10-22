@@ -30,7 +30,7 @@ import UpgradeUSPersonScreen from './screens/UpgradeUsPerson';
 import ConfirmAddressScreen from './screens/ConfirmAddress';
 import EnterAddressScreen from './screens/Address';
 import PersonalDetailsScreen from './screens/PersonalDetails';
-import UpgradeConfirmScreen from './screens/UpgradeConfirmScreen';
+import UpgradeConfirm from './screens/UpgradeConfirm';
 import UpgradeRecapScreen from './screens/UpgradeRecap';
 import UpgradeStartedScreen from './screens/UpgradeStarted';
 import UpgradeCompleteScreen from './screens/UpgradeComplete';
@@ -154,7 +154,7 @@ function AppContent(): JSX.Element {
         {renderScreen('ConfirmAddress', ConfirmAddressScreen, headerOptions)}
         {renderScreen('StepperComplete', StepperCompleteScreen, headerOptions)}
         {renderScreen('PersonalDetails', PersonalDetailsScreen, headerOptions)}
-        {renderScreen('UpgradeConfirm', UpgradeConfirmScreen, headerOptions)}
+        {renderScreen('UpgradeConfirm', UpgradeConfirm, headerOptions)}
         {renderScreen('UpgradeRecap', UpgradeRecapScreen, headerOptions)}
         {renderScreen(
           'UpgradeStarted',

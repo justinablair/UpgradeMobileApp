@@ -1,3 +1,5 @@
+//Stepper2.tsx
+
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Text from '../components/Text';
@@ -36,11 +38,8 @@ const StepperScreen2: React.FC<UpgradeStepper2Props> = ({navigation}) => {
           {backgroundColor: activeCircle},
         ]}>
         {/* Indicator line for the steps */}
-
         <View style={styles.leftContainer}>
-          <View style={styles.lineContainer}>
-            {/* <View style={styles.line} /> */}
-          </View>
+          <View style={styles.lineContainer}></View>
           <View style={styles.completeLine} />
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
           {/* Mapping through stepsData to display the steps */}

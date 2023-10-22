@@ -1,3 +1,5 @@
+//ThemeScreen.tsx
+
 import React, {useEffect} from 'react';
 import {View, StyleSheet, AccessibilityInfo} from 'react-native';
 import Colours from '../components/theme/Colour';

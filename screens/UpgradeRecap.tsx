@@ -1,4 +1,5 @@
 //UpgradeRecap.tsx
+
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -173,7 +174,6 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
         <AuthModal
           visible={modalVisible}
           navigation={navigation}
-          onDigitsEntered={handleSwitchButtonExitJourney}
           onClose={onClose}
         />
         <ExitModal
