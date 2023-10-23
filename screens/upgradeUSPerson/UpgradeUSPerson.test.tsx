@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeUSPersonScreen from './UpgradeUsPerson';
 import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -66,13 +66,19 @@ describe('UpgradeUSPersonScreen', () => {
         <UpgradeUSPersonScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByLabelText('US Person Button'));
+    act(() => {
+      fireEvent.press(getByLabelText('US Person Button'));
+    });
     expect(getByTestId('USPersonModal')).toBeTruthy();
 
-    fireEvent.press(getByLabelText('yesButton'));
+    act(() => {
+      fireEvent.press(getByLabelText('yesButton'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIneligibleUS');
 
-    fireEvent.press(getByLabelText('noButton'));
+    act(() => {
+      fireEvent.press(getByLabelText('noButton'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen4');
   });
 });

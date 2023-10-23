@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import CustomHeader from '../CustomHeader';
 
 describe('CustomHeader', () => {
@@ -23,8 +23,10 @@ describe('CustomHeader', () => {
     const {getByTestId} = render(
       <CustomHeader isDarkMode={false} toggleExitModal={mockToggleExitModal} />,
     );
-    const closeButton = getByTestId('CloseButton');
-    fireEvent.press(closeButton);
+    act(() => {
+      const closeButton = getByTestId('CloseButton');
+      fireEvent.press(closeButton);
+    });
     expect(mockToggleExitModal).toHaveBeenCalled();
   });
 });

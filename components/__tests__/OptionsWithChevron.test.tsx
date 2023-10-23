@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import OptionsWithChevron from '../OptionsWithChevron';
 import {UserContextProvider} from '../UserContext';
 import {StyleSheet} from 'react-native';
@@ -36,30 +36,29 @@ describe('OptionsWithChevron component', () => {
       </UserContextProvider>,
     );
 
-    const button = getByTestId('OptionsButton');
-    fireEvent.press(button);
-
+    act(() => {
+      const button = getByTestId('OptionsButton');
+      fireEvent.press(button);
+    });
     expect(mockOnPress).toHaveBeenCalled();
   });
+});
 
-  it('renders with the correct styles', () => {
-    const {getByTestId} = render(
-      <UserContextProvider>
-        <OptionsWithChevron
-          title="Sample Title"
-          description="Sample Description"
-          onPress={() => {}}
-        />
-      </UserContextProvider>,
-    );
-    const optionContainer = getByTestId('OptionsButton');
-    const optionContainerStyle = StyleSheet.flatten(
-      optionContainer.props.style,
-    ); // Flattening the styles for access
+it('renders with the correct styles', () => {
+  const {getByTestId} = render(
+    <UserContextProvider>
+      <OptionsWithChevron
+        title="Sample Title"
+        description="Sample Description"
+        onPress={() => {}}
+      />
+    </UserContextProvider>,
+  );
+  const optionContainer = getByTestId('OptionsButton');
+  const optionContainerStyle = StyleSheet.flatten(optionContainer.props.style); // Flattening the styles for access
 
-    const optionContent = getByTestId('OptionContent');
-    const optionContentStyle = StyleSheet.flatten(optionContent.props.style); // Flattening the styles for access
-    expect(optionContainerStyle.width).toBe(327);
-    expect(optionContentStyle.flex).toBe(1);
-  });
+  const optionContent = getByTestId('OptionContent');
+  const optionContentStyle = StyleSheet.flatten(optionContent.props.style); // Flattening the styles for access
+  expect(optionContainerStyle.width).toBe(327);
+  expect(optionContentStyle.flex).toBe(1);
 });

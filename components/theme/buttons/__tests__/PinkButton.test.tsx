@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import PinkButton from '../PinkButton';
 import {UserContextProvider} from '../../../UserContext';
 
@@ -22,8 +22,10 @@ describe('PinkButton component', () => {
         <PinkButton buttonText="Click me" onPress={mockOnPress} />
       </UserContextProvider>,
     );
-    const button = getByText('Click me');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByText('Click me');
+      fireEvent.press(button);
+    });
     expect(mockOnPress).toHaveBeenCalledTimes(1);
   });
 
@@ -38,8 +40,11 @@ describe('PinkButton component', () => {
         />
       </UserContextProvider>,
     );
-    const button = getByText('Click me');
-    fireEvent.press(button);
+
+    act(() => {
+      const button = getByText('Click me');
+      fireEvent.press(button);
+    });
     expect(mockOnPress).toHaveBeenCalledTimes(0);
   });
 });

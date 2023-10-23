@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import AuthModal from '../AuthModal';
 import {RootStackParamList} from '../../../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -50,10 +50,10 @@ describe('AuthModal component', () => {
         navigation={mockNavigation}
       />,
     );
-
-    fireEvent.press(getByText('1'));
-    fireEvent.press(getByText('2'));
-
+    act(() => {
+      fireEvent.press(getByText('1'));
+      fireEvent.press(getByText('2'));
+    });
     expect(onCloseMock).not.toHaveBeenCalled();
   });
 
@@ -66,9 +66,9 @@ describe('AuthModal component', () => {
         navigation={mockNavigation}
       />,
     );
-
-    fireEvent.press(getByTestId('backspaceButton'));
-
+    act(() => {
+      fireEvent.press(getByTestId('backspaceButton'));
+    });
     expect(onCloseMock).not.toHaveBeenCalled();
   });
 

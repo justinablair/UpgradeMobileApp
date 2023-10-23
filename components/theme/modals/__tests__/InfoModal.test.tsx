@@ -31,6 +31,7 @@ describe('InfoModal', () => {
         <InfoModal {...mockProps} />
       </UserContextProvider>,
     );
+
     fireEvent.press(getByTestId('CloseIcon'));
     expect(mockProps.onPressClose).toHaveBeenCalled();
   });
