@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import InteractiveModal from '../InteractiveModal';
 import {UserContextProvider} from '../../../UserContext';
 
@@ -31,7 +31,9 @@ describe('InteractiveModal', () => {
         <InteractiveModal {...mockProps} />{' '}
       </UserContextProvider>,
     );
-    fireEvent.press(getByLabelText('Close Button'));
+    act(() => {
+      fireEvent.press(getByLabelText('Close Button'));
+    });
     expect(mockProps.closeModal).toHaveBeenCalled();
   });
 
@@ -41,7 +43,9 @@ describe('InteractiveModal', () => {
         <InteractiveModal {...mockProps} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Pink Button'));
+    act(() => {
+      fireEvent.press(getByText('Pink Button'));
+    });
     expect(mockProps.onPinkButtonClick).toHaveBeenCalled();
   });
 
@@ -51,7 +55,9 @@ describe('InteractiveModal', () => {
         <InteractiveModal {...mockProps} />{' '}
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('White Button'));
+    act(() => {
+      fireEvent.press(getByText('White Button'));
+    });
     expect(mockProps.onWhiteButtonClick).toHaveBeenCalled();
   });
 

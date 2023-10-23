@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeChangesNewAccountScreen from './UpgradeChangesNewAccount';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -50,7 +50,9 @@ describe('UpgradeChangesNewAccountScreen', () => {
       </UserContextProvider>,
     );
     const getStartedButton = getByTestId('getStartedButton');
-    fireEvent.press(getStartedButton);
+    act(() => {
+      fireEvent.press(getStartedButton);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen2');
   });
 
@@ -64,8 +66,9 @@ describe('UpgradeChangesNewAccountScreen', () => {
     );
 
     const maybeLaterButton = getByTestId('maybeLaterButton');
-    fireEvent.press(maybeLaterButton);
-
+    act(() => {
+      fireEvent.press(maybeLaterButton);
+    });
     const exitModal = queryByTestId('exitModal');
 
     expect(exitModal).toBeTruthy();
@@ -102,8 +105,9 @@ describe('UpgradeChangesNewAccountScreen', () => {
     );
 
     const maybeLaterButton = getByTestId('maybeLaterButton');
-    fireEvent.press(maybeLaterButton);
-
+    act(() => {
+      fireEvent.press(maybeLaterButton);
+    });
     const exitModal = queryByTestId('exitModal');
 
     expect(exitModal).toBeTruthy();

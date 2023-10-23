@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeIneligibleResidentScreen from './UpgradeIneligibleResidentScreen';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigationTypes';
@@ -91,7 +91,9 @@ describe('UpgradeIneligibleResidentScreen', () => {
       </UserContextProvider>,
     );
     const button = getByTestId('buttonText');
-    fireEvent.press(button);
+    act(() => {
+      fireEvent.press(button);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });
 });

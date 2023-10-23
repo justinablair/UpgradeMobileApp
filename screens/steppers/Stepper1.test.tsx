@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import StepperScreen1 from './Stepper1';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -68,7 +68,9 @@ describe('StepperScreen1', () => {
       </UserContextProvider>,
     );
     const buttonElement = getByText('How it will work');
-    fireEvent.press(buttonElement);
+    act(() => {
+      fireEvent.press(buttonElement);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeChangesWeDo');
   });
 });

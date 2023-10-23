@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
@@ -71,7 +71,9 @@ describe('StepperScreen4', () => {
       </UserContextProvider>,
     );
     const buttonElement = getByText('Confirm details');
-    fireEvent.press(buttonElement);
+    act(() => {
+      fireEvent.press(buttonElement);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ConfirmAddress');
   });
 });

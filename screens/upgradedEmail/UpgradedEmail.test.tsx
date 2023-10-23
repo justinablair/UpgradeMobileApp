@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradedEmailScreen from './UpgradedEmail';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -72,9 +72,10 @@ describe('UpgradedEmailScreen', () => {
     );
     const gotItButton = getByText('Got it');
     const openEmailButton = getByText('Open email app');
-
-    fireEvent.press(gotItButton);
-    fireEvent.press(openEmailButton);
+    act(() => {
+      fireEvent.press(gotItButton);
+      fireEvent.press(openEmailButton);
+    });
   });
 
   it('checks if list items are rendered', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeNationalityScreen from './UpgradeNationality';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -65,7 +65,9 @@ describe('UpgradeNationalityScreen', () => {
         <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Yes'));
+    act(() => {
+      fireEvent.press(getByText('Yes'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith(
       'UpgradeIneligibleResident',
     );
@@ -77,7 +79,9 @@ describe('UpgradeNationalityScreen', () => {
         <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('No'));
+    act(() => {
+      fireEvent.press(getByText('No'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeUSPerson');
   });
 
@@ -90,7 +94,9 @@ describe('UpgradeNationalityScreen', () => {
     const taxAvoidancePressable = getByLabelText(
       'Press to learn more about tax residency',
     );
-    fireEvent.press(taxAvoidancePressable);
+    act(() => {
+      fireEvent.press(taxAvoidancePressable);
+    });
     expect(getByTestId('taxResidentInfoModal')).toBeTruthy();
   });
 });

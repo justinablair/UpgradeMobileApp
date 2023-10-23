@@ -78,7 +78,9 @@ describe('<ConfirmAddressScreen />', () => {
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Confirm address'));
+    act(() => {
+      fireEvent.press(getByText('Confirm address'));
+    });
     expect(mockNavigation.navigate).toBeCalledWith('StepperComplete');
   });
 
@@ -88,15 +90,18 @@ describe('<ConfirmAddressScreen />', () => {
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
+    act(() => {
+      fireEvent.press(getByText('Update address'));
+    });
 
-    fireEvent.press(getByText('Update address'));
     await waitFor(() => {
       expect(
         findByText('Updating your address will also change the address'),
       ).toBeTruthy();
     });
-
-    fireEvent.press(getByTestId('interactivePinkButton'));
+    act(() => {
+      fireEvent.press(getByTestId('interactivePinkButton'));
+    });
 
     expect(mockNavigation.navigate).toBeCalledWith('PersonalDetails');
   });
@@ -107,8 +112,9 @@ describe('<ConfirmAddressScreen />', () => {
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-
-    fireEvent.press(getByTestId('newCardPressable'));
+    act(() => {
+      fireEvent.press(getByTestId('newCardPressable'));
+    });
 
     await waitFor(() => {
       expect(

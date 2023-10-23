@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import MarketingScreen from './Marketing';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -62,8 +62,9 @@ describe('Marketing Screen', () => {
     );
 
     const emailToggle = getByTestId('EmailToggle');
-    fireEvent(emailToggle, 'onValueChange');
-
+    act(() => {
+      fireEvent(emailToggle, 'onValueChange');
+    });
     const updatedEmailToggle = getByTestId('EmailToggle');
     const isToggled = updatedEmailToggle.props.value;
     console.log('Toggle value:', isToggled);
@@ -76,8 +77,10 @@ describe('Marketing Screen', () => {
         <MarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const button = getByTestId('NoThanksButton');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByTestId('NoThanksButton');
+      fireEvent.press(button);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen3');
   });
 
@@ -87,8 +90,11 @@ describe('Marketing Screen', () => {
         <MarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const button = getByTestId('YesToAllButton');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByTestId('YesToAllButton');
+      fireEvent.press(button);
+    });
+
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen3');
   });
 });

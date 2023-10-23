@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UserContextProvider from '../../components/UserContext';
 import UpgradeCompleteScreen from './UpgradeComplete';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -70,7 +70,9 @@ describe('UpgradeCompleteScreen', () => {
         <UpgradeCompleteScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByTestId('loginButton'));
+    act(() => {
+      fireEvent.press(getByTestId('loginButton'));
+    });
     expect(getByText('Authorise')).toBeTruthy();
   });
 });

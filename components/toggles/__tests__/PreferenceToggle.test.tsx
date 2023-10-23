@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import {UserContextProvider} from '../../UserContext';
 import PreferenceToggle from '../PreferenceToggle';
 
@@ -32,8 +32,9 @@ describe('PreferenceToggle component', () => {
       </UserContextProvider>,
     );
     const toggleComponent = getByTestId(`${mockProps.testID}Toggle`);
-
-    fireEvent(toggleComponent, 'onValueChange', true);
+    act(() => {
+      fireEvent(toggleComponent, 'onValueChange', true);
+    });
 
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
   });

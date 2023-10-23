@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import ExitModal from '../ExitModal';
 import {UserContextProvider} from '../../../UserContext';
 import {NavigationContainer} from '@react-navigation/native';
@@ -34,7 +34,9 @@ describe('ExitModal', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Continue Switch'));
+    act(() => {
+      fireEvent.press(getByText('Continue Switch'));
+    });
     expect(mockProps.onPressClose).toHaveBeenCalled();
   });
 
@@ -46,7 +48,9 @@ describe('ExitModal', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Exit Switch'));
+    act(() => {
+      fireEvent.press(getByText('Exit Switch'));
+    });
     expect(mockProps.toggleExitModal).toHaveBeenCalled();
     expect(mockProps.onPressClose).toHaveBeenCalled();
   });
@@ -59,7 +63,9 @@ describe('ExitModal', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Exit Switch'));
+    act(() => {
+      fireEvent.press(getByText('Exit Switch'));
+    });
     expect(mockProps.toggleExitModal).toHaveBeenCalled();
   });
 

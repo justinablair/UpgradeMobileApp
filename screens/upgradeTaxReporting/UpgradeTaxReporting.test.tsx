@@ -85,10 +85,16 @@ describe('UpgradeTaxReportingScreen', () => {
     let agreeButton = getByTestId('agreeButton');
     const checkbox = getByTestId('checkboxToggle');
     expect(agreeButton.props.accessibilityState.disabled).toBe(true);
-    fireEvent.press(checkbox);
-    agreeButton = getByTestId('agreeButton');
+
+    act(() => {
+      fireEvent.press(checkbox);
+      agreeButton = getByTestId('agreeButton');
+    });
     expect(agreeButton.props.accessibilityState.disabled).toBe(false);
-    fireEvent.press(agreeButton);
+
+    act(() => {
+      fireEvent.press(agreeButton);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeNationality');
   });
 

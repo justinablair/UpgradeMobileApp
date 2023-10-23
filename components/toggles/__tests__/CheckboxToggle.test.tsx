@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import CheckboxToggle from '../CheckboxToggle';
 
 describe('CheckboxToggle component', () => {
@@ -18,7 +18,9 @@ describe('CheckboxToggle component', () => {
   it('calls onToggle when the checkbox is pressed', () => {
     const {getByRole} = render(<CheckboxToggle {...mockProps} />);
     const checkboxComponent = getByRole('checkbox');
-    fireEvent.press(checkboxComponent);
+    act(() => {
+      fireEvent.press(checkboxComponent);
+    });
     expect(mockProps.onToggle).toHaveBeenCalled();
   });
 

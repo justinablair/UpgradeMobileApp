@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeChangesWeDoScreen from './UpgradeChangesWeDo';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -45,7 +45,9 @@ describe('UpgradeChangesWeDoScreen', () => {
         <UpgradeChangesWeDoScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByTestId('nextButton'));
+    act(() => {
+      fireEvent.press(getByTestId('nextButton'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeChangesYouDo');
   });
 

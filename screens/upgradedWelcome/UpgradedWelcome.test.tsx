@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import UpgradedWelcomeScreen from './UpgradedWelcome';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -69,7 +69,9 @@ describe('UpgradedWelcomeScreen', () => {
         <UpgradedWelcomeScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByTestId('nextButton'));
+    act(() => {
+      fireEvent.press(getByTestId('nextButton'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradedEmail');
   });
 });

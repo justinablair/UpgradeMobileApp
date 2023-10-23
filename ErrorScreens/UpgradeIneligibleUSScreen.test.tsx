@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeIneligibleUSScreen from './UpgradeIneligibleUSScreen';
 import UserContextProvider from '../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
@@ -71,7 +71,9 @@ describe('UpgradeIneligibleUSScreen', () => {
     );
     const buttonElement = getByText('Cancel switch');
     expect(buttonElement).toBeTruthy();
-    fireEvent.press(buttonElement);
+    act(() => {
+      fireEvent.press(buttonElement);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });
 
@@ -82,7 +84,9 @@ describe('UpgradeIneligibleUSScreen', () => {
       </UserContextProvider>,
     );
     const buttonElement = getByText('Cancel switch');
-    fireEvent.press(buttonElement);
+    act(() => {
+      fireEvent.press(buttonElement);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });
 });

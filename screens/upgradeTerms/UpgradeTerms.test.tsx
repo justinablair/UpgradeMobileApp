@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import UpgradeTermsScreen from './UpgradeTerms';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -76,7 +76,9 @@ describe('UpgradeTermsScreen', () => {
         <UpgradeTermsScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByText('Terms'));
+    act(() => {
+      fireEvent.press(getByText('Terms'));
+    });
     expect(Linking.openURL).toHaveBeenCalledWith(
       'https://www.mettle.co.uk/docs/mettle-natwest-app-terms-and-conditions/1.1.pdf',
     );
@@ -88,15 +90,9 @@ describe('UpgradeTermsScreen', () => {
         <UpgradeTermsScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-  });
-
-  it('should open privacy link on press', () => {
-    const {getByText} = render(
-      <UserContextProvider>
-        <UpgradeTermsScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    fireEvent.press(getByText('Privacy Notice'));
+    act(() => {
+      fireEvent.press(getByText('Privacy Notice'));
+    });
     expect(Linking.openURL).toHaveBeenCalledWith(
       'https://www.mettle.co.uk/docs/mettle-natwest-privacy-notice/1.1.pdf',
     );

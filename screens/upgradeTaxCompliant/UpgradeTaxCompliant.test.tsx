@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeTaxCompliantScreen from './UpgradeTaxCompliant';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -66,8 +66,10 @@ describe('UpgradeTaxCompliantScreen', () => {
         <UpgradeTaxCompliantScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const taxEvasionPressable = getByLabelText('Evaded Tax Pressable');
-    fireEvent.press(taxEvasionPressable);
+    act(() => {
+      const taxEvasionPressable = getByLabelText('Evaded Tax Pressable');
+      fireEvent.press(taxEvasionPressable);
+    });
     expect(getByText('Tax evasion')).toBeTruthy();
   });
 
@@ -77,8 +79,10 @@ describe('UpgradeTaxCompliantScreen', () => {
         <UpgradeTaxCompliantScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const taxAvoidancePressable = getByLabelText('Avoided Tax Pressable');
-    fireEvent.press(taxAvoidancePressable);
+    act(() => {
+      const taxAvoidancePressable = getByLabelText('Avoided Tax Pressable');
+      fireEvent.press(taxAvoidancePressable);
+    });
     expect(getByText('Tax avoidance')).toBeTruthy();
   });
 
@@ -91,10 +95,15 @@ describe('UpgradeTaxCompliantScreen', () => {
     let nextButton = getByTestId('nextButton');
     const checkbox = getByTestId('checkboxToggle');
     expect(nextButton.props.accessibilityState.disabled).toBe(true);
-    fireEvent.press(checkbox);
-    nextButton = getByTestId('nextButton');
+
+    act(() => {
+      fireEvent.press(checkbox);
+      nextButton = getByTestId('nextButton');
+    });
     expect(nextButton.props.accessibilityState.disabled).toBe(false);
-    fireEvent.press(nextButton);
+    act(() => {
+      fireEvent.press(nextButton);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTaxReporting');
   });
 });

@@ -80,7 +80,9 @@ describe('UpgradeConsentsScreen', () => {
     );
 
     const checkbox = getByRole('checkbox', {name: 'Opening your new account'});
-    fireEvent.press(checkbox);
+    act(() => {
+      fireEvent.press(checkbox);
+    });
     expect(checkbox.props.accessibilityState.checked).toEqual(true);
   });
 
@@ -91,7 +93,9 @@ describe('UpgradeConsentsScreen', () => {
       </UserContextProvider>,
     );
     const checkbox = getByRole('checkbox', {name: 'Opening your new account'});
-    fireEvent.press(checkbox);
+    act(() => {
+      fireEvent.press(checkbox);
+    });
     expect(checkbox.props.accessibilityState.checked).toEqual(true);
   });
 
@@ -134,7 +138,10 @@ describe('UpgradeConsentsScreen', () => {
     const link = getByRole('link', {
       name: 'Read more about how we’ll use your data',
     });
-    fireEvent.press(link);
+    act(() => {
+      fireEvent.press(link);
+    });
+
     expect(openUrlSpy).toHaveBeenCalledWith(
       'https://www.mettle.co.uk/upgrade-data-use.pdf',
     );

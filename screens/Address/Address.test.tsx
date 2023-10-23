@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import EnterAddressScreen from './Address';
 import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -64,7 +64,9 @@ describe('EnterAddressScreen', () => {
       </UserContextProvider>,
     );
     const confirmButton = getByText('Confirm');
-    fireEvent.press(confirmButton);
+    act(() => {
+      fireEvent.press(confirmButton);
+    });
     expect(getByText('Please complete all required fields.')).toBeTruthy();
   });
 
@@ -78,12 +80,12 @@ describe('EnterAddressScreen', () => {
     const townInput = getByPlaceholderText('Enter town');
     const postcodeInput = getByPlaceholderText('Enter postcode');
     const confirmButton = getByText('Confirm');
-
     fireEvent.changeText(addressInput, '123 Sample Address');
     fireEvent.changeText(townInput, 'Sample Town');
     fireEvent.changeText(postcodeInput, 'Invalid Postcode');
-    fireEvent.press(confirmButton);
-
+    act(() => {
+      fireEvent.press(confirmButton);
+    });
     expect(getByText('Please provide a valid UK postcode.')).toBeTruthy();
   });
 
@@ -97,11 +99,12 @@ describe('EnterAddressScreen', () => {
     const townInput = getByPlaceholderText('Enter town');
     const postcodeInput = getByPlaceholderText('Enter postcode');
     const confirmButton = getByText('Confirm');
-
     fireEvent.changeText(addressInput, '123 Sample Address');
     fireEvent.changeText(townInput, 'Sample Town');
     fireEvent.changeText(postcodeInput, 'AB12 3CD');
-    fireEvent.press(confirmButton);
+    act(() => {
+      fireEvent.press(confirmButton);
+    });
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import CompanyDetailsScreen from './CompanyDetails';
 import {UserContextProvider} from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -86,7 +86,9 @@ describe('CompanyDetailsScreen', () => {
     expect(companyNameInput.props.value).toBe('Test Company');
     // Check if the Next button is still disabled
     expect(nextButton.props.accessibilityState.disabled).toBe(true);
-    fireEvent.press(checkbox);
+    act(() => {
+      fireEvent.press(checkbox);
+    });
     // Re-retrieve the Next button element after the state update
     nextButton = getByTestId('nextButton');
     // Check if the Next button is now enabled
@@ -94,7 +96,9 @@ describe('CompanyDetailsScreen', () => {
     // Check if the confirm text is rendered
     const confirmText = getByText(`I confirm Test Company is correct`);
     expect(confirmText).toBeDefined();
-    fireEvent.press(nextButton);
+    act(() => {
+      fireEvent.press(nextButton);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('Address');
   });
 });

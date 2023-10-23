@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import InfoModal from '../InfoModal';
 import UserContextProvider from '../../../UserContext';
 
@@ -31,8 +31,9 @@ describe('InfoModal', () => {
         <InfoModal {...mockProps} />
       </UserContextProvider>,
     );
-
-    fireEvent.press(getByTestId('CloseIcon'));
+    act(() => {
+      fireEvent.press(getByTestId('CloseIcon'));
+    });
     expect(mockProps.onPressClose).toHaveBeenCalled();
   });
 

@@ -81,10 +81,12 @@ describe('AuthModal component', () => {
         navigation={mockNavigation}
       />,
     );
-    const digitButtons = [...Array(6).keys()].map(num =>
-      getByLabelText(`digit-${num}`),
-    );
-    digitButtons.forEach(button => fireEvent.press(button));
+    act(() => {
+      const digitButtons = [...Array(6).keys()].map(num =>
+        getByLabelText(`digit-${num}`),
+      );
+      digitButtons.forEach(button => fireEvent.press(button));
+    });
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserContext} from '../../components/UserContext';
@@ -48,21 +48,27 @@ describe('SettingsScreen', () => {
   it('handles switch button press correctly', () => {
     const {getByTestId} = render(<ThemeScreen navigation={mockNavigation} />);
     const confirmButton = getByTestId('confirmButton');
-    fireEvent.press(confirmButton);
+    act(() => {
+      fireEvent.press(confirmButton);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UserSelection');
   });
 
   it('toggles dark mode correctly', () => {
     const {getByTestId} = render(<ThemeScreen navigation={mockNavigation} />);
     const darkModeCheckbox = getByTestId('darkModeCheckbox');
-    fireEvent.press(darkModeCheckbox);
+    act(() => {
+      fireEvent.press(darkModeCheckbox);
+    });
     expect(useUserContext().toggleDarkMode).toHaveBeenCalled();
   });
 
   it('toggles light mode correctly', () => {
     const {getByTestId} = render(<ThemeScreen navigation={mockNavigation} />);
     const lightModeCheckbox = getByTestId('lightModeCheckbox');
-    fireEvent.press(lightModeCheckbox);
+    act(() => {
+      fireEvent.press(lightModeCheckbox);
+    });
     expect(useUserContext().toggleDarkMode).toHaveBeenCalled();
   });
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {

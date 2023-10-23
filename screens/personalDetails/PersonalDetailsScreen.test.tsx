@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import PersonalDetailsScreen from './PersonalDetails';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigationTypes';
@@ -57,7 +57,9 @@ describe('PersonalDetailsScreen', () => {
 
     // Test editing functionality
     const editButton = getByTestId('saveEditButton');
-    fireEvent.press(editButton);
+    act(() => {
+      fireEvent.press(editButton);
+    });
     const buttonText = getByText('Save');
     expect(buttonText).toBeTruthy();
 
@@ -73,8 +75,9 @@ describe('PersonalDetailsScreen', () => {
 
     // Save the updated address details
     const saveButton = getByTestId('saveEditButton');
-    fireEvent.press(saveButton);
-
+    act(() => {
+      fireEvent.press(saveButton);
+    });
     // Check if the updated address details are displayed correctly
     expect(addressLine1Input.props.value).toBe('123 New Street');
     expect(townInput.props.value).toBe('New Town');
@@ -92,9 +95,13 @@ describe('PersonalDetailsScreen', () => {
       </UserContextProvider>,
     );
     const editButton = getByTestId('saveEditButton');
-    fireEvent.press(editButton);
+    act(() => {
+      fireEvent.press(editButton);
+    });
     const saveButton = getByTestId('saveEditButton');
-    fireEvent.press(saveButton);
+    act(() => {
+      fireEvent.press(saveButton);
+    });
     expect(getByText('Address updated successfully!')).toBeTruthy();
   });
 

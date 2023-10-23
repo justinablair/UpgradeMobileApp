@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeConfirmScreen from './UpgradeConfirmScreen';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -65,7 +65,9 @@ describe('UpgradeConfirmScreen', () => {
         <UpgradeConfirmScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    fireEvent.press(getByTestId('switchRecapButton'));
+    act(() => {
+      fireEvent.press(getByTestId('switchRecapButton'));
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeRecap');
   });
 });

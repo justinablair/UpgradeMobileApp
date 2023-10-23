@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeRecapScreen from './UpgradeRecap';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -69,8 +69,10 @@ describe('UpgradeRecapScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    const toggleButton = getByLabelText('Toggle Changes We Do Section');
-    fireEvent.press(toggleButton);
+    act(() => {
+      const toggleButton = getByLabelText('Toggle Changes We Do Section');
+      fireEvent.press(toggleButton);
+    });
     expect(getByText('What we’ll do during the switch')).toBeTruthy();
     expect(queryByText('Recap of changes')).toBeTruthy();
   });
@@ -83,8 +85,10 @@ describe('UpgradeRecapScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    const toggleButton = getByLabelText('Toggle Changes You Do Section');
-    fireEvent.press(toggleButton);
+    act(() => {
+      const toggleButton = getByLabelText('Toggle Changes You Do Section');
+      fireEvent.press(toggleButton);
+    });
     expect(getByText('What you’ll need to do after the switch')).toBeTruthy();
     expect(queryByText('What we’ll do during the switch')).toBeTruthy();
   });
@@ -97,8 +101,10 @@ describe('UpgradeRecapScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    const toggleButton = getByLabelText('Toggle New Account Section');
-    fireEvent.press(toggleButton);
+    act(() => {
+      const toggleButton = getByLabelText('Toggle New Account Section');
+      fireEvent.press(toggleButton);
+    });
     expect(getByText('How your new account will work')).toBeTruthy();
     expect(queryByText('What you’ll need to do after the switch')).toBeTruthy();
   });
@@ -111,8 +117,10 @@ describe('UpgradeRecapScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    const button = getByTestId('switchNow');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByTestId('switchNow');
+      fireEvent.press(button);
+    });
     expect(getByText('Authorise')).toBeTruthy();
   });
 
@@ -124,8 +132,10 @@ describe('UpgradeRecapScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
-    const button = getByTestId('notSureButton');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByTestId('notSureButton');
+      fireEvent.press(button);
+    });
     expect(getByTestId('exitModal')).toBeTruthy();
   });
 });

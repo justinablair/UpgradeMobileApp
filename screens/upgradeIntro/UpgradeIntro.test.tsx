@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, act} from '@testing-library/react-native';
 import UpgradeIntroScreen from './UpgradeIntro';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
@@ -78,8 +78,10 @@ describe('UpgradeIntroScreen', () => {
         <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const button = getByTestId('getStartedButton');
-    fireEvent.press(button);
+    act(() => {
+      const button = getByTestId('getStartedButton');
+      fireEvent.press(button);
+    });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen1');
   });
 
@@ -89,8 +91,10 @@ describe('UpgradeIntroScreen', () => {
         <UpgradeIntroScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const emoneyPressable = getByLabelText('E-money Pressable');
-    fireEvent.press(emoneyPressable);
+    act(() => {
+      const emoneyPressable = getByLabelText('E-money Pressable');
+      fireEvent.press(emoneyPressable);
+    });
     expect(getByText('Your e-money account')).toBeTruthy();
   });
 });
