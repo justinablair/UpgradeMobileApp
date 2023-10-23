@@ -7,28 +7,19 @@ import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
 import {NavigationProps} from '../../navigationTypes';
 import {useUserContext} from '../../components/UserContext';
-
-interface StepperScreenProps extends UpgradeStepperCompleteProps {
-  stepsData: {
-    number: string;
-    title: string;
-    description: string;
-    active: boolean;
-  }[];
-}
+import stepsData from '../../components/StepsData';
 
 type UpgradeStepperCompleteProps = NavigationProps<'StepperComplete'>;
 
-const StepperCompleteScreen: React.FC<StepperScreenProps> = ({
+const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
   navigation,
-  stepsData,
 }) => {
   // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
 
   const inactiveColor = isDarkMode ? Colours.black60 : Colours.black60;
-
   const activeCircle = isDarkMode ? Colours.black : Colours.white;
+
   const handleSwitchButtonPress = () => {
     navigation.navigate('UpgradeConfirm');
   };

@@ -52,7 +52,7 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
             accessible={true}
             accessibilityLabel="Image of a padlock">
             <Image
-              source={require('../assets/Padlock.png')}
+              source={require('../../assets/Padlock.png')}
               style={styles.alignCenter}
               accessibilityLabel="Image of a padlock"
             />

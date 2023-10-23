@@ -2,17 +2,17 @@
 
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import Text from '../components/Text';
-import PinkButton from '../components/theme/buttons/PinkButton';
-import Colours from '../components/theme/Colour';
-import stepsData from '../components/StepsData';
-import {NavigationProps} from '../navigationTypes';
-import {useUserContext} from '../components/UserContext';
+import Text from '../../components/Text';
+import PinkButton from '../../components/theme/buttons/PinkButton';
+import Colours from '../../components/theme/Colour';
+import stepsData from '../../components/StepsData';
+import {NavigationProps} from '../../navigationTypes';
+import {useUserContext} from '../../components/UserContext';
 import {
   commonStepCircleStyles,
   commonStepNumberStyles,
   commonStepContentStyles,
-} from './Common/CommonStyles';
+} from './../Common/CommonStyles';
 
 type UpgradeStepper2Props = NavigationProps<'StepperScreen2'>;
 

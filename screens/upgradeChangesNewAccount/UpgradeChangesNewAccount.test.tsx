@@ -8,7 +8,6 @@ import UserContextProvider, {
 } from '../../components/UserContext';
 import {NavigationContainer} from '@react-navigation/native';
 import {AccessibilityInfo} from 'react-native';
-// import * as UserContext from '../../components/UserContext';
 
 describe('UpgradeChangesNewAccountScreen', () => {
   const mockNavigation: StackNavigationProp<

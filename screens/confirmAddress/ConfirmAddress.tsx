@@ -11,8 +11,6 @@ import {
   AccessibilityInfo,
 } from 'react-native';
 import Text from '../../components/Text';
-// import InfoModal from '../components/InfoModal';
-
 import {NavigationProps} from '../../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../../components/theme/Colour';
@@ -27,19 +25,21 @@ type ConfirmAddressProps = NavigationProps<'ConfirmAddress'>;
 
 const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
-
-  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
-
-  const text60 = isDarkMode ? Colours.black : Colours.white;
-
-  const textColour = isDarkMode ? Colours.white : Colours.black;
+  const {addressLine1, town, postcode} = useUserContext();
 
   const [showSendingCardInfoModal, setShowSendingCardInfoModal] =
     useState(false);
-
   const [showInteractiveModal, setShowInteractiveModal] = useState(false);
-
   const [newCardPressed, setNewCardPressed] = useState(false);
+  const [displayedAddress, setDisplayedAddress] = useState({
+    addressLine1: '',
+    town: '',
+    postcode: '',
+  });
+
+  useEffect(() => {
+    setDisplayedAddress({addressLine1, town, postcode});
+  }, [addressLine1, town, postcode]);
 
   const handleOpenInteractiveModal = () => {
     setShowInteractiveModal(true);
@@ -55,23 +55,15 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
     setShowSendingCardInfoModal(true);
   };
 
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const text60 = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
+
   const newCardTextStyles: TextStyle = {
     ...styles.newCardText,
     color: newCardPressed ? Colours.blue : Colours.pink,
     textDecorationLine: 'underline',
   };
-
-  const {addressLine1, town, postcode} = useUserContext();
-
-  const [displayedAddress, setDisplayedAddress] = useState({
-    addressLine1: '',
-    town: '',
-    postcode: '',
-  });
-
-  useEffect(() => {
-    setDisplayedAddress({addressLine1, town, postcode});
-  }, [addressLine1, town, postcode]);
 
   const handleChangeAddressClick = () => {
     navigation.navigate('PersonalDetails');
@@ -96,19 +88,28 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
         {backgroundColor: containerBackgroundColor},
       ]}>
       <View
+        accessible={true}
+        accessibilityLabel="Confirm Address Screen"
         style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
         <ScrollView>
           <View>
             <Image
               source={require('../../assets/Envelope.png')}
               style={[styles.centerText, styles.spaceMedium]}
-              accessibilityLabel="Mettle Card In Envelope"
+              accessible={true}
+              accessibilityLabel="Image of a Mettle Card In Envelope"
+              accessibilityRole="image"
             />
-            <Text variant="screenTitle centerAlign" style={{color: textColour}}>
+            <Text
+              accessible={true}
+              accessibilityRole="header"
+              style={{color: textColour}}>
               {title}
             </Text>
             <Text
               variant="bodyText centerAlign"
+              accessible={true}
+              accessibilityRole="text"
               style={[{color: textColour}, styles.spaceMedium]}>
               We’ll send your new card to this address. If your address has
               changed, you’ll need to update it before continuing.
@@ -125,11 +126,14 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
             <Pressable onPress={handleNewCardTextPress}>
               <Text
                 variant="bodyText bodyTextBold"
+                accessible
+                accessibilityRole="button"
                 style={[
                   {color: Colours.pink},
                   styles.centerText,
                   newCardTextStyles,
-                ]}>
+                ]}
+                testID="newCardPressable">
                 Why we're sending a new card
               </Text>
             </Pressable>
@@ -143,7 +147,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
                 {backgroundColor: containerBackgroundColor},
                 styles.InfoModalCustomisation,
               ]}
-              titleStyle={{color: textColour}} // Customize title text color
+              titleStyle={{color: textColour}}
               bodyTextStyle={{color: textColour}}
             />
             <InteractiveModal
@@ -160,10 +164,12 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
             <WhiteButton
               buttonText="Update address"
               onPress={handleOpenInteractiveModal}
+              accessibilityLabel="Button to Update Address"
             />
             <PinkButton
               buttonText="Confirm address"
               onPress={handleConfirmAddressClick}
+              accessibilityLabel="Button to Confirm Address"
             />
           </View>
         </ScrollView>
@@ -175,7 +181,6 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
     padding: 16,
   },
   spaceMedium: {
@@ -188,7 +193,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
     height: '100%',
   },
 

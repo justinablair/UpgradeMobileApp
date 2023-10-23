@@ -6,10 +6,6 @@ import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AccessibilityInfo} from 'react-native';
 
-const mockNavigation = {
-  navigate: jest.fn(),
-};
-
 describe('UpgradeConfirmScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,

@@ -34,12 +34,12 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
 
   // Determining image sources based on dark mode
   const MettleStarsImageSource = isDarkMode
-    ? require('../assets/MettleStars.png')
-    : require('../assets/MettleStarsLightMode.png');
+    ? require('../../assets/MettleStars.png')
+    : require('../../assets/MettleStarsLightMode.png');
 
   const FSCSImageSource = isDarkMode
-    ? require('../assets/FSCSLogo.png')
-    : require('../assets/FSCSLightMode.png');
+    ? require('../../assets/FSCSLogo.png')
+    : require('../../assets/FSCSLightMode.png');
 
   const title = 'Welcome to your new Mettle bank account';
 

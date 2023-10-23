@@ -61,7 +61,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
           ]}>
           <View style={styles.contentContainer}>
             <Image
-              source={require('../assets/Supertick.png')}
+              source={require('../../assets/Supertick.png')}
               style={styles.largeImage}
               accessibilityLabel="Rocket taking off image"
             />

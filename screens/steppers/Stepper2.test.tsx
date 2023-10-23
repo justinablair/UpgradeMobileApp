@@ -3,7 +3,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
-import StepperScreen2 from '../Stepper2';
+import StepperScreen2 from './Stepper2';
 
 describe('StepperScreen2', () => {
   jest.mock('../../components/StepsData', () => [

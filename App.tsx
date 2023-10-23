@@ -36,11 +36,12 @@ import UpgradeCompleteScreen from './screens/upgradeComplete/UpgradeComplete';
 import UpgradedWelcomeScreen from './screens/upgradedWelcome/UpgradedWelcome';
 import UpgradedEmailScreen from './screens/upgradedEmail/UpgradedEmail';
 import StepperScreen1 from './screens/steppers/Stepper1';
-import StepperScreen2 from './screens/Stepper2';
-import StepperScreen3 from './screens/Stepper3';
+import StepperScreen2 from './screens/steppers/Stepper2';
+import StepperScreen3 from './screens/steppers/Stepper3';
+import StepperScreen4 from './screens/steppers/Stepper4';
+
 import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleScreenResident';
 import UpgradeIneligibleUSScreen from './ErrorScreens/UpgradeIneligibleUSScreen';
-import StepperScreen4 from './screens/Stepper4';
 import StepperCompleteScreen from './screens/steppers/StepperComplete';
 import ThemeScreen from './screens/themeScreen/ThemeScreen';
 import CompanyDetailsScreen from './screens/companyDetails/CompanyDetails';

@@ -15,6 +15,7 @@ interface InteractiveModalProps {
   onPinkButtonClick: () => void;
   whiteButtonText?: string;
   onWhiteButtonClick?: () => void;
+  testID?: string;
 }
 
 const InteractiveModal: React.FC<InteractiveModalProps> = ({
@@ -26,6 +27,7 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   onPinkButtonClick,
   whiteButtonText,
   onWhiteButtonClick,
+  testID,
 }) => {
   // Access isDarkMode from the user context
   const {isDarkMode} = useUserContext();
@@ -36,7 +38,11 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
 
   // Render the pink button with the provided text and click handler
   const renderPinkButton = () => (
-    <PinkButton buttonText={pinkButtonText} onPress={onPinkButtonClick} />
+    <PinkButton
+      buttonText={pinkButtonText}
+      onPress={onPinkButtonClick}
+      testID={'interactive-pink-button'}
+    />
   );
 
   // Render the white button if the text and click handler are provided, otherwise render nothing

@@ -31,12 +31,12 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   const title = 'Introducing the Mettle bank account';
 
   const FSCSImageSource = isDarkMode
-    ? require('../assets/FSCSLogo.png')
-    : require('../assets/FSCSLightMode.png');
+    ? require('../../assets/FSCSLogo.png')
+    : require('../../assets/FSCSLightMode.png');
 
   const MettleLogoImageSource = isDarkMode
-    ? require('../assets/MettleLogo.png')
-    : require('../assets/MettleLogoLightMode.png');
+    ? require('../../assets/MettleLogo.png')
+    : require('../../assets/MettleLogoLightMode.png');
 
   const [showEMoneyInfoModal, setShowEMoneyInfoModal] = useState(false);
   const [emoneyPressed, setEmoneyPressed] = useState(false);

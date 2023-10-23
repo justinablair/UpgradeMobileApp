@@ -51,7 +51,7 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
           accessibilityLabel="Upgrade Confirm Screen"
           accessibilityRole="summary">
           <Image
-            source={require('../assets/SwitchArrows.png')}
+            source={require('../../assets/SwitchArrows.png')}
             style={styles.largeImage}
             accessibilityLabel="Switch arrows image"
             accessible={true}
