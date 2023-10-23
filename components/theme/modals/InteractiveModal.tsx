@@ -41,7 +41,7 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
     <PinkButton
       buttonText={pinkButtonText}
       onPress={onPinkButtonClick}
-      testID={'interactive-pink-button'}
+      testID={'interactivePinkButton'}
     />
   );
 

@@ -3,9 +3,7 @@ import {render, fireEvent} from '@testing-library/react-native';
 import UpgradeChangesNewAccountScreen from './UpgradeChangesNewAccount';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import UserContextProvider, {
-  useUserContext,
-} from '../../components/UserContext';
+import UserContextProvider from '../../components/UserContext';
 import {NavigationContainer} from '@react-navigation/native';
 import {AccessibilityInfo} from 'react-native';
 

@@ -40,7 +40,7 @@ const UpgradeIneligibleResidentScreen: React.FC<
       <Text
         variant="bodyText"
         style={{color: textColour}}
-        accessibilityLabel="upgrade-ineligible-content">
+        accessibilityLabel="upgradeIneligibleContent">
         {contentText}
       </Text>
     );

@@ -18,7 +18,7 @@ describe('CheckboxToggle component', () => {
   it('calls onToggle when the checkbox is pressed', () => {
     const {getByRole} = render(<CheckboxToggle {...mockProps} />);
     const checkboxComponent = getByRole('checkbox');
-    fireEvent.press(checkboxComponent); // Use fireEvent.press to simulate press
+    fireEvent.press(checkboxComponent);
     expect(mockProps.onToggle).toHaveBeenCalled();
   });
 

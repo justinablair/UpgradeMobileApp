@@ -6,7 +6,6 @@ import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {AccessibilityInfo} from 'react-native';
-import UpgradeStartedScreen from '../upgradeStarted/UpgradeStarted';
 
 describe('UpgradeUSPersonScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -31,6 +30,7 @@ describe('UpgradeUSPersonScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
+
   it('renders correctly', () => {
     const {getByLabelText} = render(
       <UserContextProvider>
@@ -38,22 +38,6 @@ describe('UpgradeUSPersonScreen', () => {
       </UserContextProvider>,
     );
     expect(getByLabelText('Upgrade US Person Screen')).toBeTruthy();
-  });
-
-  it('handles button presses correctly', () => {
-    const {getByLabelText, getByTestId} = render(
-      <UserContextProvider>
-        <UpgradeUSPersonScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    fireEvent.press(getByLabelText('US Person Button'));
-    expect(getByTestId('USPersonModal')).toBeTruthy();
-
-    fireEvent.press(getByLabelText('yesButton'));
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIneligibleUS');
-
-    fireEvent.press(getByLabelText('noButton'));
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen4');
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -71,5 +55,24 @@ describe('UpgradeUSPersonScreen', () => {
         </NavigationContainer>
       </UserContextProvider>,
     );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Are you a United States (US) person?',
+    );
+  });
+
+  it('handles button presses correctly', () => {
+    const {getByLabelText, getByTestId} = render(
+      <UserContextProvider>
+        <UpgradeUSPersonScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    fireEvent.press(getByLabelText('US Person Button'));
+    expect(getByTestId('USPersonModal')).toBeTruthy();
+
+    fireEvent.press(getByLabelText('yesButton'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIneligibleUS');
+
+    fireEvent.press(getByLabelText('noButton'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen4');
   });
 });

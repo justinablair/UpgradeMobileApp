@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render, waitFor} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import UpgradeTermsScreen from './UpgradeTerms';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -49,6 +49,24 @@ describe('UpgradeTermsScreen', () => {
       <UserContextProvider>
         <UpgradeTermsScreen navigation={mockNavigation} />
       </UserContextProvider>,
+    );
+  });
+
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <UpgradeTermsScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Terms and Privacy Notice',
     );
   });
 
@@ -106,20 +124,5 @@ describe('UpgradeTermsScreen', () => {
         'To switch from an e-money account to a Mettle bank account, you must be a director of Test Business',
       ),
     ).toBeTruthy();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <UpgradeTermsScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
   });
 });

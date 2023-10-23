@@ -58,6 +58,9 @@ describe('UpgradedWelcomeScreen', () => {
         <UpgradedWelcomeScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Welcome to your new Mettle bank account',
+    );
   });
 
   it('navigates to "UpgradeRecap" screen on button press', () => {

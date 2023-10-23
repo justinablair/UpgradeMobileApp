@@ -3,7 +3,6 @@ import {fireEvent, render} from '@testing-library/react-native';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
-import {getByTestId} from '@testing-library/react';
 import StepperScreen3 from './Stepper3';
 
 describe('StepperScreen3', () => {
@@ -44,7 +43,7 @@ describe('StepperScreen3', () => {
     getId: jest.fn(),
   };
 
-  test('renders stepper screen with steps data', () => {
+  it('renders stepper screen with steps data', () => {
     const stepsData = [
       {
         number: '1',

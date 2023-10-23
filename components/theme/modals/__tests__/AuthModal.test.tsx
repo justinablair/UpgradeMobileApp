@@ -27,11 +27,15 @@ describe('AuthModal component', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
-  jest.setTimeout(10000); // Set the test timeout to 10000 ms or as needed
+  jest.setTimeout(10000);
 
   it('should render properly', () => {
     const {getByLabelText} = render(
-      <AuthModal visible={true} onClose={() => {}} />,
+      <AuthModal
+        visible={true}
+        onClose={() => {}}
+        navigation={mockNavigation}
+      />,
     );
 
     expect(getByLabelText('Authentication Modal')).toBeTruthy();
@@ -40,7 +44,11 @@ describe('AuthModal component', () => {
   it('should handle digit press correctly', () => {
     const onCloseMock = jest.fn();
     const {getByText} = render(
-      <AuthModal visible={true} onClose={onCloseMock} />,
+      <AuthModal
+        visible={true}
+        onClose={onCloseMock}
+        navigation={mockNavigation}
+      />,
     );
 
     fireEvent.press(getByText('1'));
@@ -52,7 +60,11 @@ describe('AuthModal component', () => {
   it('should handle backspace correctly', () => {
     const onCloseMock = jest.fn();
     const {getByLabelText, getByTestId} = render(
-      <AuthModal visible={true} onClose={onCloseMock} />,
+      <AuthModal
+        visible={true}
+        onClose={onCloseMock}
+        navigation={mockNavigation}
+      />,
     );
 
     fireEvent.press(getByTestId('backspaceButton'));

@@ -29,6 +29,7 @@ describe('UpgradeConfirmScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
+
   it('renders correctly', () => {
     const {getByText, getByLabelText} = render(
       <UserContextProvider>
@@ -37,16 +38,6 @@ describe('UpgradeConfirmScreen', () => {
     );
     expect(getByText('Ready to switch?')).toBeTruthy();
     expect(getByLabelText('Switch arrows image')).toBeTruthy();
-  });
-
-  it('navigates to "UpgradeRecap" screen on button press', () => {
-    const {getByTestId} = render(
-      <UserContextProvider>
-        <UpgradeConfirmScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    fireEvent.press(getByTestId('switchRecapButton'));
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeRecap');
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -66,5 +57,15 @@ describe('UpgradeConfirmScreen', () => {
     expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
       'Ready to switch?',
     );
+  });
+
+  it('navigates to desired screen on button press', () => {
+    const {getByTestId} = render(
+      <UserContextProvider>
+        <UpgradeConfirmScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    fireEvent.press(getByTestId('switchRecapButton'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeRecap');
   });
 });

@@ -44,6 +44,24 @@ describe('UpgradeConsentsScreen', () => {
     );
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <UpgradeConsentsScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Your consents to switch',
+    );
+  });
+
   it('disables the button when no checkboxes are checked', () => {
     const {getByTestId} = render(
       <UserContextProvider>
@@ -121,20 +139,5 @@ describe('UpgradeConsentsScreen', () => {
       'https://www.mettle.co.uk/upgrade-data-use.pdf',
     );
     openUrlSpy.mockRestore();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <UpgradeConsentsScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
   });
 });

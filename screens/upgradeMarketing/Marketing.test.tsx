@@ -35,6 +35,25 @@ describe('Marketing Screen', () => {
     expect(getByText('Marketing preferences')).not.toBeNull();
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <MarketingScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Marketing preferences',
+    );
+  });
+
   it('toggles email subscription correctly', () => {
     const {getByTestId} = render(
       <UserContextProvider>
@@ -71,24 +90,5 @@ describe('Marketing Screen', () => {
     const button = getByTestId('YesToAllButton');
     fireEvent.press(button);
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen3');
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-
-    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
-      'Marketing preferences',
-    );
   });
 });

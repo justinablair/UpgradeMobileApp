@@ -43,22 +43,7 @@ describe('StepperScreen1', () => {
     getId: jest.fn(),
   };
 
-  test('renders stepper screen with steps data', () => {
-    const stepsData = [
-      {
-        number: '1',
-        title: 'How your new account will work',
-        description: 'Description for step 1',
-        active: true,
-      },
-      {
-        number: '2',
-        title: 'Your consents to switch',
-        description: 'Description for step 2',
-        active: false,
-      },
-    ];
-
+  it('renders stepper screen with steps data', () => {
     const {getByText} = render(
       <UserContextProvider>
         <StepperScreen1 navigation={mockNavigation} />

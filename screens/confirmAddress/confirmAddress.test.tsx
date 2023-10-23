@@ -56,6 +56,22 @@ describe('<ConfirmAddressScreen />', () => {
     expect(getByLabelText('Confirm Address Screen')).toBeTruthy();
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <ConfirmAddressScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toBeCalledWith('Confirm your address');
+  });
+
   it('should navigate to the desired screen', () => {
     const {getByText} = render(
       <UserContextProvider>
@@ -80,7 +96,7 @@ describe('<ConfirmAddressScreen />', () => {
       ).toBeTruthy();
     });
 
-    fireEvent.press(getByTestId('interactive-pink-button'));
+    fireEvent.press(getByTestId('interactivePinkButton'));
 
     expect(mockNavigation.navigate).toBeCalledWith('PersonalDetails');
   });
@@ -112,21 +128,5 @@ describe('<ConfirmAddressScreen />', () => {
     expect(findByText('123 Street')).toBeTruthy();
     expect(findByText('City')).toBeTruthy();
     expect(findByText('12345')).toBeTruthy();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <ConfirmAddressScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    expect(mockAnnounceForAccessibility).toBeCalledWith('Confirm your address');
   });
 });

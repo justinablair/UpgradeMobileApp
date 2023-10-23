@@ -45,6 +45,24 @@ describe('UpgradeIntroScreen', () => {
     );
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <UpgradeIntroScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Introducing the Mettle bank account',
+    );
+  });
+
   it('displays the title correctly', () => {
     const {getByText} = render(
       <UserContextProvider>
@@ -74,20 +92,5 @@ describe('UpgradeIntroScreen', () => {
     const emoneyPressable = getByLabelText('E-money Pressable');
     fireEvent.press(emoneyPressable);
     expect(getByText('Your e-money account')).toBeTruthy();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <UpgradeIntroScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
   });
 });

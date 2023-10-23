@@ -12,7 +12,7 @@ describe('CustomHeader', () => {
     expect(headerComponent.props.style).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          backgroundColor: '#FFFFFF', // Change this to the expected color for light mode
+          backgroundColor: '#FFFFFF',
         }),
       ]),
     );

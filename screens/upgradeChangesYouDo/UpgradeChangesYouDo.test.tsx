@@ -63,6 +63,9 @@ describe('UpgradeChangesYouDoScreen', () => {
         <UpgradeChangesYouDoScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'What you’ll need to do after the switch',
+    );
   });
 
   it('navigates to "UpgradeChangesNewAccount" screen on button press', () => {

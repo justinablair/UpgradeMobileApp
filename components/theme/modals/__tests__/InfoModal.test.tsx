@@ -1,7 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import InfoModal from '../InfoModal';
-import {getByTestId} from '@testing-library/react';
 import UserContextProvider from '../../../UserContext';
 
 describe('InfoModal', () => {

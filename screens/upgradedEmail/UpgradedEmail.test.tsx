@@ -37,6 +37,24 @@ describe('UpgradedEmailScreen', () => {
     );
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <UpgradedEmailScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Look out for an email from us',
+    );
+  });
+
   it('checks if the title is rendered', () => {
     const {getByText} = render(
       <UserContextProvider>
@@ -69,20 +87,5 @@ describe('UpgradedEmailScreen', () => {
     expect(getByLabelText('Direct Debits')).toBeTruthy();
     expect(getByLabelText('Unpaid invoices')).toBeTruthy();
     expect(getByLabelText('Share bank details')).toBeTruthy();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <UpgradedEmailScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
   });
 });

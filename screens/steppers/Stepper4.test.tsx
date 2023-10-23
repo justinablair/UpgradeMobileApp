@@ -44,33 +44,6 @@ describe('StepperScreen4', () => {
   };
 
   it('renders stepper screen with steps data', () => {
-    const stepsData = [
-      {
-        number: '1',
-        title: 'How your new account will work',
-        description: 'Description for step 1',
-        active: true,
-      },
-      {
-        number: '2',
-        title: 'Your consents to switch',
-        description: 'Description for step 2',
-        active: false,
-      },
-      {
-        number: '3',
-        title: 'Tax reporting',
-        description: 'Description for step 3',
-        active: false,
-      },
-      {
-        number: '4',
-        title: 'Confirm your details',
-        description: 'Description for step 4',
-        active: false,
-      },
-    ];
-
     const {getByText} = render(
       <UserContextProvider>
         <StepperScreen4 navigation={mockNavigation} />

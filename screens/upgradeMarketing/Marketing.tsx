@@ -37,7 +37,6 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
     useState<ToggleStates>(initialToggleStates);
 
   const handleToggleChange = (preference: keyof ToggleStates) => {
-    console.log('Toggle state changed for:', preference);
     setToggleStates(prevState => ({
       ...prevState,
       [preference]: !prevState[preference],

@@ -44,7 +44,7 @@ describe('UpgradeIneligibleResidentScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
-  test('renders title correctly', () => {
+  it('renders title correctly', () => {
     const {getByLabelText} = render(
       <UserContextProvider>
         <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
@@ -52,29 +52,6 @@ describe('UpgradeIneligibleResidentScreen', () => {
     );
     const title = getByLabelText('upgradeIneligibleTitle');
     expect(title).toBeTruthy();
-  });
-
-  test('renders content correctly based on user type', () => {
-    const {getByLabelText} = render(
-      <UserContextProvider>
-        <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    const limitedCompanyContent = getByLabelText('upgrade-ineligible-content');
-    const soleTraderContent = getByLabelText('upgrade-ineligible-content');
-    expect(limitedCompanyContent).toBeTruthy();
-    expect(soleTraderContent).toBeTruthy();
-  });
-
-  test('handles button press correctly', () => {
-    const {getByTestId} = render(
-      <UserContextProvider>
-        <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
-      </UserContextProvider>,
-    );
-    const button = getByTestId('buttonText');
-    fireEvent.press(button);
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -96,5 +73,25 @@ describe('UpgradeIneligibleResidentScreen', () => {
     expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
       'Sorry, we can’t open a bank account for you',
     );
+  });
+  it('renders content correctly based on user type', () => {
+    const {getByLabelText} = render(
+      <UserContextProvider>
+        <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const limitedCompanyContent = getByLabelText('upgradeIneligibleContent');
+    expect(limitedCompanyContent).toBeTruthy();
+  });
+
+  it('handles button press correctly', () => {
+    const {getByTestId} = render(
+      <UserContextProvider>
+        <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    const button = getByTestId('buttonText');
+    fireEvent.press(button);
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
   });
 });

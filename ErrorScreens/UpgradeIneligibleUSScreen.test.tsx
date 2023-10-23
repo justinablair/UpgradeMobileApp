@@ -42,7 +42,28 @@ describe('UpgradeIneligibleUSScreen', () => {
     expect(titleElement).toBeTruthy();
   });
 
-  it('renders the cancel switch button', () => {
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <NavigationContainer>
+          <UpgradeIneligibleUSScreen navigation={mockNavigation} />
+        </NavigationContainer>
+      </UserContextProvider>,
+    );
+
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'Sorry, we can’t open a bank account for you',
+    );
+  });
+
+  it('navigates to the desired screen', () => {
     const {getByText} = render(
       <UserContextProvider>
         <UpgradeIneligibleUSScreen navigation={mockNavigation} />
@@ -63,26 +84,5 @@ describe('UpgradeIneligibleUSScreen', () => {
     const buttonElement = getByText('Cancel switch');
     fireEvent.press(buttonElement);
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIntro');
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <NavigationContainer>
-          <UpgradeIneligibleUSScreen navigation={mockNavigation} />
-        </NavigationContainer>
-      </UserContextProvider>,
-    );
-
-    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
-      'Sorry, we can’t open a bank account for you',
-    );
   });
 });

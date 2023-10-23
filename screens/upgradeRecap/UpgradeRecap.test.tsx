@@ -41,6 +41,26 @@ describe('UpgradeRecapScreen', () => {
     expect(getByLabelText('Upgrade Recap Screen Summary')).toBeTruthy();
   });
 
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
+      <UserContextProvider>
+        <NavigationContainer>
+          <UpgradeRecapScreen navigation={mockNavigation} />
+        </NavigationContainer>
+      </UserContextProvider>,
+    );
+    expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
+      'What we’ll do during the switch',
+    );
+  });
+
   it('toggles Changes We Do section', () => {
     const {getByLabelText, getByText, queryByText} = render(
       <UserContextProvider>
@@ -107,22 +127,5 @@ describe('UpgradeRecapScreen', () => {
     const button = getByTestId('notSureButton');
     fireEvent.press(button);
     expect(getByTestId('exitModal')).toBeTruthy();
-  });
-
-  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
-    const mockAnnounceForAccessibility = jest.fn();
-    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
-    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
-    jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
-      .mockImplementation(mockAnnounceForAccessibility);
-
-    render(
-      <UserContextProvider>
-        <NavigationContainer>
-          <UpgradeRecapScreen navigation={mockNavigation} />
-        </NavigationContainer>
-      </UserContextProvider>,
-    );
   });
 });
