@@ -30,39 +30,41 @@ describe('StepperCompleteScreen', () => {
   };
 
   test('renders stepper complete screen with steps data', () => {
+    const title1 = 'How your new account will work';
+    const title2 = 'Your consents to switch';
+    const title3 = 'Tax reporting';
+    const title4 = 'Confirm your details';
+
     const stepsData = [
       {
         number: '1',
-        title: 'Step 1',
+        title: {title1},
       },
       {
         number: '2',
-        title: 'Step 2',
+        title: {title2},
       },
       {
         number: '3',
-        title: 'Step 3',
+        title: {title3},
       },
       {
         number: '4',
-        title: 'Step 4',
+        title: {title4},
       },
     ];
 
     const {getByText} = render(
       <UserContextProvider>
-        <StepperCompleteScreen
-          navigation={mockNavigation}
-          stepsData={stepsData}
-        />
+        <StepperCompleteScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
     // Check if the step titles are rendered
-    const step1Title = getByText('Step 1');
-    const step2Title = getByText('Step 2');
-    const step3Title = getByText('Step 3');
-    const step4Title = getByText('Step 4');
+    const step1Title = getByText(title1);
+    const step2Title = getByText(title2);
+    const step3Title = getByText(title3);
+    const step4Title = getByText(title4);
     expect(step1Title).toBeTruthy();
     expect(step2Title).toBeTruthy();
     expect(step3Title).toBeTruthy();
