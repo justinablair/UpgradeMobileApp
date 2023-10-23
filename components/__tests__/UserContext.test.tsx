@@ -1,10 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import {
-  UserContextProvider,
-  UserType,
-  useUserContext,
-} from '../components/UserContext';
+import {UserContextProvider, UserType, useUserContext} from '../UserContext';
 
 describe('UserContext', () => {
   it('should toggle dark mode', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
-import UpgradedWelcomeScreen from '../upgradedWelcome/UpgradedWelcome';
+import UpgradedWelcomeScreen from './UpgradedWelcome';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';

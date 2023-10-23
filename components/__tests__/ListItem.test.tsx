@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
-import ListItem from '../components/ListItem';
+import ListItem from '../ListItem';
 import {StyleSheet} from 'react-native';
 
 describe('ListItem component', () => {

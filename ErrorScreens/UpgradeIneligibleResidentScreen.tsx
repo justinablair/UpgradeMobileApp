@@ -1,5 +1,11 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import Colours from '../components/theme/Colour';
@@ -22,37 +28,49 @@ const UpgradeIneligibleResidentScreen: React.FC<
   };
 
   const renderContent = () => {
+    let contentText = '';
     if (userType === 'limitedCompany') {
-      return (
-        <>
-          <Text variant="bodyText" style={{color: textColour}}>
-            We’re currently unable to support businesses that are liable to pay
-            tax outside of the United Kingdom.
-          </Text>
-        </>
-      );
+      contentText =
+        'We’re currently unable to support businesses that are liable to pay tax outside of the United Kingdom.';
     } else if (userType === 'soleTrader') {
-      return (
-        <>
-          <Text variant="bodyText" style={{color: textColour}}>
-            We’re currently unable to support countries outside of the United
-            Kingdom where you’re liable to pay tax.{'\n'}
-          </Text>
-        </>
-      );
+      contentText =
+        'We’re currently unable to support countries outside of the United Kingdom where you’re liable to pay tax.\n';
     }
+    return (
+      <Text
+        variant="bodyText"
+        style={{color: textColour}}
+        accessibilityLabel="upgrade-ineligible-content">
+        {contentText}
+      </Text>
+    );
   };
+
+  const title = 'Sorry, we can’t open a bank account for you';
+
+  // Use AccessibilityInfo to set accessibility focus on the title
+  useEffect(() => {
+    AccessibilityInfo.announceForAccessibility(title);
+  }, [title]);
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View
-        style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
+        style={[styles.container, {backgroundColor: containerBackgroundColor}]}
+        accessibilityRole="header">
         <ScrollView>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-            Sorry, we can’t open a bank account for you{' '}
+          <Text
+            variant="screenTitle leftAlign"
+            style={{color: textColour}}
+            accessibilityRole="header"
+            accessibilityLabel="upgradeIneligibleTitle">
+            {title}
           </Text>
           {renderContent()}
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessibilityLabel="upgrade-ineligible-body">
             Please continue to use your e-money account.
             {'\n\n'}
             If you have any questions about our decision, contact us via in-app
@@ -63,6 +81,7 @@ const UpgradeIneligibleResidentScreen: React.FC<
           <PinkButton
             buttonText="Cancel switch"
             onPress={handleSwitchExitJourneyPress}
+            accessibilityLabel="cancelSwitchButton"
           />
         </View>
       </View>
@@ -77,10 +96,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bottomButtonContainer: {
-    marginBottom: 10, // Some margin to separate the button from the content
+    marginBottom: 20,
   },
   safeAreaContainer: {
-    height: '100%',
+    flex: 1,
   },
 });
 

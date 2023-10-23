@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
-import InfoBox from '../components/InfoBox';
-import {UserContextProvider} from '../components/UserContext';
+import InfoBox from '../InfoBox';
+import {UserContextProvider} from '../UserContext';
 import {StyleSheet, Text} from 'react-native';
 
 describe('InfoBox component', () => {

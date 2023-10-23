@@ -1,7 +1,7 @@
 // Text.test.tsx
 import React from 'react';
 import {render} from '@testing-library/react-native';
-import Text from '../components/Text';
+import Text from '../Text';
 
 describe('Text component', () => {
   it('renders with default variant', () => {

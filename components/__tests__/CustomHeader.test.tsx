@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import CustomHeader from '../components/CustomHeader';
+import CustomHeader from '../CustomHeader';
 
 describe('CustomHeader', () => {
   it('renders the header with the correct styling', () => {

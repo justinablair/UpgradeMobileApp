@@ -40,11 +40,11 @@ import StepperScreen2 from './screens/steppers/Stepper2';
 import StepperScreen3 from './screens/steppers/Stepper3';
 import StepperScreen4 from './screens/steppers/Stepper4';
 
-import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleScreenResident';
 import UpgradeIneligibleUSScreen from './ErrorScreens/UpgradeIneligibleUSScreen';
 import StepperCompleteScreen from './screens/steppers/StepperComplete';
 import ThemeScreen from './screens/themeScreen/ThemeScreen';
 import CompanyDetailsScreen from './screens/companyDetails/CompanyDetails';
+import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleResidentScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

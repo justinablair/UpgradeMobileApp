@@ -1,5 +1,3 @@
-//UpgradeComplete.tsx
-
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -22,27 +20,37 @@ type UpgradeCompleteProps = NavigationProps<'UpgradeComplete'>;
 const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
   navigation,
 }) => {
+  // Get the current mode from the user context
   const {isDarkMode} = useUserContext();
 
+  // Define container background and text colors based on the mode
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
+  // State to manage the visibility of the authentication modal
   const [authModalVisible, setAuthModalVisible] = useState(false);
 
+  // Function to handle closing the authentication modal
   const onCloseAuthModal = () => {
-    setAuthModalVisible(false); // Close the AuthModal
+    setAuthModalVisible(false);
   };
+
+  // Function to handle the login button press
   const handleLoginButtonPress = () => {
     setAuthModalVisible(true); // Open the AuthModal
   };
+
+  // Function to handle the navigation action in the authentication modal
   const handleAuthModalNext = () => {
-    const targetScreen = 'UpgradedWelcome'; // Define the target screen
-    navigation.navigate(targetScreen); // Navigate to the target screen
-    onCloseAuthModal(); // Close the AuthModal
+    const targetScreen = 'UpgradedWelcome';
+    navigation.navigate(targetScreen);
+    onCloseAuthModal();
   };
 
-  const title = 'Congratulations your switch is complete!';
-  // Use AccessibilityInfo to set accessibility focus on the title
+  // Define the title of the screen
+  const title = 'Congratulations! Your switch is complete!';
+
+  // Set accessibility focus on the title
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
@@ -52,40 +60,64 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}>
-      <View style={{flex: 1}}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.container,
-            {backgroundColor: containerBackgroundColor},
-          ]}>
-          <View style={styles.contentContainer}>
-            <Image
-              source={require('../../assets/Supertick.png')}
-              style={styles.largeImage}
-              accessibilityLabel="Rocket taking off image"
-            />
-            <Text variant="screenTitle" style={{color: textColour}}>
-              {title}
-            </Text>
-            <Text variant="bodyText centerAlign" style={{color: textColour}}>
-              You can now log in to your new account, where you’ll find your
-              account number and sort code.{'\n\n'} To help you get started,
-              we’ll send you a couple of emails soon. Look out for your new
-              account details and your old scheduled payments and Direct Debits.
-            </Text>
-          </View>
-        </ScrollView>
-        <View style={styles.bottomButtonContainer}>
-          <PinkButton buttonText="Log in" onPress={handleLoginButtonPress} />
+      ]}
+      accessible={true}
+      accessibilityLabel="upgrade-complete-screen">
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          {backgroundColor: containerBackgroundColor},
+        ]}>
+        <View
+          style={styles.contentContainer}
+          accessible={true}
+          accessibilityLabel="upgrade-complete-content">
+          {/* Display the success image */}
+          <Image
+            source={require('../../assets/Supertick.png')}
+            style={styles.largeImage}
+            accessible={true}
+            accessibilityLabel="rocketTakingOffImage"
+          />
+          {/* Display the title */}
+          <Text
+            variant="screenTitle"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="upgradeCompleteTitle">
+            {title}
+          </Text>
+          {/* Display the body text */}
+          <Text
+            variant="bodyText"
+            style={{color: textColour, textAlign: 'center'}}
+            accessible={true}
+            accessibilityLabel="upgradeCompleteBody">
+            You can now log in to your new account, where you’ll find your
+            account number and sort code.
+            {'\n\n'}
+            To help you get started, we’ll send you a couple of emails soon.
+            Look out for your new account details and your old scheduled
+            payments and Direct Debits.
+          </Text>
         </View>
-        <AuthModal
-          visible={authModalVisible}
-          onClose={onCloseAuthModal}
-          // navigation={navigation}
-          onNext={handleAuthModalNext}
+      </ScrollView>
+      {/* Display the login button */}
+      <View style={styles.bottomButtonContainer}>
+        <PinkButton
+          buttonText="Log in"
+          onPress={handleLoginButtonPress}
+          accessibilityLabel="loginButton"
+          testID="loginButton"
         />
       </View>
+      {/* Display the authentication modal */}
+      <AuthModal
+        visible={authModalVisible}
+        onClose={onCloseAuthModal}
+        navigation={navigation}
+        onNext={handleAuthModalNext}
+      />
     </SafeAreaView>
   );
 };
@@ -95,10 +127,12 @@ const styles = StyleSheet.create({
     padding: 25,
   },
   contentContainer: {
-    flex: 1, // Content takes remaining space
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   safeAreaContainer: {
-    height: '100%',
+    flex: 1,
   },
   bottomButtonContainer: {
     padding: 16,
@@ -107,6 +141,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center',
+    marginBottom: 20,
   },
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
-import Toast from '../components/Toast';
+import Toast from '../Toast';
 
 describe('Toast component', () => {
   it('renders with message', () => {

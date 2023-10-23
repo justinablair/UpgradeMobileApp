@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import OptionsWithChevron from '../components/OptionsWithChevron';
-import {UserContextProvider} from '../components/UserContext';
+import OptionsWithChevron from '../OptionsWithChevron';
+import {UserContextProvider} from '../UserContext';
 import {StyleSheet} from 'react-native';
 
 describe('OptionsWithChevron component', () => {
