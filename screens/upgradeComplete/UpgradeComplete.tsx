@@ -62,7 +62,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
         {backgroundColor: containerBackgroundColor},
       ]}
       accessible={true}
-      accessibilityLabel="upgrade-complete-screen">
+      accessibilityLabel="upgradeCompleteScreen">
       <ScrollView
         contentContainerStyle={[
           styles.container,
@@ -71,7 +71,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
         <View
           style={styles.contentContainer}
           accessible={true}
-          accessibilityLabel="upgrade-complete-content">
+          accessibilityLabel="upgradeCompleteContent">
           {/* Display the success image */}
           <Image
             source={require('../../assets/Supertick.png')}

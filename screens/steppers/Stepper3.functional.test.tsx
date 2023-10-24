@@ -11,21 +11,16 @@ describe('StepperScreen3', () => {
       number: '1',
       title: 'How your new account will work',
       description: 'Description for step 1',
-      active: false,
+      active: true,
     },
     {
       number: '2',
-      title: 'Your consents to switch',
+      title: 'Step 2',
       description: 'Description for step 2',
       active: false,
     },
-    {
-      number: '3',
-      title: 'Tax reporting',
-      description: 'Description for step 2',
-      active: true,
-    },
   ]);
+
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
     'StepperScreen3'

@@ -1,34 +1,30 @@
 import React from 'react';
 import {act, fireEvent, render} from '@testing-library/react-native';
+import StepperScreen1 from './Stepper1';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
-import StepperScreen3 from './Stepper3';
+import {getAllByText} from '@testing-library/react';
 
-describe('StepperScreen3', () => {
+describe('StepperScreen1', () => {
   jest.mock('../../components/StepsData', () => [
     {
       number: '1',
       title: 'How your new account will work',
       description: 'Description for step 1',
-      active: false,
+      active: true,
     },
     {
       number: '2',
-      title: 'Your consents to switch',
+      title: 'Step 2',
       description: 'Description for step 2',
       active: false,
     },
-    {
-      number: '3',
-      title: 'Tax reporting',
-      description: 'Description for step 2',
-      active: true,
-    },
   ]);
+
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'StepperScreen3'
+    'StepperScreen1'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -50,35 +46,33 @@ describe('StepperScreen3', () => {
   };
 
   it('renders stepper screen with steps data', () => {
-    const {getByText, getByTestId} = render(
+    const {getByText, getAllByText} = render(
       <UserContextProvider>
-        <StepperScreen3 navigation={mockNavigation} />
+        <StepperScreen1 navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
     // Check if the step titles are rendered
     const step1Title = getByText('How your new account will work');
-    const step2Title = getByText('Your consents to switch');
-    const step3Title = getByTestId('step-3');
+    const step2Title = getByText(' Your consents to switch');
     expect(step1Title).toBeTruthy();
     expect(step2Title).toBeTruthy();
-    expect(step3Title).toBeTruthy();
 
     // Check if the button is rendered
-    const buttonElement = getByTestId('taxReportingButton');
+    const buttonElement = getByText('How it will work');
     expect(buttonElement).toBeTruthy();
   });
 
-  it('handles "tax reporting" button click', () => {
-    const {getByTestId} = render(
+  it('handles "how will it work" button click', () => {
+    const {getByText} = render(
       <UserContextProvider>
-        <StepperScreen3 navigation={mockNavigation} />
+        <StepperScreen1 navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const buttonElement = getByTestId('taxReportingButton');
+    const buttonElement = getByText('How it will work');
     act(() => {
       fireEvent.press(buttonElement);
     });
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTaxReporting');
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeChangesWeDo');
   });
 });
