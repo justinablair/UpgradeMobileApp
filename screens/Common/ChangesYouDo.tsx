@@ -24,6 +24,8 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
         icon={<DrawingsPaidToUserIcon stroke={colourMode} />}
         title="Give your clients your new bank details"
         description="Be sure to re-create unpaid invoices and any payments you’re expecting to receive, as you’ll lose the old ones."
+        accessible={true}
+        accessibilityLabel="Give Clients New Bank Details"
       />
       <View style={styles.space} />
       {/* Box 2 */}
@@ -31,6 +33,8 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
         icon={<CashIcon fill={colourMode} />}
         title="Set up your Direct Debits and scheduled payments"
         description="Use the email we send you to set them up again."
+        accessible={true}
+        accessibilityLabel="Set Up Direct Debits and Scheduled Payments"
       />
       <View style={styles.space} />
       {/* Box 3 */}
@@ -38,6 +42,8 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
         icon={<PotSmallIcon stroke={colourMode} />}
         title="Set up any pots you need"
         description="The balance of your existing pots will be moved to your main balance in your new account, so you’ll need to set up your pots."
+        accessible={true}
+        accessibilityLabel="Set up Pots"
       />
       <View style={styles.space} />
       {/* Box 4 */}
@@ -45,6 +51,8 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
         icon={<ApplePaySvg fill={colourMode} />}
         title="Set up Apple Pay"
         description="You can do this once you’ve activated your new card."
+        accessible={true}
+        accessibilityLabel="Set up Apple Pay"
       />
       <View style={styles.space} />
       {/* Box 5 */}
@@ -52,6 +60,8 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
         icon={<ComputerSoftwareIcon fill={colourMode} />}
         title="Connect Xero or Quickbooks"
         description="These existing connections will expire."
+        accessible={true}
+        accessibilityLabel="Connect Xero or Quickbooks"
       />
       <View style={styles.space} />
     </View>

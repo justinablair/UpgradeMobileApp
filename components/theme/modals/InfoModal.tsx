@@ -15,6 +15,7 @@ interface InfoModalProps {
   onPressClose: () => void;
   title: string;
   content: string;
+  accessible?: boolean;
   accessibilityLabel?: string;
   contentStyle?: object;
   titleStyle?: object;
@@ -27,6 +28,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
   onPressClose,
   title,
   content,
+  accessible = false, // Default to false if not provided
   accessibilityLabel,
   contentStyle,
   titleStyle,
@@ -41,12 +43,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View
-        style={styles.modalBackground}
-        accessible={true}
-        accessibilityLabel="Info Modal Background"
-        accessibilityRole="alert"
-        testID={testID}>
+      <View style={styles.modalBackground} testID={testID}>
         {/* Background with opacity */}
         <View>
           {/* Modal Content */}
@@ -56,10 +53,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
               contentStyle,
               {backgroundColor: containerBackgroundColor},
             ]}
-            accessible={true}
-            accessibilityLabel="Info Modal Content"
-            testID="InfoModalContent"
-            accessibilityRole="alert">
+            testID="InfoModalContent">
             <TouchableOpacity
               style={styles.modalCloseIcon}
               testID="CloseIcon"
@@ -68,15 +62,21 @@ const InfoModal: React.FC<InfoModalProps> = ({
               <Image
                 source={require('../../../assets/Close.png')}
                 style={styles.modalCloseIcon}
-                accessibilityLabel={accessibilityLabel}
+                accessible={true}
+                accessibilityLabel="close button"
               />
             </TouchableOpacity>
             <Text
               style={[styles.modalTitle, titleStyle, {color: textColour}]}
+              accessible={true}
               accessibilityRole="header">
               {title}
             </Text>
-            <Text style={[styles.bodyText, {color: textColour}]}>
+            <Text
+              style={[styles.bodyText, {color: textColour}]}
+              accessible={true}
+              accessibilityLabel="Modal Content"
+              accessibilityRole="text">
               {content}
             </Text>
           </View>

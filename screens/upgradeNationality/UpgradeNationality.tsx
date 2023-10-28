@@ -73,6 +73,8 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
       <Text
         variant="screenTitle leftAlign"
         style={{color: textColour}}
+        accessible={true}
+        accessibilityLabel={title}
         accessibilityRole="header">
         {title}
       </Text>
@@ -100,28 +102,35 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           {renderContent()}
           <Pressable
             onPress={handleNationalityPress}
+            accessible={true}
             accessibilityRole="button">
             <Text
               variant="bodyText"
               style={nationalityTextStyles}
-              accessibilityRole="text"
-              accessibilityLabel="Press to learn more about tax residency">
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="What Is Tax Residency"
+              accessibilityHint="Press to learn more about tax residency">
               What is tax residency?
             </Text>
-            <OptionsWithChevron
-              title="Yes"
-              onPress={handleYesButtonPress}
-              accessibilityRole="button"
-              accessibilityLabel="Select Yes to proceed"
-            />
-            <View style={[styles.spaceMedium, styles.separator]} />
-            <OptionsWithChevron
-              title="No"
-              onPress={handleNoButtonPress}
-              accessibilityRole="button"
-              accessibilityLabel="Select No to proceed"
-            />
           </Pressable>
+          <OptionsWithChevron
+            title="Yes"
+            description=""
+            onPress={handleYesButtonPress}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityHint="Press yes to proceed"
+          />
+          <View style={[styles.spaceMedium, styles.separator]} />
+          <OptionsWithChevron
+            title="No"
+            description=""
+            onPress={handleNoButtonPress}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityHint="Press no to proceed"
+          />
         </View>
         <InfoModal
           visible={showNationalityModal}
@@ -135,6 +144,8 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
           titleStyle={{color: textColour}}
           bodyTextStyle={{color: textColour}}
           testID="taxResidentInfoModal"
+          accessible={true}
+          accessibilityLabel="Tax Residency Definition Modal"
         />
       </ScrollView>
     </SafeAreaView>

@@ -54,25 +54,20 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityLabel="Welcome Screen"
-      accessibilityRole="summary">
+      ]}>
       {/* ScrollView for scrollable content */}
       <ScrollView
         contentContainerStyle={[
           styles.container,
           {backgroundColor: containerBackgroundColor},
-        ]}
-        accessible={true}
-        accessibilityLabel="Welcome Screen Content"
-        accessibilityRole="summary">
+        ]}>
         <View>
           {/* Mettle Logo Image */}
           <Image
             source={MettleStarsImageSource}
             style={styles.largeImage}
             resizeMode="contain"
+            accessible={true}
             accessibilityLabel="Mettle logo with stars around it"
             accessibilityRole="image"
           />
@@ -81,6 +76,7 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
             variant="screenTitle centerAlign"
             style={{color: textColour}}
             accessible={true}
+            accessibilityLabel={title}
             accessibilityRole="header">
             {title}
           </Text>
@@ -89,19 +85,18 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
             variant="bodyText centerAlign"
             style={{color: textColour}}
             accessible={true}
+            accessibilityLabel="Upgrade Complete"
             accessibilityRole="text">
             It may look like nothing’s changed, but we’ve done a lot of work
             under the hood.
           </Text>
           {/* Bottom Container */}
-          <View
-            style={styles.bottomContainer}
-            accessible={true}
-            accessibilityRole="alert">
+          <View style={styles.bottomContainer}>
             {/* FSCS Logo Image */}
             <Image
               source={FSCSImageSource}
               style={styles.smallImage}
+              accessible={true}
               accessibilityLabel="FSCS logo"
               accessibilityRole="image"
             />
@@ -110,6 +105,7 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
               variant="bodyTextDescription centerAlign"
               style={[styles.text, {color: textColour}]}
               accessible={true}
+              accessibilityLabel="FSCS protection"
               accessibilityRole="text">
               Your eligible deposits at Mettle are covered by the Financial
               Services Compensation Scheme.
@@ -119,7 +115,7 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
           <PinkButton
             buttonText="Next"
             onPress={handleSwitchButtonPress}
-            accessibilityLabel="Next Button"
+            accessibilityLabel="Next"
             testID="nextButton"
           />
         </View>

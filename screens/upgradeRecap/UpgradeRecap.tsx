@@ -42,10 +42,6 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
     setModalVisible(!modalVisible);
   };
 
-  const handleSwitchButtonExitJourney = () => {
-    navigation.navigate('UpgradeStarted');
-  };
-
   const exitModalVisible = () => {
     setExitModalVisible(true);
   };
@@ -88,65 +84,97 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}
-      accessibilityRole="summary"
-      accessibilityLabel="Upgrade Recap Screen Summary">
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <View
-          style={[styles.container, {backgroundColor: backgroundColour}]}
-          accessibilityRole="summary">
+        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
+          <Text
+            variant="screenTitle leftAlign"
+            style={{color: title, marginRight: 13, paddingBottom: 10}}
+            accessible={true}
+            accessibilityRole="header"
+            accessibilityLabel={mainTitle}>
+            {mainTitle}
+          </Text>
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Toggle Changes We Do Section">
-            <Text
-              variant="screenTitle leftAlign"
-              style={{color: title, marginRight: 13, paddingBottom: 10}}>
-              {mainTitle}
-            </Text>
+            onPress={() => setChangesWeDoVisible(!changesWeDoVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle leftAlign"
-                style={{color: title, marginRight: 13}}>
+                style={{color: title, marginRight: 13}}
+                accessible={true}
+                accessibilityRole="button"
+                accessibilityHint={`press to collapse ${weDoTitle} information`}
+                accessibilityLabel={weDoTitle}>
                 {weDoTitle}
               </Text>
-              {changesWeDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              {changesWeDoVisible ? (
+                <ChevronUpIcon
+                  accessibilityLabel="Expanded"
+                  accessibilityState={{expanded: true}}
+                />
+              ) : (
+                <ChevronDownIcon
+                  accessibilityLabel="Collapsed"
+                  accessibilityState={{expanded: false}}
+                />
+              )}
             </View>
             <View style={styles.space} />
           </TouchableOpacity>
           {changesWeDoVisible && <ChangesWeDo />}
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setChangesYouDoVisible(!changesYouDoVisible)}
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Toggle Changes You Do Section">
+            onPress={() => setChangesYouDoVisible(!changesYouDoVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
-                style={{color: title, marginRight: 10}}>
+                style={{color: title, marginRight: 10}}
+                accessible={true}
+                accessibilityRole="button"
+                accessibilityHint={`press to collapse ${youDoTitle} information`}
+                accessibilityLabel={youDoTitle}>
                 {youDoTitle}
               </Text>
-              {changesYouDoVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              {changesYouDoVisible ? (
+                <ChevronUpIcon
+                  accessibilityLabel="Expanded"
+                  accessibilityState={{expanded: true}}
+                />
+              ) : (
+                <ChevronDownIcon
+                  accessibilityLabel="Collapsed"
+                  accessibilityState={{expanded: false}}
+                />
+              )}
             </View>
             <View style={styles.space} />
           </TouchableOpacity>
           {changesYouDoVisible && <ChangesYouDo />}
           <TouchableOpacity
             style={styles.titleContainer}
-            onPress={() => setNewAccountVisible(!newAccountVisible)}
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Toggle New Account Section">
+            onPress={() => setNewAccountVisible(!newAccountVisible)}>
             <View style={styles.titleIconContainer}>
               <Text
                 variant="screenTitle"
-                style={{color: title, marginRight: 7}}>
-                How your new account will work
+                style={{color: title, marginRight: 7}}
+                accessible={true}
+                accessibilityRole="button"
+                accessibilityHint={`press to collapse ${newAccountTitle} information`}
+                accessibilityLabel={newAccountTitle}>
+                {newAccountTitle}
               </Text>
-              {newAccountVisible ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              {newAccountVisible ? (
+                <ChevronUpIcon
+                  accessibilityLabel="Expanded"
+                  accessibilityState={{expanded: true}}
+                />
+              ) : (
+                <ChevronDownIcon
+                  accessibilityLabel="Collapsed"
+                  accessibilityState={{expanded: false}}
+                />
+              )}
             </View>
             <View style={styles.space} />
           </TouchableOpacity>
@@ -156,13 +184,13 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           <WhiteButton
             buttonText="I'm not sure"
             onPress={exitModalVisible}
-            accessibilityLabel="Select if you are not sure"
+            accessibilityLabel="notSure"
             testID="notSureButton"
           />
           <PinkButton
             buttonText="Switch now"
             onPress={handlePinkButtonPress}
-            accessibilityLabel="Select to switch now"
+            accessibilityLabel="switchNow"
             testID="switchNow"
           />
         </View>
@@ -174,6 +202,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
         <AuthModal
           visible={modalVisible}
           navigation={navigation}
+          navigationTarget="UpgradeStarted"
           onClose={onClose}
         />
         <ExitModal

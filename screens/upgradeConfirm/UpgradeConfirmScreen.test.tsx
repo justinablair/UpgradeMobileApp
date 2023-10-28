@@ -66,7 +66,7 @@ describe('UpgradeConfirmScreen', () => {
       </UserContextProvider>,
     );
     act(() => {
-      fireEvent.press(getByTestId('switchRecapButton'));
+      fireEvent.press(getByTestId('ViewRecapButton'));
     });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeRecap');
   });

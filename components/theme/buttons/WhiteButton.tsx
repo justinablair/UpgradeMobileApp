@@ -7,6 +7,7 @@ interface WhiteButtonProps {
   buttonText: string;
   onPress: () => void;
   customWidth?: number;
+  accessible?: boolean;
   accessibilityLabel?: string;
   testID?: string;
 }

@@ -58,7 +58,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
   return (
     <View
       style={styles.container}
-      accessible={true}
+      // accessible={true}
       accessibilityLabel="settingsScreen">
       <View style={styles.contentContainer}>
         <Text
@@ -79,6 +79,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
           <CheckboxToggle
             checked={!isDarkMode}
             onToggle={toggleDarkMode}
+            accessible={true}
             accessibilityLabel="lightModeCheckbox"
             testID="lightModeCheckbox"
             accessibilityRole="checkbox"
@@ -100,6 +101,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
           <CheckboxToggle
             checked={isDarkMode}
             onToggle={toggleDarkMode}
+            accessible={true} // Added accessible prop
             accessibilityLabel="darkModeCheckbox"
             testID="darkModeCheckbox"
             accessibilityRole="checkbox"
@@ -110,7 +112,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
       <PinkButton
         buttonText="Confirm"
         onPress={handleSwitchButtonPress}
-        accessibilityLabel="confirmButton"
+        accessibilityLabel="confirm"
         testID="confirmButton"
       />
     </View>

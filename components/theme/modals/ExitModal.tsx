@@ -45,38 +45,31 @@ const ExitModal: React.FC<ExitModalProps> = ({
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View
-        style={styles.backgroundContainer}
-        accessible={true}
-        accessibilityLabel="Exit Modal Background"
-        accessibilityRole="alert"
-        testID={testID}>
+      <View style={styles.backgroundContainer} testID={testID}>
         <View style={styles.modalContainer}>
           <View
             style={[
               styles.modalContent,
               {backgroundColor: containerBackgroundColor},
             ]}
-            accessible={true}
-            accessibilityLabel="Exit Modal Content"
-            accessibilityRole="alert"
             testID="modalContent">
             <Text
               variant="bodyTextBold centerAlign"
               style={[styles.modalTitle, {color: textColour}]}
-              accessibilityRole="header">
+              accessible={true}
+              accessibilityRole="header"
+              accessibilityLabel={title}>
               {title}
             </Text>
             <Text
               variant="centerAlign"
               style={[styles.bodyText, {color: textColour}]}
-              accessibilityRole="text">
+              accessible={true}
+              accessibilityRole="text"
+              accessibilityLabel={content}>
               {content}
             </Text>
-            <View
-              style={styles.buttonContainer}
-              accessible={true}
-              accessibilityRole="toolbar">
+            <View style={styles.buttonContainer}>
               <WhiteButton
                 buttonText="Continue Switch"
                 onPress={() => {
@@ -84,7 +77,8 @@ const ExitModal: React.FC<ExitModalProps> = ({
                   onPressClose(); // Close the modal after agreeing
                 }}
                 customWidth={158}
-                accessibilityLabel="Continue Switch Button"
+                accessible={true}
+                accessibilityLabel="Continue Switch"
                 testID="continueSwitchButton"
               />
               <View style={{width: 10}} />
@@ -95,7 +89,8 @@ const ExitModal: React.FC<ExitModalProps> = ({
                   onPressClose();
                 }}
                 customWidth={158}
-                accessibilityLabel="Exit Switch Button"
+                accessible={true}
+                accessibilityLabel="Exit Switch"
                 testID="exitSwitchButton"
               />
             </View>

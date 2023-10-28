@@ -61,14 +61,25 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
     if (userType === 'limitedCompany') {
       return (
         <View>
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Acknowledge"
+            accessibilityRole="text">
             I acknowledge, on behalf of the business, that the information I
             supply may be reported to the HMRC, and may be transferred to the
             government of another territory in accordance with{' '}
             <Pressable
               onPress={handleFACTAPress}
               accessibilityLabel="FACTA Pressable">
-              <Text variant="bodyText" style={factaTextStyles} testID="facta">
+              <Text
+                variant="bodyText"
+                style={factaTextStyles}
+                testID="facta"
+                accessible={true}
+                accessibilityLabel="FACTA Pressable"
+                accessibilityRole="button">
                 {' FACTA '}
               </Text>
             </Pressable>
@@ -77,21 +88,36 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
               onPress={handleCRSPress}
               accessibilityLabel="CRS Pressable"
               testID="crs">
-              <Text variant="bodyText" style={crsTextStyles}>
+              <Text
+                variant="bodyText"
+                style={crsTextStyles}
+                accessible={true}
+                accessibilityLabel="CRS Pressable"
+                accessibilityRole="button">
                 {' CRS '}
               </Text>
             </Pressable>
             agreements.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Agree"
+            accessibilityRole="text">
             I agree to inform Mettle of any change in circumstance that causes
             my information to become incorrect or incomplete and to provide an
             updated Self Certification Declaration which details my tax
             liabilities, within 30 days.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Declare"
+            accessibilityRole="text">
             I declare that the business is compliant with all relevant tax laws
             and all statements made in this declaration are, to the best of my
             knowledge and belief, correct and complete.
@@ -102,31 +128,57 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
     } else if (userType === 'soleTrader') {
       return (
         <View>
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Acknowledge"
+            accessibilityRole="text"
+            accessibilityHint="Tap the phrases 'FACTA' and 'CRS' to learn more.">
             I acknowledge that any relevant information I supply may be reported
             to the HMRC, and may be transferred to the government of another
             territory in accordance with{' '}
             <Pressable onPress={handleFACTAPress}>
-              <Text variant="bodyText" style={factaTextStyles}>
+              <Text
+                variant="bodyText"
+                style={factaTextStyles}
+                accessible={true}
+                accessibilityLabel="FACTA Pressable"
+                accessibilityRole="button">
                 {' FACTA '}
               </Text>
             </Pressable>
             and
             <Pressable onPress={handleCRSPress}>
-              <Text variant="bodyText" style={crsTextStyles}>
+              <Text
+                variant="bodyText"
+                style={crsTextStyles}
+                accessible={true}
+                accessibilityLabel="CRS Pressable"
+                accessibilityRole="button">
                 {' CRS '}
               </Text>
             </Pressable>
             agreements.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Agree"
+            accessibilityRole="text">
             I agree to inform Mettle of any change in circumstance that causes
             my information to become incorrect or incomplete and to provide an
             updated Self Certification Declaration within 30 days.
           </Text>
           <View style={styles.separator} />
-          <Text variant="bodyText" style={{color: textColour}}>
+          <Text
+            variant="bodyText"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="I Declare"
+            accessibilityRole="text">
             I declare that I am compliant with all relevant tax laws and all
             statements made in this declaration are, to the best of my knowledge
             and belief, correct and complete.
@@ -147,22 +199,27 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessibilityLabel="Upgrade Tax Reporting Screen">
+      ]}>
       <ScrollView>
         <View
           style={[
             styles.container,
             {backgroundColor: containerBackgroundColor},
           ]}>
-          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+          <Text
+            variant="screenTitle leftAlign"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="Tax Reporting"
+            accessibilityRole="header">
             {title}
           </Text>
           <Text
             variant="bodyText leftAlign"
             style={{color: textColour}}
-            accessibilityRole="header"
-            accessibilityLabel="Tax Reporting Title">
+            accessible={true}
+            accessibilityRole="text"
+            accessibilityLabel="Agree To The Following">
             To open a Mettle bank account you need to agree to the following:{' '}
           </Text>
           {renderContent()}
@@ -170,13 +227,19 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
           <View style={styles.checkboxContainer}>
             <Text
               variant="bodyText"
-              style={[styles.checkboxText, {color: textColour}]}>
+              style={[styles.checkboxText, {color: textColour}]}
+              accessible={true}
+              accessibilityLabel="I Agree To All Statements"
+              accessibilityRole="text">
               I agree with these statements
             </Text>
             <CheckboxToggle
               checked={isChecked}
               onToggle={handleCheckboxToggle}
               testID="checkboxToggle"
+              accessible={true}
+              accessibilityRole="checkbox"
+              accessibilityLabel="Toggle"
             />
           </View>
           <View style={styles.spaceMedium} />
@@ -184,7 +247,13 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             buttonText="Agree"
             onPress={handleSwitchButtonPress}
             disabled={!isChecked}
+            accessibilityLabel="Agree"
             testID="agreeButton"
+            accessibilityHint={
+              !isChecked
+                ? 'Please check the checkbox to confirm your tax reporting'
+                : undefined
+            }
           />
           {/* FACTA Info Modal */}
           <InfoModal
@@ -192,7 +261,8 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             onPressClose={() => setShowFACTAModal(false)}
             title="FACTA"
             content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
-            accessibilityLabel="FACTA Info Modal"
+            accessible={true}
+            accessibilityLabel="FACTA Definition Modal"
             contentStyle={[{backgroundColor: containerBackgroundColor}]}
             titleStyle={{color: textColour}}
             bodyTextStyle={{color: textColour}}
@@ -206,7 +276,8 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             title="CRS"
             content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
             contentStyle={[{backgroundColor: containerBackgroundColor}]}
-            accessibilityLabel="CRS Info Modal"
+            accessible={true}
+            accessibilityLabel="CRS Definition Modal"
             titleStyle={{color: textColour}}
             bodyTextStyle={{color: textColour}}
           />

@@ -14,46 +14,57 @@ interface OptionsWithChevronProps {
   title: string;
   description?: string;
   onPress: () => void;
+  accessible?: boolean;
   accessibilityRole?: AccessibilityRole | string;
   accessibilityLabel?: string;
+  accessibilityHint?: string;
 }
 
 const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
   title,
   description,
   onPress,
+  accessible = false, // Default to false if not provided
   accessibilityRole,
   accessibilityLabel,
+  accessibilityHint,
 }) => {
   // Access isDarkMode from context
   const {isDarkMode} = useUserContext();
-  // Setting text color based on the dark mode
+  // Setting text color based ron the dark mode
   const colourMode = isDarkMode ? Colours.white : Colours.black;
-  const blackShades = isDarkMode ? Colours.black05 : Colours.black60;
+
+  const combinedAccessibilityValue = {
+    text: `${title}. ${description}`,
+  };
 
   return (
     <TouchableOpacity
       style={styles.optionContainer}
       onPress={onPress}
       testID="OptionsButton"
-      accessible={true}
+      accessible={accessible} // Set the accessible prop here
       accessibilityRole={accessibilityRole}
-      accessibilityLabel={accessibilityLabel}>
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      accessibilityValue={combinedAccessibilityValue}>
       {/* Option Content */}
       <View style={styles.optionContent} testID="OptionContent">
         {/* Title Text */}
         <Text
           variant="bodyText"
           style={{color: colourMode}}
-          accessibilityRole="text">
+          accessibilityRole="text"
+          accessible={true}>
           {title}
         </Text>
         {/* Description Text */}
         {description && (
           <Text
             variant="bodyText"
-            style={{color: blackShades}}
-            accessibilityRole="text">
+            style={{color: colourMode}}
+            accessibilityRole="text"
+            accessible={true}>
             {description}
           </Text>
         )}

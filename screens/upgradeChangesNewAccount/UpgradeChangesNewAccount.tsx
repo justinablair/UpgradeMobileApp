@@ -45,24 +45,15 @@ const UpgradeChangesNewAccountScreen: React.FC<
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}
-      accessible={true}
-      accessibilityLabel="upgradeChangesNewAccountScreen"
-      accessibilityRole="none">
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        accessibilityLabel="upgradeChangesScrollView">
-        <View
-          style={[styles.container, {backgroundColor: backgroundColour}]}
-          accessible={true}
-          accessibilityLabel="upgradeChangesContainer"
-          accessibilityRole="none">
+      style={[styles.safeAreaContainer, {backgroundColor: backgroundColour}]}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
             <Text
               variant="screenTitle centreAlign"
               style={{color: titleColor}}
               accessible={true}
-              accessibilityLabel="upgradeChangesTitle"
+              accessibilityLabel="How your new account will work"
               accessibilityRole="header">
               {title}
             </Text>
@@ -71,20 +62,20 @@ const UpgradeChangesNewAccountScreen: React.FC<
           <WhiteButton
             buttonText="Maybe later"
             onPress={handleSwitchExitJourneyPress}
-            accessibilityLabel="maybeLaterButton"
+            accessibilityLabel="maybeLater"
             testID="maybeLaterButton"
           />
           <PinkButton
             buttonText="Get started"
             onPress={handleSwitchButtonPress}
-            accessibilityLabel="getStartedButton"
+            accessibilityLabel="getStarted"
             testID="getStartedButton"
           />
           <ExitModal
             visible={isExitModalVisible}
             onPressClose={() => setExitModalVisible(false)}
             title="Are you sure you want to quit?"
-            content="Your progress won't be saved"
+            content="Your progress won't be saved."
             toggleExitModal={() => setExitModalVisible(!isExitModalVisible)}
             accessibilityLabel="exitModal"
             testID="exitModal"

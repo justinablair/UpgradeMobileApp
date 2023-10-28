@@ -39,27 +39,24 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityLabel="Upgrade Started Screen">
+      ]}>
       <ScrollView
-        style={[styles.container, {backgroundColor: containerBackgroundColor}]}
-        accessibilityRole="scrollbar">
+        style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
         <View>
-          <View
-            style={styles.largeImage}
-            accessibilityRole="image"
-            accessible={true}
-            accessibilityLabel="Image of a padlock">
+          <View style={styles.largeImage}>
             <Image
               source={require('../../assets/Padlock.png')}
               style={styles.alignCenter}
-              accessibilityLabel="Image of a padlock"
+              accessibilityRole="image"
+              accessible={true}
+              accessibilityLabel="padlock"
             />
           </View>
           <Text
             variant="screenTitle"
             style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel={title}
             accessibilityRole="header">
             {title}
           </Text>
@@ -67,6 +64,7 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
             variant="bodyText"
             style={[styles.centeredText, {color: textColour}]}
             accessible={true}
+            accessibilityLabel="Description"
             accessibilityRole="text">
             This usually takes less than a couple of minutes, but it can
             sometimes take up to 2 hours.{'\n\n'}If you need anything during

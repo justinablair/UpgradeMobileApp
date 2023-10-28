@@ -47,20 +47,22 @@ const UpgradeChangesWeDoScreen: FC<UpgradeChangesWeDoProps> = ({
         <View style={[styles.container, {backgroundColor: backgroundColour}]}>
           <View style={styles.titleContainer}>
             <Text
-              variant="screenTitle"
+              variant="screenTitle centreAlign"
+              accessible={true}
               accessibilityRole="header"
-              accessibilityLabel="Changes During Switch"
+              accessibilityLabel="Upgrade Changes We Do"
               style={{color: title}}>
               {titleText}
             </Text>
             <View style={styles.space} />
           </View>
-          {/* Render ChangesWeDo component */}
+          {/* Changes We Do component */}
           <ChangesWeDo />
           <PinkButton
             buttonText="Next"
             onPress={handleSwitchButtonPress}
-            accessibilityLabel="Next Button"
+            accessible={true}
+            accessibilityLabel="next"
             testID="nextButton"
           />
         </View>

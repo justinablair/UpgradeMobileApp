@@ -63,14 +63,14 @@ const UpgradeIneligibleResidentScreen: React.FC<
             variant="screenTitle leftAlign"
             style={{color: textColour}}
             accessibilityRole="header"
-            accessibilityLabel="upgradeIneligibleTitle">
+            accessibilityLabel={title}>
             {title}
           </Text>
           {renderContent()}
           <Text
             variant="bodyText"
             style={{color: textColour}}
-            accessibilityLabel="upgrade-ineligible-body">
+            accessibilityLabel="Upgrade Ineligible Content">
             Please continue to use your e-money account.
             {'\n\n'}
             If you have any questions about our decision, contact us via in-app
@@ -81,7 +81,7 @@ const UpgradeIneligibleResidentScreen: React.FC<
           <PinkButton
             buttonText="Cancel switch"
             onPress={handleSwitchExitJourneyPress}
-            accessibilityLabel="cancelSwitchButton"
+            accessibilityLabel="Cancel Switch"
           />
         </View>
       </View>

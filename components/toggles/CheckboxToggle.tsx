@@ -13,6 +13,7 @@ interface CheckboxProps {
   onToggle: () => void;
   disabled?: boolean;
   testID?: string;
+  accessible?: boolean;
   accessibilityLabel?: string;
   accessibilityRole?: AccessibilityRole;
   accessibilityState?: AccessibilityState;
@@ -23,6 +24,7 @@ const CheckboxToggle: React.FC<CheckboxProps> = ({
   onToggle,
   disabled = false,
   testID,
+  accessible = false, // Default to false if not provided
   accessibilityLabel,
   accessibilityRole,
 }) => {
@@ -42,6 +44,7 @@ const CheckboxToggle: React.FC<CheckboxProps> = ({
       testID={testID}
       onPress={handleToggle}
       disabled={disabled}
+      accessible={accessible} // Set the accessible prop here
       accessibilityRole={accessibilityRole || 'checkbox'}
       accessibilityState={accessibilityState}
       accessibilityLiveRegion="polite"

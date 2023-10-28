@@ -11,6 +11,9 @@ interface InfoBoxProps {
   description: string;
   descriptionStyle?: TextStyle;
   titleStyle?: TextStyle;
+  accessible?: boolean;
+  accessibilityRole?: string;
+  accessibilityLabel?: string;
 }
 
 const InfoBox: React.FC<InfoBoxProps> = ({
@@ -28,23 +31,31 @@ const InfoBox: React.FC<InfoBoxProps> = ({
   const boxColor = isDarkMode ? Colours.black90 : Colours.black05;
 
   return (
-    <View
-      style={[styles.box, {backgroundColor: boxColor}]}
-      testID="InfoBox"
-      accessible={true}
-      accessibilityRole="text">
+    <View style={[styles.box, {backgroundColor: boxColor}]} testID="InfoBox">
       {/* Container for the icon */}
-      <View style={styles.iconContainer}>{icon}</View>
+      <View
+        style={styles.iconContainer}
+        accessible={true}
+        accessibilityRole={'image'}>
+        {icon}
+      </View>
       {/* Container for the text content */}
       <View style={styles.textContainer}>
         {/* Text component for the title */}
-        <Text variant="bodyTextBold" style={[titleStyle, {color: colourMode}]}>
+        <Text
+          variant="bodyTextBold"
+          style={[titleStyle, {color: colourMode}]}
+          accessible={true}
+          accessibilityRole="header">
           {title}
         </Text>
         {/* Text component for the description */}
         <Text
           variant="bodyText"
-          style={[descriptionStyle, {color: colourMode}]}>
+          style={[descriptionStyle, {color: colourMode}]}
+          accessible={true}
+          accessibilityRole="text"
+          accessibilityLabel="description">
           {description}
         </Text>
       </View>

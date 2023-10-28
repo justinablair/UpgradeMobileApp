@@ -38,33 +38,34 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityRole="alert">
+      ]}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View
           style={[
             styles.container,
             {backgroundColor: containerBackgroundColor},
-          ]}
-          accessible={true}
-          accessibilityLabel="Upgrade Confirm Screen"
-          accessibilityRole="summary">
+          ]}>
           <Image
             source={require('../../assets/SwitchArrows.png')}
             style={styles.largeImage}
-            accessibilityLabel="Switch arrows image"
             accessible={true}
+            accessibilityLabel="Switch arrows"
             accessibilityRole="image"
           />
-          <Text variant="screenTitle centerAlign" style={{color: textColour}}>
+          <Text
+            variant="screenTitle centerAlign"
+            style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel={title}
+            accessibilityRole="header">
             {title}
           </Text>
           <Text
             variant="bodyText centerAlign"
             style={{color: textColour}}
             accessible={true}
-            accessibilityRole="text">
+            accessibilityRole="text"
+            accessibilityLabel="Open New Account, Close Old Account">
             We’ll open your new account and move your money. We’ll also close
             your e-money account.{'\n'}
           </Text>
@@ -72,7 +73,8 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
             variant="bodyText centerAlign"
             style={{color: Colours.pink}}
             accessible={true}
-            accessibilityRole="text">
+            accessibilityRole="text"
+            accessibilityLabel="You Can't Go Back Once Started">
             Only do this if you’re ready. We can’t undo it once we’ve started.
           </Text>
         </View>
@@ -84,8 +86,8 @@ const UpgradeConfirmScreen: React.FC<UpgradeConfirmProps> = ({navigation}) => {
         <PinkButton
           buttonText="View recap of changes"
           onPress={handleSwitchButtonPress}
-          accessibilityLabel="Switch Recap Button"
-          testID="switchRecapButton"
+          accessibilityLabel="View Recap"
+          testID="ViewRecapButton"
         />
       </View>
     </SafeAreaView>

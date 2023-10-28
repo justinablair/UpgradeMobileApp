@@ -60,31 +60,28 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityLabel="upgradeCompleteScreen">
+      ]}>
       <ScrollView
         contentContainerStyle={[
           styles.container,
           {backgroundColor: containerBackgroundColor},
         ]}>
-        <View
-          style={styles.contentContainer}
-          accessible={true}
-          accessibilityLabel="upgradeCompleteContent">
+        <View style={styles.contentContainer}>
           {/* Display the success image */}
           <Image
             source={require('../../assets/Supertick.png')}
             style={styles.largeImage}
             accessible={true}
-            accessibilityLabel="rocketTakingOffImage"
+            accessibilityRole="image"
+            accessibilityLabel="largeTick"
           />
           {/* Display the title */}
           <Text
             variant="screenTitle"
             style={{color: textColour}}
             accessible={true}
-            accessibilityLabel="upgradeCompleteTitle">
+            accessibilityRole="header"
+            accessibilityLabel={title}>
             {title}
           </Text>
           {/* Display the body text */}
@@ -92,7 +89,8 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
             variant="bodyText"
             style={{color: textColour, textAlign: 'center'}}
             accessible={true}
-            accessibilityLabel="upgradeCompleteBody">
+            accessibilityRole="text"
+            accessibilityLabel="upgradeCompleteDescription">
             You can now log in to your new account, where you’ll find your
             account number and sort code.
             {'\n\n'}
@@ -107,7 +105,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
         <PinkButton
           buttonText="Log in"
           onPress={handleLoginButtonPress}
-          accessibilityLabel="loginButton"
+          accessibilityLabel="login"
           testID="loginButton"
         />
       </View>
@@ -116,6 +114,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
         visible={authModalVisible}
         onClose={onCloseAuthModal}
         navigation={navigation}
+        navigationTarget="UpgradedWelcome"
         onNext={handleAuthModalNext}
       />
     </SafeAreaView>

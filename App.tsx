@@ -61,7 +61,10 @@ const commonHeaderOptions = ({
   },
   headerTitle: '',
   headerRight: () => (
-    <TouchableOpacity onPress={() => toggleExitModal()}>
+    <TouchableOpacity
+      onPress={() => toggleExitModal()}
+      accessible={true}
+      accessibilityLabel="Close button">
       <CloseIcon />
     </TouchableOpacity>
   ),
@@ -163,12 +166,14 @@ function AppContent(): JSX.Element {
           headerOptions,
           undefined,
           true,
+          true,
         )}
         {renderScreen(
           'UpgradeComplete',
           UpgradeCompleteScreen,
           headerOptions,
           undefined,
+          true,
           true,
         )}
         {renderScreen(
@@ -177,12 +182,14 @@ function AppContent(): JSX.Element {
           headerOptions,
           undefined,
           true,
+          true,
         )}
         {renderScreen(
           'UpgradedEmail',
           UpgradedEmailScreen,
           headerOptions,
           undefined,
+          true,
           true,
         )}
       </Stack.Navigator>
@@ -200,208 +207,30 @@ function AppContent(): JSX.Element {
   );
 }
 
-// function App(): JSX.Element {
-//   const [isExitModalVisible, setIsExitModalVisible] = useState(false);
-//   // const {isDarkMode} = useUserContext(); // Access isDarkMode from context
-
-//   const toggleExitModal = () => {
-//     setIsExitModalVisible(!isExitModalVisible);
-//   };
-//   const headerOptions = commonHeaderOptions({
-//     toggleExitModal,
-//   });
-
-//   return (
-//     <SafeAreaProvider>
-//       <UserContextProvider>
-//         <NavigationContainer>
-//           <StatusBar backgroundColor="#171B1B" />
-//           <Stack.Navigator>
-//             {renderScreen('Settings', SettingsScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.white,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UserSelection', UserSelectionScreen, headerOptions)}
-//             {renderScreen('Address', EnterAddressScreen, headerOptions)}
-//             {renderScreen(
-//               'CompanyDetails',
-//               CompanyDetailsScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('UpgradeIntro', UpgradeIntroScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//                 // backgroundColor: isDarkMode ? Colours.black : Colours.white,
-//               },
-//             })}
-//             {renderScreen('StepperScreen1', StepperScreen1, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-
-//             {renderScreen(
-//               'UpgradeChangesWeDo',
-//               UpgradeChangesWeDoScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeChangesYouDo',
-//               UpgradeChangesYouDoScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeChangesNewAccount',
-//               UpgradeChangesNewAccountScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('StepperScreen2', StepperScreen2, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UpgradeTerms', UpgradeTermsScreen, headerOptions)}
-//             {renderScreen(
-//               'UpgradeConsents',
-//               UpgradeConsentsScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('Marketing', MarketingScreen, headerOptions)}
-//             {renderScreen('StepperScreen3', StepperScreen3, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen(
-//               'UpgradeTaxCompliant',
-//               UpgradeTaxCompliantScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeTaxReporting',
-//               UpgradeTaxReportingScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeNationality',
-//               UpgradeNationalityScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeIneligibleResident',
-//               UpgradeIneligibleResidentScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeUSPerson',
-//               UpgradeUSPersonScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen(
-//               'UpgradeIneligibleUS',
-//               UpgradeIneligibleUSScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('StepperScreen4', StepperScreen4, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen(
-//               'ConfirmAddress',
-//               ConfirmAddressScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('StepperComplete', StepperCompleteScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen(
-//               'PersonalDetails',
-//               PersonalDetailsScreen,
-//               headerOptions,
-//             )}
-//             {renderScreen('UpgradeConfirm', UpgradeConfirmScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UpgradeRecap', UpgradeRecapScreen, headerOptions)}
-//             {renderScreen('UpgradeStarted', UpgradeStartedScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UpgradeComplete', UpgradeCompleteScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UpgradedWelcome', UpgradedWelcomeScreen, {
-//               ...headerOptions,
-//               headerStyle: {
-//                 backgroundColor: Colours.black,
-//                 shadowOpacity: 0,
-//               },
-//             })}
-//             {renderScreen('UpgradedEmail', UpgradedEmailScreen, headerOptions)}
-//           </Stack.Navigator>
-//           {/* Exit confirmation modal */}
-//           <ExitModal
-//             visible={isExitModalVisible}
-//             onPressClose={() => setIsExitModalVisible(false)}
-//             title="Are you sure you want to exit?"
-//             content="Your progress won’t be saved."
-//             onAgree={() => {
-//               setIsExitModalVisible(false);
-//             }}
-//             toggleExitModal={toggleExitModal} // Pass the
-//           />
-//         </NavigationContainer>
-//       </UserContextProvider>
-//     </SafeAreaProvider>
-//   );
-// }
-
 // Helper function to render screens
 function renderScreen<ScreenName extends keyof RootStackParamList>(
   name: ScreenName,
   component: React.ComponentType<any>,
   options?: any,
-  additionalProps?: any, // Add this parameter
-  hideBackButton: boolean = false, // Add this parameter with a default value of false
+  additionalProps?: any,
+  hideBackButton: boolean = false,
+  hideExitButton: boolean = false,
 ) {
   return (
     <Stack.Screen
       name={name}
       component={component}
-      options={props => ({
-        ...commonHeaderOptions(props),
-        ...options,
-        headerLeft: hideBackButton ? () => null : undefined, // Conditionally hide the back button
-      })}
+      options={props => {
+        const baseHeaderOptions = commonHeaderOptions(props);
+        const screenHeaderOptions = {...baseHeaderOptions, ...options};
+        if (hideExitButton) {
+          screenHeaderOptions.headerRight = () => null;
+        }
+        if (hideBackButton) {
+          screenHeaderOptions.headerLeft = () => null;
+        }
+        return screenHeaderOptions;
+      }}
       initialParams={additionalProps} // Pass additional props
     />
   );

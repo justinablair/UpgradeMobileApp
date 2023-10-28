@@ -6,21 +6,23 @@ import Text from '../../Text';
 
 interface AuthModalProps {
   visible?: boolean;
-  navigation: any;
+  navigation?: any;
   onNext?: (code: string) => void;
   onClose: () => void;
+  navigationTarget: string;
 }
 const AuthModal: React.FC<AuthModalProps> = ({
   visible,
   onClose,
   navigation,
+  navigationTarget,
 }) => {
   const [code, setCode] = useState('');
   const [selectedCount, setSelectedCount] = useState(0);
 
   useEffect(() => {
     if (selectedCount === 6) {
-      navigation.navigate('UpgradeStarted');
+      navigation.navigate(navigationTarget);
       onClose();
     }
   }, [selectedCount, navigation, onClose]);
@@ -148,7 +150,10 @@ const AuthModal: React.FC<AuthModalProps> = ({
                 style={styles.gridItem}
                 onPress={handleBackspace}
                 testID="backspaceButton">
-                <PinBackIcon fill="white" />
+                <PinBackIcon
+                  fill="white"
+                  accessibilityLabel="backspaceButton"
+                />
               </TouchableOpacity>
             </View>
           </View>

@@ -27,7 +27,7 @@ const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
   const activeCircle = isDarkMode ? Colours.black : Colours.white;
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeTaxReporting');
+    navigation.navigate('UpgradeTaxCompliant');
   };
 
   return (

@@ -51,6 +51,8 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
           <Text
             variant="bodyText"
             style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="You must be a director"
             accessibilityRole="text">
             To switch from an e-money account to a Mettle bank account, you must
             be a director of {businessName}.
@@ -60,11 +62,15 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
             icon={<PersonIcon fill={textColour} />}
             title="Only 1 user has access"
             description="Just like before, as the person opening the account, you’ll be the only one with access."
+            accessible={true}
+            accessibilityLabel="Only 1 user has access"
           />
           <View style={styles.spaceLarge} />
           <Text
             variant="bodyText"
             style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="Confirmation statements"
             accessibilityRole="text">
             By tapping ‘Agree’ you’re confirming that:{'\n\n'}1. You’re
             authorised by {businessName} to switch to a Mettle bank account and
@@ -82,6 +88,8 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
           <Text
             variant="bodyText"
             style={{color: textColour}}
+            accessible={true}
+            accessibilityLabel="Confirmation statement"
             accessibilityRole="text">
             Take your time to read these documents. By tapping ‘Agree’, you’re
             agreeing to our Terms.{'\n\n'}Take a moment to read our Privacy
@@ -115,7 +123,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
               variant="screenTitle leftAlign"
               style={{color: textColour}}
               accessibilityRole="header"
-              accessibilityLabel="Terms and Privacy Notice Title">
+              accessibilityLabel="Terms and Privacy Notice">
               {title}
             </Text>
             {renderContent()}
@@ -149,7 +157,7 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
           <PinkButton
             buttonText="Agree"
             onPress={handleSwitchButtonPress}
-            accessibilityLabel="Agree Button"
+            accessibilityLabel="Agree"
             testID="agreeButton"
           />
         </View>

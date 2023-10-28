@@ -62,72 +62,75 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
 
   return (
     <SafeAreaView
-      accessible={true}
-      accessibilityLabel="Upgrade Intro Screen"
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
       ]}>
-      <ScrollView
-        contentContainerStyle={styles.container}
-        accessible={true}
-        accessibilityLabel="Upgrade Intro Content">
-        <StatusBar backgroundColor="#171B1B" translucent={false} />
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.padding}>
           <Image
             source={MettleLogoImageSource}
             style={styles.largeImage}
-            accessibilityLabel="Mettle Bank Account Logo"
+            accessible={true}
+            accessibilityLabel="Mettle Bank Logo"
             accessibilityRole="image"
           />
           <Text
             accessible={true}
-            accessibilityLabel="Upgrade Intro Title"
+            accessibilityLabel={title}
+            accessibilityRole="header"
             variant="headerMedium centerAlign"
             style={[styles.padding, {color: textColour}]}>
             {title}
           </Text>
 
-          <Text
-            accessible={true}
-            accessibilityLabel="Upgrade Intro Text"
-            variant="bodyText centerAlign"
-            style={{color: textColour}}>
-            We’ve built a new bank account, which will replace the
-            <Pressable
-              onPress={handleEmoneyPress}
+          <View>
+            <Text
               accessible={true}
-              accessibilityLabel="E-money Pressable">
-              <Text variant="bodyText" style={emoneyTextStyles}>
-                {' '}
-                e-money
-              </Text>
-            </Pressable>{' '}
-            account you currently use.
-          </Text>
+              accessibilityLabel="Upgrade Intro"
+              accessibilityRole="text"
+              accessibilityHint="Tap the phrase 'e-money' to learn more."
+              variant="bodyText centerAlign"
+              style={{color: textColour}}>
+              We’ve built a new bank account, which will replace the{' '}
+              <Pressable
+                onPress={handleEmoneyPress}
+                accessible={true}
+                accessibilityHint="Pressing this opens pop-up with a definition"
+                accessibilityLabel="E-money Pressable"
+                accessibilityRole="button">
+                <Text variant="bodyText" style={emoneyTextStyles}>
+                  {' '}
+                  e-money
+                </Text>
+              </Pressable>{' '}
+              account you currently use.
+            </Text>
+          </View>
         </View>
         <View style={styles.section}>
           <Text
             accessible={true}
-            accessibilityLabel="Upgrade Intro Section Header"
+            accessibilityLabel="Upgrade Intro Section"
+            accessibilityRole="header"
             variant="headerSmall centerAlign"
             style={{color: textColour}}>
             What’s new?
           </Text>
         </View>
-        <View
-          style={[styles.box, {backgroundColor: boxColour}]}
-          accessible={true}
-          accessibilityLabel="Upgrade Intro Box">
+        <View style={[styles.box, {backgroundColor: boxColour}]}>
           <Image
             source={FSCSImageSource}
             style={styles.fscsLogo}
+            accessible={true}
             accessibilityLabel="FSCS Logo"
             accessibilityRole="image"
           />
           <Text
             variant="bodyText"
-            style={[styles.centeredText, {color: textColour}]}>
+            style={[styles.centeredText, {color: textColour}]}
+            accessibilityLabel="FSCS protection description"
+            accessibilityRole="text">
             With the new Mettle bank account, your funds are protected by the
             Financial Services Compensation Scheme (FSCS) up to £85k.
           </Text>
@@ -136,7 +139,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
         <PinkButton
           buttonText="Get started"
           onPress={handleSwitchButtonPress}
-          accessibilityLabel="Get Started Button"
+          accessible={true}
+          accessibilityLabel="GetStarted"
           testID="getStartedButton"
         />
         {/* E-money Info Modal */}
@@ -145,7 +149,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
           onPressClose={() => setShowEMoneyInfoModal(false)}
           title="Your e-money account"
           content="Your existing e-money account, provided by Prepay Technologies Ltd (PPS), stores your money electronically for making payments and is regulated by the Financial Conduct Authority (FCA)."
-          accessibilityLabel="e-money account Info Modal"
+          accessible={true}
+          accessibilityLabel="E-money Definition Modal"
         />
       </ScrollView>
     </SafeAreaView>

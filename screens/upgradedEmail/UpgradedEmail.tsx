@@ -65,10 +65,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityLabel="Email screen"
-      accessibilityRole="summary">
+      ]}>
       <ScrollView>
         <View
           style={[
@@ -81,7 +78,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             style={{color: textColour}}
             accessible={true}
             accessibilityRole="header"
-            accessibilityLabel="Email title">
+            accessibilityLabel={title}>
             {title}
           </Text>
 
@@ -91,7 +88,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
             style={{color: textColour}}
             accessible={true}
             accessibilityRole="text"
-            accessibilityLabel="Email body">
+            accessibilityLabel="Email">
             If you haven’t received it already, we’re sending you an email with
             scheduled payment and Direct Debit information from your old
             account.{'\n\n'} You can also message us via in-app chat, we’re
@@ -158,7 +155,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
           setShowBankAccountToast(true);
           setShowOpenMailToast(false);
         }}
-        accessibilityLabel="Got it button"
+        accessibilityLabel="Got it"
       />
       <PinkButton
         buttonText="Open email app"
@@ -166,7 +163,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
           setShowOpenMailToast(true);
           setShowBankAccountToast(false);
         }}
-        accessibilityLabel="Open email app button"
+        accessibilityLabel="Open email app"
       />
       <View style={styles.spaceMedium}></View>
     </SafeAreaView>

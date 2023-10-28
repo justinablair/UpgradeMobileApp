@@ -84,26 +84,27 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessible={true}
-      accessibilityRole="adjustable">
+      ]}>
       <ScrollView>
         <View
           style={[
             styles.container,
             {backgroundColor: containerBackgroundColor},
           ]}>
-          <View style={styles.titleContainer} accessible={true}>
+          <View style={styles.titleContainer}>
             <Text
               variant="screenTitle leftAlign"
               style={{color: textColour}}
-              accessible={true}>
+              accessible={true}
+              accessibilityRole="header">
               {title}
             </Text>
             <Text
               variant="bodyText"
               style={{color: textColour}}
-              accessible={true}>
+              accessible={true}
+              accessibilityLabel="Agree to the following"
+              accessibilityRole="text">
               To switch your e-money account to a Mettle bank account, you need
               to agree to the following:
             </Text>
@@ -116,8 +117,9 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
               onPress={() => toggleCheckbox(index)}
               accessible={true}
               accessibilityRole="checkbox"
-              accessibilityState={{checked: checkboxesChecked[index]}}>
-              <View style={styles.textContainer} accessible={true}>
+              accessibilityState={{checked: checkboxesChecked[index]}}
+              accessibilityLabel={`Consent ${index + 1} ${consentTitle}`}>
+              <View style={styles.textContainer}>
                 <Text
                   variant="bodyText bodyTextBold"
                   style={{color: textColour}}
@@ -129,7 +131,10 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
                     <Text
                       variant="bodyText leftAlign"
                       style={{color: textColour}}
-                      accessible={true}>
+                      accessible={true}
+                      accessibilityLabel={`Consent description ${index + 1}: ${
+                        consentDescriptions[index]
+                      }`}>
                       {consentDescriptions[index]}
                     </Text>
                     {index === 2 && (
@@ -173,8 +178,13 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
           buttonText="Next"
           onPress={() => navigation.navigate('Marketing')}
           disabled={isButtonDisabled}
-          accessibilityLabel="Next button"
+          accessibilityLabel="Next"
           testID="nextButton"
+          accessibilityHint={
+            !isButtonDisabled
+              ? 'Please check all checkboxes to provide your consent'
+              : undefined
+          }
         />
       </View>
     </SafeAreaView>

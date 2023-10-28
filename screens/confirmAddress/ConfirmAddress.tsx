@@ -88,8 +88,6 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
         {backgroundColor: containerBackgroundColor},
       ]}>
       <View
-        accessible={true}
-        accessibilityLabel="Confirm Address Screen"
         style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
         <ScrollView>
           <View>
@@ -97,18 +95,20 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               source={require('../../assets/Envelope.png')}
               style={[styles.centerText, styles.spaceMedium]}
               accessible={true}
-              accessibilityLabel="Image of a Mettle Card In Envelope"
+              accessibilityLabel="Mettle Card In A Envelope"
               accessibilityRole="image"
             />
             <Text
               accessible={true}
               accessibilityRole="header"
+              accessibilityLabel={title}
               style={{color: textColour}}>
               {title}
             </Text>
             <Text
               variant="bodyText centerAlign"
               accessible={true}
+              accessibilityLabel="We'll Send Your Card"
               accessibilityRole="text"
               style={[{color: textColour}, styles.spaceMedium]}>
               We’ll send your new card to this address. If your address has
@@ -121,13 +121,19 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
                 description={`${displayedAddress.addressLine1}\n${displayedAddress.town}\n${displayedAddress.postcode}`}
                 titleStyle={{color: text60}}
                 descriptionStyle={{color: textColour}}
+                accessible={true}
+                accessibilityLabel="Your Address"
               />
             </View>
-            <Pressable onPress={handleNewCardTextPress}>
+            <Pressable
+              onPress={handleNewCardTextPress}
+              accessibilityRole="button">
               <Text
                 variant="bodyText bodyTextBold"
-                accessible
+                accessible={true}
                 accessibilityRole="button"
+                accessibilityLabel="Why New Card"
+                accessibilityHint="Press to learn why we're sending a new card"
                 style={[
                   {color: Colours.pink},
                   styles.centerText,
@@ -141,7 +147,10 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               visible={showSendingCardInfoModal}
               onPressClose={() => setShowSendingCardInfoModal(false)}
               title="You’ll get a new card"
-              content="Because we’re closing your e-money account, your current card will no longer work. We’ll send you a new card that’s connected to your new bank account."
+              content="Because we’re closing your e-money account, your current card 
+              will no longer work. We’ll send you a new card that’s connected to your 
+              new bank account."
+              accessible={true}
               accessibilityLabel="Close US Person Info Modal"
               contentStyle={[
                 {backgroundColor: containerBackgroundColor},
@@ -164,12 +173,12 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
             <WhiteButton
               buttonText="Update address"
               onPress={handleOpenInteractiveModal}
-              accessibilityLabel="Button to Update Address"
+              accessibilityLabel="Update Address"
             />
             <PinkButton
               buttonText="Confirm address"
               onPress={handleConfirmAddressClick}
-              accessibilityLabel="Button to Confirm Address"
+              accessibilityLabel="Confirm Address"
             />
           </View>
         </ScrollView>

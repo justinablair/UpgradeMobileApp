@@ -71,12 +71,20 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
         {/* Display the title */}
         <Text
           variant="bodyText bodyTextBold"
-          style={[{color: Colours.black60}, styles.titlePadding]}>
+          style={[{color: Colours.black60}, styles.titlePadding]}
+          accessible={true}
+          accessibilityLabel={title}
+          accessibilityRole="header">
           {title}
         </Text>
         {/* Input fields for address details */}
         <View style={styles.addressContainer}>
-          <Text variant="bodyText" style={{color: titleColor}}>
+          <Text
+            variant="bodyText"
+            style={{color: titleColor}}
+            accessible={true}
+            accessibilityRole="text"
+            accessibilityLabel="Address Line 1">
             Address Line 1:
           </Text>
           <TextInput
@@ -85,10 +93,16 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
             value={isEditing ? newAddressLine1 : addressLine1}
             onChangeText={setNewAddressLine1}
             editable={isEditing}
-            accessibilityLabel="Address Line 1"
+            accessible={true}
+            accessibilityLabel="Address Line 1 Input"
             testID="addressLine1Input"
           />
-          <Text variant="bodyText" style={{color: titleColor}}>
+          <Text
+            variant="bodyText"
+            style={{color: titleColor}}
+            accessible={true}
+            accessibilityRole="text"
+            accessibilityLabel="Town">
             Town:
           </Text>
           <TextInput
@@ -97,10 +111,16 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
             value={isEditing ? newTown : town}
             onChangeText={setNewTown}
             editable={isEditing}
-            accessibilityLabel="Town"
+            accessible={true}
+            accessibilityLabel="Town Input"
             testID="townInput"
           />
-          <Text variant="bodyText" style={{color: titleColor}}>
+          <Text
+            variant="bodyText"
+            style={{color: titleColor}}
+            accessible={true}
+            accessibilityRole="text"
+            accessibilityLabel="Postcode">
             Postcode:
           </Text>
           <TextInput
@@ -109,7 +129,8 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
             value={isEditing ? newPostcode : postcode}
             onChangeText={setNewPostcode}
             editable={isEditing}
-            accessibilityLabel="Postcode"
+            accessible={true}
+            accessibilityLabel="Postcode Input"
             testID="postcodeInput"
           />
         </View>
@@ -118,6 +139,8 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
           <Text
             variant="bodyText leftAlign"
             style={styles.successMessage}
+            accessible={true}
+            accessibilityRole="text"
             accessibilityLabel="Success Message">
             Address updated successfully!
           </Text>
@@ -128,6 +151,7 @@ const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
         <PinkButton
           buttonText={isEditing ? 'Save' : 'Edit Address'}
           onPress={isEditing ? handleUpdateAddress : handleEditAddress}
+          accessible={true}
           accessibilityLabel={isEditing ? 'Save Button' : 'Edit Address Button'}
           testID="saveEditButton"
         />

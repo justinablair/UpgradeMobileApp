@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewStyle,
   TextStyle,
+  AccessibilityState,
 } from 'react-native';
 
 import {useUserContext} from '../../UserContext';
@@ -15,7 +16,10 @@ interface PinkButtonProps {
   onPress: () => void;
   disabled?: boolean;
   customWidth?: number;
+  accessible?: boolean;
   accessibilityLabel?: string;
+  accessibilityState?: AccessibilityState;
+  accessibilityHint?: string;
   testID?: string;
 }
 
@@ -25,6 +29,7 @@ const PinkButton: React.FC<PinkButtonProps> = ({
   disabled = false,
   customWidth,
   accessibilityLabel,
+  accessibilityHint,
   testID,
 }) => {
   const {isDarkMode} = useUserContext();
@@ -51,6 +56,9 @@ const PinkButton: React.FC<PinkButtonProps> = ({
     color: disabled ? disabledText : 'white',
   };
 
+  const accessibilityState: AccessibilityState = {
+    disabled: disabled,
+  };
   return (
     <TouchableOpacity
       style={[styles.button, buttonStyle]}
@@ -58,8 +66,9 @@ const PinkButton: React.FC<PinkButtonProps> = ({
       disabled={disabled}
       accessible={true}
       accessibilityRole="button"
-      accessibilityState={{disabled}}
       accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      accessibilityState={accessibilityState}
       testID={testID}>
       <Text
         style={[styles.buttonText, textStyle]}

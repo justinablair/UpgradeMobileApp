@@ -23,13 +23,13 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   const handleUserTypeSelect = (userType: UserType) => {
     setUserType(userType);
     navigation.navigate(
-      userType === 'soleTrader' ? 'UpgradeTaxCompliant' : 'CompanyDetails',
+      userType === 'soleTrader' ? 'Address' : 'CompanyDetails',
     );
   };
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: isDarkMode ? Colours.black : Colours.white, // Change background color
+      backgroundColor: isDarkMode ? Colours.black : Colours.white,
       padding: 16,
     },
     separator: {
@@ -56,7 +56,8 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
     <View style={styles.container}>
       <Text
         variant="screenTitle leftAlign"
-        style={[styles.title, styles.space]}>
+        style={[styles.title, styles.space]}
+        accessibilityRole="header">
         {title}
       </Text>
 
@@ -64,6 +65,9 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
         title="Sole trader or side business"
         description="Maybe you’re self-employed, work as a freelancer, or make money independently"
         onPress={() => handleUserTypeSelect('soleTrader')}
+        accessible={true}
+        accessibilityLabel="select sole trader option"
+        accessibilityHint="press if you are a sole trader"
       />
       <View style={styles.separator} />
 
@@ -71,6 +75,9 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
         title="Private Limited Company"
         description="Your business is registered with Companies House and will have at least one director"
         onPress={() => handleUserTypeSelect('limitedCompany')}
+        accessible={true}
+        accessibilityLabel="select limited company option"
+        accessibilityHint="press if you are a limited company"
       />
       <View style={styles.separator} />
     </View>

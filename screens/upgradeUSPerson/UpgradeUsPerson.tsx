@@ -65,7 +65,12 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
 
     return (
       <>
-        <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+        <Text
+          variant="screenTitle leftAlign"
+          style={{color: textColour}}
+          accessible={true}
+          accessibilityLabel={title}
+          accessibilityRole="header">
           {title}
         </Text>
         <InfoModal
@@ -91,9 +96,7 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
-      ]}
-      accessibilityLabel="Upgrade US Person Screen"
-      accessibilityRole="summary">
+      ]}>
       <ScrollView>
         <View
           style={[
@@ -108,22 +111,28 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
             <Text
               variant="bodyText bodyTextBold"
               style={[{color: Colours.pink}, usPersonTextStyles]}
-              accessibilityLabel="US Person Button">
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="What Is A US Person?"
+              accessibilityHint="Press to learn more a US Person">
               What is a US person?
             </Text>
           </Pressable>
           <OptionsWithChevron
             title="Yes"
+            description=""
             onPress={handleYesButtonPress}
-            accessibilityLabel="yesButton"
-            accessibilityRole="button"
+            accessible={true}
+            accessibilityHint="Press yes to proceed"
           />
           <View style={[styles.spaceMedium, styles.separator]} />
           <OptionsWithChevron
             title="No"
+            description=""
             onPress={handleNoButtonPress}
-            accessibilityLabel="noButton"
+            accessible={true}
             accessibilityRole="button"
+            accessibilityHint="Press no to proceed"
           />
         </View>
       </ScrollView>

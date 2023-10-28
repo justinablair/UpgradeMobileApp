@@ -16,6 +16,8 @@ interface InteractiveModalProps {
   whiteButtonText?: string;
   onWhiteButtonClick?: () => void;
   testID?: string;
+  accessible?: boolean;
+  accessibilityLabel?: string;
 }
 
 const InteractiveModal: React.FC<InteractiveModalProps> = ({
@@ -28,6 +30,8 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   whiteButtonText,
   onWhiteButtonClick,
   testID,
+  accessible = false, // Default to false if not provided
+  accessibilityLabel,
 }) => {
   // Access isDarkMode from the user context
   const {isDarkMode} = useUserContext();
@@ -61,15 +65,10 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   return (
     <Modal visible={modalVisible} animationType="slide" transparent>
       {/* Main modal container */}
-      <View
-        style={styles.modalContainer}
-        accessible={true}
-        accessibilityLabel="Interactive Modal Container">
+      <View style={styles.modalContainer}>
         {/* Modal content */}
         <View
-          style={[styles.modalContent, {backgroundColor: backgroundColour}]}
-          accessible={true}
-          accessibilityLabel="Interactive Modal Content">
+          style={[styles.modalContent, {backgroundColor: backgroundColour}]}>
           {/* Close icon */}
           <TouchableOpacity
             style={styles.modalCloseIcon}
@@ -88,7 +87,8 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
             variant="leftAlign"
             style={[styles.modalTitle, {color: title}]}
             accessible={true}
-            accessibilityRole="header">
+            accessibilityRole="header"
+            accessibilityLabel={modalTitle}>
             {modalTitle}
           </Text>
           {/* Modal content */}

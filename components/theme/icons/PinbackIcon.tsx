@@ -4,10 +4,16 @@ import Colours from '../Colour'; // Update the path to Colour.js
 
 interface SvgPinBackProps {
   fill?: string;
+  accessibilityLabel?: string;
 }
 
-const SvgPinBack: React.FC<SvgPinBackProps> = ({fill}) => (
-  <Svg width="23" height="18" viewBox="0 0 23 18" fill="none">
+const SvgPinBack: React.FC<SvgPinBackProps> = ({fill, accessibilityLabel}) => (
+  <Svg
+    width="23"
+    height="18"
+    viewBox="0 0 23 18"
+    fill="none"
+    accessibilityLabel={accessibilityLabel}>
     <Defs>
       <ClipPath id="clip0">
         <Rect width="23" height="18" fill="white" />

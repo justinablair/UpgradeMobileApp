@@ -79,31 +79,41 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
             variant="screenTitle leftAlign"
             style={{color: Colours.black}}
             accessibilityRole="header"
-            accessibilityLabel="Tax Compliance Check">
+            accessibilityLabel="Tax Compliance Header">
             {title}
           </Text>
           {/* Title text */}
           <Text
             variant="bodyText leftAlign"
             style={[{color: Colours.black}, styles.space]}
+            accessible={true}
             accessibilityRole="text"
-            accessibilityLabel="Tax Compliance Description">
+            accessibilityLabel="Tax Compliance Description"
+            accessibilityHint="Tap the phrases 'evaded tax' and 'tax avoidance' to learn more.">
             This means that you've not previously{' '}
-            <Text
-              variant="bodyText leftAlign"
+            <Pressable
               onPress={handleEvasionPress}
-              style={pressedEvasionTextStyles}
+              accessible={true}
+              accessibilityRole="button"
               accessibilityLabel="Evaded Tax Pressable">
-              evaded tax
-            </Text>{' '}
+              <Text
+                variant="bodyText leftAlign"
+                style={pressedEvasionTextStyles}>
+                evaded tax
+              </Text>
+            </Pressable>{' '}
             and are not engaged in any{' '}
-            <Text
-              variant="bodyText leftAlign"
+            <Pressable
               onPress={handleAvoidancePress}
-              style={pressedAvoidanceTextStyles}
+              accessible={true}
+              accessibilityRole="button"
               accessibilityLabel="Avoided Tax Pressable">
-              tax avoidance
-            </Text>{' '}
+              <Text
+                variant="bodyText leftAlign"
+                style={pressedAvoidanceTextStyles}>
+                tax avoidance
+              </Text>
+            </Pressable>{' '}
             arrangements.
           </Text>
 
@@ -114,14 +124,17 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
             <Text
               variant="bodyText"
               style={styles.checkboxText}
-              accessibilityLabel="Tax Compliance Confirmation Text">
+              accessible={true}
+              accessibilityRole="text"
+              accessibilityLabel="I confirm I Am Tax Compliant">
               I confirm that I am tax compliant
             </Text>
             <CheckboxToggle
               checked={isChecked}
               onToggle={handleCheckboxToggle}
-              accessibilityRole="button"
-              accessibilityLabel="Checkbox Toggle"
+              accessible={true}
+              accessibilityRole="checkbox"
+              accessibilityLabel="Toggle"
               testID="checkboxToggle"
             />
           </View>
@@ -130,8 +143,13 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
               buttonText="Next"
               onPress={handleSwitchButtonPress}
               disabled={!isChecked}
-              accessibilityLabel="Next Button"
+              accessibilityLabel="Next"
               testID="nextButton"
+              accessibilityHint={
+                !isChecked
+                  ? 'Please check the checkbox to confirm your tax compliance'
+                  : undefined
+              }
             />
             {/* Tax evasion Info Modal */}
             <InfoModal
@@ -139,7 +157,8 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
               onPressClose={() => setShowEvasionInfoModal(false)}
               title="Tax evasion"
               content="This is a deliberate attempt not to declare and account for the taxes which are owed. It includes the hidden economy, where the presence of taxable sources of income are concealed."
-              accessibilityLabel="tax evasion Info Modal"
+              accessible={true}
+              accessibilityLabel="Tax Evasion Definition Modal"
             />
             {/* Tax avoidance Info Modal */}
             <InfoModal
@@ -147,7 +166,8 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
               onPressClose={() => setShowAvoidanceInfoModal(false)}
               title="Tax avoidance"
               content="This involves bending the rules of the tax system to try to gain a tax advantage that Parliament never intended. It often involves contrived, artificial transactions with no genuine purpose other than to produce a tax advantage. This is operating within the letter, but not the spirit of the law."
-              accessibilityLabel="tax avoidance Info Modal"
+              accessible={true}
+              accessibilityLabel="Tax Avoidance Definition Modal"
             />
           </View>
         </View>

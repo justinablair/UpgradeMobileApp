@@ -42,22 +42,17 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
 
   // Component JSX
   return (
-    <SafeAreaView
-      style={[styles.safeAreaContainer, {backgroundColor}]}
-      accessibilityRole="summary">
+    <SafeAreaView style={[styles.safeAreaContainer, {backgroundColor}]}>
       <ScrollView>
-        <View
-          style={[styles.container, {backgroundColor}]}
-          accessible
-          accessibilityRole="summary">
+        <View style={[styles.container, {backgroundColor}]}>
           {/* Title Section */}
           <View style={styles.titleContainer}>
             <Text
               variant="screenTitle centreAlign"
               style={{color: titleColor}}
-              accessible
+              accessible={true}
               accessibilityRole="header"
-              accessibilityLabel="What you’ll need to do after the switch.">
+              accessibilityLabel="Upgrade Changes You'll Do">
               {title}
             </Text>
           </View>
@@ -72,7 +67,8 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
           <PinkButton
             buttonText="Next"
             onPress={handleSwitchButtonPress}
-            accessibilityLabel="Proceed to the next step"
+            accessible={true}
+            accessibilityLabel="next"
             testID="nextButton"
           />
         </View>

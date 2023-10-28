@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  AccessibilityInfo,
+  AccessibilityRole,
+  AccessibilityState,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Text from '../Text';
 import Colours from '../theme/Colour';
 import {useUserContext} from '../UserContext';
@@ -11,7 +17,10 @@ interface PreferenceToggleProps {
   description?: string; // Optional description for the toggle
   onChange: () => void; // Function to handle toggle change
   testID: string; // Test ID for the toggle
+  accessible?: boolean;
   accessibilityLabel?: string;
+  accessibilityRole?: AccessibilityRole;
+  accessibilityState?: AccessibilityState;
 }
 
 const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
@@ -20,22 +29,27 @@ const PreferenceToggle: React.FC<PreferenceToggleProps> = ({
   description,
   onChange,
   testID,
+  accessible = false, // Default to false if not provided
   accessibilityLabel,
+  accessibilityRole,
 }) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
-  // Function to handle the toggle change
   const handleToggle = () => {
     onChange();
-  };
 
+    const announcement = value
+      ? `${label} preference enabled`
+      : `${label} preference disabled`;
+    AccessibilityInfo.announceForAccessibility(announcement);
+  };
   // Rendering the toggle component
   return (
     <View
       style={styles.preferenceContainer}
-      accessible
-      accessibilityLabel={`${label} Preference Toggle`}
+      accessible={true}
+      accessibilityLabel={accessibilityLabel}
       testID={`${testID}Container`}>
       <View style={styles.textContainer}>
         <Text variant="bodyText" style={{color: textColour}}>

@@ -93,7 +93,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={addressLine1Local}
           onChangeText={setAddressLine1Local}
-          accessibilityLabel="First line of address"
+          accessibilityLabel="First line of address input"
           accessibilityRole="text"
         />
         <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
@@ -105,7 +105,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={townLocal}
           onChangeText={setTownLocal}
-          accessibilityLabel="Town"
+          accessibilityLabel="Town input"
           accessibilityRole="text"
         />
         <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
@@ -117,7 +117,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
           placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
           value={postcodeLocal}
           onChangeText={setPostcodeLocal}
-          accessibilityLabel="Postcode"
+          accessibilityLabel="Postcode input"
           accessibilityRole="text"
         />
       </View>

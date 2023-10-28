@@ -39,18 +39,12 @@ const UpgradeIneligibleUSScreen: React.FC<UpgradeIneligibleResidentProps> = ({
   return (
     // Main container for the screen, with accessibility label and style
     <SafeAreaView
-      accessible={true}
-      accessibilityLabel="Upgrade Ineligible US Screen"
       style={[
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
       ]}>
       <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          accessible={true}
-          accessibilityLabel="Scrollable Content"
-          accessibilityRole="scrollbar">
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View
             style={[
               styles.content,
@@ -61,7 +55,8 @@ const UpgradeIneligibleUSScreen: React.FC<UpgradeIneligibleResidentProps> = ({
               variant="screenTitle leftAlign"
               style={{color: textColour}}
               accessible={true}
-              accessibilityLabel="Screen Title">
+              accessibilityRole="header"
+              accessibilityLabel={title}>
               {title}
             </Text>
             {/* Body text */}
@@ -69,7 +64,7 @@ const UpgradeIneligibleUSScreen: React.FC<UpgradeIneligibleResidentProps> = ({
               variant="bodyText"
               style={{color: textColour}}
               accessible={true}
-              accessibilityLabel="Body Text">
+              accessibilityLabel="Upgrade Ineligible Content">
               We’re currently unable to support businesses that are liable to
               pay tax in the United States.
               {'\n\n'}Please continue to use your e-money account.
@@ -79,14 +74,11 @@ const UpgradeIneligibleUSScreen: React.FC<UpgradeIneligibleResidentProps> = ({
             </Text>
           </View>
         </ScrollView>
-        <View
-          style={styles.bottomButtonContainer}
-          accessible={true}
-          accessibilityLabel="Bottom Button Container">
+        <View style={styles.bottomButtonContainer}>
           <PinkButton
             buttonText="Cancel switch"
             onPress={handleSwitchExitJourneyPress}
-            accessibilityLabel="Cancel Switch Button"
+            accessibilityLabel="Cancel Switch"
             testID="cancelSwitchButton"
           />
         </View>

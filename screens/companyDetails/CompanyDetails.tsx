@@ -45,13 +45,13 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
   return (
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}
-      accessible={true}
       accessibilityLabel="companyDetailsScreenContainer">
       <View style={styles.contentContainer}>
         <Text
           variant="screenTitle leftAlign"
           style={{color: isDarkMode ? Colours.white : Colours.black}}
           accessible={true}
+          accessibilityRole="header"
           accessibilityLabel="companyDetailsScreenTitle">
           {title}
         </Text>
@@ -62,7 +62,8 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
             styles.space,
           ]}
           accessible={true}
-          accessibilityLabel="companyNameLabelText">
+          accessibilityRole="text"
+          accessibilityLabel="companyName">
           Company name
         </Text>
         <TextInput
@@ -84,10 +85,7 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
         />
       </View>
 
-      <View
-        style={styles.checkboxContainer}
-        accessible={true}
-        accessibilityLabel="consentSection">
+      <View style={styles.checkboxContainer}>
         <Text
           variant="bodyText"
           style={[
@@ -95,7 +93,7 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
             {color: isDarkMode ? Colours.white : Colours.black},
           ]}
           accessible={true}
-          accessibilityLabel="consentText">
+          accessibilityLabel="consentToCompanyNameInput">
           I confirm {companyName ? companyName : 'the company name I entered'}{' '}
           is correct
         </Text>
@@ -104,21 +102,25 @@ const CompanyDetailsScreen: React.FC<CompanyDetailsScreenProps> = ({
           checked={isChecked}
           onToggle={handleToggle}
           disabled={!isCompanyNameEntered}
+          accessible={true}
           accessibilityLabel="consentCheckbox"
           accessibilityRole="checkbox"
         />
       </View>
 
-      <View
-        accessible={true}
-        accessibilityLabel="nextButtonContainer"
-        accessibilityRole="button">
+      <View>
         <PinkButton
           buttonText="Next"
           onPress={handleNextPress}
           disabled={!isChecked || !isCompanyNameEntered}
-          accessibilityLabel="nextButton"
+          accessible={true}
+          accessibilityLabel="next"
           testID="nextButton"
+          accessibilityHint={
+            !isCompanyNameEntered
+              ? 'Please input company name and consent to input to enable button'
+              : undefined
+          }
         />
       </View>
     </View>
