@@ -68,7 +68,6 @@ describe('Marketing Screen', () => {
     });
     const updatedEmailToggle = getByTestId('EmailToggle');
     const isToggled = updatedEmailToggle.props.value;
-    console.log('Toggle value:', isToggled);
     expect(isToggled).toBe(true);
   });
 
@@ -84,7 +83,6 @@ describe('Marketing Screen', () => {
     });
     const updatedPushToggle = getByTestId('PushNotificationsToggle');
     const isToggled = updatedPushToggle.props.value;
-    console.log('Toggle value:', isToggled);
     expect(isToggled).toBe(true);
   });
 

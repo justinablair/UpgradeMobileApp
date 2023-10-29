@@ -12,7 +12,6 @@ import Text from '../../components/Text';
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
-import AuthModal from '../../components/theme/modals/AuthModal';
 import {useUserContext} from '../../components/UserContext';
 
 type UpgradeCompleteProps = NavigationProps<'UpgradeComplete'>;
@@ -27,24 +26,9 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
-  // State to manage the visibility of the authentication modal
-  const [authModalVisible, setAuthModalVisible] = useState(false);
-
-  // Function to handle closing the authentication modal
-  const onCloseAuthModal = () => {
-    setAuthModalVisible(false);
-  };
-
   // Function to handle the login button press
   const handleLoginButtonPress = () => {
-    setAuthModalVisible(true); // Open the AuthModal
-  };
-
-  // Function to handle the navigation action in the authentication modal
-  const handleAuthModalNext = () => {
-    const targetScreen = 'UpgradedWelcome';
-    navigation.navigate(targetScreen);
-    onCloseAuthModal();
+    navigation.navigate('Login');
   };
 
   // Define the title of the screen
@@ -109,14 +93,6 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
           testID="loginButton"
         />
       </View>
-      {/* Display the authentication modal */}
-      <AuthModal
-        visible={authModalVisible}
-        onClose={onCloseAuthModal}
-        navigation={navigation}
-        navigationTarget="UpgradedWelcome"
-        onNext={handleAuthModalNext}
-      />
     </SafeAreaView>
   );
 };

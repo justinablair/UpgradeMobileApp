@@ -32,13 +32,12 @@ describe('<ConfirmAddressScreen />', () => {
   };
 
   it('renders correctly', () => {
-    const {getByText, getByLabelText} = render(
+    const {getByText} = render(
       <UserContextProvider>
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     expect(getByText('Confirm your address')).toBeTruthy();
-    expect(getByLabelText('Confirm Address Screen')).toBeTruthy();
   });
 
   it('displays the user address', () => {

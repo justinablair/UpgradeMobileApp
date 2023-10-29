@@ -26,7 +26,7 @@ const CheckboxToggle: React.FC<CheckboxProps> = ({
   testID,
   accessible = false, // Default to false if not provided
   accessibilityLabel,
-  accessibilityRole,
+  accessibilityRole = 'checkbox',
 }) => {
   const accessibilityState: AccessibilityState = {
     disabled: disabled,

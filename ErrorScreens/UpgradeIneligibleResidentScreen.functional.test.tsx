@@ -36,7 +36,7 @@ describe('UpgradeIneligibleResidentScreen', () => {
         <UpgradeIneligibleResidentScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const title = getByLabelText('upgradeIneligibleTitle');
+    const title = getByLabelText('Sorry, we can’t open a bank account for you');
     expect(title).toBeTruthy();
   });
 

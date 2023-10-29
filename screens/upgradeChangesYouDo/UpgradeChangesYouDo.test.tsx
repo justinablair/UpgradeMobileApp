@@ -45,9 +45,7 @@ describe('UpgradeChangesYouDoScreen', () => {
     expect(getByText('Next')).toBeTruthy();
 
     // Check if the accessibility label is set correctly
-    expect(
-      getByLabelText('What you’ll need to do after the switch.'),
-    ).toBeTruthy();
+    expect(getByLabelText("Upgrade Changes You'll Do")).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {

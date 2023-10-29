@@ -6,6 +6,7 @@ import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AccessibilityInfo} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {findAllByText, getByTestId, getByText} from '@testing-library/react';
 
 describe('UpgradeRecapScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -31,14 +32,17 @@ describe('UpgradeRecapScreen', () => {
     getId: jest.fn(),
   };
   it('renders correctly', () => {
-    const {getByLabelText} = render(
+    const {findByText} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeRecapScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );
-    expect(getByLabelText('Upgrade Recap Screen Summary')).toBeTruthy();
+    expect(findByText('Recap of changes')).toBeTruthy();
+    expect(findByText('What we’ll do during the switch')).toBeTruthy();
+    expect(findByText('What you’ll need to do after the switch')).toBeTruthy();
+    expect(findByText('How your new account will work')).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -61,52 +65,60 @@ describe('UpgradeRecapScreen', () => {
     );
   });
 
-  it('toggles Changes We Do section', () => {
-    const {getByLabelText, getByText, queryByText} = render(
+  it('collapses Changes We Do section', () => {
+    const {getByTestId, getByText, queryByText} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeRecapScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );
+    expect(
+      getByText('Give you a new account number and sort code'),
+    ).toBeTruthy();
     act(() => {
-      const toggleButton = getByLabelText('Toggle Changes We Do Section');
+      const toggleButton = getByTestId('changesWeDo');
       fireEvent.press(toggleButton);
     });
-    expect(getByText('What we’ll do during the switch')).toBeTruthy();
-    expect(queryByText('Recap of changes')).toBeTruthy();
+    expect(
+      queryByText('Give you a new account number and sort code'),
+    ).toBeFalsy();
   });
 
-  it('toggles Changes You Do section', () => {
-    const {getByLabelText, getByText, queryByText} = render(
+  it('collapses Changes You Do section', () => {
+    const {getByTestId, getByText, queryByText} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeRecapScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );
+    expect(getByText('Give your clients your new bank details')).toBeTruthy();
     act(() => {
-      const toggleButton = getByLabelText('Toggle Changes You Do Section');
+      const toggleButton = getByTestId('changesYouDo');
       fireEvent.press(toggleButton);
     });
-    expect(getByText('What you’ll need to do after the switch')).toBeTruthy();
-    expect(queryByText('What we’ll do during the switch')).toBeTruthy();
+    expect(queryByText('Give your clients your new bank details')).toBeFalsy();
   });
 
-  it('toggles New Account section', () => {
-    const {getByLabelText, getByText, queryByText} = render(
+  it('collapses New Account section', () => {
+    const {getByText, getByTestId, queryByText} = render(
       <UserContextProvider>
         <NavigationContainer>
           <UpgradeRecapScreen navigation={mockNavigation} />
         </NavigationContainer>
       </UserContextProvider>,
     );
+    expect(
+      getByText('Your app will be locked while we open your new account'),
+    ).toBeTruthy();
     act(() => {
-      const toggleButton = getByLabelText('Toggle New Account Section');
+      const toggleButton = getByTestId('newAccount');
       fireEvent.press(toggleButton);
     });
-    expect(getByText('How your new account will work')).toBeTruthy();
-    expect(queryByText('What you’ll need to do after the switch')).toBeTruthy();
+    expect(
+      queryByText('Your app will be locked while we open your new account'),
+    ).toBeFalsy();
   });
 
   it('triggers AuthModal when "Switch now" button is pressed', () => {

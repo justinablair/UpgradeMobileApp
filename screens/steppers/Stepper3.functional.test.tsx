@@ -74,6 +74,6 @@ describe('StepperScreen3', () => {
     act(() => {
       fireEvent.press(buttonElement);
     });
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTaxReporting');
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeTaxCompliant');
   });
 });

@@ -1,11 +1,6 @@
 //UserSelection.tsx
 import React, {useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  AccessibilityInfo,
-} from 'react-native';
+import {View, StyleSheet, AccessibilityInfo} from 'react-native';
 import Text from '../../components/Text';
 import {useUserContext, UserType} from '../../components/UserContext';
 import Colours from '../../components/theme/Colour'; // Import Colours

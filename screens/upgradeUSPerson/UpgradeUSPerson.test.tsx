@@ -32,12 +32,12 @@ describe('UpgradeUSPersonScreen', () => {
   };
 
   it('renders correctly', () => {
-    const {getByLabelText} = render(
+    const {getByText} = render(
       <UserContextProvider>
         <UpgradeUSPersonScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByLabelText('Upgrade US Person Screen')).toBeTruthy();
+    expect(getByText('What is a US person?')).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
@@ -61,23 +61,23 @@ describe('UpgradeUSPersonScreen', () => {
   });
 
   it('handles button presses correctly', () => {
-    const {getByLabelText, getByTestId} = render(
+    const {getByText, getByTestId} = render(
       <UserContextProvider>
         <UpgradeUSPersonScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
-      fireEvent.press(getByLabelText('US Person Button'));
+      fireEvent.press(getByText('What is a US person?'));
     });
     expect(getByTestId('USPersonModal')).toBeTruthy();
 
     act(() => {
-      fireEvent.press(getByLabelText('yesButton'));
+      fireEvent.press(getByText('Yes'));
     });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeIneligibleUS');
 
     act(() => {
-      fireEvent.press(getByLabelText('noButton'));
+      fireEvent.press(getByText('No'));
     });
     expect(mockNavigation.navigate).toHaveBeenCalledWith('StepperScreen4');
   });

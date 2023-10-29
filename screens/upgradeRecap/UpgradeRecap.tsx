@@ -105,6 +105,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
                 accessible={true}
                 accessibilityRole="button"
                 accessibilityHint={`press to collapse ${weDoTitle} information`}
+                testID="changesWeDo"
                 accessibilityLabel={weDoTitle}>
                 {weDoTitle}
               </Text>
@@ -133,7 +134,8 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
                 accessible={true}
                 accessibilityRole="button"
                 accessibilityHint={`press to collapse ${youDoTitle} information`}
-                accessibilityLabel={youDoTitle}>
+                accessibilityLabel={youDoTitle}
+                testID="changesYouDo">
                 {youDoTitle}
               </Text>
               {changesYouDoVisible ? (
@@ -161,7 +163,8 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
                 accessible={true}
                 accessibilityRole="button"
                 accessibilityHint={`press to collapse ${newAccountTitle} information`}
-                accessibilityLabel={newAccountTitle}>
+                accessibilityLabel={newAccountTitle}
+                testID="newAccount">
                 {newAccountTitle}
               </Text>
               {newAccountVisible ? (
@@ -222,11 +225,11 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     padding: 16,
   },
   safeAreaContainer: {
-    backgroundColor: Colours.white,
+    // backgroundColor: Colours.white,
     flex: 1,
   },
   scrollViewContainer: {

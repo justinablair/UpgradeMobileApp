@@ -45,6 +45,7 @@ import StepperCompleteScreen from './screens/steppers/StepperComplete';
 import ThemeScreen from './screens/themeScreen/ThemeScreen';
 import CompanyDetailsScreen from './screens/companyDetails/CompanyDetails';
 import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleResidentScreen';
+import LoginScreen from './screens/upgradeLogin/UpgradeLogin';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -171,6 +172,14 @@ function AppContent(): JSX.Element {
         {renderScreen(
           'UpgradeComplete',
           UpgradeCompleteScreen,
+          headerOptions,
+          undefined,
+          true,
+          true,
+        )}
+        {renderScreen(
+          'Login',
+          LoginScreen,
           headerOptions,
           undefined,
           true,

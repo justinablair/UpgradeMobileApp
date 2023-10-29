@@ -91,9 +91,7 @@ describe('UpgradeNationalityScreen', () => {
         <UpgradeNationalityScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    const taxAvoidancePressable = getByLabelText(
-      'Press to learn more about tax residency',
-    );
+    const taxAvoidancePressable = getByLabelText('What Is Tax Residency');
     act(() => {
       fireEvent.press(taxAvoidancePressable);
     });

@@ -37,10 +37,10 @@ describe('UpgradeCompleteScreen', () => {
       </UserContextProvider>,
     );
 
-    expect(getByLabelText('upgradeCompleteScreen')).toBeTruthy();
-    expect(getByLabelText('rocketTakingOffImage')).toBeTruthy();
-    expect(getByLabelText('upgradeCompleteTitle')).toBeTruthy();
-    expect(getByLabelText('upgradeCompleteBody')).toBeTruthy();
+    expect(getByText('Congratulations! Your switch is complete!')).toBeTruthy();
+    expect(getByLabelText('largeTick')).toBeTruthy();
+    expect(getByLabelText('upgradeCompleteDescription')).toBeTruthy();
+
     expect(getByText('Log in')).toBeTruthy();
   });
 
@@ -62,7 +62,7 @@ describe('UpgradeCompleteScreen', () => {
     );
   });
 
-  it('opens the authentication modal on "Log in" button press', () => {
+  it('navigates to the "upgradeLogin" screen on button press', () => {
     const {getByTestId, getByText} = render(
       <UserContextProvider>
         <UpgradeCompleteScreen navigation={mockNavigation} />
@@ -71,6 +71,6 @@ describe('UpgradeCompleteScreen', () => {
     act(() => {
       fireEvent.press(getByTestId('loginButton'));
     });
-    expect(getByText('Authorise')).toBeTruthy();
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('Login');
   });
 });

@@ -36,12 +36,12 @@ describe('UpgradedWelcomeScreen', () => {
         <UpgradedWelcomeScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(getByLabelText('Welcome Screen')).toBeTruthy();
-    expect(getAllByRole('summary')).toBeTruthy();
-    expect(getByLabelText('Welcome Screen Content')).toBeTruthy();
+    expect(getAllByRole('image')).toBeTruthy();
+    expect(
+      getByLabelText('Welcome to your new Mettle bank account'),
+    ).toBeTruthy();
     expect(getByLabelText('Mettle logo with stars around it')).toBeTruthy();
     expect(getByRole('header')).toBeTruthy();
-    expect(getByRole('alert')).toBeTruthy();
     expect(getByLabelText('FSCS logo')).toBeTruthy();
     expect(getByTestId('nextButton')).toBeTruthy();
   });

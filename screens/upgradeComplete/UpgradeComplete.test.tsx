@@ -41,7 +41,7 @@ describe('UpgradeCompleteScreen', () => {
         'You can now log in to your new account, where you’ll find your account number and sort code. To help you get started, we’ll send you a couple of emails soon. Look out for your new account details and your old scheduled payments and Direct Debits.',
       ),
     ).toBeTruthy();
-    const image = getByLabelText('rocketTakingOffImage');
+    const image = getByLabelText('largeTick');
     expect(image).toBeTruthy();
   });
 
@@ -73,6 +73,6 @@ describe('UpgradeCompleteScreen', () => {
     act(() => {
       fireEvent.press(getByTestId('loginButton'));
     });
-    expect(getByText('Authorise')).toBeTruthy();
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('Login');
   });
 });

@@ -38,7 +38,7 @@ describe('UpgradeConfirmScreen', () => {
     );
 
     expect(getByText('Ready to switch?')).toBeTruthy();
-    expect(getByLabelText('Switch arrows image')).toBeTruthy();
+    expect(getByLabelText('Switch arrows')).toBeTruthy();
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {

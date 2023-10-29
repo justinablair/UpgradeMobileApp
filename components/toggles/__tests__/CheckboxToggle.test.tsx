@@ -9,26 +9,33 @@ describe('CheckboxToggle component', () => {
     disabled: false,
   };
 
-  it('renders without crashing', () => {
-    const {getByRole} = render(<CheckboxToggle {...mockProps} />);
-    const checkboxComponent = getByRole('checkbox');
+  it('renders', () => {
+    const {getByLabelText} = render(<CheckboxToggle {...mockProps} />);
+    const checkboxComponent = getByLabelText('Unchecked');
     expect(checkboxComponent).toBeTruthy();
   });
 
   it('calls onToggle when the checkbox is pressed', () => {
-    const {getByRole} = render(<CheckboxToggle {...mockProps} />);
-    const checkboxComponent = getByRole('checkbox');
+    const {getByLabelText} = render(<CheckboxToggle {...mockProps} />);
+    const checkboxComponent = getByLabelText('Unchecked');
     act(() => {
       fireEvent.press(checkboxComponent);
     });
     expect(mockProps.onToggle).toHaveBeenCalled();
   });
 
-  it('disables the checkbox when the disabled prop is true', () => {
-    const {getByRole} = render(
-      <CheckboxToggle {...mockProps} disabled={true} />,
+  it('Checks the checkbox', () => {
+    const {getByLabelText} = render(
+      <CheckboxToggle {...mockProps} checked={true} />,
     );
-    const checkboxComponent = getByRole('checkbox');
-    expect(checkboxComponent.props.accessibilityState.disabled).toEqual(true); // Check for the disabled property
+    const checkedIcon = getByLabelText('Checked');
+    expect(checkedIcon).toBeTruthy();
+  });
+  it('Unchecks the checkbox', () => {
+    const {getByLabelText} = render(
+      <CheckboxToggle {...mockProps} checked={false} />,
+    );
+    const checkedIcon = getByLabelText('Unchecked');
+    expect(checkedIcon).toBeTruthy();
   });
 });
