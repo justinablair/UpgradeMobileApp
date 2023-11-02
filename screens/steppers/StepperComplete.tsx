@@ -1,13 +1,19 @@
 //StepperComplete.tsx
 
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
 import {NavigationProps} from '../../navigationTypes';
 import {useUserContext} from '../../components/UserContext';
 import stepsData from '../../components/StepsData';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeStepperCompleteProps = NavigationProps<'StepperComplete'>;
 
@@ -77,7 +83,9 @@ const StepperCompleteScreen: React.FC<UpgradeStepperCompleteProps> = ({
           ))}
         </View>
       </ScrollView>
-      <PinkButton buttonText="Continue" onPress={handleSwitchButtonPress} />
+      <View style={styles.padding}>
+        <PinkButton buttonText="Continue" onPress={handleSwitchButtonPress} />
+      </View>
     </View>
   );
 };
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    padding: 16,
+    padding: wp('4%'),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -95,43 +103,46 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     flex: 1,
-    paddingRight: 20,
+    paddingRight: wp('4%'),
   },
   lineContainer: {
     position: 'absolute',
-    width: 2,
-    height: '10%',
-    left: 24,
-    top: 250,
+    width: wp('0.6%'),
+    height: hp('10%'),
+    left: wp('6%'),
+    top: hp('25%'),
   },
   stepContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: hp('3%'),
   },
   completeLine: {
     position: 'absolute',
-    width: 2,
-    height: '50%',
-    left: 24,
+    width: wp('0.6%'),
+    height: height > 700 ? hp('30%') : hp('40%'),
+    left: wp('7%'),
     backgroundColor: Colours.green,
-    top: 40,
+    top: hp('3%'),
   },
   stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
+    width: wp('9%'),
+    height: wp('9%'),
+    borderRadius: wp('6%'),
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -30,
+    marginTop: -hp('3%'),
   },
   stepNumber: {
-    fontSize: 18,
+    fontSize: wp('4%'),
   },
   stepContent: {
     flex: 1,
-    marginLeft: 20,
+    marginLeft: wp('5%'),
+  },
+  padding: {
+    paddingBottom: height > 700 ? hp('2%') : 0,
   },
 });
 

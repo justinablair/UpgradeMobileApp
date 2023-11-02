@@ -9,6 +9,7 @@ import {
   Image,
   TextStyle,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import {NavigationProps} from '../../navigationTypes';
@@ -20,6 +21,12 @@ import WhiteButton from '../../components/theme/buttons/WhiteButton';
 import {useUserContext} from '../../components/UserContext';
 import InfoModal from '../../components/theme/modals/InfoModal';
 import InteractiveModal from '../../components/theme/modals/InteractiveModal';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type ConfirmAddressProps = NavigationProps<'ConfirmAddress'>;
 
@@ -169,19 +176,20 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
               whiteButtonText="Cancel"
               onWhiteButtonClick={handleCloseInteractiveModal}
             />
-
-            <WhiteButton
-              buttonText="Update address"
-              onPress={handleOpenInteractiveModal}
-              accessibilityLabel="Update Address"
-            />
-            <PinkButton
-              buttonText="Confirm address"
-              onPress={handleConfirmAddressClick}
-              accessibilityLabel="Confirm Address"
-            />
           </View>
         </ScrollView>
+      </View>
+      <View style={styles.padding}>
+        <WhiteButton
+          buttonText="Update address"
+          onPress={handleOpenInteractiveModal}
+          accessibilityLabel="Update Address"
+        />
+        <PinkButton
+          buttonText="Confirm address"
+          onPress={handleConfirmAddressClick}
+          accessibilityLabel="Confirm Address"
+        />
       </View>
     </SafeAreaView>
   );
@@ -190,13 +198,13 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
   spaceMedium: {
-    marginBottom: 30,
+    marginBottom: hp('3%'),
   },
   InfoModalCustomisation: {
-    margin: 50,
+    margin: hp('5%'),
   },
   centerText: {
     alignSelf: 'center',
@@ -207,6 +215,9 @@ const styles = StyleSheet.create({
 
   newCardText: {
     fontWeight: 'bold',
+  },
+  padding: {
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../../navigationTypes';
@@ -22,6 +23,12 @@ import ChevronUpIcon from '../../components/theme/icons/ChevronUp';
 import ChevronDownIcon from '../../components/theme/icons/ChevronDown';
 import {useUserContext} from '../../components/UserContext';
 import ExitModal from '../../components/theme/modals/ExitModal';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeRecapProps = NavigationProps<'UpgradeRecap'>;
 
@@ -51,10 +58,6 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
 
   const handlePinkButtonPress = () => {
     toggleModal();
-  };
-
-  const closeAuthModal = () => {
-    setModalVisible(false);
   };
 
   const mainTitle = 'Recap of changes';
@@ -183,20 +186,7 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           </TouchableOpacity>
           {newAccountVisible && <NewAccount />}
         </View>
-        <View style={styles.buttonContainer}>
-          <WhiteButton
-            buttonText="I'm not sure"
-            onPress={exitModalVisible}
-            accessibilityLabel="notSure"
-            testID="notSureButton"
-          />
-          <PinkButton
-            buttonText="Switch now"
-            onPress={handlePinkButtonPress}
-            accessibilityLabel="switchNow"
-            testID="switchNow"
-          />
-        </View>
+
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
           accessible={true}
@@ -218,6 +208,20 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
           testID="exitModal"
         />
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <WhiteButton
+          buttonText="I'm not sure"
+          onPress={exitModalVisible}
+          accessibilityLabel="notSure"
+          testID="notSureButton"
+        />
+        <PinkButton
+          buttonText="Switch now"
+          onPress={handlePinkButtonPress}
+          accessibilityLabel="switchNow"
+          testID="switchNow"
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -225,11 +229,9 @@ const UpgradeRecapScreen: React.FC<UpgradeRecapProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: Colours.white,
-    padding: 16,
+    padding: wp('4%'),
   },
   safeAreaContainer: {
-    // backgroundColor: Colours.white,
     flex: 1,
   },
   scrollViewContainer: {
@@ -237,10 +239,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1%'),
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2%'),
   },
   titleIconContainer: {
     flexDirection: 'row',
@@ -248,7 +250,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    marginBottom: 16,
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

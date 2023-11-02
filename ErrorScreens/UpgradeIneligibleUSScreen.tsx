@@ -5,12 +5,19 @@ import {
   ScrollView,
   SafeAreaView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../navigationTypes';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from '../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeIneligibleResidentProps = NavigationProps<'UpgradeIneligibleUS'>;
 
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   bottomButtonContainer: {
-    marginBottom: 10,
+    marginBottom: height > 700 ? 0 : hp('2%'),
   },
   safeAreaContainer: {
     flex: 1,
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
 });
 

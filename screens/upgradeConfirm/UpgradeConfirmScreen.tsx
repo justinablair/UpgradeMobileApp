@@ -8,12 +8,19 @@ import {
   SafeAreaView,
   AccessibilityInfo,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeConfirmProps = NavigationProps<'UpgradeConfirm'>;
 
@@ -100,19 +107,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   container: {
-    padding: 16,
-    marginTop: 50,
+    padding: wp('4%'),
+    marginTop: hp('5%'),
   },
   largeImage: {
-    width: 210,
-    height: 210,
+    width: wp('55%'),
+    height: wp('55%'),
     alignSelf: 'center',
   },
   safeAreaContainer: {
     flex: 1,
   },
   bottomButtonContainer: {
-    padding: 16,
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

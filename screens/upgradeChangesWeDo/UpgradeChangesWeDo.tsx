@@ -8,6 +8,7 @@ import {
   ScrollView,
   AccessibilityInfo,
   ViewStyle,
+  Dimensions,
 } from 'react-native';
 import {NavigationProps} from '../../navigationTypes';
 import {useUserContext} from '../../components/UserContext';
@@ -15,6 +16,11 @@ import ChangesWeDo from '../Common/ChangesWeDo';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type UpgradeChangesWeDoProps = NavigationProps<'UpgradeChangesWeDo'>;
 
@@ -58,15 +64,16 @@ const UpgradeChangesWeDoScreen: FC<UpgradeChangesWeDoProps> = ({
           </View>
           {/* Changes We Do component */}
           <ChangesWeDo />
-          <PinkButton
-            buttonText="Next"
-            onPress={handleSwitchButtonPress}
-            accessible={true}
-            accessibilityLabel="next"
-            testID="nextButton"
-          />
         </View>
       </ScrollView>
+      <PinkButton
+        buttonText="Next"
+        onPress={handleSwitchButtonPress}
+        accessible={true}
+        accessibilityLabel="next"
+        testID="nextButton"
+      />
+      <View style={styles.space} />
     </SafeAreaView>
   );
 };
@@ -80,17 +87,17 @@ const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     backgroundColor: Colours.white,
-    padding: 16,
+    padding: wp('4%'),
   },
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
   },
   space: {
-    marginVertical: 8,
+    marginVertical: height > 700 ? 0 : hp('1%'),
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2%'),
   },
 });
 

@@ -7,14 +7,17 @@ import {
   AccessibilityInfo,
   Pressable,
   TextStyle,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../../components/toggles/CheckboxToggle'; // Import the CheckboxToggle component
-
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import InfoModal from '../../components/theme/modals/InfoModal';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeTaxCompliantProps = NavigationProps<'UpgradeTaxCompliant'>;
 
@@ -138,7 +141,9 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
               testID="checkboxToggle"
             />
           </View>
-          <View style={styles.buttonContainer}>
+        </View>
+        <View>
+          <View style={styles.padding}>
             <PinkButton
               buttonText="Next"
               onPress={handleSwitchButtonPress}
@@ -151,25 +156,25 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
                   : undefined
               }
             />
-            {/* Tax evasion Info Modal */}
-            <InfoModal
-              visible={showEvasionInfoModal}
-              onPressClose={() => setShowEvasionInfoModal(false)}
-              title="Tax evasion"
-              content="This is a deliberate attempt not to declare and account for the taxes which are owed. It includes the hidden economy, where the presence of taxable sources of income are concealed."
-              accessible={true}
-              accessibilityLabel="Tax Evasion Definition Modal"
-            />
-            {/* Tax avoidance Info Modal */}
-            <InfoModal
-              visible={showAvoidanceInfoModal}
-              onPressClose={() => setShowAvoidanceInfoModal(false)}
-              title="Tax avoidance"
-              content="This involves bending the rules of the tax system to try to gain a tax advantage that Parliament never intended. It often involves contrived, artificial transactions with no genuine purpose other than to produce a tax advantage. This is operating within the letter, but not the spirit of the law."
-              accessible={true}
-              accessibilityLabel="Tax Avoidance Definition Modal"
-            />
           </View>
+          {/* Tax evasion Info Modal */}
+          <InfoModal
+            visible={showEvasionInfoModal}
+            onPressClose={() => setShowEvasionInfoModal(false)}
+            title="Tax evasion"
+            content="This is a deliberate attempt not to declare and account for the taxes which are owed. It includes the hidden economy, where the presence of taxable sources of income are concealed."
+            accessible={true}
+            accessibilityLabel="Tax Evasion Definition Modal"
+          />
+          {/* Tax avoidance Info Modal */}
+          <InfoModal
+            visible={showAvoidanceInfoModal}
+            onPressClose={() => setShowAvoidanceInfoModal(false)}
+            title="Tax avoidance"
+            content="This involves bending the rules of the tax system to try to gain a tax advantage that Parliament never intended. It often involves contrived, artificial transactions with no genuine purpose other than to produce a tax advantage. This is operating within the letter, but not the spirit of the law."
+            accessible={true}
+            accessibilityLabel="Tax Avoidance Definition Modal"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -179,19 +184,18 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colours.white,
-    padding: 16,
+    padding: hp('4%'),
   },
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1%'),
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 8,
+    paddingRight: hp('1%'),
   },
   checkboxText: {
-    marginLeft: 8,
+    marginLeft: hp('1%'),
     color: Colours.black,
     flex: 1,
   },
@@ -201,17 +205,17 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
-  buttonContainer: {
-    flex: 0.1,
-    justifyContent: 'flex-end',
-  },
+
   safeAreaContainer: {
     backgroundColor: Colours.white,
     height: '100%',
   },
   linkText: {
-    lineHeight: 90,
+    lineHeight: height > 600 ? 90 : 60,
     fontWeight: 'bold',
+  },
+  padding: {
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

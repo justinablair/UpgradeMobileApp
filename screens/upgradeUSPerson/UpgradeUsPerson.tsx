@@ -14,6 +14,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext';
 import OptionsWithChevron from '../../components/OptionsWithChevron';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type UpgradeUSPersonProps = NavigationProps<'UpgradeUSPerson'>;
 
@@ -143,24 +147,25 @@ const UpgradeUSPersonScreen: React.FC<UpgradeUSPersonProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
+    width: wp('95%'),
   },
   spaceMedium: {
-    marginBottom: 15,
+    marginBottom: hp('2%'),
   },
   InfoModalCustomisation: {
-    margin: 50,
+    margin: wp('10%'),
   },
   safeAreaContainer: {
     height: '100%',
   },
   separator: {
-    width: 327,
+    width: wp('85%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
   },
   usPersonText: {
-    lineHeight: 90,
+    lineHeight: hp('10%'),
     fontWeight: 'bold',
   },
 });

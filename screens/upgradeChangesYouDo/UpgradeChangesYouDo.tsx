@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -14,6 +15,11 @@ import {useUserContext} from '../../components/UserContext';
 import {NavigationProps} from '../../navigationTypes';
 import ChangesYouDo from '../Common/ChangesYouDo';
 import Colours from '../../components/theme/Colour';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 // Define type for the props
 type UpgradeChangesYouDoProps = NavigationProps<'UpgradeChangesYouDo'>;
@@ -62,17 +68,17 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
 
           {/* Changes You Do Component */}
           <ChangesYouDo />
-
-          {/* Next Button */}
-          <PinkButton
-            buttonText="Next"
-            onPress={handleSwitchButtonPress}
-            accessible={true}
-            accessibilityLabel="next"
-            testID="nextButton"
-          />
         </View>
       </ScrollView>
+      {/* Next Button */}
+      <PinkButton
+        buttonText="Next"
+        onPress={handleSwitchButtonPress}
+        accessible={true}
+        accessibilityLabel="next"
+        testID="nextButton"
+      />
+      <View style={styles.space} />
     </SafeAreaView>
   );
 };
@@ -81,16 +87,16 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
   safeAreaContainer: {
     height: '100%',
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2%'),
   },
   space: {
-    marginVertical: 8,
+    marginVertical: height > 700 ? 0 : hp('1%'),
   },
 });
 

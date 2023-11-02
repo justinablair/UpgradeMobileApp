@@ -10,6 +10,7 @@ import {
   Linking,
   Pressable,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -17,6 +18,11 @@ import {NavigationProps} from '../../navigationTypes';
 import CheckboxToggle from '../../components/toggles/CheckboxToggle';
 import {useUserContext} from '../../components/UserContext';
 import Colours from '../../components/theme/Colour';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type UpgradeConsentsProps = NavigationProps<'UpgradeConsents'>;
 
@@ -194,18 +200,18 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1%'),
   },
   box: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingVertical: 16,
-    marginBottom: 8,
+    paddingVertical: hp('2%'),
+    marginBottom: hp('1%'),
     alignSelf: 'center',
-    width: 327,
+    width: wp('85%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black05,
   },
@@ -213,13 +219,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2.5%'),
   },
   safeAreaContainer: {
     flex: 1,
   },
   bottomPadding: {
-    paddingBottom: 16,
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

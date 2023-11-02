@@ -6,6 +6,7 @@ import {
   Pressable,
   SafeAreaView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -16,6 +17,12 @@ import {NavigationProps} from '../../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext'; // Import the user context
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type UpgradeTermsProps = NavigationProps<'UpgradeTerms'>;
 
@@ -153,15 +160,15 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
             </Pressable>
           </View>
         </View>
-        <View style={styles.bottomButtonContainer}>
-          <PinkButton
-            buttonText="Agree"
-            onPress={handleSwitchButtonPress}
-            accessibilityLabel="Agree"
-            testID="agreeButton"
-          />
-        </View>
       </ScrollView>
+      <View style={styles.bottomButtonContainer}>
+        <PinkButton
+          buttonText="Agree"
+          onPress={handleSwitchButtonPress}
+          accessibilityLabel="Agree"
+          testID="agreeButton"
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -169,7 +176,6 @@ const UpgradeTermsScreen: React.FC<UpgradeTermsProps> = ({navigation}) => {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    // backgroundColor: Colours.white,
   },
   scrollViewContentContainer: {
     flexGrow: 1,
@@ -177,21 +183,20 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // backgroundColor: Colours.white,
-    padding: 16,
+    padding: wp('4%'),
   },
   contentContainer: {
-    flex: 1, // Content takes remaining space
+    flex: 1,
   },
   spaceLarge: {
-    marginBottom: 25,
+    marginBottom: hp('3%'),
   },
   spaceMedium: {
-    marginBottom: 15,
+    marginBottom: hp('2%'),
   },
   bottomButtonContainer: {
     alignSelf: 'center',
-    marginVertical: 20, // Adjust this value as needed
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
 });
 

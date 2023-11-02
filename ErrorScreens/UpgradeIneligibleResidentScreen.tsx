@@ -5,12 +5,15 @@ import {
   ScrollView,
   SafeAreaView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../components/Text';
 import PinkButton from '../components/theme/buttons/PinkButton';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from '../components/UserContext';
 import {NavigationProps} from '../navigationTypes';
+const {height} = Dimensions.get('window');
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 type UpgradeIneligibleResidentProps =
   NavigationProps<'UpgradeIneligibleResident'>;
@@ -54,7 +57,11 @@ const UpgradeIneligibleResidentScreen: React.FC<
   }, [title]);
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <View
         style={[styles.container, {backgroundColor: containerBackgroundColor}]}
         accessibilityRole="header">
@@ -92,11 +99,11 @@ const UpgradeIneligibleResidentScreen: React.FC<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: hp('4%'),
     justifyContent: 'space-between',
   },
   bottomButtonContainer: {
-    marginBottom: 20,
+    marginBottom: height > 700 ? hp('-4%') : hp('-2%'),
   },
   safeAreaContainer: {
     flex: 1,

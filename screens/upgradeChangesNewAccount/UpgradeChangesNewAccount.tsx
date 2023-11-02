@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../../navigationTypes';
@@ -16,6 +17,11 @@ import NewAccount from '../Common/NewAccount';
 import Text from '../../components/Text';
 import ExitModal from '../../components/theme/modals/ExitModal';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type UpgradeChangesNewAccountProps =
   NavigationProps<'UpgradeChangesNewAccount'>;
@@ -59,18 +65,7 @@ const UpgradeChangesNewAccountScreen: React.FC<
             </Text>
           </View>
           <NewAccount />
-          <WhiteButton
-            buttonText="Maybe later"
-            onPress={handleSwitchExitJourneyPress}
-            accessibilityLabel="maybeLater"
-            testID="maybeLaterButton"
-          />
-          <PinkButton
-            buttonText="Get started"
-            onPress={handleSwitchButtonPress}
-            accessibilityLabel="getStarted"
-            testID="getStartedButton"
-          />
+
           <ExitModal
             visible={isExitModalVisible}
             onPressClose={() => setExitModalVisible(false)}
@@ -82,6 +77,19 @@ const UpgradeChangesNewAccountScreen: React.FC<
           />
         </View>
       </ScrollView>
+      <WhiteButton
+        buttonText="Maybe later"
+        onPress={handleSwitchExitJourneyPress}
+        accessibilityLabel="maybeLater"
+        testID="maybeLaterButton"
+      />
+      <PinkButton
+        buttonText="Get started"
+        onPress={handleSwitchButtonPress}
+        accessibilityLabel="getStarted"
+        testID="getStartedButton"
+      />
+      <View style={styles.space} />
     </SafeAreaView>
   );
 };
@@ -89,7 +97,7 @@ const UpgradeChangesNewAccountScreen: React.FC<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
   safeAreaContainer: {
     flex: 1,
@@ -98,7 +106,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2%'),
+  },
+  space: {
+    marginVertical: height > 700 ? 0 : hp('1%'),
   },
 });
 

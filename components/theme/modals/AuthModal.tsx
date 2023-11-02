@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Modal, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Modal, StyleSheet} from 'react-native';
 import Colours from '../Colour';
-import {PinBackIcon} from '../icons/PinbackIcon';
 import Text from '../../Text';
 import Dots from '../../Dots';
 import Grid from '../../Grid';

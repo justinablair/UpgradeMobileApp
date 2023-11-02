@@ -5,12 +5,12 @@ import {
   View,
   Image,
   ScrollView,
-  StatusBar,
   StyleSheet,
   SafeAreaView,
   Pressable,
   TextStyle,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import InfoModal from '../../components/theme/modals/InfoModal';
@@ -18,6 +18,12 @@ import Text from '../../components/Text';
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
@@ -135,7 +141,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
             Financial Services Compensation Scheme (FSCS) up to £85k.
           </Text>
         </View>
-
+        <View style={styles.padding} />
         <PinkButton
           buttonText="Get started"
           onPress={handleSwitchButtonPress}
@@ -159,38 +165,39 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: wp('5%'),
   },
   safeAreaContainer: {
     height: '100%',
   },
   padding: {
-    paddingBottom: 20,
+    paddingBottom: hp('2%'),
   },
   largeImage: {
-    margin: 50,
+    margin: hp('5%'),
     alignSelf: 'center',
   },
   centeredText: {
     textAlign: 'center',
   },
   section: {
-    marginTop: 20,
+    marginTop: hp('2%'),
   },
   box: {
     borderRadius: 8,
-    width: 327,
-    padding: 20,
-    paddingBottom: 45,
-    marginTop: 10,
+    alignSelf: 'center',
+    width: wp('85%'),
+    padding: wp('5%'),
+    paddingBottom: hp('7%'),
+    marginTop: hp('1%'),
   },
   fscsLogo: {
     alignSelf: 'center',
-    marginBottom: 30,
-    marginTop: 30,
+    marginBottom: hp('5%'),
+    marginTop: hp('5%'),
   },
   emoneyText: {
-    lineHeight: 90,
+    lineHeight: height > 600 ? 90 : 60,
     fontWeight: 'bold',
   },
 });

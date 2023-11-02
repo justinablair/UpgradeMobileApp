@@ -16,6 +16,10 @@ import InfoModal from '../../components/theme/modals/InfoModal';
 import OptionsWithChevron from '../../components/OptionsWithChevron';
 import Text from '../../components/Text';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
 
@@ -155,25 +159,26 @@ const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
+    width: wp('95%'),
   },
   safeAreaContainer: {
     flex: 1,
   },
   nationalityText: {
-    lineHeight: 90,
+    lineHeight: hp('10%'),
     fontWeight: 'bold',
   },
   separator: {
-    width: 327,
+    width: wp('85%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
   },
   spaceMedium: {
-    marginBottom: 15,
+    marginBottom: hp('2%'),
   },
   InfoModalCustomisation: {
-    margin: 50,
+    margin: wp('10%'),
   },
 });
 

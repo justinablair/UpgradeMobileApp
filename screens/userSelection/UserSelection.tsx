@@ -6,6 +6,10 @@ import {useUserContext, UserType} from '../../components/UserContext';
 import Colours from '../../components/theme/Colour'; // Import Colours
 import {NavigationProps} from '../../navigationTypes';
 import OptionsWithChevron from '../../components/OptionsWithChevron';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type UserSelectionScreenProps = NavigationProps<'UserSelection'>;
 
@@ -25,16 +29,16 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
     container: {
       flex: 1,
       backgroundColor: isDarkMode ? Colours.black : Colours.white,
-      padding: 16,
+      padding: wp('4%'),
     },
     separator: {
-      width: 327,
+      width: wp('85%'),
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? Colours.black05 : Colours.black05,
-      marginBottom: 16,
+      marginBottom: hp('4%'),
     },
     space: {
-      marginBottom: 40,
+      marginBottom: hp('4%'),
     },
     title: {
       color: isDarkMode ? Colours.white : Colours.black,

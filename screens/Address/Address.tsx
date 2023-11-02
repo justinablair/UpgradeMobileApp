@@ -7,6 +7,10 @@ import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
 import {NavigationProps} from '../../navigationTypes';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type EnterAddressScreenProps = NavigationProps<'Address'>;
 
@@ -139,23 +143,23 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
   },
   contentContainer: {
     flex: 1,
   },
   label: {
-    marginBottom: 4,
+    marginBottom: hp('1%'),
   },
   input: {
     borderBottomWidth: 1,
     borderColor: Colours.black30,
-    marginBottom: 16,
-    paddingVertical: 8,
+    marginBottom: hp('2%'),
+    paddingVertical: hp('1%'),
   },
   errorText: {
     color: Colours.red,
-    marginBottom: 8,
+    marginBottom: hp('1%'),
   },
 });
 

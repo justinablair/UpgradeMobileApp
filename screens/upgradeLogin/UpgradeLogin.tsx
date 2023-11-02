@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, Dimensions} from 'react-native';
 import {useUserContext} from '../../components/UserContext';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Text from '../../components/Text';
 import Dots from '../../components/Dots';
 import Grid from '../../components/Grid';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 interface LoginProps {
   navigation?: any;
@@ -90,22 +96,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    padding: 10,
+    padding: wp('4%'),
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     alignItems: 'center',
-    height: '60%',
+    height: hp('60%'),
     width: '100%',
   },
   space: {
-    marginVertical: 15,
+    marginVertical: hp('2%'),
   },
   safeAreaContainer: {
     flex: 1,
-    padding: 25,
+    padding: wp('5%'),
   },
   padding: {
-    paddingBottom: 20,
+    paddingBottom: hp('2%'),
   },
 });
 

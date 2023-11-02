@@ -6,6 +6,7 @@ import {
   Pressable,
   TextStyle,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -16,6 +17,11 @@ import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext'; // Import the user context
 import CheckboxToggle from '../../components/toggles/CheckboxToggle';
 import InfoModal from '../../components/theme/modals/InfoModal';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
 
@@ -200,7 +206,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
       ]}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View
           style={[
             styles.container,
@@ -223,86 +229,99 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             To open a Mettle bank account you need to agree to the following:{' '}
           </Text>
           {renderContent()}
-          <View style={styles.spaceMedium} />
-          <View style={styles.checkboxContainer}>
-            <Text
-              variant="bodyText"
-              style={[styles.checkboxText, {color: textColour}]}
-              accessible={true}
-              accessibilityLabel="I Agree To All Statements"
-              accessibilityRole="text">
-              I agree with these statements
-            </Text>
-            <CheckboxToggle
-              checked={isChecked}
-              onToggle={handleCheckboxToggle}
-              testID="checkboxToggle"
-              accessible={true}
-              accessibilityRole="checkbox"
-              accessibilityLabel="Toggle"
-            />
-          </View>
-          <View style={styles.spaceMedium} />
-          <PinkButton
-            buttonText="Agree"
-            onPress={handleSwitchButtonPress}
-            disabled={!isChecked}
-            accessibilityLabel="Agree"
-            testID="agreeButton"
-            accessibilityHint={
-              !isChecked
-                ? 'Please check the checkbox to confirm your tax reporting'
-                : undefined
-            }
-          />
-          {/* FACTA Info Modal */}
-          <InfoModal
-            visible={showFACTAModal}
-            onPressClose={() => setShowFACTAModal(false)}
-            title="FACTA"
-            content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
-            accessible={true}
-            accessibilityLabel="FACTA Definition Modal"
-            contentStyle={[{backgroundColor: containerBackgroundColor}]}
-            titleStyle={{color: textColour}}
-            bodyTextStyle={{color: textColour}}
-            testID="FactaModal"
-          />
 
-          {/* CRS Info Modal */}
-          <InfoModal
-            visible={showCRSModal}
-            onPressClose={() => setShowCRSModal(false)}
-            title="CRS"
-            content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
-            contentStyle={[{backgroundColor: containerBackgroundColor}]}
-            accessible={true}
-            accessibilityLabel="CRS Definition Modal"
-            titleStyle={{color: textColour}}
-            bodyTextStyle={{color: textColour}}
-          />
+          <View style={styles.spaceMedium} />
+          <View style={styles.bottomContainer}>
+            <View style={styles.checkboxContainer}>
+              <Text
+                variant="bodyText"
+                style={[styles.checkboxText, {color: textColour}]}
+                accessible={true}
+                accessibilityLabel="I Agree To All Statements"
+                accessibilityRole="text">
+                I agree with these statements
+              </Text>
+              <CheckboxToggle
+                checked={isChecked}
+                onToggle={handleCheckboxToggle}
+                testID="checkboxToggle"
+                accessible={true}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Toggle"
+              />
+            </View>
+          </View>
         </View>
+        {/* FACTA Info Modal */}
+        <InfoModal
+          visible={showFACTAModal}
+          onPressClose={() => setShowFACTAModal(false)}
+          title="FACTA"
+          content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
+          accessible={true}
+          accessibilityLabel="FACTA Definition Modal"
+          contentStyle={[{backgroundColor: containerBackgroundColor}]}
+          titleStyle={{color: textColour}}
+          bodyTextStyle={{color: textColour}}
+          testID="FactaModal"
+        />
+
+        {/* CRS Info Modal */}
+        <InfoModal
+          visible={showCRSModal}
+          onPressClose={() => setShowCRSModal(false)}
+          title="CRS"
+          content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
+          contentStyle={[{backgroundColor: containerBackgroundColor}]}
+          accessible={true}
+          accessibilityLabel="CRS Definition Modal"
+          titleStyle={{color: textColour}}
+          bodyTextStyle={{color: textColour}}
+        />
       </ScrollView>
+      <View style={styles.padding}>
+        <PinkButton
+          buttonText="Agree"
+          onPress={handleSwitchButtonPress}
+          disabled={!isChecked}
+          accessibilityLabel="Agree"
+          testID="agreeButton"
+          accessibilityHint={
+            !isChecked
+              ? 'Please check the checkbox to confirm your tax reporting'
+              : undefined
+          }
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
   container: {
     flex: 1,
-    padding: 16,
-    margin: 16,
+    padding: wp('4%'),
+    margin: wp('4%'),
+  },
+  bottomContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginTop: height > 700 ? hp('17%') : hp('1%'),
   },
   spaceLarge: {
-    marginBottom: 25,
+    marginBottom: hp('3%'),
   },
   spaceMedium: {
-    marginBottom: 15,
+    marginBottom: height > 700 ? 0 : hp('1%'),
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 8,
+    paddingRight: wp('1.5%'),
   },
   checkboxText: {
     flex: 1,
@@ -311,17 +330,19 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   pressableText: {
-    lineHeight: 215,
+    lineHeight: height > 700 ? hp('20.7%') : hp('32.6%'),
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     color: Colours.pink,
   },
-
   separator: {
-    paddingTop: 5,
-    width: 327,
+    paddingTop: hp('0.8%'),
+    width: wp('90%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
+  },
+  padding: {
+    paddingBottom: height > 700 ? 0 : hp('1%'),
   },
 });
 

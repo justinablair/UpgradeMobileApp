@@ -1,5 +1,3 @@
-// Marketing.tsx
-
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -7,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -15,6 +14,11 @@ import PreferenceToggle from '../../components/toggles/PreferenceToggle';
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {height} = Dimensions.get('window');
 
 type MarketingProps = NavigationProps<'Marketing'>;
 
@@ -62,16 +66,41 @@ const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
         styles.safeAreaContainer,
         {backgroundColor: containerBackgroundColor},
       ]}>
-      <ScrollView>
-        <MarketingContent
-          containerBackgroundColor={containerBackgroundColor}
-          textColour={textColour}
-          toggleStates={toggleStates}
-          handleToggleChange={handleToggleChange}
-          handleButtonClick={handleButtonClick}
-          handleYesToAllClick={handleYesToAllClick}
-        />
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView>
+          <MarketingContent
+            containerBackgroundColor={containerBackgroundColor}
+            textColour={textColour}
+            toggleStates={toggleStates}
+            handleToggleChange={handleToggleChange}
+            handleButtonClick={handleButtonClick}
+            handleYesToAllClick={handleYesToAllClick}
+          />
+        </ScrollView>
+      </View>
+      <View
+        style={[
+          styles.buttonContainer,
+          {backgroundColor: containerBackgroundColor},
+        ]}>
+        <View style={[styles.buttonRow, styles.padding]}>
+          <WhiteButton
+            buttonText="No thanks"
+            onPress={handleButtonClick}
+            customWidth={155}
+            accessibilityLabel="No Thanks To All Toggles"
+            testID="NoThanksButton"
+          />
+          <View style={styles.buttonSeparator} />
+          <PinkButton
+            buttonText="Yes to all"
+            onPress={handleYesToAllClick}
+            customWidth={155}
+            accessibilityLabel="Yes to All Toggles"
+            testID="YesToAllButton"
+          />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -88,8 +117,6 @@ const MarketingContent: React.FC<{
   textColour,
   toggleStates,
   handleToggleChange,
-  handleButtonClick,
-  handleYesToAllClick,
 }) => {
   const title = 'Marketing preferences';
 
@@ -167,31 +194,13 @@ const MarketingContent: React.FC<{
 
       <Text
         variant="bodyText bodyTextDescription"
-        style={{color: textColour}}
+        style={{...styles.textContainer, color: textColour}}
         accessible={true}
         accessibilityLabel="You Can Change These Later"
         accessibilityRole="text">
         You can change these later in your settings by selecting ‘Marketing
         preferences’ in the Account tab, or by using the in-app chat.
       </Text>
-
-      <View style={styles.buttonRow}>
-        <WhiteButton
-          buttonText="No thanks"
-          onPress={handleButtonClick}
-          customWidth={155}
-          accessibilityLabel="No Thanks To All Toggles"
-          testID="NoThanksButton"
-        />
-        <View style={styles.buttonSeparator} />
-        <PinkButton
-          buttonText="Yes to all"
-          onPress={handleYesToAllClick}
-          customWidth={155}
-          accessibilityLabel="Yes to All Toggles"
-          testID="YesToAllButton"
-        />
-      </View>
     </View>
   );
 };
@@ -199,27 +208,38 @@ const MarketingContent: React.FC<{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: wp('4%'),
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  textContainer: {
+    width: wp('86%'),
+  },
+  padding: {
+    paddingBottom: height > 700 ? hp('4%') : hp('2%'),
   },
   separator: {
-    width: 327,
+    width: wp('85%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
-    marginBottom: 16,
+    marginBottom: hp('2%'),
   },
   text: {
-    marginBottom: 40,
+    marginBottom: hp('5%'),
   },
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonSeparator: {
-    width: 20,
+    width: wp('6%'),
   },
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: Colours.white,
   },
 });
 

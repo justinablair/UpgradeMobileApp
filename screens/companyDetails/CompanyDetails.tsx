@@ -1,13 +1,24 @@
 //CompanyDetails.tsx
 
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  AccessibilityInfo,
+  Dimensions,
+} from 'react-native';
 import Text from '../../components/Text';
 import Colours from '../../components/theme/Colour';
 import {NavigationProps} from '../../navigationTypes';
 import {useUserContext} from '../../components/UserContext';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../../components/toggles/CheckboxToggle';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+const {width} = Dimensions.get('window');
 
 type CompanyDetailsScreenProps = NavigationProps<'CompanyDetails'>;
 
@@ -131,33 +142,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colours.white,
-    padding: 16,
+    padding: wp('4%'),
   },
   contentContainer: {
     flex: 1,
   },
   input: {
     width: '100%',
-    marginBottom: 16,
+    marginBottom: hp('2%'),
     color: Colours.black,
   },
   separator: {
-    width: 327,
+    width: wp('82%'),
     borderBottomWidth: 1,
     borderBottomColor: Colours.black30,
-    marginBottom: 16,
+    marginBottom: hp('2%'),
   },
   space: {
-    marginBottom: 25,
+    marginBottom: width > 700 ? '5%' : '3%',
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
-    paddingRight: 8,
+    marginBottom: hp('2%'),
+    paddingRight: width > 700 ? '5%' : '5%',
   },
   checkboxText: {
-    marginLeft: 8,
+    marginLeft: wp('2%'),
     color: Colours.black,
     flex: 1,
     width: '80%',

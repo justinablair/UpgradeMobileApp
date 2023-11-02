@@ -2,6 +2,10 @@ import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import Text from './Text';
 import Colour from './theme/Colour';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 // Interface for the props of the Toast component
 interface ToastProps {
@@ -36,19 +40,21 @@ const Toast: React.FC<ToastProps> = ({message}) => {
 const styles = StyleSheet.create({
   toastContainer: {
     backgroundColor: 'black',
-    width: '100%',
-    height: '13%',
-    padding: 10,
+    width: wp('80%'),
+    height: hp('8%'),
+    padding: wp('2%'),
     borderRadius: 4,
     flexDirection: 'row',
+    marginTop: -hp('5%'),
   },
   imageContainer: {
-    paddingRight: 10,
+    paddingRight: wp('2.5%'),
+    alignItems: 'center',
   },
 
   text: {
     flex: 1,
-    padding: 3,
+    padding: wp('0.75%'),
   },
 });
 

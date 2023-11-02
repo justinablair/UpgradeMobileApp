@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -16,6 +17,12 @@ import Colours from '../../components/theme/Colour';
 import ListItem from '../../components/ListItem';
 import Toast from '../../components/Toast';
 import WhiteButton from '../../components/theme/buttons/WhiteButton';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 
@@ -69,7 +76,7 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
       <ScrollView>
         <View
           style={[
-            styles.safeAreaContainer,
+            styles.container,
             {backgroundColor: containerBackgroundColor},
           ]}>
           {/* Title section */}
@@ -173,15 +180,16 @@ const UpgradedEmailScreen: React.FC<UpgradedEmailProps> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: wp('8%'),
   },
   spaceLarge: {
-    marginBottom: 25,
+    marginBottom: hp('6%'),
   },
   spaceMedium: {
-    marginBottom: 15,
+    marginBottom: hp('2%'),
   },
   safeAreaContainer: {
-    padding: 16,
+    padding: wp('4%'),
     height: '100%',
   },
 });

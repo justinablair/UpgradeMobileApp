@@ -8,6 +8,10 @@ import {useUserContext} from '../../components/UserContext';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import CheckboxToggle from '../../components/toggles/CheckboxToggle';
 import Text from '../../components/Text';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type ThemeScreenProps = NavigationProps<'ThemeScreen'>;
 
@@ -18,7 +22,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
     container: {
       flex: 1,
       backgroundColor: isDarkMode ? Colours.black : Colours.white,
-      padding: 16,
+      padding: wp('4%'),
     },
     title: {
       color: isDarkMode ? Colours.white : Colours.black,
@@ -26,16 +30,19 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
     contentContainer: {
       flex: 1,
     },
+    space: {
+      marginBottom: hp('4%'),
+    },
     optionContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
       backgroundColor: isDarkMode ? Colours.black : Colours.white,
-      padding: 16,
-      marginBottom: 16,
+      padding: wp('4%'),
+      marginBottom: hp('2%'),
     },
     optionText: {
-      fontSize: 16,
+      fontSize: wp('4%'),
       color: isDarkMode ? Colours.white : Colours.black,
     },
     separator: {
@@ -56,14 +63,11 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
   }, [title]);
 
   return (
-    <View
-      style={styles.container}
-      // accessible={true}
-      accessibilityLabel="settingsScreen">
+    <View style={styles.container} accessibilityLabel="settingsScreen">
       <View style={styles.contentContainer}>
         <Text
           variant="screenTitle leftAlign"
-          style={styles.title}
+          style={[styles.title, styles.space]}
           accessible={true}
           accessibilityRole="header"
           testID="title">

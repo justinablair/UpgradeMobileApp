@@ -11,6 +11,10 @@ import Text from '../../components/Text';
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type UpgradeStartedProps = NavigationProps<'UpgradeStarted'>;
 
@@ -78,8 +82,8 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
-    marginTop: 50,
+    padding: wp('10%'),
+    marginTop: hp('6%'),
     height: '100%',
   },
   safeAreaContainer: {
@@ -89,10 +93,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   largeImage: {
-    width: 200,
-    height: 200,
+    width: wp('30%'),
+    height: wp('30%'),
     alignSelf: 'center',
-    marginHorizontal: 50,
+    marginHorizontal: wp('15%'),
   },
   centeredText: {
     textAlign: 'center',

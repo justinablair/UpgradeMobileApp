@@ -16,6 +16,12 @@ import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradedWelcomeProps = NavigationProps<'UpgradedWelcome'>;
 
@@ -125,32 +131,30 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
 };
 
 // Calculating marginTop based on screenHeight
-const screenHeight = Dimensions.get('window').height;
-const marginTop = screenHeight * 0.2;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: wp('4%'),
   },
   safeAreaContainer: {
     flex: 1,
   },
   largeImage: {
     alignSelf: 'center',
-    width: 279,
-    height: 200,
+    width: wp('75%'),
+    height: hp('30%'),
   },
   centeredText: {
     textAlign: 'center',
   },
   bottomContainer: {
-    marginTop: marginTop,
+    marginTop: height > 700 ? hp('25%') : hp('23%'),
     flexDirection: 'row',
     width: 327,
   },
   smallImage: {
-    width: 32,
-    height: 32,
+    width: wp('10%'),
+    height: hp('5%'),
   },
   text: {
     flex: 1,

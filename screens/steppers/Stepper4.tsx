@@ -1,7 +1,7 @@
 //Stepper4.tsx
 
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
@@ -13,6 +13,12 @@ import {
   commonStepNumberStyles,
   commonStepContentStyles,
 } from './../Common/CommonStyles';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeStepper4Props = NavigationProps<'StepperScreen4'>;
 
@@ -106,10 +112,12 @@ const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
           ))}
         </View>
       </ScrollView>
-      <PinkButton
-        buttonText="Confirm details"
-        onPress={handleSwitchButtonPress}
-      />
+      <View style={styles.padding}>
+        <PinkButton
+          buttonText="Confirm details"
+          onPress={handleSwitchButtonPress}
+        />
+      </View>
     </View>
   );
 };
@@ -133,7 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colours.black,
     flexDirection: 'column',
-    padding: 16,
+    padding: wp('4%'),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -142,76 +150,78 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     flex: 1,
-    paddingRight: 20,
+    paddingRight: wp('4%'),
   },
   lineContainer: {
     position: 'absolute',
-    width: 2,
-    height: '20%',
-    left: 24,
-    top: 250,
+    width: wp('0.5%'),
+    height: hp('20%'),
+    left: wp('6%'),
+    top: hp('25%'),
   },
   stepContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: hp('3%'),
   },
   completeLine: {
     position: 'absolute',
-    width: 2,
-    height: '30%',
-    left: 24,
+    width: wp('0.6%'),
+    height: hp('30%'),
+    left: wp('6%'),
     backgroundColor: Colours.green,
-    top: 40,
+    top: hp('3%'),
   },
   activeLine: {
     position: 'absolute',
-    width: 2,
-    height: '15%',
-    left: 24,
+    width: wp('0.5%'),
+    height: hp('15%'),
+    left: wp('6%'),
     backgroundColor: Colours.white,
-    top: 200,
+    top: height > 700 ? 180 : 200,
   },
   stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 24,
+    width: wp('8%'),
+    height: wp('8%'),
+    borderRadius: wp('6%'),
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -30,
+    marginTop: -hp('3%'),
   },
   stepNumber: {
-    fontSize: 18,
+    fontSize: wp('5%'),
   },
 
   stepContent: {
     flex: 1,
-    marginLeft: 20,
+    marginLeft: wp('5%'),
   },
   activeStepTitle: {
-    marginTop: 10,
+    marginLeft: wp('1%'),
   },
   inactiveStepTitle: {
-    marginTop: 10,
+    marginTop: hp('2%'),
   },
-
   margin: {
     marginTop: 0,
   },
   activeStepCircle: {
     ...commonStyles.stepCircle,
-    width: 48,
-    height: 48,
+    width: wp('12%'),
+    height: wp('12%'),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -60,
+    marginTop: -hp('5%'),
   },
   inactiveStepCircle: {
     ...commonStyles.stepCircle,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
+    marginLeft: wp('2.5%'),
+  },
+  padding: {
+    paddingBottom: height > 700 ? hp('2%') : 0,
   },
 });
 

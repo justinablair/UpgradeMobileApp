@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
   AccessibilityInfo,
+  Dimensions,
 } from 'react-native';
 
 import Text from '../../components/Text';
@@ -13,6 +14,12 @@ import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
+const {height} = Dimensions.get('window');
 
 type UpgradeCompleteProps = NavigationProps<'UpgradeComplete'>;
 
@@ -99,7 +106,7 @@ const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: wp('10%'),
   },
   contentContainer: {
     flex: 1,
@@ -110,13 +117,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottomButtonContainer: {
-    padding: 16,
+    paddingBottom: height > 700 ? 0 : hp('2%'),
   },
   largeImage: {
-    width: 200,
-    height: 200,
+    width: wp('60%'),
+    height: wp('60%'),
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: hp('5%'),
   },
 });
 
