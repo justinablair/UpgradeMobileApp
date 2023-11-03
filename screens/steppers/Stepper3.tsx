@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('2.5%'),
   },
   padding: {
-    paddingBottom: height > 700 ? hp('2%') : 0,
+    paddingBottom: height > 800 ? hp('2%') : 0,
   },
 });
 

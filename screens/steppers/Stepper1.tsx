@@ -148,20 +148,22 @@ const styles = StyleSheet.create({
   lineContainer: {
     position: 'absolute',
     width: 2,
-    height: height > 600 ? 200 : 30,
+    height: height > 700 ? hp('37%') : hp('48%'),
     backgroundColor: Colours.black60,
     left: wp('6%'),
-    top: height > 600 ? 170 : 50,
+    top: height > 700 ? hp('13%') : hp('13%'),
   },
   stepContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: wp('1%'),
+
     marginBottom: wp('5%'),
   },
   activeLine: {
     position: 'absolute',
     width: 2,
-    height: height > 600 ? 130 : 50,
+    height: height > 700 ? hp('15%') : hp('20%'),
     left: wp('6%'),
     top: hp('5%'),
   },
@@ -202,7 +204,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   padding: {
-    paddingBottom: hp('2%'),
+    marginVertical: height > 700 ? hp('2%') : 0,
   },
 });
 

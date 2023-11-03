@@ -11,6 +11,7 @@ import {
   TextStyle,
   AccessibilityInfo,
   Dimensions,
+  LayoutChangeEvent,
 } from 'react-native';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import InfoModal from '../../components/theme/modals/InfoModal';
@@ -29,6 +30,18 @@ type UpgradeIntroProps = NavigationProps<'UpgradeIntro'>;
 
 const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
   const {isDarkMode} = useUserContext();
+
+  const [emoneyLayout, setEmoneyLayout] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+
+  const handleEmoneyLayout = (event: LayoutChangeEvent) => {
+    const {x, y, width, height} = event.nativeEvent.layout;
+    setEmoneyLayout({x, y, width, height});
+  };
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
@@ -60,6 +73,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
     ...styles.emoneyText,
     color: emoneyPressed ? Colours.blue : Colours.pink,
     textDecorationLine: 'underline',
+    marginTop:
+      emoneyLayout.height / 2 - (height > 700 ? hp('-1.6%') : hp('-2%')),
   };
 
   useEffect(() => {
@@ -104,7 +119,8 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
                 accessible={true}
                 accessibilityHint="Pressing this opens pop-up with a definition"
                 accessibilityLabel="E-money Pressable"
-                accessibilityRole="button">
+                accessibilityRole="button"
+                onLayout={handleEmoneyLayout}>
                 <Text variant="bodyText" style={emoneyTextStyles}>
                   {' '}
                   e-money
@@ -197,7 +213,6 @@ const styles = StyleSheet.create({
     marginTop: hp('5%'),
   },
   emoneyText: {
-    lineHeight: height > 600 ? 90 : 60,
     fontWeight: 'bold',
   },
 });

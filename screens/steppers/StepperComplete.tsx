@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   completeLine: {
     position: 'absolute',
     width: wp('0.6%'),
-    height: height > 700 ? hp('30%') : hp('40%'),
+    height: height > 700 ? hp('32%') : hp('40%'),
     left: wp('7%'),
     backgroundColor: Colours.green,
     top: hp('3%'),
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('5%'),
   },
   padding: {
-    paddingBottom: height > 700 ? hp('2%') : 0,
+    paddingBottom: height > 800 ? hp('2%') : 0,
   },
 });
 

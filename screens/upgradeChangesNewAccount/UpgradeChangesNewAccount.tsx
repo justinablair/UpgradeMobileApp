@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp('2%'),
   },
   space: {
-    marginVertical: height > 700 ? 0 : hp('1%'),
+    marginVertical: height > 800 ? 0 : hp('1%'),
   },
 });
 

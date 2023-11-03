@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   bottomButtonContainer: {
-    marginBottom: height > 700 ? 0 : hp('2%'),
+    marginBottom: height > 800 ? 0 : hp('2%'),
   },
   safeAreaContainer: {
     flex: 1,

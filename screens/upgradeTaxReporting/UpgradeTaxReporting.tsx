@@ -7,6 +7,7 @@ import {
   TextStyle,
   AccessibilityInfo,
   Dimensions,
+  Platform,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -56,11 +57,13 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   const factaTextStyles: TextStyle = {
     ...styles.pressableText,
     color: showFACTAModal ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
   };
 
   const crsTextStyles: TextStyle = {
     ...styles.pressableText,
     color: showCRSModal ? Colours.blue : Colours.pink,
+    textDecorationLine: 'underline',
   };
 
   const renderContent = () => {
@@ -76,35 +79,30 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             I acknowledge, on behalf of the business, that the information I
             supply may be reported to the HMRC, and may be transferred to the
             government of another territory in accordance with{' '}
-            <Pressable
+            <Text
               onPress={handleFACTAPress}
-              accessibilityLabel="FACTA Pressable">
-              <Text
-                variant="bodyText"
-                style={factaTextStyles}
-                testID="facta"
-                accessible={true}
-                accessibilityLabel="FACTA Pressable"
-                accessibilityRole="button">
-                {' FACTA '}
-              </Text>
-            </Pressable>
-            and
-            <Pressable
+              variant="bodyText"
+              style={factaTextStyles}
+              testID="facta"
+              accessible={true}
+              accessibilityLabel="FACTA Pressable"
+              accessibilityRole="button">
+              {'FACTA '}
+            </Text>
+            and{' '}
+            <Text
+              variant="bodyText"
               onPress={handleCRSPress}
+              style={crsTextStyles}
+              accessible={true}
               accessibilityLabel="CRS Pressable"
+              accessibilityRole="button"
               testID="crs">
-              <Text
-                variant="bodyText"
-                style={crsTextStyles}
-                accessible={true}
-                accessibilityLabel="CRS Pressable"
-                accessibilityRole="button">
-                {' CRS '}
-              </Text>
-            </Pressable>
+              {' CRS '}
+            </Text>
             agreements.
           </Text>
+
           <View style={styles.separator} />
           <Text
             variant="bodyText"
@@ -144,27 +142,25 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             I acknowledge that any relevant information I supply may be reported
             to the HMRC, and may be transferred to the government of another
             territory in accordance with{' '}
-            <Pressable onPress={handleFACTAPress}>
-              <Text
-                variant="bodyText"
-                style={factaTextStyles}
-                accessible={true}
-                accessibilityLabel="FACTA Pressable"
-                accessibilityRole="button">
-                {' FACTA '}
-              </Text>
-            </Pressable>
+            <Text
+              onPress={handleFACTAPress}
+              variant="bodyText"
+              style={[factaTextStyles, styles.margin]}
+              accessible={true}
+              accessibilityLabel="FACTA Pressable"
+              accessibilityRole="button">
+              {' FACTA '}
+            </Text>
             and
-            <Pressable onPress={handleCRSPress}>
-              <Text
-                variant="bodyText"
-                style={crsTextStyles}
-                accessible={true}
-                accessibilityLabel="CRS Pressable"
-                accessibilityRole="button">
-                {' CRS '}
-              </Text>
-            </Pressable>
+            <Text
+              onPress={handleCRSPress}
+              variant="bodyText"
+              style={[crsTextStyles, styles.margin]}
+              accessible={true}
+              accessibilityLabel="CRS Pressable"
+              accessibilityRole="button">
+              {' CRS '}
+            </Text>
             agreements.
           </Text>
           <View style={styles.separator} />
@@ -252,33 +248,33 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
             </View>
           </View>
         </View>
-        {/* FACTA Info Modal */}
-        <InfoModal
-          visible={showFACTAModal}
-          onPressClose={() => setShowFACTAModal(false)}
-          title="FACTA"
-          content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
-          accessible={true}
-          accessibilityLabel="FACTA Definition Modal"
-          contentStyle={[{backgroundColor: containerBackgroundColor}]}
-          titleStyle={{color: textColour}}
-          bodyTextStyle={{color: textColour}}
-          testID="FactaModal"
-        />
-
-        {/* CRS Info Modal */}
-        <InfoModal
-          visible={showCRSModal}
-          onPressClose={() => setShowCRSModal(false)}
-          title="CRS"
-          content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
-          contentStyle={[{backgroundColor: containerBackgroundColor}]}
-          accessible={true}
-          accessibilityLabel="CRS Definition Modal"
-          titleStyle={{color: textColour}}
-          bodyTextStyle={{color: textColour}}
-        />
       </ScrollView>
+      {/* FACTA Info Modal */}
+      <InfoModal
+        visible={showFACTAModal}
+        onPressClose={() => setShowFACTAModal(false)}
+        title="FACTA"
+        content="FACTA stands for the Foreign Account Tax Compliance Act. It is a United States federal law requiring all non-U.S. financial institutions to report financial accounts held by U.S. taxpayers to the U.S. Internal Revenue Service (IRS)."
+        accessible={true}
+        accessibilityLabel="FACTA Definition Modal"
+        contentStyle={[{backgroundColor: containerBackgroundColor}]}
+        titleStyle={{color: textColour}}
+        bodyTextStyle={{color: textColour}}
+        testID="FactaModal"
+      />
+
+      {/* CRS Info Modal */}
+      <InfoModal
+        visible={showCRSModal}
+        onPressClose={() => setShowCRSModal(false)}
+        title="CRS"
+        content="CRS stands for the Common Reporting Standard. It is a global standard for the automatic exchange of financial account information between tax authorities to help combat tax evasion."
+        contentStyle={[{backgroundColor: containerBackgroundColor}]}
+        accessible={true}
+        accessibilityLabel="CRS Definition Modal"
+        titleStyle={{color: textColour}}
+        bodyTextStyle={{color: textColour}}
+      />
       <View style={styles.padding}>
         <PinkButton
           buttonText="Agree"
@@ -298,10 +294,14 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
 };
 
 const styles = StyleSheet.create({
+  textContainer: {
+    flex: 1,
+    // Add other styling properties as needed
+  },
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: 'space-between',
   },
+
   container: {
     flex: 1,
     padding: wp('4%'),
@@ -330,10 +330,19 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   pressableText: {
-    lineHeight: height > 700 ? hp('20.7%') : hp('32.6%'),
+    ...Platform.select({
+      ios: {
+        lineHeight: height > 700 ? hp('20.7%') : hp('32.6%'),
+      },
+    }),
     fontWeight: 'bold',
-    textDecorationLine: 'underline',
-    color: Colours.pink,
+  },
+  margin: {
+    ...Platform.select({
+      android: {
+        marginBottom: hp('-0.5%'),
+      },
+    }),
   },
   separator: {
     paddingTop: hp('0.8%'),
@@ -342,7 +351,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colours.black30,
   },
   padding: {
-    paddingBottom: height > 700 ? 0 : hp('1%'),
+    paddingBottom: height > 800 ? 0 : hp('1%'),
   },
 });
 

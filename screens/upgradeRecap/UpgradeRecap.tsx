@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    paddingBottom: height > 700 ? 0 : hp('2%'),
+    paddingBottom: height > 800 ? 0 : hp('2%'),
   },
 });
 

@@ -94,7 +94,7 @@ const styles = StyleSheet.create<Styles>({
     height: '100%',
   },
   space: {
-    marginVertical: height > 700 ? 0 : hp('1%'),
+    marginVertical: height > 800 ? 0 : hp('1%'),
   },
   titleContainer: {
     paddingLeft: wp('2%'),

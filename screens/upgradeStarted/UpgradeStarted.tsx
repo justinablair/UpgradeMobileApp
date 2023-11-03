@@ -56,24 +56,26 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
               accessibilityLabel="padlock"
             />
           </View>
-          <Text
-            variant="screenTitle"
-            style={{color: textColour}}
-            accessible={true}
-            accessibilityLabel={title}
-            accessibilityRole="header">
-            {title}
-          </Text>
-          <Text
-            variant="bodyText"
-            style={[styles.centeredText, {color: textColour}]}
-            accessible={true}
-            accessibilityLabel="Description"
-            accessibilityRole="text">
-            This usually takes less than a couple of minutes, but it can
-            sometimes take up to 2 hours.{'\n\n'}If you need anything during
-            this time, message us via in-app chat.
-          </Text>
+          <View style={styles.space}>
+            <Text
+              variant="screenTitle"
+              style={{color: textColour}}
+              accessible={true}
+              accessibilityLabel={title}
+              accessibilityRole="header">
+              {title}
+            </Text>
+            <Text
+              variant="bodyText"
+              style={[styles.centeredText, {color: textColour}]}
+              accessible={true}
+              accessibilityLabel="Description"
+              accessibilityRole="text">
+              This usually takes less than a couple of minutes, but it can
+              sometimes take up to 2 hours.{'\n\n'}If you need anything during
+              this time, message us via in-app chat.
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     padding: wp('10%'),
     marginTop: hp('6%'),
-    height: '100%',
+    flexGrow: 1,
   },
   safeAreaContainer: {
     flex: 1,
@@ -100,6 +102,9 @@ const styles = StyleSheet.create({
   },
   centeredText: {
     textAlign: 'center',
+  },
+  space: {
+    marginVertical: hp('15%'),
   },
 });
 

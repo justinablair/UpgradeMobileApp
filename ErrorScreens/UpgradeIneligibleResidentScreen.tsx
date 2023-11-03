@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bottomButtonContainer: {
-    marginBottom: height > 700 ? hp('-4%') : hp('-2%'),
+    marginBottom: height > 800 ? hp('-4%') : hp('-2%'),
   },
   safeAreaContainer: {
     flex: 1,

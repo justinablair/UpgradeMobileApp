@@ -8,6 +8,8 @@ import {
   Pressable,
   TextStyle,
   Dimensions,
+  Platform,
+  Touchable,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -16,6 +18,7 @@ import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import InfoModal from '../../components/theme/modals/InfoModal';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {useUserContext} from '../../components/UserContext';
 
 const {height} = Dimensions.get('window');
 
@@ -24,6 +27,10 @@ type UpgradeTaxCompliantProps = NavigationProps<'UpgradeTaxCompliant'>;
 const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   navigation,
 }) => {
+  const {userType, isDarkMode} = useUserContext();
+
+  const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+
   const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
 
   const [showEvasionInfoModal, setShowEvasionInfoModal] = useState(false);
@@ -74,7 +81,11 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   }, [title]);
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView
+      style={[
+        styles.safeAreaContainer,
+        {backgroundColor: containerBackgroundColor},
+      ]}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           {/* Title text */}
@@ -94,29 +105,19 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
             accessibilityLabel="Tax Compliance Description"
             accessibilityHint="Tap the phrases 'evaded tax' and 'tax avoidance' to learn more.">
             This means that you've not previously{' '}
-            <Pressable
+            <Text
               onPress={handleEvasionPress}
-              accessible={true}
-              accessibilityRole="button"
-              accessibilityLabel="Evaded Tax Pressable">
-              <Text
-                variant="bodyText leftAlign"
-                style={pressedEvasionTextStyles}>
-                evaded tax
-              </Text>
-            </Pressable>{' '}
+              variant="bodyText leftAlign"
+              style={[styles.margin, pressedEvasionTextStyles]}>
+              evaded tax
+            </Text>{' '}
             and are not engaged in any{' '}
-            <Pressable
+            <Text
               onPress={handleAvoidancePress}
-              accessible={true}
-              accessibilityRole="button"
-              accessibilityLabel="Avoided Tax Pressable">
-              <Text
-                variant="bodyText leftAlign"
-                style={pressedAvoidanceTextStyles}>
-                tax avoidance
-              </Text>
-            </Pressable>{' '}
+              variant="bodyText leftAlign"
+              style={[styles.margin, pressedAvoidanceTextStyles]}>
+              tax avoidance
+            </Text>{' '}
             arrangements.
           </Text>
 
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: hp('4%'),
+    lineHeight: 100,
   },
   space: {
     marginVertical: hp('1%'),
@@ -207,15 +209,25 @@ const styles = StyleSheet.create({
   },
 
   safeAreaContainer: {
-    backgroundColor: Colours.white,
     height: '100%',
   },
   linkText: {
-    lineHeight: height > 600 ? 90 : 60,
     fontWeight: 'bold',
+    ...Platform.select({
+      ios: {
+        lineHeight: height > 800 ? hp('10.5%') : hp('13.5%'),
+      },
+    }),
+  },
+  margin: {
+    ...Platform.select({
+      android: {
+        marginBottom: hp('-0.5%'),
+      },
+    }),
   },
   padding: {
-    paddingBottom: height > 700 ? 0 : hp('2%'),
+    paddingBottom: height > 800 ? 0 : hp('2%'),
   },
 });
 

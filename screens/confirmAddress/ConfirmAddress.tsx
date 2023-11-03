@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   padding: {
-    paddingBottom: height > 700 ? 0 : hp('2%'),
+    paddingBottom: height > 800 ? 0 : hp('2%'),
   },
 });
 

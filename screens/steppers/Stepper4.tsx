@@ -175,10 +175,10 @@ const styles = StyleSheet.create({
   activeLine: {
     position: 'absolute',
     width: wp('0.5%'),
-    height: hp('15%'),
+    height: hp('14%'),
     left: wp('6%'),
     backgroundColor: Colours.white,
-    top: height > 700 ? 180 : 200,
+    top: height > 800 ? 180 : 200,
   },
   stepCircle: {
     width: wp('8%'),
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('2.5%'),
   },
   padding: {
-    paddingBottom: height > 700 ? hp('2%') : 0,
+    paddingBottom: height > 800 ? hp('2%') : 0,
   },
 });
 

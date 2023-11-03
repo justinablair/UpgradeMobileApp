@@ -46,7 +46,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
       color: isDarkMode ? Colours.white : Colours.black,
     },
     separator: {
-      width: 327,
+      width: wp('90%'),
       borderBottomWidth: 1,
       borderBottomColor: isDarkMode ? Colours.white : Colours.black30,
     },

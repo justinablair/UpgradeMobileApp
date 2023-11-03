@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     width: wp('86%'),
   },
   padding: {
-    paddingBottom: height > 700 ? hp('4%') : hp('2%'),
+    paddingBottom: height > 800 ? hp('4%') : hp('2%'),
   },
   separator: {
     width: wp('85%'),
