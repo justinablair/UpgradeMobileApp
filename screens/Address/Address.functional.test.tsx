@@ -3,10 +3,28 @@ import {render, fireEvent, act} from '@testing-library/react-native';
 import EnterAddressScreen from './Address';
 import {UserContextProvider} from '../../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigationTypes';
 
 describe('EnterAddressScreen', () => {
-  const mockNavigation = {
+  const mockNavigation: StackNavigationProp<RootStackParamList, 'Address'> = {
     navigate: jest.fn(),
+    goBack: jest.fn(),
+    dispatch: jest.fn(),
+    setParams: jest.fn(),
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    canGoBack: () => true,
+    isFocused: () => true,
+    push: jest.fn(),
+    replace: jest.fn(),
+    pop: jest.fn(),
+    popToTop: jest.fn(),
+    setOptions: jest.fn(),
+    reset: jest.fn(),
+    getParent: jest.fn(),
+    getState: jest.fn(),
+    getId: jest.fn(),
   };
 
   it('Renders all input fields correctly', () => {
