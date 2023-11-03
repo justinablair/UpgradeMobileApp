@@ -27,9 +27,10 @@ type UpgradeTaxCompliantProps = NavigationProps<'UpgradeTaxCompliant'>;
 const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   navigation,
 }) => {
-  const {userType, isDarkMode} = useUserContext();
+  const {isDarkMode} = useUserContext();
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
 
@@ -91,7 +92,7 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
           {/* Title text */}
           <Text
             variant="screenTitle leftAlign"
-            style={{color: Colours.black}}
+            style={{color: textColour}}
             accessibilityRole="header"
             accessibilityLabel="Tax Compliance Header">
             {title}
@@ -99,7 +100,7 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
           {/* Title text */}
           <Text
             variant="bodyText leftAlign"
-            style={[{color: Colours.black}, styles.space]}
+            style={[{color: textColour}, styles.space]}
             accessible={true}
             accessibilityRole="text"
             accessibilityLabel="Tax Compliance Description"
@@ -198,7 +199,6 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     marginLeft: hp('1%'),
-    color: Colours.black,
     flex: 1,
   },
   scrollContainer: {

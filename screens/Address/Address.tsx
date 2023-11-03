@@ -1,11 +1,15 @@
-//Address.tsx
-
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, TextInput, AccessibilityInfo} from 'react-native';
-import {useUserContext} from '../../components/UserContext';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  AccessibilityInfo,
+} from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import Colours from '../../components/theme/Colour';
+import {useUserContext} from '../../components/UserContext';
 import {NavigationProps} from '../../navigationTypes';
 import {
   widthPercentageToDP as wp,
@@ -70,7 +74,6 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
 
   const title = 'What you’ll need to do after the switch';
 
-  // Use AccessibilityInfo to set accessibility focus on the title
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
@@ -78,54 +81,56 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   return (
     <View
       style={[styles.container, {backgroundColor: containerBackgroundColor}]}>
-      <View style={styles.contentContainer}>
-        <Text variant="screenTitle leftAlign" style={{color: textColour}}>
-          {title}
-        </Text>
+      <ScrollView style={{flex: 1}}>
+        <View style={styles.contentContainer}>
+          <Text variant="screenTitle leftAlign" style={{color: textColour}}>
+            {title}
+          </Text>
 
-        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
-          First line of address
-        </Text>
-        <TextInput
-          style={[
-            styles.input,
-            {
-              color: textColour,
-            },
-          ]}
-          placeholder="Enter first line of address"
-          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
-          value={addressLine1Local}
-          onChangeText={setAddressLine1Local}
-          accessibilityLabel="First line of address input"
-          accessibilityRole="text"
-        />
-        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
-          Town
-        </Text>
-        <TextInput
-          style={[styles.input, {color: textColour}]}
-          placeholder="Enter town"
-          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
-          value={townLocal}
-          onChangeText={setTownLocal}
-          accessibilityLabel="Town input"
-          accessibilityRole="text"
-        />
-        <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
-          Postcode
-        </Text>
-        <TextInput
-          style={[styles.input, {color: textColour}]}
-          placeholder="Enter postcode"
-          placeholderTextColor={isDarkMode ? Colours.black30 : Colours.black60}
-          value={postcodeLocal}
-          onChangeText={setPostcodeLocal}
-          accessibilityLabel="Postcode input"
-          accessibilityRole="text"
-        />
-      </View>
-
+          <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
+            First line of address
+          </Text>
+          <TextInput
+            style={[styles.input, {color: textColour}]}
+            placeholder="Enter first line of address"
+            placeholderTextColor={
+              isDarkMode ? Colours.black30 : Colours.black60
+            }
+            value={addressLine1Local}
+            onChangeText={setAddressLine1Local}
+            accessibilityLabel="First line of address input"
+            accessibilityRole="text"
+          />
+          <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
+            Town
+          </Text>
+          <TextInput
+            style={[styles.input, {color: textColour}]}
+            placeholder="Enter town"
+            placeholderTextColor={
+              isDarkMode ? Colours.black30 : Colours.black60
+            }
+            value={townLocal}
+            onChangeText={setTownLocal}
+            accessibilityLabel="Town input"
+            accessibilityRole="text"
+          />
+          <Text variant="bodyText" style={[styles.label, {color: textColour}]}>
+            Postcode
+          </Text>
+          <TextInput
+            style={[styles.input, {color: textColour}]}
+            placeholder="Enter postcode"
+            placeholderTextColor={
+              isDarkMode ? Colours.black30 : Colours.black60
+            }
+            value={postcodeLocal}
+            onChangeText={setPostcodeLocal}
+            accessibilityLabel="Postcode input"
+            accessibilityRole="text"
+          />
+        </View>
+      </ScrollView>
       {formError && (
         <Text variant="bodyText" style={styles.errorText}>
           {formError}
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('2%'),
     paddingVertical: hp('1%'),
   },
+
   errorText: {
     color: Colours.red,
     marginBottom: hp('1%'),
