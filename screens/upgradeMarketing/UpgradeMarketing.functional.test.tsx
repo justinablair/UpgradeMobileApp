@@ -1,13 +1,16 @@
 import React from 'react';
 import {act, fireEvent, render} from '@testing-library/react-native';
-import MarketingScreen from './Marketing';
+import UpgradeMarketingScreen from './UpgradeMarketing';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AccessibilityInfo} from 'react-native';
 
-describe('Marketing Screen', () => {
-  const mockNavigation: StackNavigationProp<RootStackParamList, 'Marketing'> = {
+describe('Upgrade Marketing Screen', () => {
+  const mockNavigation: StackNavigationProp<
+    RootStackParamList,
+    'UpgradeMarketing'
+  > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
     dispatch: jest.fn(),
@@ -30,7 +33,7 @@ describe('Marketing Screen', () => {
   it('renders correctly', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     expect(getByText('Marketing preferences')).not.toBeNull();
@@ -46,7 +49,7 @@ describe('Marketing Screen', () => {
 
     render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
@@ -58,7 +61,7 @@ describe('Marketing Screen', () => {
   it('toggles email subscription correctly', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
@@ -74,7 +77,7 @@ describe('Marketing Screen', () => {
   it('toggles push notifications correctly', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const pushNotificationsToggle = getByTestId('PushNotificationsToggle');
@@ -89,7 +92,7 @@ describe('Marketing Screen', () => {
   it('toggles text messages correctly', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const textMessagesToggle = getByTestId('TextMessagesToggle');
@@ -105,7 +108,7 @@ describe('Marketing Screen', () => {
   it('toggles online advertising correctly', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const onlineAdvertisingToggle = getByTestId('OnlineAdvertisingToggle');
@@ -122,7 +125,7 @@ describe('Marketing Screen', () => {
   it('handles "No thanks" button click', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
@@ -135,7 +138,7 @@ describe('Marketing Screen', () => {
   it('handles "Yes to all" button click', () => {
     const {getByTestId} = render(
       <UserContextProvider>
-        <MarketingScreen navigation={mockNavigation} />
+        <UpgradeMarketingScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {

@@ -7,7 +7,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 describe('AuthModal component', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'PersonalDetails'
+    'UpgradeEditAddress'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),

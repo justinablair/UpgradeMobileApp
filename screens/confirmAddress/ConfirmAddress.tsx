@@ -73,7 +73,7 @@ const ConfirmAddressScreen: React.FC<ConfirmAddressProps> = ({navigation}) => {
   };
 
   const handleChangeAddressClick = () => {
-    navigation.navigate('PersonalDetails');
+    navigation.navigate('UpgradeEditAddress');
     setShowInteractiveModal(false);
   };
 

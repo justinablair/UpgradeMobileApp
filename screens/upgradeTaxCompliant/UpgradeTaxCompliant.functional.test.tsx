@@ -62,27 +62,27 @@ describe('UpgradeTaxCompliantScreen', () => {
   });
 
   it('opens the evaded tax info modal on press of evaded tax', () => {
-    const {getByLabelText, getByText} = render(
+    const {getByTestId, getByText} = render(
       <UserContextProvider>
         <UpgradeTaxCompliantScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
-      const taxEvasionPressable = getByLabelText('Evaded Tax Pressable');
-      fireEvent.press(taxEvasionPressable);
+      const taxEvasion = getByTestId('evadedTax');
+      fireEvent.press(taxEvasion);
     });
     expect(getByText('Tax evasion')).toBeTruthy();
   });
 
   it('opens the avoided tax info modal on press of tax avoidance', () => {
-    const {getByLabelText, getByText} = render(
+    const {getByTestId, getByText} = render(
       <UserContextProvider>
         <UpgradeTaxCompliantScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
-      const taxAvoidancePressable = getByLabelText('Avoided Tax Pressable');
-      fireEvent.press(taxAvoidancePressable);
+      const taxEvasion = getByTestId('avoidedTax');
+      fireEvent.press(taxEvasion);
     });
     expect(getByText('Tax avoidance')).toBeTruthy();
   });

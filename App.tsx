@@ -21,14 +21,14 @@ import UpgradeChangesNewAccountScreen from './screens/upgradeChangesNewAccount/U
 import UpgradeTermsScreen from './screens/upgradeTerms/UpgradeTerms';
 import UpgradeConsentsScreen from './screens/upgradeConsents/UpgradeConsents';
 import UserSelectionScreen from './screens/userSelection/UserSelection';
-import MarketingScreen from './screens/upgradeMarketing/Marketing';
+import UpgradeMarketingScreen from './screens/upgradeMarketing/UpgradeMarketing';
 import UpgradeTaxCompliantScreen from './screens/upgradeTaxCompliant/UpgradeTaxCompliant';
 import UpgradeTaxReportingScreen from './screens/upgradeTaxReporting/UpgradeTaxReporting';
-import UpgradeNationalityScreen from './screens/upgradeNationality/UpgradeNationality';
+import UpgradeResidencyScreen from './screens/upgradeResidency/UpgradeResidency';
 import UpgradeUSPersonScreen from './screens/upgradeUSPerson/UpgradeUsPerson';
 import ConfirmAddressScreen from './screens/confirmAddress/ConfirmAddress';
 import EnterAddressScreen from './screens/address/Address';
-import PersonalDetailsScreen from './screens/personalDetails/PersonalDetails';
+import UpgradeEditAddressScreen from './screens/upgradeEditAddress/UpgradeEditAddress';
 import UpgradeConfirm from './screens/upgradeConfirm/UpgradeConfirmScreen';
 import UpgradeRecapScreen from './screens/upgradeRecap/UpgradeRecap';
 import UpgradeStartedScreen from './screens/upgradeStarted/UpgradeStarted';
@@ -127,7 +127,11 @@ function AppContent(): JSX.Element {
         {renderScreen('StepperScreen2', StepperScreen2, headerOptions)}
         {renderScreen('UpgradeTerms', UpgradeTermsScreen, headerOptions)}
         {renderScreen('UpgradeConsents', UpgradeConsentsScreen, headerOptions)}
-        {renderScreen('Marketing', MarketingScreen, headerOptions)}
+        {renderScreen(
+          'UpgradeMarketing',
+          UpgradeMarketingScreen,
+          headerOptions,
+        )}
         {renderScreen('StepperScreen3', StepperScreen3, headerOptions)}
         {renderScreen(
           'UpgradeTaxCompliant',
@@ -140,8 +144,8 @@ function AppContent(): JSX.Element {
           headerOptions,
         )}
         {renderScreen(
-          'UpgradeNationality',
-          UpgradeNationalityScreen,
+          'UpgradeResidency',
+          UpgradeResidencyScreen,
           headerOptions,
         )}
         {renderScreen(
@@ -158,7 +162,11 @@ function AppContent(): JSX.Element {
         {renderScreen('StepperScreen4', StepperScreen4, headerOptions)}
         {renderScreen('ConfirmAddress', ConfirmAddressScreen, headerOptions)}
         {renderScreen('StepperComplete', StepperCompleteScreen, headerOptions)}
-        {renderScreen('PersonalDetails', PersonalDetailsScreen, headerOptions)}
+        {renderScreen(
+          'UpgradeEditAddress',
+          UpgradeEditAddressScreen,
+          headerOptions,
+        )}
         {renderScreen('UpgradeConfirm', UpgradeConfirm, headerOptions)}
         {renderScreen('UpgradeRecap', UpgradeRecapScreen, headerOptions)}
         {renderScreen(

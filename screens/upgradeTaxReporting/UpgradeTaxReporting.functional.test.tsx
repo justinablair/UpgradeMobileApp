@@ -90,7 +90,7 @@ describe('UpgradeTaxReportingScreen', () => {
     act(() => {
       fireEvent.press(agreeButton);
     });
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeNationality');
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeResidency');
   });
 
   it('opens the facta info modal on press of facta text', async () => {

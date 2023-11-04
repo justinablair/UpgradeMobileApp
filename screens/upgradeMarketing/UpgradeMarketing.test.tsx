@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent, act} from '@testing-library/react-native';
-import MarketingScreen from './Marketing';
+import MarketingScreen from './UpgradeMarketing';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';

@@ -7,7 +7,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 describe('AuthModal component', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'PersonalDetails'
+    'UpgradeEditAddress'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -35,6 +35,7 @@ describe('AuthModal component', () => {
         visible={true}
         onClose={() => {}}
         navigation={mockNavigation}
+        navigationTarget={''}
       />,
     );
 
@@ -48,6 +49,7 @@ describe('AuthModal component', () => {
         visible={true}
         onClose={onCloseMock}
         navigation={mockNavigation}
+        navigationTarget={''}
       />,
     );
     act(() => {
@@ -64,6 +66,7 @@ describe('AuthModal component', () => {
         visible={true}
         onClose={onCloseMock}
         navigation={mockNavigation}
+        navigationTarget={''}
       />,
     );
     act(() => {
@@ -79,6 +82,7 @@ describe('AuthModal component', () => {
         visible={true}
         onClose={mockOnClose}
         navigation={mockNavigation}
+        navigationTarget={''}
       />,
     );
     act(() => {

@@ -20,13 +20,15 @@ import {
 } from 'react-native-responsive-screen';
 const {height} = Dimensions.get('window');
 
-type MarketingProps = NavigationProps<'Marketing'>;
+type UpgradeMarketingProps = NavigationProps<'UpgradeMarketing'>;
 
 type ToggleStates = {
   [key: string]: boolean;
 };
 
-const MarketingScreen: React.FC<MarketingProps> = ({navigation}) => {
+const UpgradeMarketingScreen: React.FC<UpgradeMarketingProps> = ({
+  navigation,
+}) => {
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
@@ -243,4 +245,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MarketingScreen;
+export default UpgradeMarketingScreen;

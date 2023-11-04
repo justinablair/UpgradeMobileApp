@@ -1,4 +1,4 @@
-//UpgradeNationality.tsx
+//UpgradeResidency.tsx
 
 import React, {useEffect, useState} from 'react';
 import {
@@ -21,9 +21,9 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-type UpgradeNationalityListProps = NavigationProps<'UpgradeNationality'>;
+type UpgradeResidencyListProps = NavigationProps<'UpgradeResidency'>;
 
-const UpgradeNationalityScreen: React.FC<UpgradeNationalityListProps> = ({
+const UpgradeResidencyScreen: React.FC<UpgradeResidencyListProps> = ({
   navigation,
 }) => {
   const {userType, isDarkMode} = useUserContext();
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpgradeNationalityScreen;
+export default UpgradeResidencyScreen;

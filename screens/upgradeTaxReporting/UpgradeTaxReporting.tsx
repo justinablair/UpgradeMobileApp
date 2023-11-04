@@ -51,7 +51,7 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   };
 
   const handleSwitchButtonPress = () => {
-    navigation.navigate('UpgradeNationality'); // Navigate to the desired screen
+    navigation.navigate('UpgradeResidency'); // Navigate to the desired screen
   };
 
   const factaTextStyles: TextStyle = {

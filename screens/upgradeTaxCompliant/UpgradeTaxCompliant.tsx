@@ -109,14 +109,16 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
             <Text
               onPress={handleEvasionPress}
               variant="bodyText leftAlign"
-              style={[styles.margin, pressedEvasionTextStyles]}>
+              style={[styles.margin, pressedEvasionTextStyles]}
+              testID="evadedTax">
               evaded tax
             </Text>{' '}
             and are not engaged in any{' '}
             <Text
               onPress={handleAvoidancePress}
               variant="bodyText leftAlign"
-              style={[styles.margin, pressedAvoidanceTextStyles]}>
+              style={[styles.margin, pressedAvoidanceTextStyles]}
+              testID="avoidedTax">
               tax avoidance
             </Text>{' '}
             arrangements.

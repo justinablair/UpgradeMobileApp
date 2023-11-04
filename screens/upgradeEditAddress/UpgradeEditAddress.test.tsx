@@ -1,15 +1,15 @@
 import React from 'react';
 import {render, fireEvent, act} from '@testing-library/react-native';
-import PersonalDetailsScreen from './PersonalDetails';
+import UpgradeEditAddressScreen from './UpgradeEditAddress';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigationTypes';
 import UserContextProvider from '../../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
 
-describe('PersonalDetailsScreen', () => {
+describe('UpgradeEditAddressScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'PersonalDetails'
+    'UpgradeEditAddress'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -29,11 +29,10 @@ describe('PersonalDetailsScreen', () => {
     getState: jest.fn(),
     getId: jest.fn(),
   };
-
   it('renders correctly', () => {
     render(
       <UserContextProvider>
-        <PersonalDetailsScreen navigation={mockNavigation} />
+        <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
   });
@@ -41,7 +40,7 @@ describe('PersonalDetailsScreen', () => {
   it('displays the correct placeholder for the input fields', () => {
     const {getByPlaceholderText} = render(
       <UserContextProvider>
-        <PersonalDetailsScreen navigation={mockNavigation} />
+        <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     expect(getByPlaceholderText('Enter address')).toBeTruthy();
@@ -52,7 +51,7 @@ describe('PersonalDetailsScreen', () => {
   it('allows the user to edit the address details and updates the address', () => {
     const {getByTestId, getByText, getByPlaceholderText} = render(
       <UserContextProvider>
-        <PersonalDetailsScreen navigation={mockNavigation} />
+        <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
@@ -92,7 +91,7 @@ describe('PersonalDetailsScreen', () => {
   it('displays the success message after updating the address', () => {
     const {getByTestId, getByText} = render(
       <UserContextProvider>
-        <PersonalDetailsScreen navigation={mockNavigation} />
+        <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const editButton = getByTestId('saveEditButton');
@@ -116,7 +115,7 @@ describe('PersonalDetailsScreen', () => {
 
     render(
       <UserContextProvider>
-        <PersonalDetailsScreen navigation={mockNavigation} />
+        <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 

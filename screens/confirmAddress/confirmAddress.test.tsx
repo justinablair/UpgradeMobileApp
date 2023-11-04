@@ -102,7 +102,7 @@ describe('<ConfirmAddressScreen />', () => {
       fireEvent.press(getByTestId('interactivePinkButton'));
     });
 
-    expect(mockNavigation.navigate).toBeCalledWith('PersonalDetails');
+    expect(mockNavigation.navigate).toBeCalledWith('UpgradeEditAddress');
   });
 
   it('opens the new card info modal on press of new card text', async () => {

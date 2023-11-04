@@ -1,4 +1,4 @@
-// PersonalDetails.tsx
+// UpgradeEditAddress.tsx
 
 import React, {useEffect, useState} from 'react';
 import {
@@ -15,9 +15,9 @@ import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {useUserContext} from '../../components/UserContext';
 
-type PersonalDetailsProps = NavigationProps<'PersonalDetails'>;
+type UpgradeEditAddressProps = NavigationProps<'UpgradeEditAddress'>;
 
-const PersonalDetailsScreen: React.FC<PersonalDetailsProps> = ({
+const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
   navigation,
 }) => {
   // Access user context and initialize necessary states
@@ -195,4 +195,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PersonalDetailsScreen;
+export default UpgradeEditAddressScreen;

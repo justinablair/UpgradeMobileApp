@@ -1,6 +1,6 @@
 import React from 'react';
-import {render, fireEvent, act} from '@testing-library/react-native';
-import UpgradeNationalityScreen from './UpgradeNationality';
+import {act, fireEvent, render} from '@testing-library/react-native';
+import UpgradeResidencyScreen from './UpgradeResidency';
 import UserContextProvider from '../../components/UserContext';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -9,7 +9,7 @@ import {AccessibilityInfo} from 'react-native';
 describe('UpgradeNationalityScreen', () => {
   const mockNavigation: StackNavigationProp<
     RootStackParamList,
-    'UpgradeNationality'
+    'UpgradeResidency'
   > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
@@ -33,7 +33,7 @@ describe('UpgradeNationalityScreen', () => {
   test('renders title based on userType', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradeNationalityScreen navigation={mockNavigation} />
+        <UpgradeResidencyScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     expect(
@@ -51,7 +51,7 @@ describe('UpgradeNationalityScreen', () => {
 
     render(
       <UserContextProvider>
-        <UpgradeNationalityScreen navigation={mockNavigation} />
+        <UpgradeResidencyScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
@@ -62,7 +62,7 @@ describe('UpgradeNationalityScreen', () => {
   it('handles press event for Yes button', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradeNationalityScreen navigation={mockNavigation} />
+        <UpgradeResidencyScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
@@ -76,7 +76,7 @@ describe('UpgradeNationalityScreen', () => {
   test('handles press event for No button', () => {
     const {getByText} = render(
       <UserContextProvider>
-        <UpgradeNationalityScreen navigation={mockNavigation} />
+        <UpgradeResidencyScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     act(() => {
@@ -88,7 +88,7 @@ describe('UpgradeNationalityScreen', () => {
   it('displays "What is tax residency?" info modal', () => {
     const {getByLabelText, getByTestId} = render(
       <UserContextProvider>
-        <UpgradeNationalityScreen navigation={mockNavigation} />
+        <UpgradeResidencyScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
     const taxAvoidancePressable = getByLabelText('What Is Tax Residency');
