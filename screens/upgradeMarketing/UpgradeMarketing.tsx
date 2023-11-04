@@ -1,3 +1,5 @@
+//UpgradeMarketing.tsx
+
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -18,6 +20,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 type UpgradeMarketingProps = NavigationProps<'UpgradeMarketing'>;

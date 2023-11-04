@@ -1,8 +1,11 @@
+//ListItem.tsx
+
 import React from 'react';
 import {View, StyleSheet, TextStyle, AccessibilityRole} from 'react-native';
 import GreenTickSvg from '../components/theme/icons/GreenTickIcon';
 import Text from '../components/Text';
 import Colours from './theme/Colour';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 type ListItemProps = {
   text: string;
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tickContainer: {
-    marginRight: 10,
+    marginRight: wp('2.5%'),
   },
 });
 

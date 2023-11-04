@@ -130,8 +130,6 @@ const UpgradedWelcomeScreen: React.FC<UpgradedWelcomeProps> = ({
   );
 };
 
-// Calculating marginTop based on screenHeight
-
 const styles = StyleSheet.create({
   container: {
     padding: wp('4%'),

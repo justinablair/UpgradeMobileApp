@@ -19,6 +19,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 // Define type for the props
@@ -46,7 +47,6 @@ const UpgradeChangesYouDoScreen: React.FC<UpgradeChangesYouDoProps> = ({
     AccessibilityInfo.announceForAccessibility(title);
   }, [title]);
 
-  // Component JSX
   return (
     <SafeAreaView style={[styles.safeAreaContainer, {backgroundColor}]}>
       <ScrollView>

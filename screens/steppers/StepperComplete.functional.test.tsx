@@ -29,7 +29,7 @@ describe('StepperCompleteScreen', () => {
     getId: jest.fn(),
   };
 
-  test('renders stepper complete screen with steps data', () => {
+  it('should render stepper complete screen with steps data', () => {
     const title1 = 'How your new account will work';
     const title2 = 'Your consents to switch';
     const title3 = 'Tax reporting';

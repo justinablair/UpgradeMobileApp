@@ -1,3 +1,5 @@
+//UpgradeTaxCompliant.tsx
+
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -5,15 +7,13 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
-  Pressable,
   TextStyle,
   Dimensions,
   Platform,
-  Touchable,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
-import CheckboxToggle from '../../components/toggles/CheckboxToggle'; // Import the CheckboxToggle component
+import CheckboxToggle from '../../components/toggles/CheckboxToggle'; //
 import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import InfoModal from '../../components/theme/modals/InfoModal';
@@ -32,17 +32,12 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
-  const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
-
+  const [isChecked, setIsChecked] = useState(false);
   const [showEvasionInfoModal, setShowEvasionInfoModal] = useState(false);
-
   const [showAvoidanceInfoModal, setShowAvoidanceInfoModal] = useState(false);
 
   const [taxEvasionPressed, setTaxEvasionPressed] = useState(false);
-
   const [taxAvoidancePressed, setTaxAvoidancePressed] = useState(false);
-
-  // const [taxAvoidancePressed, setTaxAvoidancePressed] = useState(false);
 
   // Navigate to the desired screen
   const handleSwitchButtonPress = () => {
@@ -130,7 +125,7 @@ const UpgradeTaxCompliantScreen: React.FC<UpgradeTaxCompliantProps> = ({
           <View style={styles.checkboxContainer} accessibilityRole="checkbox">
             <Text
               variant="bodyText"
-              style={styles.checkboxText}
+              style={[styles.checkboxText, {color: textColour}]}
               accessible={true}
               accessibilityRole="text"
               accessibilityLabel="I confirm I Am Tax Compliant">

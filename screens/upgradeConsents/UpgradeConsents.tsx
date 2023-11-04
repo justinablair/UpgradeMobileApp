@@ -37,10 +37,10 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
 
   const [checkboxesChecked, setCheckboxesChecked] = useState(
     Array(4).fill(false),
-  ); // Using Array.fill for initialise
+  ); // Using Array.fill to initialise
   const [descriptionsExpanded, setDescriptionsExpanded] = useState(
     Array(4).fill(true),
-  ); // Using Array.fill to initialise
+  );
 
   // Arrays for consent titles and descriptions
   const consentTitles = [
@@ -182,7 +182,7 @@ const UpgradeConsentsScreen: React.FC<UpgradeConsentsProps> = ({
       <View style={styles.bottomPadding}>
         <PinkButton
           buttonText="Next"
-          onPress={() => navigation.navigate('Marketing')}
+          onPress={() => navigation.navigate('UpgradeMarketing')}
           disabled={isButtonDisabled}
           accessibilityLabel="Next"
           testID="nextButton"

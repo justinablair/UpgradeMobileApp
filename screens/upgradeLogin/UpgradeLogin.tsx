@@ -1,3 +1,5 @@
+//UpgradeLogin.tsx
+
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, SafeAreaView, Dimensions} from 'react-native';
 import {useUserContext} from '../../components/UserContext';
@@ -10,8 +12,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
-const {height} = Dimensions.get('window');
 
 interface LoginProps {
   navigation?: any;

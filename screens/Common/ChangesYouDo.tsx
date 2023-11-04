@@ -9,6 +9,10 @@ import CashIcon from '../../components/theme/icons/CashIcon';
 import {useUserContext} from '../../components/UserContext';
 import ApplePaySvg from '../../components/theme/icons/ApplePayIcon';
 import {DrawingsPaidToUserIcon} from '../../components/theme/icons/DrawingsPaidToUserIcon';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type ChangesYouDoProps = {};
 
@@ -70,22 +74,22 @@ const ChangesYouDo: React.FC<ChangesYouDoProps> = () => {
 
 const styles = StyleSheet.create({
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1.6%'),
   },
   box: {
     backgroundColor: Colours.black03,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    marginBottom: 8,
+    paddingHorizontal: wp('10%'),
+    paddingVertical: hp('2%'),
+    marginBottom: hp('1.6%'),
     alignSelf: 'center',
-    width: 327, // Set the width to take the available space
+    width: wp('87.2%'),
   },
 
   titleContainer: {
-    paddingLeft: 10, // Adjust this value as needed
+    paddingLeft: wp('2.7%'),
   },
 });
 

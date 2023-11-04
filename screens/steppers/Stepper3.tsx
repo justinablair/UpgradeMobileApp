@@ -17,6 +17,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 type UpgradeStepper3Props = NavigationProps<'StepperScreen3'>;
@@ -44,9 +45,7 @@ const StepperScreen3: React.FC<UpgradeStepper3Props> = ({navigation}) => {
         ]}>
         {/* Indicator line for the steps */}
         <View style={styles.leftContainer}>
-          <View style={styles.lineContainer}>
-            {/* <View style={styles.line} /> */}
-          </View>
+          <View style={styles.lineContainer}></View>
           <View style={styles.completeLine} />
           {/* Active line showing progress */}
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />

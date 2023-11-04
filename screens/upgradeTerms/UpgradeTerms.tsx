@@ -12,16 +12,15 @@ import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import InfoBox from '../../components/InfoBox';
 import {PersonIcon} from '../../components/theme/icons/PersonIcon';
-
 import {NavigationProps} from '../../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../../components/theme/Colour';
-import {useUserContext} from '../../components/UserContext'; // Import the user context
-
+import {useUserContext} from '../../components/UserContext';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 type UpgradeTermsProps = NavigationProps<'UpgradeTerms'>;

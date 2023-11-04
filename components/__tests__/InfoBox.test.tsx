@@ -26,7 +26,7 @@ describe('InfoBox component', () => {
     const box = getByTestId('InfoBox');
     const boxStyle = StyleSheet.flatten(box.props.style); // Flattening the styles for access
     expect(boxStyle.borderRadius).toBe(8);
-    expect(boxStyle.width).toBe(327);
+    expect(boxStyle.width).toBe(654);
   });
 
   it('renders with the correct icon', () => {

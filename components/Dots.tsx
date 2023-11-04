@@ -1,6 +1,11 @@
 // DotsComponent.tsx
+
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 interface DotsComponentProps {
   selectedCount: number;
@@ -33,18 +38,18 @@ const DotsComponent: React.FC<DotsComponentProps> = ({
 const styles = StyleSheet.create({
   dotsContainer: {
     flexDirection: 'row',
-    marginBottom: 10,
-    height: 15,
+    marginBottom: hp('1.3%'),
+    height: hp('1.8%'),
   },
   dot: {
-    width: 10,
-    height: 10,
+    width: wp('2.5%'),
+    height: wp('2.5%'),
     borderRadius: 10,
-    marginHorizontal: 5,
+    marginHorizontal: wp('2.1%'),
   },
   selectedDot: {
-    width: 13,
-    height: 13,
+    width: wp('3.3%'),
+    height: wp('3.3%'),
     borderRadius: 13,
   },
 });

@@ -29,7 +29,7 @@ describe('LoginScreen', () => {
     getId: jest.fn(),
   };
   it('renders correctly', () => {
-    const {getByLabelText, getByRole, getByTestId} = render(
+    const {getByRole, getByTestId} = render(
       <UserContextProvider>
         <LoginScreen />
       </UserContextProvider>,

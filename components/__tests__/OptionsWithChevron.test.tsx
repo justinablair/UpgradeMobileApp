@@ -59,6 +59,6 @@ it('renders with the correct styles', () => {
 
   const optionContent = getByTestId('OptionContent');
   const optionContentStyle = StyleSheet.flatten(optionContent.props.style); // Flattening the styles for access
-  expect(optionContainerStyle.width).toBe(327);
+  expect(optionContainerStyle.width).toBe(654);
   expect(optionContentStyle.flex).toBe(1);
 });

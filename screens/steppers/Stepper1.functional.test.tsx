@@ -4,7 +4,6 @@ import StepperScreen1 from './Stepper1';
 import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserContextProvider from '../../components/UserContext';
-import {getAllByText} from '@testing-library/react';
 
 describe('StepperScreen1', () => {
   jest.mock('../../components/StepsData', () => [
@@ -46,7 +45,7 @@ describe('StepperScreen1', () => {
   };
 
   it('renders stepper screen with steps data', () => {
-    const {getByText, getAllByText} = render(
+    const {getByText} = render(
       <UserContextProvider>
         <StepperScreen1 navigation={mockNavigation} />
       </UserContextProvider>,

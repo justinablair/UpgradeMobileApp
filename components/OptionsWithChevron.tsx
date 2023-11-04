@@ -1,3 +1,5 @@
+//OptionsWithChevron.tsx
+
 import React from 'react';
 import {
   TouchableOpacity,
@@ -9,6 +11,10 @@ import Text from '../components/Text';
 import {ChevronRightIcon} from '../components/theme/icons/ChevronRight';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from './UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 interface OptionsWithChevronProps {
   title: string;
@@ -24,7 +30,7 @@ const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
   title,
   description,
   onPress,
-  accessible = false, // Default to false if not provided
+  accessible = false,
   accessibilityRole,
   accessibilityLabel,
   accessibilityHint,
@@ -44,7 +50,6 @@ const OptionsWithChevron: React.FC<OptionsWithChevronProps> = ({
       onPress={onPress}
       testID="OptionsButton"
       accessible={accessible} // Set the accessible prop here
-      accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={accessibilityHint}
       accessibilityValue={combinedAccessibilityValue}>
@@ -80,8 +85,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: 327,
-    marginBottom: 16,
+    width: wp('87.2%'),
+    marginBottom: hp('2%'),
   },
   optionContent: {
     flex: 1,

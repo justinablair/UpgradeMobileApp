@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   ScrollView,
   AccessibilityInfo,
-  Dimensions,
 } from 'react-native';
 import Text from '../../components/Text';
 import PinkButton from '../../components/theme/buttons/PinkButton';
@@ -21,8 +20,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
-const {height} = Dimensions.get('window');
 
 type UpgradedEmailProps = NavigationProps<'UpgradedEmail'>;
 

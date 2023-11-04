@@ -29,30 +29,11 @@ describe('StepperCompleteScreen', () => {
     getId: jest.fn(),
   };
 
-  test('renders stepper complete screen with steps data', () => {
+  it('should render stepper complete screen with steps data', () => {
     const title1 = 'How your new account will work';
     const title2 = 'Your consents to switch';
     const title3 = 'Tax reporting';
     const title4 = 'Confirm your details';
-
-    const stepsData = [
-      {
-        number: '1',
-        title: {title1},
-      },
-      {
-        number: '2',
-        title: {title2},
-      },
-      {
-        number: '3',
-        title: {title3},
-      },
-      {
-        number: '4',
-        title: {title4},
-      },
-    ];
 
     const {getByText} = render(
       <UserContextProvider>

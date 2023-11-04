@@ -6,7 +6,6 @@ import {RootStackParamList} from '../../navigationTypes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AccessibilityInfo} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {findAllByText, getByTestId, getByText} from '@testing-library/react';
 
 describe('UpgradeRecapScreen', () => {
   const mockNavigation: StackNavigationProp<

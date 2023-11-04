@@ -1,3 +1,5 @@
+//UpgradeIneligibleUSScreen.tsx
+
 import React, {useEffect} from 'react';
 import {
   View,
@@ -44,7 +46,6 @@ const UpgradeIneligibleUSScreen: React.FC<UpgradeIneligibleResidentProps> = ({
   }, [title]);
 
   return (
-    // Main container for the screen, with accessibility label and style
     <SafeAreaView
       style={[
         styles.safeAreaContainer,

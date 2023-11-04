@@ -30,7 +30,7 @@ describe('UserSelectionScreen', () => {
   };
 
   it('renders correctly', () => {
-    const {getByText, getByTestId} = render(
+    const {getByText} = render(
       <UserContextProvider>
         <UserSelectionScreen navigation={mockNavigation} />
       </UserContextProvider>,

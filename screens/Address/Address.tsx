@@ -72,7 +72,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
     return true;
   };
 
-  const title = 'What you’ll need to do after the switch';
+  const title = 'Tell us your address';
 
   useEffect(() => {
     AccessibilityInfo.announceForAccessibility(title);

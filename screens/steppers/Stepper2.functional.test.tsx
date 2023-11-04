@@ -44,7 +44,7 @@ describe('StepperScreen2', () => {
     getId: jest.fn(),
   };
 
-  test('should display titles and one completed', () => {
+  it('should display titles and one completed', () => {
     const {getByText, getAllByText} = render(
       <UserContextProvider>
         <StepperScreen2 navigation={mockNavigation} />

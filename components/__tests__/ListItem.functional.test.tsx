@@ -30,6 +30,6 @@ describe('ListItem component', () => {
 
     const tickContainer = getByTestId('TickContainer');
     const tickStyle = StyleSheet.flatten(tickContainer.props.style); // Flattening the styles for access
-    expect(tickStyle.marginRight).toBe(10);
+    expect(tickStyle.marginRight).toBe(19);
   });
 });

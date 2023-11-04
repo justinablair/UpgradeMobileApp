@@ -124,7 +124,7 @@ describe('UpgradeConsentsScreen', () => {
 
     // Add a conditional assertion based on the enabled state
     if (!button.props.accessibilityState.disabled) {
-      expect(mockNavigation.navigate).toHaveBeenCalledWith('Marketing');
+      expect(mockNavigation.navigate).toHaveBeenCalledWith('UpgradeMarketing');
     }
   });
 

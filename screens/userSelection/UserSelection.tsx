@@ -1,9 +1,10 @@
 //UserSelection.tsx
+
 import React, {useEffect} from 'react';
 import {View, StyleSheet, AccessibilityInfo} from 'react-native';
 import Text from '../../components/Text';
 import {useUserContext, UserType} from '../../components/UserContext';
-import Colours from '../../components/theme/Colour'; // Import Colours
+import Colours from '../../components/theme/Colour';
 import {NavigationProps} from '../../navigationTypes';
 import OptionsWithChevron from '../../components/OptionsWithChevron';
 import {
@@ -16,7 +17,7 @@ type UserSelectionScreenProps = NavigationProps<'UserSelection'>;
 const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
   navigation,
 }) => {
-  const {setUserType} = useUserContext();
+  const {setUserType} = useUserContext(); // Access user type from context
   const {isDarkMode} = useUserContext(); // Access isDarkMode from context
 
   const handleUserTypeSelect = (userType: UserType) => {

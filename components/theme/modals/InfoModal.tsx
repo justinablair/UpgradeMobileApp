@@ -1,3 +1,5 @@
+//InfoModal.tsx
+
 import React from 'react';
 import {
   View,
@@ -37,7 +39,6 @@ const InfoModal: React.FC<InfoModalProps> = ({
 }) => {
   const {isDarkMode} = useUserContext(); // Get the userType and businessName from the context
 
-  // Style configurations
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 

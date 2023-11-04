@@ -30,7 +30,7 @@ describe('UpgradeNationalityScreen', () => {
     getId: jest.fn(),
   };
 
-  test('renders title based on userType', () => {
+  it('should render title based on userType', () => {
     const {getByText} = render(
       <UserContextProvider>
         <UpgradeResidencyScreen navigation={mockNavigation} />
@@ -73,7 +73,7 @@ describe('UpgradeNationalityScreen', () => {
     );
   });
 
-  test('handles press event for No button', () => {
+  it('should handle press event for No button', () => {
     const {getByText} = render(
       <UserContextProvider>
         <UpgradeResidencyScreen navigation={mockNavigation} />

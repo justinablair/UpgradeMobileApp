@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Image,
@@ -26,10 +26,10 @@ type UpgradeCompleteProps = NavigationProps<'UpgradeComplete'>;
 const UpgradeCompleteScreen: React.FC<UpgradeCompleteProps> = ({
   navigation,
 }) => {
-  // Get the current mode from the user context
+  // Get dark mode theme from the user context
   const {isDarkMode} = useUserContext();
 
-  // Define container background and text colors based on the mode
+  // Define container background and text colors based on the theme
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 

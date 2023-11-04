@@ -105,7 +105,7 @@ const ThemeScreen: React.FC<ThemeScreenProps> = ({navigation}) => {
           <CheckboxToggle
             checked={isDarkMode}
             onToggle={toggleDarkMode}
-            accessible={true} // Added accessible prop
+            accessible={true}
             accessibilityLabel="darkModeCheckbox"
             testID="darkModeCheckbox"
             accessibilityRole="checkbox"

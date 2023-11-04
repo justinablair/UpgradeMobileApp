@@ -45,10 +45,7 @@ const StepperScreen4: React.FC<UpgradeStepper4Props> = ({navigation}) => {
         {/* Indicator line for the steps */}
 
         <View style={styles.leftContainer}>
-          <View style={styles.lineContainer}>
-            {/* <View style={styles.line} /> */}
-          </View>
-          {/* <View style={styles.completeLine} /> */}
+          <View style={styles.lineContainer}></View>
           <View style={styles.completeLine} />
           <View style={[styles.activeLine, {backgroundColor: activeColor}]} />
           {/* Mapping through stepsData to display the steps */}

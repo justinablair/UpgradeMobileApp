@@ -1,4 +1,5 @@
 //Text.tsx
+
 import React from 'react';
 import {
   Text as RNText,
@@ -17,7 +18,7 @@ type TextVariant =
   | 'leftAlign'
   | 'centerAlign';
 
-// Define the props for the Text component, extending RNTextProps
+// Define the props for the Text component
 interface TextProps extends RNTextProps {
   variant?: TextVariant | string; // Allow specifying the variant as a string
   style?: TextStyle | TextStyle[]; // Allow specifying styles
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
   },
   headerMedium: {
     fontSize: 24,
-    fontWeight: 'bold',
     textAlign: 'left',
     marginTop: 10,
     color: 'white',

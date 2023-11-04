@@ -1,9 +1,14 @@
 //InfoBox.tsx
+
 import React, {ReactNode} from 'react';
 import {View, StyleSheet, TextStyle} from 'react-native';
 import Text from '../components/Text';
 import Colours from '../components/theme/Colour';
 import {useUserContext} from './UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 interface InfoBoxProps {
   icon?: ReactNode; // Accept any icon component as a prop
@@ -68,14 +73,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    marginBottom: 8,
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('2%'),
+    marginBottom: hp('1.6%'),
     alignSelf: 'center',
-    width: 327,
+    width: wp('87.2%'),
   },
   iconContainer: {
-    marginRight: 16,
+    marginRight: wp('4.9%'),
   },
   textContainer: {
     flex: 1,

@@ -6,8 +6,5 @@
     "lib": ["dom", "es2015"],
     "types": ["react-navigation", "jest"]
   },
-  // "transformIgnorePatterns": [
-  //   "/node_modules/(?!react-native|@react-navigation)"
-  // ],
-  "include": ["**/*.ts", "**/*.tsx"] // Include your TypeScript files
+  "include": ["**/*.ts", "**/*.tsx"]
 }

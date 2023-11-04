@@ -1,4 +1,5 @@
 // ChangesWeDo.tsx
+
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import InfoBox from '../../components/InfoBox';
@@ -9,6 +10,10 @@ import Colours from '../../components/theme/Colour';
 import VoidIcon from '../../components/theme/icons/VoidIcon';
 import CalendarIcon from '../../components/theme/icons/CalendarIcon';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type NewAccountProps = {};
 
@@ -63,7 +68,7 @@ const NewAccount: React.FC<NewAccountProps> = () => {
         title="Scheduled payments will be processed on business days"
         description="Payments scheduled for a weekend or bank holiday will be processed the next working day."
         accessible={true}
-        accessibilityLabel="Sceduled Payments On Business Days"
+        accessibilityLabel="Scheduled Payments On Business Days"
       />
       <View style={styles.space} />
     </View>
@@ -72,10 +77,10 @@ const NewAccount: React.FC<NewAccountProps> = () => {
 
 const styles = StyleSheet.create({
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1.6%'),
   },
   titleContainer: {
-    paddingLeft: 10,
+    paddingLeft: wp('2.7%'),
   },
 });
 

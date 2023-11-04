@@ -53,7 +53,7 @@ describe('EnterAddressScreen', () => {
     );
 
     expect(mockAnnounceForAccessibility).toHaveBeenCalledWith(
-      'What you’ll need to do after the switch',
+      'Tell us your address',
     );
   });
 

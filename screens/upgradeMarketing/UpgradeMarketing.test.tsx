@@ -7,7 +7,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {AccessibilityInfo} from 'react-native';
 
 describe('Marketing Screen', () => {
-  const mockNavigation: StackNavigationProp<RootStackParamList, 'Marketing'> = {
+  const mockNavigation: StackNavigationProp<
+    RootStackParamList,
+    'UpgradeMarketing'
+  > = {
     navigate: jest.fn(),
     goBack: jest.fn(),
     dispatch: jest.fn(),

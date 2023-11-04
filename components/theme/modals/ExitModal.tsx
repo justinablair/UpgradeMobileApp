@@ -1,7 +1,8 @@
 //ExitModal.tsx
+
 import React from 'react';
 import {Modal, View, StyleSheet} from 'react-native';
-import Colours from '../Colour'; // Update the path to Colour.js
+import Colours from '../Colour';
 import PinkButton from '../buttons/PinkButton';
 import WhiteButton from '../buttons/WhiteButton';
 import Text from '../../Text';
@@ -40,7 +41,7 @@ const ExitModal: React.FC<ExitModalProps> = ({
   // Handle exit button press
   const handleExitButtonPress = () => {
     toggleExitModal(); // Close the modal
-    navigation.navigate('ThemeScreen'); // Navigate to UserSelection
+    navigation.navigate('ThemeScreen');
   };
 
   return (
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // Add space between buttons
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 });

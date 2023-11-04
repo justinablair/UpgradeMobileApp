@@ -1,11 +1,17 @@
+//CustomHeader.tsx
+
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {CloseIcon} from './theme/icons/CloseIcon';
 import Colours from './theme/Colour';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 interface CustomHeaderProps {
-  isDarkMode: boolean; // Boolean indicating whether the dark mode is enabled
-  toggleExitModal: () => void; // Function to handle the exit modal toggle
+  isDarkMode: boolean;
+  toggleExitModal: () => void;
 }
 const CustomHeader: React.FC<CustomHeaderProps> = ({
   isDarkMode,
@@ -42,14 +48,14 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    height: 50,
+    height: hp('6.6%'),
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    paddingHorizontal: wp('2.7%'),
   },
   headerText: {
-    fontSize: 20,
+    fontSize: wp('5.3%'),
     fontWeight: 'bold',
   },
 });

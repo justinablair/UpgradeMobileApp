@@ -1,9 +1,13 @@
 // GridComponent.tsx
+
 import React from 'react';
 import {TouchableOpacity, StyleSheet, View} from 'react-native';
 import Text from './Text';
 import {PinBackIcon} from '../components/theme/icons/PinbackIcon';
-import {useUserContext} from './UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 interface GridComponentProps {
   handleDigitPress: (digit: number) => void;
@@ -134,7 +138,7 @@ const GridComponent: React.FC<GridComponentProps> = ({
 
 const styles = StyleSheet.create({
   gridContainer: {
-    marginBottom: 10,
+    marginBottom: hp('1.3%'),
   },
   row: {
     flexDirection: 'row',
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   gridItem: {
-    width: '30%',
+    width: wp('30%'),
     aspectRatio: 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   },
   gridText: {
     fontWeight: '600',
-    fontSize: 24,
+    fontSize: wp('5%'),
     textAlign: 'center',
   },
 });

@@ -1,3 +1,5 @@
+//InteractiveModal.tsx
+
 import React from 'react';
 import {Modal, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Text from '../../Text';
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background for the modal
-    justifyContent: 'flex-end', // Align the content at the bottom of the screen
+    justifyContent: 'flex-end',
     alignItems: 'center', // Center align the items horizontally
   },
   modalContent: {

@@ -1,4 +1,4 @@
-// components/theme/Colour.ts
+// Colour.tsx
 
 const Colours = {
   black: '#171B1B',
@@ -19,7 +19,6 @@ const Colours = {
   white: '#FFFFFF',
   green: '#1FC8A9',
 
-  // Add semantic color values that are used
   stroke: '#171B1B',
   fill: '#171B1B',
 };

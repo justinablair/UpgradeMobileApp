@@ -1,3 +1,5 @@
+//AuthModal.tsx
+
 import React, {useState, useEffect} from 'react';
 import {View, Modal, StyleSheet} from 'react-native';
 import Colours from '../Colour';

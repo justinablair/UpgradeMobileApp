@@ -1,3 +1,5 @@
+//PreferenceToggle.tsx
+
 import React from 'react';
 import {
   AccessibilityInfo,
@@ -12,11 +14,11 @@ import {useUserContext} from '../UserContext';
 import Toggle from './Toggle';
 
 interface PreferenceToggleProps {
-  label: string; // Label for the toggle
-  value: boolean; // Current value of the toggle
-  description?: string; // Optional description for the toggle
-  onChange: () => void; // Function to handle toggle change
-  testID: string; // Test ID for the toggle
+  label: string;
+  value: boolean;
+  description?: string;
+  onChange: () => void;
+  testID: string;
   accessible?: boolean;
   accessibilityLabel?: string;
   accessibilityRole?: AccessibilityRole;

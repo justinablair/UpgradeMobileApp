@@ -14,13 +14,17 @@ import {NavigationProps} from '../../navigationTypes';
 import Colours from '../../components/theme/Colour';
 import PinkButton from '../../components/theme/buttons/PinkButton';
 import {useUserContext} from '../../components/UserContext';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type UpgradeEditAddressProps = NavigationProps<'UpgradeEditAddress'>;
 
 const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
   navigation,
 }) => {
-  // Access user context and initialize necessary states
+  // Access user context and initialise necessary states
   const {
     isDarkMode,
     addressLine1,
@@ -35,7 +39,7 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
   const backgroundColor = isDarkMode ? Colours.black : Colours.white;
   const titleColor = isDarkMode ? Colours.white : Colours.black;
 
-  // Initialize state variables
+  // Initialise state variables
   const [isEditing, setIsEditing] = useState(false);
   const [newAddressLine1, setNewAddressLine1] = useState(addressLine1);
   const [newTown, setNewTown] = useState(town);
@@ -167,31 +171,31 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    paddingBottom: 100,
+    paddingBottom: hp('10%'),
   },
   titlePadding: {
-    padding: 16,
+    padding: wp('4%'),
   },
   addressContainer: {
-    padding: 16,
+    padding: wp('4%'),
     width: '100%',
   },
   input: {
     borderBottomWidth: 1,
     borderColor: Colours.black30,
-    marginBottom: 16,
-    paddingVertical: 8,
+    marginBottom: hp('2%'),
+    paddingVertical: hp('1%'),
   },
   successMessage: {
     color: Colours.green,
-    padding: 16,
+    padding: wp('4%'),
   },
   buttonContainer: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+    paddingHorizontal: wp('4%'),
+    paddingBottom: hp('2%'),
   },
 });
 

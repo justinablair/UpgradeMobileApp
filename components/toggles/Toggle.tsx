@@ -1,4 +1,5 @@
 //Toggle.tsx
+
 import React, {useMemo} from 'react';
 import {Platform, StyleSheet, Switch, SwitchProps} from 'react-native';
 import Colours from '../theme/Colour';
@@ -7,7 +8,7 @@ type ToggleProps = Omit<SwitchProps, 'trackColor' | 'thumbColor'> & {
   label?: string;
   accessibilityLabel?: string;
   testID?: string;
-  onValueChange: (value: boolean) => void; // Make sure to include the onValueChange prop
+  onValueChange: (value: boolean) => void;
 };
 
 const Toggle: React.FC<ToggleProps> = props => {

@@ -38,7 +38,7 @@ describe('UserSelectionScreen', () => {
   };
 
   it('renders correctly', () => {
-    const {getByText, getByTestId} = render(
+    const {getByText} = render(
       <UserSelectionScreen navigation={mockNavigation} />,
     );
     expect(getByText('What type of business are you?')).toBeTruthy();

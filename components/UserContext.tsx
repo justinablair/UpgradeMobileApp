@@ -1,4 +1,5 @@
 // UserContext.tsx
+
 import React, {createContext, useContext, useState} from 'react';
 
 export type UserType = 'soleTrader' | 'limitedCompany';
@@ -36,13 +37,12 @@ export const UserContextProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
   // Define state variables and corresponding setters
-
   const [userType, setUserType] = useState<UserType | null>(null);
   const [businessName, setBusinessName] = useState('');
   const [addressLine1, setAddressLine1] = useState('');
   const [town, setTown] = useState('');
   const [postcode, setPostcode] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(false); // Initialize isDarkMode state
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -54,13 +54,13 @@ export const UserContextProvider: React.FC<{children: React.ReactNode}> = ({
     addressLine1,
     town,
     postcode,
-    isDarkMode, // Add isDarkMode to the context
+    isDarkMode,
     setBusinessName,
     setAddressLine1,
     setTown,
     setPostcode,
     setUserType,
-    toggleDarkMode, // Add toggleDarkMode to the context
+    toggleDarkMode,
   };
 
   return (

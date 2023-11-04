@@ -1,4 +1,5 @@
 // ChangesWeDo.tsx
+
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Colours from '../../components/theme/Colour';
@@ -10,6 +11,10 @@ import {TransferIcon} from '../../components/theme/icons/TransferIcon';
 import {ExportIcon} from '../../components/theme/icons/ExportIcon';
 import {PostageIcon} from '../../components/theme/icons/Postage';
 import {FreeAgentIcon} from '../../components/theme/icons/FreeAgentIcon';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 type ChangesWeDoProps = {};
 
@@ -87,11 +92,11 @@ const ChangesWeDo: React.FC<ChangesWeDoProps> = () => {
 
 const styles = StyleSheet.create({
   space: {
-    marginVertical: 8,
+    marginVertical: hp('1.6%'),
   },
 
   titleContainer: {
-    paddingLeft: 10, // Adjust this value as needed
+    paddingLeft: wp('2.7%'),
   },
 });
 

@@ -1,9 +1,10 @@
+//UpgradeTaxReporting.tsx
+
 import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
   SafeAreaView,
-  Pressable,
   TextStyle,
   AccessibilityInfo,
   Dimensions,
@@ -15,13 +16,14 @@ import PinkButton from '../../components/theme/buttons/PinkButton';
 import {NavigationProps} from '../../navigationTypes';
 import {ScrollView} from 'react-native-gesture-handler';
 import Colours from '../../components/theme/Colour';
-import {useUserContext} from '../../components/UserContext'; // Import the user context
+import {useUserContext} from '../../components/UserContext';
 import CheckboxToggle from '../../components/toggles/CheckboxToggle';
 import InfoModal from '../../components/theme/modals/InfoModal';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
@@ -29,12 +31,13 @@ type UpgradeTaxReportingProps = NavigationProps<'UpgradeTaxReporting'>;
 const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
   navigation,
 }) => {
-  const {userType, isDarkMode} = useUserContext();
+  const {userType, isDarkMode} = useUserContext(); //Access from user context
 
   const containerBackgroundColor = isDarkMode ? Colours.black : Colours.white;
   const textColour = isDarkMode ? Colours.white : Colours.black;
 
-  const [isChecked, setIsChecked] = useState(false); // State to track the checkbox
+  //states to track modals and checkbox
+  const [isChecked, setIsChecked] = useState(false);
   const [showFACTAModal, setShowFACTAModal] = useState(false);
   const [showCRSModal, setShowCRSModal] = useState(false);
 
@@ -296,7 +299,6 @@ const UpgradeTaxReportingScreen: React.FC<UpgradeTaxReportingProps> = ({
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
-    // Add other styling properties as needed
   },
   scrollViewContent: {
     justifyContent: 'space-between',

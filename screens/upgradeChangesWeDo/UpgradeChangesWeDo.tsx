@@ -20,6 +20,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+
 const {height} = Dimensions.get('window');
 
 type UpgradeChangesWeDoProps = NavigationProps<'UpgradeChangesWeDo'>;
@@ -83,6 +84,7 @@ interface Styles {
   space: ViewStyle;
   titleContainer: ViewStyle;
 }
+
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
