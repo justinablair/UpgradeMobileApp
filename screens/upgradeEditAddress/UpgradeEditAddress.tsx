@@ -18,6 +18,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {useAddressValidation} from '../../components/AddressValidation';
 
 type UpgradeEditAddressProps = NavigationProps<'UpgradeEditAddress'>;
 
@@ -45,21 +46,43 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
   const [newTown, setNewTown] = useState(town);
   const [newPostcode, setNewPostcode] = useState(postcode);
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  // Event handler to enable editing mode
-  const handleEditAddress = () => {
-    setIsEditing(true);
-    setUpdateSuccess(false);
-  };
+  // Custom hook for address validation
+  const {isFormValid} = useAddressValidation();
 
   // Event handler to update the address
   const handleUpdateAddress = () => {
+    const validationResult = isFormValid(newAddressLine1, newTown, newPostcode);
+    if (validationResult) {
+      setFormError(validationResult);
+      setUpdateSuccess(false);
+      return;
+    }
+
     setAddressLine1(newAddressLine1);
     setTown(newTown);
     setPostcode(newPostcode);
     setIsEditing(false);
     setUpdateSuccess(true);
+    setIsButtonEnabled(false);
+    setFormError(null); // Clear the form error when the address is successfully updated
   };
+
+  // Check if any of the inputs have changed
+  useEffect(() => {
+    if (
+      newAddressLine1 !== addressLine1 ||
+      newTown !== town ||
+      newPostcode !== postcode
+    ) {
+      setIsButtonEnabled(true);
+    } else {
+      setIsButtonEnabled(false);
+    }
+    setFormError(null); // Clear the form error when inputs change
+  }, [newAddressLine1, newTown, newPostcode, addressLine1, town, postcode]);
 
   const title = 'Home address';
 
@@ -94,9 +117,8 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
           <TextInput
             style={[styles.input, {color: titleColor}]}
             placeholder="Enter address"
-            value={isEditing ? newAddressLine1 : addressLine1}
+            value={newAddressLine1}
             onChangeText={setNewAddressLine1}
-            editable={isEditing}
             accessible={true}
             accessibilityLabel="Address Line 1 Input"
             testID="addressLine1Input"
@@ -112,9 +134,8 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
           <TextInput
             style={[styles.input, {color: titleColor}]}
             placeholder="Enter town"
-            value={isEditing ? newTown : town}
+            value={newTown}
             onChangeText={setNewTown}
-            editable={isEditing}
             accessible={true}
             accessibilityLabel="Town Input"
             testID="townInput"
@@ -130,9 +151,8 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
           <TextInput
             style={[styles.input, {color: titleColor}]}
             placeholder="Enter postcode"
-            value={isEditing ? newPostcode : postcode}
+            value={newPostcode}
             onChangeText={setNewPostcode}
-            editable={isEditing}
             accessible={true}
             accessibilityLabel="Postcode Input"
             testID="postcodeInput"
@@ -151,12 +171,20 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
         )}
       </ScrollView>
       {/* Render the edit/save button */}
+
       <View style={styles.buttonContainer}>
+        {/* Display form error message */}
+        {formError && (
+          <Text variant="bodyText" style={styles.errorText}>
+            {formError}
+          </Text>
+        )}
         <PinkButton
-          buttonText={isEditing ? 'Save' : 'Edit Address'}
-          onPress={isEditing ? handleUpdateAddress : handleEditAddress}
+          buttonText="Save"
+          onPress={handleUpdateAddress}
+          disabled={!isButtonEnabled}
           accessible={true}
-          accessibilityLabel={isEditing ? 'Save Button' : 'Edit Address Button'}
+          accessibilityLabel="Save Button"
           testID="saveEditButton"
         />
       </View>
@@ -168,6 +196,7 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: wp('4%'),
   },
   scrollContainer: {
     flexGrow: 1,
@@ -191,11 +220,14 @@ const styles = StyleSheet.create({
     padding: wp('4%'),
   },
   buttonContainer: {
-    position: 'absolute',
+    padding: wp('4%'),
     bottom: 0,
     width: '100%',
-    paddingHorizontal: wp('4%'),
-    paddingBottom: hp('2%'),
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  errorText: {
+    color: Colours.red,
   },
 });
 

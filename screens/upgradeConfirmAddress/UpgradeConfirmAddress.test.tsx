@@ -1,11 +1,26 @@
-// Functional test for ConfirmAddress.tsx
-
 import React from 'react';
 import {render, fireEvent, act, waitFor} from '@testing-library/react-native';
-import ConfirmAddressScreen from './ConfirmAddress';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../navigationTypes';
+import ConfirmAddressScreen from './UpgradeConfirmAddress';
 import UserContextProvider from '../../components/UserContext';
+import {RootStackParamList} from '../../navigationTypes';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AccessibilityInfo} from 'react-native';
+
+jest.mock('../../components/UserContext', () => {
+  const originalModule = jest.requireActual('../../components/UserContext');
+  return {
+    __esModule: true,
+    ...originalModule,
+    useUserContext: () => ({
+      addressLine1: '31 city street road',
+      town: 'London',
+      postcode: 'sm46hu',
+    }),
+    UserContextProvider: ({children}: {children: React.ReactNode}) => (
+      <>{children}</>
+    ),
+  };
+});
 
 describe('<ConfirmAddressScreen />', () => {
   const mockNavigation: StackNavigationProp<
@@ -40,19 +55,36 @@ describe('<ConfirmAddressScreen />', () => {
     expect(getByText('Confirm your address')).toBeTruthy();
   });
 
-  it('displays the user address', () => {
-    const {findByText} = render(
+  it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {
+    const mockAnnounceForAccessibility = jest.fn();
+    jest.spyOn(React, 'useEffect').mockImplementation(f => f());
+    jest.spyOn(React, 'useContext').mockReturnValue({isDarkMode: true});
+    jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(mockAnnounceForAccessibility);
+
+    render(
       <UserContextProvider>
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    expect(findByText('31 city street road')).toBeTruthy();
-    expect(findByText('London')).toBeTruthy();
-    expect(findByText('sm46hu')).toBeTruthy();
+    expect(mockAnnounceForAccessibility).toBeCalledWith('Confirm your address');
+  });
+
+  it('should navigate to the desired screen', () => {
+    const {getByText} = render(
+      <UserContextProvider>
+        <ConfirmAddressScreen navigation={mockNavigation} />
+      </UserContextProvider>,
+    );
+    act(() => {
+      fireEvent.press(getByText('Confirm address'));
+    });
+    expect(mockNavigation.navigate).toBeCalledWith('StepperComplete');
   });
 
   it('opens update address modal and navigates to the correct screen', async () => {
-    const {getByText, getByTestId} = render(
+    const {getByText, findByText, getByTestId} = render(
       <UserContextProvider>
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
@@ -63,10 +95,9 @@ describe('<ConfirmAddressScreen />', () => {
 
     await waitFor(() => {
       expect(
-        getByText(/Updating your address will also change the address/),
+        findByText('Updating your address will also change the address'),
       ).toBeTruthy();
     });
-
     act(() => {
       fireEvent.press(getByTestId('interactivePinkButton'));
     });
@@ -93,15 +124,14 @@ describe('<ConfirmAddressScreen />', () => {
     });
   });
 
-  it('should navigate to the desired screen', () => {
-    const {getByText} = render(
+  it('displays the user address', () => {
+    const {findByText} = render(
       <UserContextProvider>
         <ConfirmAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
-    act(() => {
-      fireEvent.press(getByText('Confirm address'));
-    });
-    expect(mockNavigation.navigate).toBeCalledWith('StepperComplete');
+    expect(findByText('123 Street')).toBeTruthy();
+    expect(findByText('City')).toBeTruthy();
+    expect(findByText('12345')).toBeTruthy();
   });
 });

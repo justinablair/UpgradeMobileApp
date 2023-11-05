@@ -10,7 +10,7 @@ interface UncheckedSvgProps {
 
 const UncheckedSvg: React.FC<UncheckedSvgProps> = ({
   stroke = Colours.black,
-  fill = Colours.black05,
+  fill = Colours.white,
   accessibilityLabel,
   ...props
 }) => (

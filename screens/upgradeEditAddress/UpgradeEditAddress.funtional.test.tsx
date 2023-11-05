@@ -1,10 +1,14 @@
 import React from 'react';
-import {render, fireEvent, act} from '@testing-library/react-native';
+import {render, fireEvent, act, waitFor} from '@testing-library/react-native';
 import UpgradeEditAddressScreen from './UpgradeEditAddress';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigationTypes';
 import UserContextProvider from '../../components/UserContext';
 import {AccessibilityInfo} from 'react-native';
+
+(global as any).setImmediate = (callback: any, ...args: any[]) => {
+  return setTimeout(callback, 0, ...args);
+};
 
 describe('UpgradeEditAddressScreen', () => {
   const mockNavigation: StackNavigationProp<
@@ -49,61 +53,58 @@ describe('UpgradeEditAddressScreen', () => {
     expect(getByPlaceholderText('Enter postcode')).toBeTruthy();
   });
 
-  it('allows the user to edit the address details and updates the address', () => {
+  it('displays form validation messages', async () => {
     const {getByTestId, getByText, getByPlaceholderText} = render(
       <UserContextProvider>
         <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
 
-    // Test editing functionality
-    const editButton = getByTestId('saveEditButton');
-    act(() => {
-      fireEvent.press(editButton);
-    });
-    const buttonText = getByText('Save');
-    expect(buttonText).toBeTruthy();
-
-    // Change the address details
     const addressLine1Input = getByPlaceholderText('Enter address');
     fireEvent.changeText(addressLine1Input, '123 New Street');
 
-    const townInput = getByPlaceholderText('Enter town');
-    fireEvent.changeText(townInput, 'New Town');
+    const editButton = getByTestId('saveEditButton');
+    expect(editButton.props.accessibilityState.disabled).toBe(false);
 
-    const postcodeInput = getByPlaceholderText('Enter postcode');
-    fireEvent.changeText(postcodeInput, '12345');
-
-    // Save the updated address details
-    const saveButton = getByTestId('saveEditButton');
     act(() => {
-      fireEvent.press(saveButton);
+      fireEvent.press(editButton);
     });
-    // Check if the updated address details are displayed correctly
-    expect(addressLine1Input.props.value).toBe('123 New Street');
-    expect(townInput.props.value).toBe('New Town');
-    expect(postcodeInput.props.value).toBe('12345');
 
-    // Check if the success message is displayed
-    const successMessage = getByText('Address updated successfully!');
-    expect(successMessage).toBeTruthy();
+    await waitFor(() => {
+      expect(getByText('Please complete all required fields.')).toBeTruthy();
+    });
   });
 
-  it('displays the success message after updating the address', () => {
-    const {getByTestId, getByText} = render(
+  it('displays the success message after editing the address', async () => {
+    const {getByTestId, getByText, getByPlaceholderText} = render(
       <UserContextProvider>
         <UpgradeEditAddressScreen navigation={mockNavigation} />
       </UserContextProvider>,
     );
+
+    const addressLine1Input = getByPlaceholderText('Enter address');
+    const townInput = getByPlaceholderText('Enter town');
+    const postcodeInput = getByPlaceholderText('Enter postcode');
+
+    fireEvent.changeText(addressLine1Input, '123 New Street');
+    fireEvent.changeText(townInput, 'New Town');
+    fireEvent.changeText(postcodeInput, 'sm46hu');
+
     const editButton = getByTestId('saveEditButton');
+    expect(editButton.props.accessibilityState.disabled).toBe(false);
+
     act(() => {
       fireEvent.press(editButton);
     });
-    const saveButton = getByTestId('saveEditButton');
-    act(() => {
-      fireEvent.press(saveButton);
+
+    await waitFor(() => {
+      expect(getByText('Address updated successfully!')).toBeTruthy();
     });
-    expect(getByText('Address updated successfully!')).toBeTruthy();
+
+    // Check if the updated values are displayed correctly
+    expect(addressLine1Input.props.value).toBe('123 New Street');
+    expect(townInput.props.value).toBe('New Town');
+    expect(postcodeInput.props.value).toBe('sm46hu');
   });
 
   it('calls AccessibilityInfo.announceForAccessibility with the correct message', () => {

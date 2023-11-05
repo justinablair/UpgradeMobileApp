@@ -15,6 +15,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {useAddressValidation} from '../../components/AddressValidation';
 
 type EnterAddressScreenProps = NavigationProps<'Address'>;
 
@@ -49,28 +50,21 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   ]);
 
   const handleSwitchButtonPress = () => {
-    if (!isFormValid()) {
+    const validationResult = isFormValid(
+      addressLine1Local,
+      townLocal,
+      postcodeLocal,
+    );
+    if (validationResult) {
+      setFormError(validationResult);
       return;
     }
 
     navigation.navigate('UpgradeIntro');
   };
 
-  const ukPostcodeRegex = /^[A-Za-z]{1,2}\d{1,2} ?\d[A-Za-z]{2}$/;
-  const isFormValid = () => {
-    if (!addressLine1Local || !townLocal || !postcodeLocal) {
-      setFormError('Please complete all required fields.');
-      return false;
-    }
-
-    if (!ukPostcodeRegex.test(postcodeLocal)) {
-      setFormError('Please provide a valid UK postcode.');
-      return false;
-    }
-
-    setFormError(null);
-    return true;
-  };
+  // Custom hook for address validation
+  const {isFormValid} = useAddressValidation();
 
   const title = 'Tell us your address';
 
