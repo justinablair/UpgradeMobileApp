@@ -7,13 +7,8 @@ import {
   TextStyle,
   AccessibilityState,
 } from 'react-native';
-
 import {useUserContext} from '../../UserContext';
 import Colours from '../Colour';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 interface PinkButtonProps {
   buttonText: string;
