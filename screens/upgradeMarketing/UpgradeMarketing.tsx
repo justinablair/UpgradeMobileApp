@@ -45,11 +45,14 @@ const UpgradeMarketingScreen: React.FC<UpgradeMarketingProps> = ({
   const [toggleStates, setToggleStates] =
     useState<ToggleStates>(initialToggleStates);
 
+  const [individualToggleClicked, setIndividualToggleClicked] = useState(false);
+
   const handleToggleChange = (preference: keyof ToggleStates) => {
     setToggleStates(prevState => ({
       ...prevState,
       [preference]: !prevState[preference],
     }));
+    setIndividualToggleClicked(true);
   };
 
   const handleButtonClick = () => {
@@ -80,6 +83,7 @@ const UpgradeMarketingScreen: React.FC<UpgradeMarketingProps> = ({
             handleToggleChange={handleToggleChange}
             handleButtonClick={handleButtonClick}
             handleYesToAllClick={handleYesToAllClick}
+            individualToggleClicked={individualToggleClicked}
           />
         </ScrollView>
       </View>
@@ -89,21 +93,34 @@ const UpgradeMarketingScreen: React.FC<UpgradeMarketingProps> = ({
           {backgroundColor: containerBackgroundColor},
         ]}>
         <View style={[styles.buttonRow, styles.padding]}>
-          <WhiteButton
-            buttonText="No thanks"
-            onPress={handleButtonClick}
-            customWidth={155}
-            accessibilityLabel="No Thanks To All Toggles"
-            testID="NoThanksButton"
-          />
-          <View style={styles.buttonSeparator} />
-          <PinkButton
-            buttonText="Yes to all"
-            onPress={handleYesToAllClick}
-            customWidth={155}
-            accessibilityLabel="Yes to All Toggles"
-            testID="YesToAllButton"
-          />
+          {/* Display continue button if any toggle pressed */}
+          {individualToggleClicked ? (
+            <PinkButton
+              buttonText="Continue"
+              onPress={handleButtonClick}
+              accessibilityLabel="Continue"
+              testID="ContinueButton"
+            />
+          ) : (
+            //Display yes and no to all buttons if no toggle pressed
+            <>
+              <WhiteButton
+                buttonText="No thanks"
+                onPress={handleButtonClick}
+                customWidth={155}
+                accessibilityLabel="No Thanks To All Toggles"
+                testID="NoThanksButton"
+              />
+              <View style={styles.buttonSeparator} />
+              <PinkButton
+                buttonText="Yes to all"
+                onPress={handleYesToAllClick}
+                customWidth={155}
+                accessibilityLabel="Yes to All Toggles"
+                testID="YesToAllButton"
+              />
+            </>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -117,6 +134,7 @@ const MarketingContent: React.FC<{
   handleToggleChange: (preference: keyof ToggleStates) => void;
   handleButtonClick: () => void;
   handleYesToAllClick: () => void;
+  individualToggleClicked: boolean;
 }> = ({
   containerBackgroundColor,
   textColour,
