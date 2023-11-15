@@ -37,7 +37,7 @@ const Text: React.FC<TextProps> = ({
 };
 
 // Define styles for different variants
-const styles = StyleSheet.create({
+const styles: Record<string, TextStyle> = StyleSheet.create({
   screenTitle: {
     fontSize: 22,
     lineHeight: 26,
