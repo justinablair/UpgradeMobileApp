@@ -99,7 +99,7 @@ This section details testing using virtual emulators and simulators on Windows o
      npm test
      ```
 
-Application video demonstration:
+6. **Application video demonstration:**
 [Youtube link](https://youtu.be/Fdjt-9sa4Zo)
      
 # Troubleshooting
