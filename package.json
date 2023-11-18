@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "patch -p1 -i patches/react-native.patch"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^9.4.1",
