@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
   },
 
   errorText: {
+    padding: wp('4%'),
     color: Colours.red,
     marginBottom: hp('1%'),
   },

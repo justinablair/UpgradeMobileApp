@@ -114,7 +114,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
               variant="bodyText centerAlign"
               style={{color: textColour}}>
               We’ve built a new bank account, which will replace the{' '}
-              <Pressable
+              <Text
                 onPress={handleEmoneyPress}
                 accessible={true}
                 accessibilityHint="Pressing this opens pop-up with a definition"
@@ -125,7 +125,7 @@ const UpgradeIntroScreen: React.FC<UpgradeIntroProps> = ({navigation}) => {
                   {' '}
                   e-money
                 </Text>
-              </Pressable>{' '}
+              </Text>{' '}
               account you currently use.
             </Text>
           </View>
