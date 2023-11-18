@@ -1,8 +1,6 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 
-### **Appendix 13: Upgrade Software Journey Software Manual**
-
 #### **1. Application Distribution Limitations**
 
 The React Native and TypeScript Account Upgrade mobile application is designed for Android and iOS platforms. Due to its visuals likeness to the existing software solution, it's considered company property. Distribution through official app stores is restricted to maintain the application's proprietary nature.
