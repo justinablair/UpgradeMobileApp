@@ -51,7 +51,7 @@ const UpgradeStartedScreen: React.FC<UpgradeStartedProps> = ({navigation}) => {
         <View>
           <View style={styles.largeImage}>
             <Image
-              source={require('../../assets/Padlock.png')}
+              source={require('../../assets/PadlockPink.png')}
               style={styles.alignCenter}
               accessibilityRole="image"
               accessible={true}
