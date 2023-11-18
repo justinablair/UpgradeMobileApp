@@ -86,7 +86,7 @@ This section details testing using virtual emulators and simulators on Windows o
 4. **Running the Application:**
    - In the terminal, run the command:
      ```
-     yarn start
+     npm start
      ```
      - Press 'i' for iOS or 'a' for Android to open the respective emulators.
      - **Or, Using Method 2:**
@@ -96,7 +96,7 @@ This section details testing using virtual emulators and simulators on Windows o
 5. **Running Unit and Functional Tests:**
    - Run the following command in the terminal:
      ```
-     yarn test
+     npm test
      ```
 
 These comprehensive steps cover distribution limitations, alternative deployment methods, and advanced testing scenarios for the React Native and TypeScript Account Upgrade mobile application.
