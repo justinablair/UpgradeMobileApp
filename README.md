@@ -99,7 +99,9 @@ This section details testing using virtual emulators and simulators on Windows o
      npm test
      ```
 
-These comprehensive steps cover distribution limitations, alternative deployment methods, and advanced testing scenarios for the React Native and TypeScript Account Upgrade mobile application.
+Application video demonstration:
+[Youtube link](https://youtu.be/Fdjt-9sa4Zo)
+     
 # Troubleshooting
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
