@@ -27,7 +27,7 @@ import UpgradeTaxReportingScreen from './screens/upgradeTaxReporting/UpgradeTaxR
 import UpgradeResidencyScreen from './screens/upgradeResidency/UpgradeResidency';
 import UpgradeUSPersonScreen from './screens/upgradeUSPerson/UpgradeUsPerson';
 import ConfirmAddressScreen from './screens/upgradeConfirmAddress/UpgradeConfirmAddress';
-import EnterAddressScreen from './screens/address/Address';
+import EnterAddressScreen from './screens/Address/Address';
 import UpgradeEditAddressScreen from './screens/upgradeEditAddress/UpgradeEditAddress';
 import UpgradeConfirm from './screens/upgradeConfirm/UpgradeConfirmScreen';
 import UpgradeRecapScreen from './screens/upgradeRecap/UpgradeRecap';
