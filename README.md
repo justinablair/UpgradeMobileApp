@@ -24,7 +24,7 @@ This section details testing using virtual emulators and simulators on Windows o
 - Integrated Developer Environment (IDE) (e.g., Visual Studio Code)
 - XCode version 14.2 and above (Mac only)
 - Android Studio version 2022.3.1 Patch 2 and above (Mac and Windows)
-- Yarn (or nvm if preferred) as a package manager.
+- Npm (or yarn if preferred) as a package manager.
 - Node.js 
 
 **Note:**
@@ -44,8 +44,17 @@ This section details testing using virtual emulators and simulators on Windows o
 - Download and install ANDROIDSTUDIO Version 2022.3.1 Patch 2
 
 
+**Install Node.js (for npm):**
+- Either via brew: `brew install node` or go to the [Node downloads page](https://nodejs.org/en/download/)
+-
+-   globally: `npm i -g yarn`
+
+(or)
+
 **Install Yarn:**
 - Either via brew: `brew install yarn` or npm globally: `npm i -g yarn`
+
+
 
 **VSCode:**
 - Install: `brew install visual-studio-code`
