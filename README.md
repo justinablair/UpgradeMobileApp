@@ -1,69 +1,100 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+### **Appendix 13: Upgrade Software Journey Software Manual**
 
-## Step 1: Start the Metro Server
+#### **1. Application Distribution Limitations**
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+The React Native and TypeScript Account Upgrade mobile application is designed for Android and iOS platforms. Due to its visuals likeness to the existing software solution, it's considered company property. Distribution through official app stores is restricted to maintain the application's proprietary nature.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+#### **2. Online Hosting**
 
-```bash
-# using npm
-npm start
+Hosting the React Native Application online as a website application (using GitHub Pages or Firebase) is impractical. The application relies on native device functionalities not available in a web environment.
 
-# OR using Yarn
-yarn start
-```
+#### **3. Exporting Packaged Files of the Application**
 
-## Step 2: Start your Application
+To securely deploy the application, it can be packaged into two files: .ipa for iOS and .apk for Android. These files can be downloaded onto controlled individual devices. Generating an .ipa for iOS is limited and requires an Apple Developer License, making it currently unfeasible. However, an .apk for Android can be generated without additional licensing.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- **For Android Testing:**
+  - To test the Android version, users can download the 'app-release.apk' file from [this link](https://drive.google.com/file/d/13ZV1bAy9n6RfF2VMrDA7gcWrvecp1naC/view?usp=sharin) without needing an official developer license.
 
-### For Android
+#### **4. Advanced Testing Methods**
 
-```bash
-# using npm
-npm run android
+This section details testing using virtual emulators and simulators on Windows or MacOS.
 
-# OR using Yarn
-yarn android
-```
+**System Requirements:**
+- Integrated Developer Environment (IDE) (e.g., Visual Studio Code)
+- XCode version 14.2 and above (Mac only)
+- Android Studio version 2022.3.1 Patch 2 and above (Mac and Windows)
+- Yarn (or nvm if preferred) as a package manager.
+- Node.js 
 
-### For iOS
+**Note:**
+- Mac users need to install both XCode and Android Studio for iOS and Android testing.
+- Windows users need only need to install Android Studio (iOS testing is not possible on Windows devices).
 
-```bash
-# using npm
-npm run ios
+**Setup CLI:**
+- Install Brew: [Brew download page](https://brew.sh/)
+  
+**XCode:**
+- Go to the [Apple developer download page](https://developer.apple.com/download/more/)
+- Download and install Command line tools for XCODE 14.2+
+- Download and install XCODE 14.2+
 
-# OR using Yarn
-yarn ios
-```
+**Android Studio:**
+- Go to the [Android developer page](https://developer.android.com/studio)
+- Download and install ANDROIDSTUDIO Version 2022.3.1 Patch 2
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+**Install Yarn:**
+- Either via brew: `brew install yarn` or npm globally: `npm i -g yarn`
 
-## Step 3: Modifying your App
+**VSCode:**
+- Install: `brew install visual-studio-code`
 
-Now that you have successfully run the app, let's modify it.
+#### **Testing and Setup Steps:**
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+1. **Clone the Application GitHub Repository:**
+   - Open the terminal in your selected IDE and run the command:
+     ```
+     git clone https://github.com/justinablair/UpgradeMobileApp.git
+     ```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+2. **Navigate to the Project Directory:**
+   - In the terminal, run the command:
+     ```
+     cd UpgradeMobileApp
+     ```
 
-## Congratulations! :tada:
+3. **Install Project Dependencies:**
+   - In the terminal, run the command:
+     ```
+     npm install
+     ```
+     - **For Mac Users Only:**
+       ```
+       sudo gem install cocoapods
+       cd ios
+       pod install
+       ```
 
-You've successfully run and modified your React Native App. :partying_face:
+4. **Running the Application:**
+   - In the terminal, run the command:
+     ```
+     yarn start
+     ```
+     - Press 'i' for iOS or 'a' for Android to open the respective emulators.
+     - **Or, Using Method 2:**
+       - For iOS: `npx react-native run-ios`
+       - For Android: `npx react-native run-android`
 
-### Now what?
+5. **Running Unit and Functional Tests:**
+   - Run the following command in the terminal:
+     ```
+     yarn test
+     ```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
+These comprehensive steps cover distribution limitations, alternative deployment methods, and advanced testing scenarios for the React Native and TypeScript Account Upgrade mobile application.
 # Troubleshooting
 
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
