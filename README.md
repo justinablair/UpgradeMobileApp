@@ -45,7 +45,7 @@ This section details testing using virtual emulators and simulators on Windows o
 
 
 **Install Node.js (for npm):**
-- Either via brew: `brew install node` or go to the [Node downloads page](https://nodejs.org/en/download/)
+- Either via brew: `brew install node` or go to the [Node download page](https://nodejs.org/en/download/)
 
 (or)
 
