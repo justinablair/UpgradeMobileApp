@@ -97,11 +97,12 @@ function AppContent(): JSX.Element {
   if (isDarkMode) {
     headerOptions.headerStyle.backgroundColor = Colours.black;
     StatusBar.setBarStyle('light-content');
+    StatusBar.setBackgroundColor(Colours.black);
   } else {
     headerOptions.headerStyle.backgroundColor = Colours.white;
     StatusBar.setBarStyle('dark-content');
+    StatusBar.setBackgroundColor(Colours.white);
   }
-  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   return (
     <NavigationContainer>
