@@ -50,7 +50,7 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
   const [formError, setFormError] = useState<string | null>(null);
 
   // Custom hook for address validation
-  const {isFormValid} = useAddressValidation();
+  const {isFormValid, formatPostcode} = useAddressValidation();
 
   // Event handler to update the address
   const handleUpdateAddress = () => {
@@ -61,9 +61,28 @@ const UpgradeEditAddressScreen: React.FC<UpgradeEditAddressProps> = ({
       return;
     }
 
-    setAddressLine1(newAddressLine1);
-    setTown(newTown);
-    setPostcode(newPostcode);
+    const capitalizeFirstLetter = (string: string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    // Format postcode to uppercase before setting
+    const formattedPostcode = formatPostcode(newPostcode);
+
+    const formattedAddressLine1 = newAddressLine1
+      .replace(/[^a-zA-Z\s]/g, '') // Remove special characters and numbers
+      .split(' ') // Split the string into an array of words
+      .map(word => capitalizeFirstLetter(word)) // Capitalise the first letter of each word
+      .join(' '); // Join the words back into a string
+
+    setAddressLine1(formattedAddressLine1);
+    setTown(
+      newTown
+        .replace(/[^a-zA-Z\s]/g, '') // Remove special characters and numbers
+        .split(' ') // Split the string into an array of words
+        .map(word => capitalizeFirstLetter(word)) // Capitalise the first letter of each word
+        .join(' '), // Join the words back into a string
+    );
+    setPostcode(formattedPostcode);
     setIsEditing(false);
     setUpdateSuccess(true);
     setIsButtonEnabled(false);

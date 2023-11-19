@@ -33,13 +33,22 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   const [formError, setFormError] = useState<string | null>(null);
 
   useEffect(() => {
-    const trimmedAddressLine1 = addressLine1Local.trim();
-    const trimmedTown = townLocal.trim();
-    const trimmedPostcode = postcodeLocal.trim();
+    const capitalizeFirstLetter = (string: string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
 
-    setAddressLine1(trimmedAddressLine1);
-    setTown(trimmedTown);
-    setPostcode(trimmedPostcode);
+    // Format postcode to uppercase before setting
+    const formattedPostcode = formatPostcode(postcodeLocal);
+
+    const formattedAddressLine1 = addressLine1Local
+      .replace(/[^a-zA-Z\s]/g, '')
+      .split(' ')
+      .map(capitalizeFirstLetter)
+      .join(' ');
+
+    setAddressLine1(formattedAddressLine1);
+    setTown(townLocal.replace(/[^a-zA-Z\s]/g, ''));
+    setPostcode(formattedPostcode);
   }, [
     addressLine1Local,
     townLocal,
@@ -64,7 +73,7 @@ const EnterAddressScreen: React.FC<EnterAddressScreenProps> = ({
   };
 
   // Custom hook for address validation
-  const {isFormValid} = useAddressValidation();
+  const {isFormValid, formatPostcode} = useAddressValidation();
 
   const title = 'Tell us your address';
 
