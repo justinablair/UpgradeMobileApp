@@ -46,6 +46,7 @@ import ThemeScreen from './screens/themeScreen/ThemeScreen';
 import CompanyDetailsScreen from './screens/companyDetails/CompanyDetails';
 import UpgradeIneligibleResidentScreen from './ErrorScreens/UpgradeIneligibleResidentScreen';
 import LoginScreen from './screens/upgradeLogin/UpgradeLogin';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -95,13 +96,16 @@ function AppContent(): JSX.Element {
 
   if (isDarkMode) {
     headerOptions.headerStyle.backgroundColor = Colours.black;
+    StatusBar.setBarStyle('light-content');
   } else {
     headerOptions.headerStyle.backgroundColor = Colours.white;
+    StatusBar.setBarStyle('dark-content');
   }
+  const textColour = isDarkMode ? Colours.white : Colours.black;
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#171B1B" />
+      <StatusBar />
       <Stack.Navigator>
         {renderScreen('ThemeScreen', ThemeScreen, headerOptions)}
         {renderScreen('UserSelection', UserSelectionScreen, headerOptions)}
